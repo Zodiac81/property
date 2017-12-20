@@ -1,0 +1,15 @@
+#!/bin/bash
+mydir=/home/$USER
+dirpwd=$(pwd)
+if [ -d $mydir ]
+then
+	echo "The $mydir directory exists"
+	cd $mydir
+	for var in $(ls)
+	do
+		echo $var
+	done
+	ls >> "$dirpwd/dir_home"
+else
+	echo "The $mydir directory does not exist"
+fi

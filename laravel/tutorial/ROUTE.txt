@@ -1,0 +1,116 @@
+ROUTE
+	
+	php artisan route:list			- 	список route
+	php artisan route:cache			-	кеширывание route маршрутов
+	php artisan route:clear			-	очистить кеш route
+
+	Route::get('/home', 'HomeController@index');	-	создаст route  'HomeController' action 'index'
+	Route::get('/home', 'Post\HomeController@index');	-	создаст route  'HomeController' action 'index' в Http/Controllers/Post
+
+	------------------------		resource		-----------------------------------------------------------
+	
+	Route::resource('photos', 'PhotoController');	-	создаст route  комплексно для всех action PhotoController
+
+	Route::resource('photo', 'PhotoController', [
+		'only' => [ 'index', 'show']
+	]);											-	создаст route  PhotoController только для action 'index' и 'show'
+
+	Route::resource('photo', 'PhotoController', [
+		'except' => [ 'create', 'store', 'update', 'destroy']
+	]);											-	создаст except(исключения из списка)  PhotoController для action 'create', 'store', 'update', 'destroy'
+
+	Route::resource('photo', 'PhotoController', ['names' => [
+	    'create' => 'photo.build'
+	]]);											-	создаст route  комплексно для всех action PhotoController + создаст photo.build
+	-----------------------------------------------------------------------------------
+
+	Route::any('foo', function(){
+	    return 'Hello World';
+	});												-	любые типы запросов на foo
+
+	Route::match(['get', 'post'], '/', function(){
+    	return 'Hello World match';
+	});												-	get и post запросы на /
+
+	Route::get('foo', array('https', function(){
+	    return 'Must be over HTTPS';
+	}));												-	get через https
+
+	Route::get('user/{id}', function($id){
+    	return 'User '.$id;
+	});													-	если ожидается id 		'user/{id}'
+	Route::get('user/{name?}', function($name = null)
+    	return $name;
+	});													-	если ожидается id | name | ... 	но не обяз
+
+	Route::get('user/profile', [
+	    'as' => 'profile', 'uses' => 'UserController@showProfile'
+	]);
+																	-	ИМЕНОВАННЫЕ РОУТЫ
+
+	Route::get('user/profile', 'UserController@showProfile')->name('profile');			-	ИМЕНОВАННЫЕ РОУТЫ
+
+	REGULAR
+
+		$router->pattern('id', '[0-9]+');
+		Route::get('user/{id}', function($id){...});	-	Определение глобальных паттернов и применение
+
+		Route::get('user/{name}', function($name){
+		    //
+		})->where('name', '[A-Za-z]+');					-	проверка регуляркой
+
+		Route::get('user/{id}/{name}', function($id, $name){
+		    //
+		})->where(['id' => '[0-9]+', 'name' => '[a-z]+'])	-	проверка регуляркой
+
+	URL::to
+		$url = url('foo');								-	генерация url
+		$url = route('profile');
+		$redirect = redirect()->route('profile');		-	генерации URL или переадресации
+
+	ГРУППЫ РОУТОВ
+		Route::group(['middleware' => 'auth'], function(){
+		    Route::get('/', function()
+		    {
+		        // К этому маршруту будет привязан фильтр auth.
+		    });
+
+		    Route::get('user/profile', function()
+		    {
+		        // К этому маршруту также будет привязан фильтр auth.
+		    });
+		});
+
+		Route::group(['namespace' => 'Admin'], function(){ ... });		-	использовать параметр namespace в группе
+
+		Route::group(['domain' => '{account}.myapp.com'], function(){
+		    Route::get('user/{id}', function($account, $id)
+		    {
+		        //		Регистрация роута по поддомену
+		    });
+		});
+
+	Привязка параметра к модели
+
+		public function boot(Router $router){
+		    parent::boot($router);
+		    $router->model('user', 'App\User');
+		}
+		Route::get('profile/{user}', function(App\User $user){
+		    //
+		});
+
+
+
+{!! Form::open(['action' => 'AdminController@getPostTarification', 'id' => 'currencyForm']) !!}
+   ...
+{!! Form::close() !!}
+
+Form::open(['url' => route( 'add_care_cat' ), 'id' => 'AddCarForm', 'class' => "col-lg-10col-lg-offset-1 col-sm-10 col-sm-offset-1 form_contact", 'style' => 'margin-bottom: 20px;']) !!}
+   ...
+{!! Form::close() !!}
+
+
+return redirect()->action(
+    'UserController@profile', ['id' => 1]
+);

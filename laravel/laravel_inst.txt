@@ -1,0 +1,163 @@
+PHP >= 5.6.4
+OpenSSL PHP Extension
+PDO PHP Extension
+Mbstring PHP Extension
+Tokenizer PHP Extension
+XML PHP Extension
+
+1)
+
+	php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+	php -r "if (hash_file('SHA384', 'composer-setup.php') === 'aa96f26c2b67226a324c27919f1eb05f21c248b987e6195cad9690d5c1ff713d53020a02ac8c217dbf90a7eacc9d141d') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+	php composer-setup.php
+	php -r "unlink('composer-setup.php');"
+
+2)
+
+	php C:\server\bin\PHP\composer.phar create-project laravel/laravel --prefer-dist
+
+	// composer create-project laravel/laravel trackisopen-master "5.1.*"
+	composer create-project --prefer-dist laravel/laravel laravel.basic
+
+	trackisopen-master
+
+
+3)
+
+	/	->	.env
+			APP_DEBUG=true	-	режим разработки
+
+4)
+
+	db 		-> настраиваем там же	||	config->database.php
+
+	config	->	app.php:
+		'debug' => env('APP_DEBUG', true),
+		'timezone' => 'Europe/Kiev',
+		'locale' => 'ru-RU',
+		'log' => 'daily'	-	ежедневные файлы журналов вместо одного файла
+
+5)
+	laravel-debugbar		->		https://github.com/barryvdh/laravel-debugbar
+
+
+		в console:
+			php C:\server\bin\PHP\composer.phar require barryvdh/laravel-debugbar
+			composer require barryvdh/laravel-debugbar
+
+		config	->	app.php	->	providers:
+				Barryvdh\Debugbar\ServiceProvider::class,
+
+		config	->	app.php	->	aliases:
+				'Debugbar' => Barryvdh\Debugbar\Facade::class,
+
+		в console:
+			php artisan vendor:publish --provider="Barryvdh\Debugbar\ServiceProvider"
+
+		config	->	app.php	->	aliases:
+			'debug' => env('APP_DEBUG', true),
+
+
+		config	->	debugbar	->
+			'enabled' => true,
+
+		bootstrap/app.php:
+			if (env('APP_DEBUG')) {
+				$app->register(Barryvdh\Debugbar\LumenServiceProvider::class);
+			}
+
+6)
+
+	laravel-ide-helper		->		https://github.com/barryvdh/laravel-ide-helper
+
+		в console:
+			php C:\server\bin\PHP\composer.phar require --dev barryvdh/laravel-ide-helper
+			composer require --dev barryvdh/laravel-ide-helper
+
+		config	->	app.php	->	providers:
+				Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+
+		/	->	 composer.json
+			"scripts":{
+    			"post-update-cmd": [
+    				"Illuminate\\Foundation\\ComposerScripts::postUpdate",
+			        "php artisan ide-helper:generate",
+			        "php artisan ide-helper:meta",
+			        "php artisan optimize"
+    			]
+
+
+7)	migration
+
+			Artisan — название интерфейса командной строки, который поставляется с Laravel
+
+в console:
+	php artisan list			-help
+	php artisan help migrate	- help po migrate
+	php artisan migrate			- создаст таблицы в бд
+
+Кэширование
+	php artisan config:cache
+
+
+
+
+Clone
+
+	git clone ...
+	php C:\server\bin\PHP\composer.phar update 		||		php C:\server\composer.phar install
+	.env.example 	->	save as ...	.env
+	php artisan key:generate
+	php artisan clear-compiled
+
+
+	php artisan -vvv		-	helper
+
+
+##########################################################################################################################
+
+        	"post-install-cmd": [
+            		"php artisan clear-compiled",
+            		"php artisan optimize"
+        	],
+        	"pre-update-cmd": [
+				"php artisan clear-compiled"
+        	],
+        	"post-update-cmd": [
+            		"php artisan optimize",
+					"php artisan queue:restart"
+        	],
+        	"post-create-project-cmd": [
+            		"php artisan key:generate"
+        	]
+
+##########################################################################################################################
+
+sudo chmod -R 777 /var/www/html/laravel.basic
+
+Auth
+	php artisan make:auth		-	создание регистрации
+	/register		||		/auth/register				-	и регистрируемся
+
+sudo chmod -R 777 /var/www/html/laravel.basic/storage
+php artisan migrate													-   зупустить migrate
+
+
+
+
+##########################################################################################################################
+
+composer update --no-scripts
+composer dump-autoload -o
+
+composer dump-autoload
+php artisan clear-compiled
+
+composer dumpautoload
+composer update
+
+
+composer cache-clear
+composer dump-autoload
+php artisan clear-compiled
+composer update

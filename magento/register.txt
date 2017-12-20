@@ -1,0 +1,22 @@
+zavodskiy@rambler.ru
+lexus132
+!@34qwer
+ID: MAG004212999
+
+	app/code/core/Mage/Core/Model/Layout.php (555)
+		$out .= $this->getBlock($callback[0])->$callback[1]();
+		$out .= $this->getBlock($callback[0])->{$callback[1]}();
+
+
+	CREATE DATABASE IF NOT EXISTS magento_project_captain_nason_group;
+		// CREATE DATABASE IF NOT EXISTS projet-groupe-atlantis;
+	DROP DATABASE IF EXISTS magento_project_captain_nason_group;
+	CREATE USER cptnason@localhost IDENTIFIED BY "B73FF25CC5F22A";
+	GRANT ALL ON magento_project_captain_nason_group.* TO cptnason@localhost;
+	FLUSH PRIVILEGES;
+
+	SELECT * FROM core_config_data WHERE path = 'web/unsecure/base_url';
+	SELECT * FROM core_config_data WHERE path = 'web/secure/base_url';
+
+	update core_config_data set value = 'http://altlantis.ikexpress.com/' where path = 'web/unsecure/base_url';
+	update core_config_data set value = 'http://altlantis.ikexpress.com' where path = 'web/secure/base_url';

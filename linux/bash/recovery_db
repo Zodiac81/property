@@ -1,0 +1,10 @@
+#!/bin/bash
+
+dir=$(ls /home/$USER/base/databases)
+
+for elem in $dir
+do
+	$(mysql -u root -p -e "DROP DATABASE IF EXISTS \`$elem\`")
+	$(mysql -u root -p -e "CREATE DATABASE IF NOT EXISTS \`$elem\`")
+	$(mysql -u root -p $elem < /home/$USER/base/databases/$elem)
+done

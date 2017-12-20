@@ -1,0 +1,76 @@
+Инструкция для переноса магазина Magento на другой хостинг.
+
+Для версий 1.6 и позже
+
+1) Заходим в Админ панель -> Инструменты -> Резервные копии –> Резервная копия системы.
+2) После нам потребуется зайти на ftp в папку var/backups, там найти архив xxxxxxxxx.tgz, скачать и распаковать этот архив на новом сервере.
+3) Далее, в папке var находим файл xxxxxxxxx_db.gz и загружаем бд
+4) На новом сервере, заходим в папку /app/etc ищем файл local.xml, открываем его, ищем строчки
+
+	<default_setup>
+		<connection>
+			<host><![CDATA[Меняем на свое]]></host>
+			<username><![CDATA[Меняем на свое]]></username>
+			<password><![CDATA[Меняем на свое]]></password>
+			<dbname><![CDATA[Меняем на свое]]></dbname>
+			<initStatements><![CDATA[SET NAMES utf8]]></initStatements>
+			<model><![CDATA[mysql4]]></model>
+			<type><![CDATA[pdo_mysql]]></type>
+			<pdoType><![CDATA[]]></pdoType>
+			<active>1</active>
+		</connection>
+	</default_setup>
+
+
+    <frontName><![CDATA[adminason]]></frontName>		//		adminka
+
+И сохраняем.
+
+5)  После заходим в phpMyAdmin ищем таблицу core_config_data и вписываем новый адрес сайта в строках web/unsecure/base_url  и  web/secure/base_url
+6) Готово!
+
+Для версий раньше 1.6
+
+1) Заходим в Админ панель -> Инструменты -> Резервные копии –> Резервная копия БД
+2) Заходим на ftp в папку var находим файл xxxxxxxxx_db.gz и загружаем бд
+3) Делаем полный архив магазина
+4) Переносим и распаковываем архив на новом сервере, заливаем базу. Удаляем содержимое папки var/cache
+5,6,7  действие аналогично проделываем, пользуясь предыдущей инструкцией.
+
+
+404 при заходе в админ панель Magento
+
+Когда Вы переносите свой интернет-магазин Magento на другой сервер, то иногда после переноса Вы никак не можете попасть в админку - вылезает 404 ошибка.
+Самый частый случай - смена <a href="/services/magento-hosting"target="_blank" title="быстрый хостинг magento" >хостинга магазина</a>.
+Чтобы быстро устранить проблему нужно для начала выполнить данную query:
+
+	SET FOREIGN_KEY_CHECKS=0;
+	UPDATE `core_store` SET store_id = 0 WHERE code='admin';
+	UPDATE `core_store_group` SET group_id = 0 WHERE name='Default';
+	UPDATE `core_website` SET website_id = 0 WHERE code='admin';
+	UPDATE `customer_group` SET customer_group_id = 0 WHERE customer_group_code='NOT LOGGED IN';
+	SET FOREIGN_KEY_CHECKS=1;
+
+Затем очистить кэш в папке /var/cache/.
+Если у вас Enterprise версия или установлен FPC - то еще очистить папку /var/full_page_cache/.
+
+
+
+
+1. Откройте таблицу core_config_data
+2. Там найдите строки со следующими значениями в столбце path:
+		web/unsecure/base_url
+		web/secure/base_url
+5. Установите там корневой адрес вашего сайта.
+
+	UPDATE 
+	        `core_config_data` 
+	SET 
+	        value = 'http://www.yandex.ru/' 
+	where 
+	                (('web/secure/base_url' = path) OR ('web/unsecure/base_url' = path))
+	        AND 
+	                ('default' = scope)
+	;
+	
+6. Очистите кеш Magento

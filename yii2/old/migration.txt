@@ -1,0 +1,195 @@
+php yii help migrate
+
+yii migrate									Для применения миграций используется команда
+yii migrate/up 2							Для применения нескольких миграций используется команда (2 – число применяемых миграций)
+yii migrate/to 141018_180924				Для применения определённой версии миграции (где 141018_180924 – timestamp миграций)
+yii migrate/down [step]						Команда для отката миграции ([step] – количество отменяемых миграций)
+yii migrate/redo [step]						Для повторного применения миграции ([step] – количество повторно применяемых миграций)
+yii migrate/history [limit]					Просмотр примененных миграций ([limit] – количество выводимых записей)
+yii migrate/new [limit]					Просмотр списка новых миграций, которые ещё не были применены ([limit] – количество выводимых записей)
+
+Создание миграций
+	yii migrate/create <name>					//	yii migrate/create create_job_table		// 		yii migrate/create create_vacancy
+	php yii migrate/down 1						// otmena last migration
+
+yii migrate/create create_cities_table
+yii migrate/create create_post_table --fields=title:string(12):notNull:unique,body:text
+yii migrate/create create_post_table --fields="author_id:integer:notNull:foreignKey(user),category_id:integer:defaultValue(1):foreignKey,title:string,body:text"
+
+yii migrate/create add_position_column_to_post_table --fields="position:integer"
+
+yii migrate --migrationPath=@app/modules/forum/migrations --interactive=0
+
+	interactive: логический тип - boolean (по умолчанию true). Указывает, следует ли выполнять миграцию в интерактивном режиме. 
+	migrationPath: строка - string (по умолчанию @app/migrations)
+	migrationTable: строка - string (по умолчанию migration)
+	db: строка - string (по умолчанию db). Определяет ID базы данных компонента приложения
+	templateFile: строка - string (по умолчанию @yii/views/migration.php)
+	generatorTemplateFiles
+
+
+<?php
+use yii\db\Migration;
+class m150101_185401_create_news_table extends Migration
+{
+    public function up()
+    {
+    	$tableOptions = null;
+        if ($this->db->driverName === 'mysql') {
+            $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE=InnoDB';
+        }
+
+//    	$this->createTable('news', [
+//          'id' => Schema::TYPE_PK,
+//          'title' => Schema::TYPE_STRING . ' NOT NULL',
+//          'content' => Schema::TYPE_TEXT,
+//      ],  $tableOptions);
+
+		$this->createTable('news', [
+            'id' => $this->primaryKey(),
+	    	'name' => $this->string(70)->notNull(),
+			'type' => $this->boolean()->defaultValue(true),
+			'description' => $this->text()->notNull(),
+			'rule_name' => $this->string(255)->notNull(),
+			'data' => $this->text()->defaultValue(null),
+			'created_at' => $this->datetime()->notNull(),
+			'updated_at' => $this->datetime()->defaultValue(null),
+        ], $tableOptions);
+		
+        $count = 5;
+		for($i = 0; $i < $count; $i ++ ){
+		    $this->insert('news', [
+			'id' => null,
+			'name' => 'name'.$i,
+			'type' => 1,
+			'description' => 'description',
+			'rule_name' => 'user',
+			'data' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+					    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+			'created_at' => date('Y-m-d H-i-s',(time()-$i*3600*24)),
+			'updated_at' => date('Y-m-d H-i-s',time()),
+		    ]);
+		}
+
+	Внешние ключи и индексы
+
+		 // creates index for column `author_id`
+        $this->createIndex(
+            'idx-post-author_id',
+            'post',
+            'author_id'
+        );
+
+        // add foreign key for table `user`
+        $this->addForeignKey(
+            'fk-post-author_id',
+            'post',
+            'author_id',
+            'user',
+            'id',
+            'CASCADE'
+        );
+
+        $this->addColumn('post', 'position', $this->integer());
+
+        /*
+        $this->createIndex('FK_post_author', '{{%post}}', 'author_id');
+        $this->addForeignKey(
+            'FK_post_author', '{{%post}}', 'author_id', '{{%user}}', 'id', 'SET NULL', 'CASCADE'
+        );
+        */
+    }
+    public function down()
+    {
+        $this->dropTable('news'); 				// return false;
+
+        $this->dropColumn('post', 'position');
+
+        $this->dropForeignKey(
+            'fk-post-author_id',
+            'post'
+        );
+    }
+    /*
+    // Use safeUp/safeDown to run migration code within a transaction
+    public function safeUp()
+    {}
+    public function safeDown()
+    {}
+    */
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+$this->createTable('example_table', [
+  'id' => $this->primaryKey(),
+  'name' => $this->string(64)->notNull(),
+  'type' => $this->integer()->notNull()->defaultValue(10),
+  'description' => $this->text(),
+  'rule_name' => $this->string(64),
+  'data' => $this->text(),
+  'created_at' => $this->datetime()->notNull(),
+  'updated_at' => $this->datetime(),
+]);
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+yii\db\SchemaBuilder
+Public Methods
+	bigInteger()		Creates a bigint column.
+	bigPrimaryKey()		Creates a big primary key column.
+	binary()			Creates a binary column.
+	boolean()			Creates a boolean column.
+	char()				Creates a char column.
+	date()				Creates a date column.
+	dateTime()			Creates a datetime column.
+	decimal()			Creates a decimal column.
+	double()			Creates a double column.
+	float()				Creates a float column.
+	integer()			Creates an integer column.
+	money()				Creates a money column.
+	primaryKey()		Creates a primary key column.
+	smallInteger()		Creates a smallint column.
+	string()			Creates a string column.(varchar)
+	text()				Creates a text column.
+	time()				Creates a time column.
+	timestamp()			Creates a timestamp column.
+	notNull()
+	defaultValue(10)
+	unique()
+
+Below is the list of all these database accessing methods:
+
+		execute(): выполнение SQL инструкции
+		insert(): вставка одной строки
+		batchInsert(): вставка нескольких строк
+		update(): обновление строк
+		delete(): удаление строк
+		createTable(): создание таблицы
+		renameTable(): переименование таблицы
+		dropTable(): удаление таблицы
+		truncateTable(): удаление всех строк в таблице
+		addColumn(): добавление столбца
+		renameColumn(): переименование столбца
+		dropColumn(): удаление столбца
+		alterColumn(): изменения столбца
+		addPrimaryKey(): добавление первичного ключа
+		dropPrimaryKey(): удаление первичного ключа
+		addForeignKey(): добавление внешнего ключа
+		dropForeignKey(): удаление внешнего ключа
+		createIndex(): создание индекса
+		dropIndex(): удаление индекса
+
+		addCommentOnColumn(): adding comment to column
+		dropCommentFromColumn(): dropping comment from column
+		addCommentOnTable(): adding comment to table
+		dropCommentFromTable(): dropping comment from table
+
+
+
+
+		public function up()
+	    {
+	        $this->addColumn('post', 'position', $this->integer());
+	    }
+
+	    public function down()
+	    {
+	        $this->dropColumn('post', 'position');
+	    }

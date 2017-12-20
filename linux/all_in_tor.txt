@@ -1,0 +1,54 @@
+Linux:
+
+	Команды :
+
+		curl ident.me
+			http://www.stilllistener.addr.com/che...
+			http://www.anonymize.net/check-ip-adr...
+			http://ru.smart-ip.net/
+
+		Установим пакеты Tor и prioxy:
+			apt-get install tor privoxy
+
+		Нам нужно отредактировать файл /etc/privoxy/config. Откройте его любым текстовым редактором.
+
+			leafpad /etc/privoxy/config
+
+		и добавьте в самый конец эти строки:
+
+			forward-socks5 / localhost:9050 .
+			forward-socks4 / localhost:9050 .
+			forward-socks4a / localhost:9050 .
+
+		Запустим необходимые службы
+
+			service tor start
+			service privoxy start
+
+		Отправляем весь трафик из нашей системы на прокси. Открываем: Настройки ...Параметры системы...Сетевые прокси-службы и вводим следующие данные:
+
+			HTTP proxy: localhost :8118 
+			SSL proxy: localhost :8118
+			SOCKS host: localhost :9050
+
+		update-rc.d -f tor remove && update-rc.d -f tor defaults && update-rc.d -f privoxy remove && update-rc.d -f privoxy defaults && update-rc.d -f privoxy enable
+		update-rc.d -f tor remove && update-rc.d -f tor defaults && update-rc.d -f tor remove && update-rc.d -f tor defaults && update-rc.d -f tor enable
+
+		update-rc.d -f tor remove && update-rc.d -f privoxy remove
+		update-rc.d -f tor remove && update-rc.d -f tor remove
+
+Windows:
+
+	Proxifier
+
+		Profile -> ProxyServer -> Add -> 
+			Address: 127.0.0.1
+			Port: 9150
+			SOCKS Version 5
+		-> Ok -> Ok
+
+		Profile -> Name Resolution -> 
+			- Detect DNS settings ...
+			+ Resolve hostnames ...
+		-> Ok
+

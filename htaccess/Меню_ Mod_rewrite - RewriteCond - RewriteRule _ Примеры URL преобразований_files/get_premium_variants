@@ -1,0 +1,4 @@
+
+var server = 'www.reg.ru';
+var rid = 263005;
+var domains = [{"name":"водныйкодексрф.рф","price":"199"},{"name":"programmijava.ru","price":"199"},{"name":"peintbolserver.su","price":"600"},{"name":"мюзиклы-русские.рф","price":"199"},{"name":"biologiya-10.ru","price":"199"},{"name":"domeni-rf.su","price":"600"},{"name":"икеасайт.рф","price":"199"},{"name":"fugabakha.ru","price":"199"},{"name":"teatr-satiri.su","price":"600"}];

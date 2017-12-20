@@ -1,0 +1,23 @@
+1)
+	добавить в ваш composer.json -> "composer update" ( "php c:/server/composer.phar require "laravelrus/sleepingowl":"4.*@dev"")
+		"require": {
+			"laravelrus/sleepingowl": "4.*@dev"
+	    },
+
+2)
+	после обновления composer, добавьте service provider в ваш config/app.php
+		SleepingOwl\Admin\Providers\SleepingOwlServiceProvider::class,
+
+3)
+	php artisan sleepingowl:install
+4)
+	php artisan vendor:publish --provider="SleepingOwl\Admin\Providers\SleepingOwlServiceProvider" --tag="config"
+
+
+
+http://sleepingowladmin.ru/
+https://github.com/LaravelRUS/SleepingOwlAdmin
+
+http://sleeping-owl.github.io/
+https://github.com/sleeping-owl/admin
+	

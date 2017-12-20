@@ -1,0 +1,80 @@
+index.php ->
+	/var/www/html/laravel.base/vendor/laravel/framework/src/Illuminate/Http/Request.php
+
+API
+	https://laravel.com/api/5.3/Illuminate/Http/Request.html
+
+use Illuminate\Http\Request;
+class TestController extends Controller
+{
+    protected $request;
+    
+    public function __construct(Request $request) {
+		parent::__construct();
+		$this->request = $request;
+    }
+    
+    public function Index() {
+    	$this->request
+    }
+
+    ///
+
+    public function Index(Request $request) {
+    	$request
+    }
+
+    ///
+}
+
+DATA
+	$request->ald('name');							// get ald data to session
+	$request->has('name');							// bool (!empty())
+	$request->exist('name');						// bool (isset())
+	$request->all();								// get all fields in array
+	$request->input('name' [, $default = null]);	// get name
+	$request->query('name');						// return name in GET 
+	$request->query();								// return all options in GET 
+	$request->only(['name', 'email']);				// return only query
+	$request->except(['name', 'email']);			// return all without query
+	$request->email;								// yes
+	$request->'email';								// no
+	$request->header('Content-Type');				// return value Content-Type
+	$request->header();								// return all header`s
+	$request->server();								// return all of $_SERVER
+	$request->segments();							// explode uri in array
+
+
+METHOD
+	$request->method();								// return method
+	$request->isMethod('POST');						// bool
+
+URL
+	$request->path();								// return withiut http://domet/ -> home/index
+	$request->is('contact/*');						// bool uses with ..->path()
+	$request->url();								// return GET without ?id=1 (http://contact)
+	$request->fullUrl();							// return all GET (http://contact?id=1)
+	$request->root();								// return http://domen
+
+SESSION
+
+	$request->flash();								// save all data in sassion
+			return redirect()->route('contact')->withInput(); 		// ||-||-||
+	$request->flush();								// clear sassion
+	$request->flashOnly(['name', 'email']);			// save only select data in sassion
+	$request->flashExcept(['name', 'email']);		// save data in sassion without select
+	{{ old('name') }}								// get data of session
+	
+	{{ Session::all() }}							// get all data of session
+
+
+ON SESSION
+	
+	/var/www/html/laravel.basic/app/Http/Kernel.php
+
+		protected $middlewareGroups = [
+	        'web' => [ ...
+	            \Illuminate\Session\Middleware\StartSession::class, -
+
+	    protected $middleware = [ ...
+			\Illuminate\Session\Middleware\StartSession::class,		+

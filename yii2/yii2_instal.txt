@@ -1,0 +1,208 @@
+1)
+
+	php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+	php -r "if (hash_file('SHA384', 'composer-setup.php') === 'aa96f26c2b67226a324c27919f1eb05f21c248b987e6195cad9690d5c1ff713d53020a02ac8c217dbf90a7eacc9d141d') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+	php composer-setup.php
+	php -r "unlink('composer-setup.php');"
+
+2)
+	Basic
+		composer create-project --prefer-dist yiisoft/yii2-app-basic basic
+
+	Advanced
+		composer create-project --prefer-dist yiisoft/yii2-app-advanced yii-application
+
+		info - https://github.com/yiisoft/yii2-app-advanced/blob/master/docs/guide/README.md
+
+	Token
+		https://github.com/settings/tokens/new?scopes=repo&description=Composer
+
+	____________________________________________________________________________________________
+	Old:
+		composer global require "fxp/composer-asset-plugin:^1.3.1"
+		composer create-project --prefer-dist --stability=dev yiisoft/yii2-app-basic yii2.basic
+			[ErrorException]                                                              
+	  		file_put_contents(./composer.json): failed to open stream: Permission denied
+				sudo chown -R username .composer/
+
+3)
+	Apache2
+		/etc/apache/site-available/yii2.advanced.conf
+
+<VirtualHost yii2.frontend:80>
+    #ServerName yii2.frontend
+    DocumentRoot "/var/www/html/yii2.advanced/frontend/web/"
+    
+    <Directory "/var/www/html/yii2.advanced/frontend/web/">
+        # use mod_rewrite for pretty URL support
+        RewriteEngine on
+        # If a directory or a file exists, use the request directly
+        RewriteCond %{REQUEST_FILENAME} !-f
+        RewriteCond %{REQUEST_FILENAME} !-d
+        # Otherwise forward the request to index.php
+        RewriteRule . index.php
+
+        # use index.php as index file
+        DirectoryIndex index.php
+
+        # ...other settings...
+        # Apache 2.4
+        Require all granted
+        
+        ## Apache 2.2
+        # Order allow,deny
+        # Allow from all
+    </Directory>
+</VirtualHost>
+
+<VirtualHost yii2.backend:80>
+    DocumentRoot "/var/www/html/yii2.advanced/backend/web/"
+    
+    <Directory "/var/www/html/yii2.advanced/backend/web/">
+        # use mod_rewrite for pretty URL support
+        RewriteEngine on
+        # If a directory or a file exists, use the request directly
+        RewriteCond %{REQUEST_FILENAME} !-f
+        RewriteCond %{REQUEST_FILENAME} !-d
+        # Otherwise forward the request to index.php
+        RewriteRule . index.php
+
+        # use index.php as index file
+        DirectoryIndex index.php
+
+        # ...other settings...
+        # Apache 2.4
+        Require all granted
+        
+        ## Apache 2.2
+        # Order allow,deny
+        # Allow from all
+    </Directory>
+</VirtualHost>
+
+	sudo a2ensite yii2.advanced.conf
+
+	Linux: /etc/hosts
+
+	127.0.0.1   yii2.frontend
+	127.0.0.1   yii2.backend
+
+4)
+
+	Yii2 → Установка Yii2: Composer просит token
+		1. Нужно авторизоваться на github.com под своим логином и создать токен для Сomposer по предложенной ссылке.
+			https://github.com/settings/tokens/new?scopes=repo&description=Composer
+		2. Ввести полученный токен в поле Token (hidden) или выполнить из консоли:
+			composer config -g github-oauth.github.com <токен>
+		3. При необходимости перезапустить инсталяцию Yii2.
+
+5)
+
+	init.bat
+
+6)
+
+в common/config/main.php -> добавляем в 'components'
+	'urlManager' => [
+	    'class' => 'yii\web\UrlManager',
+	    'enablePrettyUrl' => true,
+	    'showScriptName' => false,
+	],
+
+	.htaccess	в web
+		# Mod_Autoindex
+		<IfModule mod_autoindex.c>
+		  # Запрещаем просмотр содержимого папок
+		  Options -Indexes
+		</IfModule>
+
+		# Mod_Rewrite
+		<IfModule mod_rewrite.c>
+		  Options +FollowSymlinks
+		  # Включаем mod_rewrite
+		  RewriteEngine On
+
+		  # Если это папка или файл, открываем её/его
+		  RewriteCond %{REQUEST_FILENAME} !-f
+		  RewriteCond %{REQUEST_FILENAME} !-d
+		 # Определяем путь для админки (Этот пунтк можно пропустить если запуск админки по адресу: http://my-site.com/backend.php вас вполне устраивает)
+		 RewriteRule ^administrator backend.php
+		  # В противном случае перенаправляем на index.php
+		  RewriteRule . index.php
+		</IfModule>
+
+	########################################################################3
+
+	<IfModule mod_rewrite.c>
+	    Options +FollowSymlinks
+	    RewriteEngine On
+	</IfModule>
+	 
+	<IfModule mod_rewrite.c>
+	    RewriteCond %{REQUEST_URI} ^/.*
+	    RewriteRule ^(.*)$ web/$1 [L]
+
+	    RewriteCond %{REQUEST_URI} !^/web/
+	    RewriteCond %{REQUEST_FILENAME} !-f [OR]
+	    RewriteCond %{REQUEST_FILENAME} !-d
+	    RewriteRule ^.*$ web/index.php
+	</IfModule> 
+
+
+7)
+
+common -> local_config -> 'db'
+		
+		'components' => [
+        'db' => [
+            'class' => 'yii\db\Connection',
+            'dsn' => 'mysql:host=localhost;dbname=yii2basic',
+            'username' => 'root',
+            'password' => '',
+            'charset' => 'utf8',
+	    'tablePrefix' => 'dvl_'
+        ],
+
+	
+C:\OpenServer\domains\yii2_frame -> console:
+	yii migrate
+
+
+
+	phpmailer
+		php C:\composer\composer.phar require --prefer-dist zyx/zyx-phpmailer "@stable"
+
+	frontend\main.php\components
+		'components' => [
+	        'mail' => 
+[	            'class'            => 'zyx\phpmailer\Mailer',
+	            'viewPath'         => '@common/mail',
+	            'useFileTransport' => false,
+	            'config'           => [
+	                'mailer'     => 'smtp',
+	                'host'       => 'smtp.yandex.ru',
+	                'port'       => '465',
+	                'smtpsecure' => 'ssl',
+	                'smtpauth'   => true,
+	                'username'   => 'mysmtplogin@example.ru',
+	                'password'   => 'mYsmTpPassword',
+	            ],
+	        ],
+	    ],
+
+8)
+
+	
+	frontend -> config 	->	local_config 
+
+	$config['modules']['debug'] = [
+        'class' => 'yii\debug\Module',
+		'allowedIPs' => ['127.0.0.1', '::1'],
+    ];
+
+
+	adminlte - adminka
+
+
+9)
+	yii migrate --migrationPath=@yii/rbac/migrations/

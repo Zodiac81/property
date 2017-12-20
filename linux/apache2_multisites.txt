@@ -1,0 +1,78 @@
+ServerName 109.238.10.75
+
+NameVirtualHost *:80
+
+<Directory var/www/>
+    AllowOverride All
+    Options All
+</Directory>
+
+<VirtualHost *:80>
+    ServerAdmin webmaster@localhost
+    ServerName atlantis.com
+    DocumentRoot /var/www/html/atlantis.com/www
+</VirtualHost>
+
+<VirtualHost *:80>
+    ServerAdmin webmaster@localhost
+    DocumentRoot /var/www/html/captain.com
+    ServerName captain.com
+</VirtualHost>
+
+############################# 		 		###############################
+
+
+NameVirtualHost *:80
+
+<Directory var/www/>
+    AllowOverride All
+    Options All
+</Directory>
+
+<VirtualHost *:80>
+    ServerAdmin webmaster@localhost
+    DocumentRoot /var/www/html/captain-nason-group.com
+    ServerName site1.ru
+    ServerAlias www.site1.ru
+    ErrorLog logs/site1.ru-error_log
+    CustomLog logs/site1.ru-access_log common
+</VirtualHost>
+
+<VirtualHost *:80>
+    ServerAdmin webmaster@localhost
+    DocumentRoot /var/www/site2.ru
+    ServerName site2.ru
+    ServerAlias www.site2.ru	
+    ErrorLog logs/site2.ru-error_log
+    CustomLog logs/site2.ru-access_log common
+</VirtualHost>
+
+
+############################# 		recomendation`s 		###############################
+
+
+<VirtualHost www.my-site.com:80>
+    ServerAdmin webmaster@localhost
+	DocumentRoot /var/www/html/www.my-site.com/www
+
+	Alias "/cdn-groupe-atlantis" "/var/www/html/projet-groupe-atlantis/www_cdn"
+	<Directory "/var/www/html/projet-groupe-atlantis/www_cdn">
+		AllowOverride All 																				// from redirec`s
+	    Order allow,deny
+   		Allow from all
+        
+        #   RewriteEngine On
+        #   RewriteBase "/myapp/"
+        #   RewriteRule "^index\.html$"  "welcome.html"
+    </Directory>
+
+
+</VirtualHost>
+
+###########################################################################################
+
+mysql
+	php.ini
+		upload_max_filesize
+		memory_limit
+		post_max_size

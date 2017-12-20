@@ -1,0 +1,193 @@
+1)
+	composer require "laravel/cashier":"~7.0"
+
+2)
+	config/app.php
+		'providers' => [
+		    // Other Service Providers
+
+		    Laravel\Cashier\CashierServiceProvider::class,
+		],
+
+3)
+	Database Migrations	
+		php artisan make:migration update_user_table --table=users
+
+	    public function up()
+	    {
+	        Schema::table('users', function (Blueprint $table) {
+			    $table->string('stripe_id')->nullable();
+			    $table->string('card_brand')->nullable();
+			    $table->string('card_last_four')->nullable();
+			    $table->timestamp('trial_ends_at')->nullable();
+			});
+	    }
+	    public function down(){
+			if (Schema::hasColumn('users', 'stripe_id')) {
+			    Schema::table('users', function (Blueprint $table) {
+					$table->dropColumn('stripe_id');
+			    });
+			}
+			if (Schema::hasColumn('users', 'card_brand')) {
+			    Schema::table('users', function (Blueprint $table) {
+					$table->dropColumn('card_brand');
+			    });
+			}
+			if (Schema::hasColumn('users', 'card_last_four')) {
+			    Schema::table('users', function (Blueprint $table) {
+					$table->dropColumn('card_last_four');
+			    });
+			}
+			if (Schema::hasColumn('users', 'trial_ends_at')) {
+			    Schema::table('users', function (Blueprint $table) {
+					$table->dropColumn('trial_ends_at');
+			    });
+			}
+	    }
+
+	    php artisan make:migration create_table_subscriptions --create=subscriptions
+
+	    public function up()
+	    {
+	        Schema::create('subscriptions', function (Blueprint $table) {
+		    $table->increments('id');
+		    $table->integer('user_id');
+		    $table->string('name');
+		    $table->string('stripe_id');
+		    $table->string('stripe_plan');
+		    $table->integer('quantity');
+		    $table->timestamp('trial_ends_at')->nullable();
+		    $table->timestamp('ends_at')->nullable();
+		    $table->timestamps();
+	        });
+	    }
+	    public function down()
+	    {
+	        Schema::dropIfExists('subscriptions');
+	    }
+
+4)
+	use Laravel\Cashier\Billable;
+	class User extends Authenticatable
+	{
+	    use Billable;
+	}
+
+5)
+	'stripe' => [
+	    'model'  => App\User::class,
+	    'key' => env('STRIPE_KEY'),
+	    'secret' => env('STRIPE_SECRET'),
+	],
+
+Currency Configuration
+
+	default: USD
+
+	use Laravel\Cashier\Cashier;
+	Cashier::useCurrency('eur', '€');
+
+Creating Subscriptions
+
+	$user = User::find(1);
+	$user->newSubscription('main', 'premium')->create($stripeToken); 			// main - имя подписки
+																				// premium - конкретный план Stripe
+																				// create - начнет подписку и обновить базу данных с идентификатором клиента 
+
+Дополнительные сведения о пользователе
+	$user->newSubscription('main', 'monthly')->create($stripeToken, [
+	    'email' => $email,
+	]);
+
+купоны
+	$user->newSubscription('main', 'monthly')->withCoupon('code')->create($stripeToken);
+
+Проверка статуса подписки
+	if ($user->subscribed('main')){
+	    //
+	}
+
+определить, находится ли пользователь еще в течение пробного периода
+	if ($user->subscription('main')->onTrial()) {
+	    //
+	}
+
+активно ли подписка main пользователя на monthlyплан подписки
+	if ($user->subscribedToPlan('monthly', 'main')) {
+	    //
+	}
+
+Отмененный статус подписки
+	if ($user->subscription('main')->cancelled()) {
+	    // пользователь отменил подписку
+	}
+
+	if ($user->subscription('main')->onGracePeriod()) {
+	    //	определить, отменяет ли пользователь свою подписку, но все еще находится в «льготном периоде»
+	}
+
+Изменение планов
+	$user = App\User::find(1);
+	$user->subscription('main')->swap('provider-plan-id');
+
+	$user->subscription('main')
+        ->skipTrial()
+        ->swap('provider-plan-id'); 					// поменять планы и отменить любой пробный период
+
+Subscription Quantity
+	
+	$user = User::find(1);
+
+	$user->subscription('main')->incrementQuantity();
+
+	// Add five to the subscription's current quantity...
+	$user->subscription('main')->incrementQuantity(5);
+
+	$user->subscription('main')->decrementQuantity();
+
+	// Subtract five to the subscription's current quantity...
+	$user->subscription('main')->decrementQuantity(5);
+
+	$user->subscription('main')->updateQuantity(10);
+
+Налоги на подписку
+	public function taxPercentage() {
+	    return 20;
+	}
+
+Отмена подписки
+
+	$user->subscription('main')->cancel(); 					// отмена с сохранением льготного периодв
+	$user->subscription('main')->cancelNow();				// отмена немедленная
+
+Возобновление подписки
+	
+	$user->subscription('main')->resume();
+
+Обновление кредитных карт
+	
+	$user->updateCard($stripeToken);
+
+Подписка
+	
+	trialDays
+		$user = User::find(1);
+		$user->newSubscription('main', 'monthly')
+									            ->trialDays(10)
+									            ->create($stripeToken);
+
+определить, находится ли пользователь в течение пробного периода
+	
+	if ($user->onTrial('main')) {
+	    //
+	}
+
+	if ($user->subscription('main')->onTrial()) {
+	    //
+	}
+
+Без кредитной карты
+	$user = User::create([
+	    // Populate other user properties...
+	    'trial_ends_at' => Carbon::now()->addDays(10),
+	]);

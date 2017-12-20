@@ -1,0 +1,61 @@
+#  — создает атрибут id
+.  — создает атрибут class
+[]  — создает любые другие атрибуты, в том числе и пользовательские
+>  — делает переход на один уровень ниже
++  — создает соседние элементы на том же уровне
+^  — делает переход на уровень вверх
+*  — умножает элементы
+$  — заменяется числом, каждый раз увеличивающимся на единицу
+$$  — то же самое, только двухзначное
+{}  — добавляет текстовое содержимое элементам
+()  — группирует элементы
+:  — используется для некоторых элементов, таких как <input>, <a>, <link> и др., и задает для них атрибуты
+
+! -> Tab
+html:5 -> Tab
+
+Ctrl+Shift+G
+
+	ul>li*>a
+
+div#content.column
+
+input[type="text" name="address" placeholder="some text" disabled]
+
+Аналогично задаются типы: hidden (h), search, email, url, password (p), datetime, datetime-local, date, month, week, time, number, range, color, checkbox (c), radio (r), file (f), submit (s), image (i), reset, button (b).
+
+input:text
+input:t
+
+link:css
+script:src
+
+div#dialog>p>span{text}
+
+select>option[value="$"]*10
+
+table+, ul+, ol+, dl+, select+
+
+table>tr*5>td{$}+td*4
+
+div#accordion>(h3+div>p)*5
+
+div#tabs>(ul>li*5>a[href="#tabs-$"])+div#tabs-$*5>p
+
+ul>li*10>a{item$}
+
+(div>p)+(span>em)
+
+ul>li.class$*5>a{item$$}
+
+Lorem
+
+Loremru250
+
+html
+	c — добавляет комментарии в код
+	s — выводит всю разметку в одну строку
+	t — работает только при оборачивании тегов; обрезает маркеры оборачиваемых пунктов списка.
+	e — заменяет символы <, > и & соответственно на последовательности &lt;, &gt; и &amp
+
+#content>ul.nav>li*2|e

@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<!-- saved from url=(0063)https://tuts.codingo.me/google-recaptcha-in-laravel-application -->
+<html lang="en" class=""><!--<![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>
+Google reCaptcha in Laravel application | Codingo Tuts
+</title>
+<script type="text/javascript" async="" data-rocketsrc="https://cdn.userreport.com/userreport.js" data-rocketoptimized="true"></script><script id="facebook-jssdk" data-rocketsrc="//connect.facebook.net/en_US/sdk.js#xfbml=1&amp;version=v2.6&amp;appId=426612230850990" data-rocketoptimized="true"></script><script data-rocketsrc="https://connect.facebook.net/signals/config/194636690874425?v=2.7.18" data-rocketoptimized="true" async=""></script><script async="" data-rocketsrc="https://connect.facebook.net/en_US/fbevents.js" data-rocketoptimized="true"></script><script async="" data-rocketsrc="//www.google-analytics.com/analytics.js" data-rocketoptimized="true"></script><script data-rocketsrc="https://pagead2.googlesyndication.com/pub-config/r20160913/ca-pub-3781130638907631.js" data-rocketoptimized="true"></script><script type="text/javascript">
+//<![CDATA[
+try{if (!window.CloudFlare) {var CloudFlare=[{verbose:0,p:0,byc:0,owlid:"cf",bag2:1,mirage2:0,oracle:0,paths:{cloudflare:"/cdn-cgi/nexp/dok3v=1613a3a185/"},atok:"7bf897493618a81bad52e000ec8d0d57",petok:"e099facfd06e2d5f54a14eb79b7ce74522148125-1501549506-1800",zone:"codingo.me",rocket:"a",apps:{}}];document.write('<script type="text/javascript" src="//ajax.cloudflare.com/cdn-cgi/nexp/dok3v=85b614c0f6/cloudflare.min.js"><'+'\/script>');}}catch(e){};
+//]]>
+</script><script type="text/javascript" src="./Google reCaptcha in Laravel application _ Codingo Tuts_files/cloudflare.min.js"></script><style type="text/css">.cf-hidden { display: none; } .cf-invisible { visibility: hidden; }</style><script data-module="cloudflare/rocket" id="cfjs_block_6d46fb8e34" onload="CloudFlare.__cfjs_block_6d46fb8e34_load()" onerror="CloudFlare.__cfjs_block_6d46fb8e34_error()" onreadystatechange="CloudFlare.__cfjs_block_6d46fb8e34_readystatechange()" type="text/javascript" src="./Google reCaptcha in Laravel application _ Codingo Tuts_files/rocket.js"></script>
+<script async="" data-rocketsrc="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" type="text/rocketscript" data-rocketoptimized="true"></script>
+<script type="text/rocketscript" data-rocketoptimized="true">
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-3781130638907631",
+            enable_page_level_ads: true
+        });
+    </script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1">
+<meta name="description" itemprop="description" content="There are many options when it comes to captcha but most elegant solution is Google reCaptcha for sure. User is required only to click on checkbox and in some cases he needs to select few similar images and that’s it.">
+<meta name="keywords" itemprop="keywords" content="Google,Laravel,reCaptcha,validation,">
+ 
+<meta property="og:url" content="https://tuts.codingo.me/google-recaptcha-in-laravel-application">
+<meta property="og:title" content="Google reCaptcha in Laravel application">
+<meta property="og:description" content="There are many options when it comes to captcha but most elegant solution is Google reCaptcha for sure. User is required only to click on checkbox and in some cases he needs to select few similar images and that’s it.">
+<meta property="og:image" content="https://tuts.codingo.me/wp-content/uploads/2016/10/captcha-register.png">
+<meta property="og:site_name" content="Codingo Tuts">
+<meta property="og:image:type" content="image/png">
+<meta name="author" content="Ivan Radunovic">
+ 
+<link rel="shortcut icon" href="https://tuts.codingo.me/assets/img/box.png">
+ 
+<link rel="stylesheet" href="./Google reCaptcha in Laravel application _ Codingo Tuts_files/css" type="text/css" media="all">
+<link href="./Google reCaptcha in Laravel application _ Codingo Tuts_files/css(1)" rel="stylesheet" type="text/css">
+ 
+<link rel="stylesheet" href="./Google reCaptcha in Laravel application _ Codingo Tuts_files/font-awesome.min.css">
+<link rel="stylesheet" href="./Google reCaptcha in Laravel application _ Codingo Tuts_files/all.css">
+<link rel="alternate" hreflang="en" type="application/atom+xml" href="https://tuts.codingo.me/feed" title="My Feed">
+<script type="text/rocketscript" data-rocketoptimized="true">
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-60551246-2', 'auto');
+        ga('send', 'pageview');
+    </script>
+ 
+<script type="text/rocketscript" data-rocketoptimized="true">
+        !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+                n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+            n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+            t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+                document,'script','https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '194636690874425'); // Insert your pixel ID here.
+        fbq('track', 'PageView');
+    </script>
+<noscript>&lt;img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=194636690874425&amp;ev=PageView&amp;noscript=1"/&gt;</noscript>
+<link rel="stylesheet" id="crayon-css" href="./Google reCaptcha in Laravel application _ Codingo Tuts_files/prism-okaidia.min.css" type="text/css" media="all">
+<link rel="stylesheet" href="./Google reCaptcha in Laravel application _ Codingo Tuts_files/jquery-ui.min.css">
+<link rel="stylesheet" href="./Google reCaptcha in Laravel application _ Codingo Tuts_files/profile.css" type="text/css">
+<script type="text/javascript" async="" data-rocketsrc="//codingo-tuts.disqus.com/embed.js" data-rocketoptimized="true" data-timestamp="1501549508637"></script><script data-rocketsrc="https://codingo-tuts.disqus.com/count-data.js?1=142%20http%3A%2F%2Ftuts.codingo.me%2F%3Fp%3D142&amp;2=https%3A%2F%2Ftuts.codingo.me%2Fgoogle-recaptcha-in-laravel-application%2F&amp;2=https%3A%2F%2Ftuts.codingo.me%2Flaravel-5-1-and-dropzone-js-auto-image-uploads-with-removal-links%2F&amp;2=https%3A%2F%2Ftuts.codingo.me%2Flaravel-social-and-email-authentication%2F&amp;2=https%3A%2F%2Ftuts.codingo.me%2Fupload-and-edit-image-using-croppic-jquery-plugin%2F&amp;2=https%3A%2F%2Ftuts.codingo.me%2Fusing-telegram-messenger-for-laravel-application-notifications%2F" data-rocketoptimized="true"></script><script type="text/javascript" charset="utf-8" async="" data-rocketsrc="https://platform.twitter.com/js/button.56d4a00aea1af069615f067f4e79aaba.js" data-rocketoptimized="true"></script><style type="text/css">.fb_hidden{position:absolute;top:-10000px;z-index:10001}.fb_reposition{overflow:hidden;position:relative}.fb_invisible{display:none}.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}.fb_reset>div{overflow:hidden}.fb_link img{border:none}@keyframes fb_transform{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}.fb_animate{animation:fb_transform .3s forwards}
+.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}.fb_reset .fb_dialog_legacy{overflow:visible}.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px}.fb_dialog_content{background:#fff;color:#333}.fb_dialog_close_icon{background:url(http://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px}.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}.fb_dialog_close_icon:hover{background:url(http://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent}.fb_dialog_close_icon:active{background:url(http://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent}.fb_dialog_loader{background-color:#f6f7f9;border:1px solid #606060;font-size:24px;padding:20px}.fb_dialog_top_left,.fb_dialog_top_right,.fb_dialog_bottom_left,.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}.fb_dialog_top_left{background:url(http://static.xx.fbcdn.net/rsrc.php/v3/ye/r/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}.fb_dialog_top_right{background:url(http://static.xx.fbcdn.net/rsrc.php/v3/ye/r/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}.fb_dialog_bottom_left{background:url(http://static.xx.fbcdn.net/rsrc.php/v3/ye/r/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}.fb_dialog_bottom_right{background:url(http://static.xx.fbcdn.net/rsrc.php/v3/ye/r/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}.fb_dialog_vert_left,.fb_dialog_vert_right,.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}.fb_dialog_vert_left,.fb_dialog_vert_right{width:10px;height:100%}.fb_dialog_vert_left{margin-left:-10px}.fb_dialog_vert_right{right:0;margin-right:-10px}.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{width:100%;height:10px}.fb_dialog_horiz_top{margin-top:-10px}.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}.fb_dialog_iframe{line-height:0}.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #365899;color:#fff;font-size:14px;font-weight:bold;margin:0}.fb_dialog_content .dialog_title>span{background:url(http://static.xx.fbcdn.net/rsrc.php/v3/yd/r/Cou7n-nqK52.gif) no-repeat 5px 50%;float:left;padding:5px 0 7px 26px}body.fb_hidden{-webkit-transform:none;height:100%;margin:0;overflow:visible;position:absolute;top:-10000px;left:0;width:100%}.fb_dialog.fb_dialog_mobile.loading{background:url(http://static.xx.fbcdn.net/rsrc.php/v3/ya/r/3rhSv5V8j3o.gif) white no-repeat 50% 50%;min-height:100%;min-width:100%;overflow:hidden;position:absolute;top:0;z-index:10001}.fb_dialog.fb_dialog_mobile.loading.centered{width:auto;height:auto;min-height:initial;min-width:initial;background:none}.fb_dialog.fb_dialog_mobile.loading.centered #fb_dialog_loader_spinner{width:100%}.fb_dialog.fb_dialog_mobile.loading.centered .fb_dialog_content{background:none}.loading.centered #fb_dialog_loader_close{color:#fff;display:block;padding-top:20px;clear:both;font-size:18px}#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;bottom:0;left:0;right:0;top:0;width:100%;min-height:100%;z-index:10000}#fb-root #fb_dialog_ipad_overlay.hidden{display:none}.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100%}.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px}.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px}.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#4966A6), color-stop(.5, #355492), to(#2A4887));border:1px solid #29487d;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset, rgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}.fb_dialog_content .dialog_content{background:url(http://static.xx.fbcdn.net/rsrc.php/v3/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;border:1px solid #555;border-bottom:0;border-top:0;height:150px}.fb_dialog_content .dialog_footer{background:#f6f7f9;border:1px solid #555;border-top-color:#ccc;height:40px}#fb_dialog_loader_close{float:left}.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}#fb_dialog_loader_spinner{animation:rotateSpinner 1.2s linear infinite;background-color:transparent;background-image:url(http://static.xx.fbcdn.net/rsrc.php/v3/yD/r/t-wz8gw1xG1.png);background-repeat:no-repeat;background-position:50% 50%;height:24px;width:24px}@keyframes rotateSpinner{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+.fb_iframe_widget{display:inline-block;position:relative}.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}.fb_iframe_widget iframe{position:absolute}.fb_iframe_widget_fluid_desktop,.fb_iframe_widget_fluid_desktop span,.fb_iframe_widget_fluid_desktop iframe{max-width:100%}.fb_iframe_widget_fluid_desktop iframe{min-width:220px;position:relative}.fb_iframe_widget_lift{z-index:1}.fb_hide_iframes iframe{position:relative;left:-10000px}.fb_iframe_widget_loader{position:relative;display:inline-block}.fb_iframe_widget_fluid{display:inline}.fb_iframe_widget_fluid span{width:100%}.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}.fb_iframe_widget_loader .FB_Loader{background:url(http://static.xx.fbcdn.net/rsrc.php/v3/y9/r/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50%;z-index:4}</style><link rel="preload" as="style" href="https://c.disquscdn.com/next/embed/styles/lounge.eceee602870fc4ed49dc5f89e270689e.css"><link rel="preload" as="script" href="https://c.disquscdn.com/next/embed/common.bundle.9fcff11af667507b1757062f0192b821.js"><link rel="preload" as="script" href="https://c.disquscdn.com/next/embed/lounge.bundle.aafec1a2f3fa1e486216be04908b0e3a.js"><link rel="preload" as="script" href="https://disqus.com/next/config.js"><link rel="stylesheet" type="text/css" href="./Google reCaptcha in Laravel application _ Codingo Tuts_files/modal.css" media="all"><style type="text/css"></style><style type="text/css">/* This is not a zero-length file! */</style><style type="text/css">/* This is not a zero-length file! */</style><script data-rocketsrc="https://cdn.userreport.com/w_bc95a360-89c8-4ad6-a7a1-34b7d4476d9e/settings.js" data-rocketoptimized="true" async="" class="lazyload" charset="utf-8"></script><script data-rocketsrc="https://cdn.userreport.com/SystemSettings.js" data-rocketoptimized="true" async="" class="lazyload" charset="utf-8"></script><script data-rocketsrc="https://cdn.userreport.com/analytics-tags.js" data-rocketoptimized="true" async="" class="lazyload" charset="utf-8"></script><script data-rocketsrc="https://c.disquscdn.com/next/embed/alfie.f51946af45e0b561c60f768335c9eb79.js" data-rocketoptimized="true" async="" charset="UTF-8"></script></head>
+<body class="index-page" data-page="index" style="overflow: auto;">
+<noscript>&lt;div style="display:none;visibility:hidden"&gt;&lt;img src="/common.png?category=NoJS"/&gt;&lt;/div&gt;</noscript>
+<div id="fb-root" class=" fb_reset"><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div></div></div><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div><iframe name="fb_xdm_frame_https" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" id="fb_xdm_frame_https" aria-hidden="true" title="Facebook Cross Domain Communication Frame" tabindex="-1" src="./Google reCaptcha in Laravel application _ Codingo Tuts_files/XBwzv5Yrm_1.html" style="border: none;"></iframe></div></div></div>
+<script type="text/rocketscript" data-rocketoptimized="true">(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6&appId=426612230850990";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+<div class="wrapper">
+ 
+<div class="header">
+<div class="container-fluid">
+ 
+<a class="logo pull-left" href="https://tuts.codingo.me/">
+<img src="./Google reCaptcha in Laravel application _ Codingo Tuts_files/tutsLogo.png" alt="Codingo Logo">
+</a>
+ 
+</div> 
+</div>
+ 
+ 
+<div class="bg-color-light">
+<div class="container-fluid content-sm">
+<div class="row">
+<div class="col-lg-2 col-md-2 hidden-sm hidden-xs">
+<div class="headline-v2 headline-webdev web-class">
+<h2>Web coding</h2>
+<p>
+<a href="https://tuts.codingo.me/category/web-development/laravel">Laravel</a>
+</p>
+<p>
+<a href="https://tuts.codingo.me/category/web-development/facebook">Facebook</a>
+</p>
+</div>
+<div class="headline-v2 headline-webdev hardware-class">
+<h2>Hardware</h2>
+<p>
+<a href="https://tuts.codingo.me/category/iot">IoT</a>
+</p>
+</div>
+<div class="headline-v2 headline-webdev tools-class">
+<h2>Tools</h2>
+<p>
+<a href="https://tuts.codingo.me/category/tools/browsers">Browsers</a>
+</p>
+<p>
+<a href="https://tuts.codingo.me/category/tools/git">Git</a>
+</p>
+</div>
+ 
+<div class="tag-box tag-box-v3" id="select-content-box" style="margin-top: 3658px; width: 100%;">
+<h4>Go To</h4>
+<select class="form-control input-lg" id="select-h2" name="selected-title">
+<option value="Frontend-implementation">Frontend implementation</option><option value="Backend-implementation">Backend implementation</option></select>
+</div>
+ 
+</div>
+<div class="col-lg-7 col-md-7">
+<div class="news-v3 bg-color-white margin-bottom-30">
+<div class="news-v3-in post-widget easy-block-v2">
+<div class="easy-bg-v2 rgba-yellow"><a href="https://tuts.codingo.me/google-recaptcha-in-laravel-application#lessons" title="Checkout all Lessons">Series</a></div>
+<div class="share-bar">
+<div class="pull-left">
+Part <b>3</b> of <b>5</b>
+</div>
+<span class="badge badge-light">
+Share <i class="fa fa-share-alt"></i>
+</span>
+<a href="https://www.reddit.com/submit" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Social Button&#39;, &#39;click&#39;, &#39;Top Social Bar&#39;, &#39;Reddit&#39;); window.open(&#39;//www.reddit.com/submit?url=&#39; + encodeURIComponent(window.location) + &#39;&amp;title=&#39; + encodeURIComponent(&#39;Google reCaptcha in Laravel application&#39;), &#39;_blank&#39;); return false" type="button" class="btn btn-reddit">
+<i class="fa fa-reddit"></i>
+</a>
+<a href="https://www.facebook.com/sharer/sharer.php" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Social Button&#39;, &#39;click&#39;, &#39;Top Social Bar&#39;, &#39;Facebook&#39;); window.open( &#39;https://www.facebook.com/sharer/sharer.php?u=&#39; + encodeURIComponent(window.location) + &#39;&amp;title=&#39; + encodeURIComponent(&#39;Google reCaptcha in Laravel application&#39;), &#39;_blank&#39;); return false" type="button" class="btn btn-facebook">
+<i class="fa fa-facebook"></i>
+</a>
+<a href="https://www.twitter.com/home" type="button" class="btn btn-twitter" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Social Button&#39;, &#39;click&#39;, &#39;Top Social Bar&#39;, &#39;Twitter&#39;);window.open( &#39;https://www.twitter.com/home?status=&#39; + encodeURIComponent(window.location) + &#39; &#39; + encodeURIComponent(&#39;Google reCaptcha in Laravel application&#39;), &#39;_blank&#39;); return false">
+<i class="fa fa-twitter"></i>
+</a>
+<a href="https://plus.google.com/share?url=https%3A%2F%2Ftuts.codingo.me%2Fgoogle-recaptcha-in-laravel-application" type="button" class="btn btn-googleplus" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Social Button&#39;, &#39;click&#39;, &#39;Top Social Bar&#39;, &#39;Google+&#39;);window.open( &#39;https://plus.google.com/share?url&#39; + encodeURIComponent(window.location) +  &#39; &#39; + encodeURIComponent(&#39;Google reCaptcha in Laravel application&#39;), &#39;_blank&#39;); return false">
+<i class="fa fa-google-plus"></i>
+</a>
+<a href="https://tuts.codingo.me/google-recaptcha-in-laravel-application#" type="button" class="btn btn-linkedin" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Social Button&#39;, &#39;click&#39;, &#39;Top Social Bar&#39;, &#39;Linkedin&#39;);window.open( &#39;https://www.linkedin.com/shareArticle?mini=true&amp;url=&#39; + encodeURIComponent(window.location) + &#39;&amp;title=&#39; + encodeURIComponent(&#39;Google reCaptcha in Laravel application&#39;), &#39;_blank&#39;); return false">
+<i class="fa fa-linkedin"></i>
+</a>
+</div>
+<h1><a href="https://tuts.codingo.me/google-recaptcha-in-laravel-application#">Google reCaptcha in Laravel application</a></h1>
+<ul class="list-inline posted-info">
+<li>By <a href="https://tuts.codingo.me/author/ivanderbu2">Ivan Radunovic</a></li>
+<li>In <a href="https://tuts.codingo.me/category/web-development/laravel">Laravel</a></li>
+<li>Last updated Oct. 20, 2016</li>
+<li><a href="https://tuts.codingo.me/google-recaptcha-in-laravel-application#disqus_thread" data-disqus-identifier="142 http://tuts.codingo.me/?p=142">21 Comments</a></li>
+</ul>
+<script async="" data-rocketsrc="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" type="text/rocketscript" data-rocketoptimized="true"></script>
+ 
+<ins class="adsbygoogle" style="display: block; height: 60px;" data-ad-client="ca-pub-3781130638907631" data-ad-slot="4827268703" data-ad-format="auto" data-adsbygoogle-status="done"><ins id="aswift_1_expand" style="display:inline-table;border:none;height:60px;margin:0;padding:0;position:relative;visibility:visible;width:698px;background-color:transparent"><ins id="aswift_1_anchor" style="display:block;border:none;height:60px;margin:0;padding:0;position:relative;visibility:visible;width:698px;background-color:transparent"><iframe width="698" height="60" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_1" name="aswift_1" style="left:0;position:absolute;top:0;width:698px;height:60px;" src="./Google reCaptcha in Laravel application _ Codingo Tuts_files/saved_resource.html"></iframe></ins></ins></ins>
+<script type="text/rocketscript" data-rocketoptimized="true">
+                                    (adsbygoogle = window.adsbygoogle || []).push({});
+                                </script>
+<div class="post-content-only">
+<p>There are many options when it comes to captcha but most elegant solution is <a href="https://www.google.com/recaptcha/intro/index.html" target="_blank">Google reCaptcha</a> for sure. User is required only to click on checkbox and in some cases&nbsp;he needs to select few similar images and that's all.</p>
+<p>I know that too often&nbsp;I bump on websites, which registration form has some weird characters in captcha field and I have to guess that combination few times cause I can't read anything there. So not to stress users I will be using the simplest captcha, Google reCaptcha.</p>
+<p>I will work on same code as in previous tutorials&nbsp;<a href="http://tuts.codingo.me/laravel-social-and-email-authentication/" target="_blank">Laravel 5 Social and Email Authentication</a>&nbsp;and&nbsp;<a href="http://tuts.codingo.me/laravel-5-client-side-validation-with-parsley-js/" target="_blank">Laravel 5 client side validation with Parsley.js</a>.&nbsp;</p>
+<blockquote>All code from this tutorial is on <a href="https://github.com/codingo-me/laravel-social-email-authentication" target="_blank">Github</a>.</blockquote>
+<h2 id="Frontend-implementation">Frontend implementation</h2>
+<p>I will first visit Google reCaptcha site&nbsp;<a href="https://www.google.com/recaptcha/" target="_blank">https://www.google.com/recaptcha/</a>&nbsp;and register new site there. Good thing is that you can insert multiple domains, so same captcha placement can&nbsp;work on your development domain and production domain.</p>
+<p>After registration of new site, I am&nbsp;redirected to&nbsp;captcha keys and quick guide how to implement widget.</p>
+<div class="thumbnail"><img src="./Google reCaptcha in Laravel application _ Codingo Tuts_files/reCaptcha2.png" alt="" width="1002" height="467">
+<div class="caption">
+<p>reCaptcha Keys</p>
+</div>
+</div>
+<p>I will store these keys into .env file.</p>
+<pre title=".env - End of file with reCaptcha keys" class=" language-yaml"><code class=" language-yaml">
+RE_CAP_SITE=6LfAcwkTAAAAAIpZmjqpo-DQ4JWedQ2ywsw4T6qK
+RE_CAP_SECRET=6LfAcwkTAAAAAJx5gxqn0S4jguJ-HrJmu7vfpUyI
+</code>
+</pre>
+<p>I want this widget to appear after password confirmation filed, before Register button. Also I will include <code>https://www.google.com/recaptcha/api.js</code>&nbsp;in the footer section of the page.</p>
+<pre title="register.blade.php " class=" language-markdown"><code class=" language-markdown">
+&lt;div class="g-recaptcha" data-sitekey="{{ env('RE_CAP_SITE') }}"&gt;&lt;/div&gt;
+
+&lt;button class="btn btn-lg btn-primary btn-block register-btn" type="submit"&gt;Register&lt;/button&gt;
+</code>
+</pre>
+<p>With this I have completed frontend and it looks pretty good now.</p>
+<div class="thumbnail"><img src="./Google reCaptcha in Laravel application _ Codingo Tuts_files/captcha-register.png" alt="Register form captcha field">
+<div class="caption">
+<p>Register form captcha field</p>
+</div>
+</div>
+<h2 id="Backend-implementation">Backend implementation</h2>
+<p>First I need to pull reCaptcha PHP package by adding&nbsp;<code><span class="lang:js decode:true  crayon-inline ">"google/recaptcha": "~1.1"</span></code>&nbsp; to <em>composer.json&nbsp;</em>require section and doing update on composer dependencies. You may have already pulled this package if you followed first tutorial.</p>
+<p>There&nbsp;are&nbsp;probably 10 different ways how I can code this, but I like reusable approach using traits. This way I can include captcha logic in multiple controllers with simple <em>use</em> statement without the need to inject dependencies.</p>
+<p>This trait will be located in <em>app/Traits/CaptchaTrait.php</em>.</p>
+<pre title="CaptchaTrait.php" class=" language-php"><code class=" language-php">
+&lt;?php namespace App\Traits;
+
+use Input;
+use ReCaptcha\ReCaptcha;
+
+trait CaptchaTrait {
+
+    public function captchaCheck()
+    {
+
+        $response = Input::get('g-recaptcha-response');
+        $remoteip = $_SERVER['REMOTE_ADDR'];
+        $secret   = env('RE_CAP_SECRET');
+
+        $recaptcha = new ReCaptcha($secret);
+        $resp = $recaptcha-&gt;verify($response, $remoteip);
+        if ($resp-&gt;isSuccess()) {
+            return 1;
+        } else {
+            return 0;
+        }
+
+    }
+
+}
+</code>
+</pre>
+<p>This method <em>captchaCheck&nbsp;</em>does everything, it takes input from user, sends&nbsp;request to Google and returns state. No need to pass any arguments in the method, simple&nbsp;<code><span class="lang:php decode:true crayon-inline">$this-&gt;captchaCheck();</span></code>&nbsp; will do the job in the controller.</p>
+<p>I am using built-in authentication controllers and I don't want to copy/paste any illuminate classes and re-implement them. So I found pretty elegant solution, I will only modify <code>validator()</code> method of <code>RegisterController</code>.</p>
+<pre class=" language-php"><code class=" language-php">    /**
+     * Get a validator for an incoming registration request.
+     *
+     * @param  array  $data
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
+    protected function validator(array $data)
+    {
+
+        $data['captcha'] = $this-&gt;captchaCheck();
+
+        $validator = Validator::make($data,
+            [
+                'first_name'            =&gt; 'required',
+                'last_name'             =&gt; 'required',
+                'email'                 =&gt; 'required|email|unique:users',
+                'password'              =&gt; 'required|min:6|max:20',
+                'password_confirmation' =&gt; 'required|same:password',
+                'g-recaptcha-response'  =&gt; 'required',
+                'captcha'               =&gt; 'required|min:1'
+            ],
+            [
+                'first_name.required'   =&gt; 'First Name is required',
+                'last_name.required'    =&gt; 'Last Name is required',
+                'email.required'        =&gt; 'Email is required',
+                'email.email'           =&gt; 'Email is invalid',
+                'password.required'     =&gt; 'Password is required',
+                'password.min'          =&gt; 'Password needs to have at least 6 characters',
+                'password.max'          =&gt; 'Password maximum length is 20 characters',
+                'g-recaptcha-response.required' =&gt; 'Captcha is required',
+                'captcha.min'           =&gt; 'Wrong captcha, please try again.'
+            ]
+        );
+
+        return $validator;
+
+    }</code></pre>
+<p>I am calling <code>captchaCheck()</code>&nbsp;from validator method and I am adding it's response to <code>$data</code> array, as it was a form field. In validation rule Laravel expects captcha to be min 1, and if <code>captchaCheck()</code> only returns 0 and 1, you see what will happen.</p>
+<p>Don't forget to pull CaptchaTrait with <code>use</code> statement.</p>
+<p>You can find full code used here on <a href="https://github.com/codingo-me/laravel-social-email-authentication" target="_blank">Github</a>&nbsp;or you can test Live Demo&nbsp;<a title="Google reCaptcha Live Demo" href="http://demo1.codingo.me/register">here</a>.</p>
+</div>
+<div class="row" id="lessons">
+<div class="col-md-12">
+<div class="headline-v2" style="background-color: #efefef;border-left:6px solid rgba(121,213,176,.75);margin-bottom:10px;">
+<h2><i class="fa fa-book"></i>Lessons of this Series</h2>
+</div>
+<ul class="list-inline tags-v2 margin-bottom-20">
+</ul>
+</div>
+</div>
+<div class="row profile margin-bottom-40">
+<div class="col-md-12">
+<div class="panel panel-profile no-bg">
+<div class="profile-post color-one">
+<span class="profile-post-numb">1</span>
+<div class="profile-post-in">
+<h3 class=""><a href="https://tuts.codingo.me/laravel-social-and-email-authentication">Laravel 5.3 Social and Email Multi-Authentication</a></h3>
+</div>
+</div>
+<div class="profile-post color-two">
+<span class="profile-post-numb">2</span>
+<div class="profile-post-in">
+<h3 class=""><a href="https://tuts.codingo.me/laravel-5-client-side-validation-with-parsley-js">Laravel 5 client side validation with Parsley.js</a></h3>
+</div>
+</div>
+<div class="profile-post color-three">
+<span class="profile-post-numb">3</span>
+<div class="profile-post-in">
+<h3 class=""><a href="https://tuts.codingo.me/google-recaptcha-in-laravel-application">Google reCaptcha in Laravel application</a></h3>
+</div>
+</div>
+<div class="profile-post color-four">
+<span class="profile-post-numb">4</span>
+<div class="profile-post-in">
+<h3 class=""><a href="https://tuts.codingo.me/user-activation-with-middleware">User Activation via email and Laravel Middleware for Activated Users</a></h3>
+</div>
+</div>
+<div class="profile-post color-five">
+<span class="profile-post-numb">5</span>
+<div class="profile-post-in">
+<h3 class=""><a href="https://tuts.codingo.me/sending-emails-over-queue-with-aws-ses">Sending emails over Queue with AWS SES</a></h3>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-12">
+<div class="headline-v2" style="background-color: #efefef;border-left:6px solid rgba(121,213,176,.75);">
+<h2>Tags</h2>
+</div>
+<ul class="list-inline tags-v2 margin-bottom-20">
+<li>
+<a href="https://tuts.codingo.me/tag/google" class="btn-u btn-brd rounded-3x btn-u-lg btn-u-light-green">Google</a>
+</li>
+<li>
+<a href="https://tuts.codingo.me/tag/laravel" class="btn-u btn-brd rounded-3x btn-u-lg btn-u-light-green">Laravel</a>
+</li>
+<li>
+<a href="https://tuts.codingo.me/tag/recaptcha" class="btn-u btn-brd rounded-3x btn-u-lg btn-u-light-green">reCaptcha</a>
+</li>
+<li>
+<a href="https://tuts.codingo.me/tag/validation" class="btn-u btn-brd rounded-3x btn-u-lg btn-u-light-green">validation</a>
+</li>
+</ul>
+</div>
+</div>
+<div id="disqus_thread"><iframe id="dsq-app5497" name="dsq-app5497" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" width="100%" src="./Google reCaptcha in Laravel application _ Codingo Tuts_files/saved_resource(2).html" style="width: 1px !important; min-width: 100% !important; border: none !important; overflow: hidden !important; height: 3309px !important;" horizontalscrolling="no" verticalscrolling="no"></iframe></div>
+<script type="text/rocketscript" data-rocketoptimized="true">
+    /**
+     * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+     * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+     */
+
+     var disqus_config = function () {
+     this.page.url = 'https://tuts.codingo.me/google-recaptcha-in-laravel-application/'; // Replace PAGE_URL with your page's canonical URL variable
+     this.page.identifier = '142 http:\/\/tuts.codingo.me\/?p=142'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+     this.page.title = 'Google reCaptcha in Laravel application';
+     };
+
+    (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        s.type = "text/javascript";
+        s.async = true;
+
+        s.src = '//codingo-tuts.disqus.com/embed.js';
+
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the &lt;a href="https://disqus.com/?ref_noscript" rel="nofollow"&gt;comments powered by Disqus.&lt;/a&gt;</noscript>
+</div>
+</div>
+</div>
+ 
+<div class="col-lg-2 col-md-2">
+<div class="margin-bottom-20">
+<script async="" data-rocketsrc="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" type="text/rocketscript" data-rocketoptimized="true"></script>
+ 
+<ins class="adsbygoogle" style="display: inline-block; width: 300px; height: 250px;" data-ad-client="ca-pub-3781130638907631" data-ad-slot="6009513509" data-adsbygoogle-status="done"><ins id="aswift_2_expand" style="display:inline-table;border:none;height:250px;margin:0;padding:0;position:relative;visibility:visible;width:300px;background-color:transparent"><ins id="aswift_2_anchor" style="display:block;border:none;height:250px;margin:0;padding:0;position:relative;visibility:visible;width:300px;background-color:transparent"><iframe width="300" height="250" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_2" name="aswift_2" style="left:0;position:absolute;top:0;width:300px;height:250px;" src="./Google reCaptcha in Laravel application _ Codingo Tuts_files/saved_resource(3).html"></iframe></ins></ins></ins>
+<script type="text/rocketscript" data-rocketoptimized="true">
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</div>
+<script async="" data-rocketsrc="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" type="text/rocketscript" data-rocketoptimized="true"></script>
+ 
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:600px" data-ad-client="ca-pub-3781130638907631" data-ad-slot="2196703106" data-adsbygoogle-status="done"><ins id="aswift_3_expand" style="display:inline-table;border:none;height:600px;margin:0;padding:0;position:relative;visibility:visible;width:300px;background-color:transparent"><ins id="aswift_3_anchor" style="display:block;border:none;height:600px;margin:0;padding:0;position:relative;visibility:visible;width:300px;background-color:transparent"><iframe width="300" height="600" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_3" name="aswift_3" style="left:0;position:absolute;top:0;width:300px;height:600px;" src="./Google reCaptcha in Laravel application _ Codingo Tuts_files/saved_resource(4).html"></iframe></ins></ins></ins>
+<script type="text/rocketscript" data-rocketoptimized="true">
+    (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<div class="margin-bottom-20">
+<a target="_blank" href="https://tuts.codingo.me/out/coursera"><img border="0" alt="Online computer science courses to jumpstart your future." src="./Google reCaptcha in Laravel application _ Codingo Tuts_files/coursera.jpg"></a>
+</div>
+<div class="margin-bottom-20">
+<a target="_blank" href="https://tuts.codingo.me/recommend/wordpress"><img src="./Google reCaptcha in Laravel application _ Codingo Tuts_files/codingo-llc-wp-hosting.png" border="0" alt="WP Engine Managed WordPress Hosting"></a>
+</div>
+<div class="margin-bottom-20">
+<iframe id="twitter-widget-0" scrolling="no" frameborder="0" allowtransparency="true" class="twitter-follow-button twitter-follow-button-rendered" title="Twitter Follow Button" src="./Google reCaptcha in Laravel application _ Codingo Tuts_files/follow_button.85cf65311617c356fe9237c3e6c10afb.en.html" style="position: static; visibility: visible; width: 219px; height: 20px;" data-screen-name="codingo_me"></iframe><script async="" data-rocketsrc="//platform.twitter.com/widgets.js" charset="utf-8" type="text/rocketscript" data-rocketoptimized="true"></script>
+</div>
+<div class="margin-bottom-20">
+<div class="fb-page fb_iframe_widget" data-href="https://www.facebook.com/codingo.me" data-tabs="" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true" fb-xfbml-state="rendered" fb-iframe-plugin-query="adapt_container_width=true&amp;app_id=426612230850990&amp;container_width=195&amp;hide_cover=false&amp;href=https%3A%2F%2Fwww.facebook.com%2Fcodingo.me&amp;locale=en_US&amp;sdk=joey&amp;show_facepile=true&amp;small_header=false"><span style="vertical-align: bottom; width: 195px; height: 230px;"><iframe name="f2dffc13b02567" width="1000px" height="1000px" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" title="fb:page Facebook Social Plugin" src="./Google reCaptcha in Laravel application _ Codingo Tuts_files/page.html" style="border: none; visibility: visible; width: 195px; height: 230px;" class=""></iframe></span></div>
+</div>
+<div class="headline-v2"><h2>Trending</h2></div>
+ 
+<ul class="list-unstyled blog-trending margin-bottom-20">
+<li>
+<h3><a href="https://tuts.codingo.me/laravel-5-1-and-dropzone-js-auto-image-uploads-with-removal-links" class="trend-title ola">Laravel 5.2 and Dropzone.js Part 1: Auto image uploads with removal links</a></h3>
+<small>22nd Jun 2016 | <a href="https://tuts.codingo.me/laravel-5-1-and-dropzone-js-auto-image-uploads-with-removal-links/#disqus_thread" title="Number of comments">147 Comments</a> | <a href="https://tuts.codingo.me/category/web-development/laravel" title="Category">Laravel</a></small>
+</li>
+<li>
+<h3><a href="https://tuts.codingo.me/laravel-social-and-email-authentication" class="trend-title ola">Laravel 5.3 Social and Email Multi-Authentication</a></h3>
+<small>19th Oct 2016 | <a href="https://tuts.codingo.me/laravel-social-and-email-authentication/#disqus_thread" title="Number of comments">134 Comments</a> | <a href="https://tuts.codingo.me/category/web-development/laravel" title="Category">Laravel</a></small>
+</li>
+<li>
+<h3><a href="https://tuts.codingo.me/upload-and-edit-image-using-croppic-jquery-plugin" class="trend-title ola">Upload and edit image using Croppic jQuery plugin</a></h3>
+<small>14th Dec 2015 | <a href="https://tuts.codingo.me/upload-and-edit-image-using-croppic-jquery-plugin/#disqus_thread" title="Number of comments">26 Comments</a> | <a href="https://tuts.codingo.me/category/web-development/laravel" title="Category">Laravel</a></small>
+</li>
+<li>
+<h3><a href="https://tuts.codingo.me/using-telegram-messenger-for-laravel-application-notifications" class="trend-title ola">Using Telegram Messenger for Laravel application notifications</a></h3>
+<small>26th Oct 2016 | <a href="https://tuts.codingo.me/using-telegram-messenger-for-laravel-application-notifications/#disqus_thread" title="Number of comments">32 Comments</a> | <a href="https://tuts.codingo.me/category/web-development/laravel" title="Category">Laravel</a></small>
+</li>
+<li>
+<h3><a href="https://tuts.codingo.me/google-recaptcha-in-laravel-application" class="trend-title ola">Google reCaptcha in Laravel application</a></h3>
+<small>20th Oct 2016 | <a href="https://tuts.codingo.me/google-recaptcha-in-laravel-application/#disqus_thread" title="Number of comments">21 Comments</a> | <a href="https://tuts.codingo.me/category/web-development/laravel" title="Category">Laravel</a></small>
+</li>
+</ul>
+ 
+<div class="headline-v2"><h2>Newsletter</h2></div>
+ 
+<div class="blog-newsletter margin-bottom-20">
+<p>Subscribe to our newsletter for good news, sent out every month.</p>
+<form action="https://codingo.us11.list-manage.com/subscribe/post?u=61defc691f1cd89ac743ef606&amp;id=c94f5511b5" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate="">
+<div class="input-group">
+<input type="email" value="" name="EMAIL" id="mce-EMAIL" class="form-control" placeholder="Email">
+<span class="input-group-btn">
+<button class="btn-u" type="submit" name="subscribe" id="mc-embedded-subscribe">Subscribe</button>
+</span>
+</div>
+</form>
+</div>
+ 
+<div class="headline-v2"><h2>Tags</h2></div>
+ 
+<ul class="list-inline tags-v2 margin-bottom-20">
+<li><a href="https://tuts.codingo.me/tag/laravel">Laravel</a></li>
+<li><a href="https://tuts.codingo.me/tag/esp8266">ESP8266</a></li>
+<li><a href="https://tuts.codingo.me/tag/laravel-5">laravel 5</a></li>
+<li><a href="https://tuts.codingo.me/tag/laravel-tutorial">laravel tutorial</a></li>
+<li><a href="https://tuts.codingo.me/tag/node-red">Node-Red</a></li>
+<li><a href="https://tuts.codingo.me/tag/ibm-bluemix">IBM Bluemix</a></li>
+<li><a href="https://tuts.codingo.me/tag/bluemix">Bluemix</a></li>
+<li><a href="https://tuts.codingo.me/tag/google">Google</a></li>
+<li><a href="https://tuts.codingo.me/tag/slack">Slack</a></li>
+<li><a href="https://tuts.codingo.me/tag/tutorial">tutorial</a></li>
+<li><a href="https://tuts.codingo.me/tag/socialite">Socialite</a></li>
+<li><a href="https://tuts.codingo.me/tag/notifications">notifications</a></li>
+<li><a href="https://tuts.codingo.me/tag/parsley-js">Parsley.js</a></li>
+<li><a href="https://tuts.codingo.me/tag/oauth">oAuth</a></li>
+<li><a href="https://tuts.codingo.me/tag/arduino">Arduino</a></li>
+<li><a href="https://tuts.codingo.me/tag/mqtt">MQTT</a></li>
+<li><a href="https://tuts.codingo.me/tag/image-upload">image upload</a></li>
+<li><a href="https://tuts.codingo.me/tag/facebook">Facebook</a></li>
+<li><a href="https://tuts.codingo.me/tag/dropzone-laravel">dropzone laravel</a></li>
+<li><a href="https://tuts.codingo.me/tag/dropzone-image-upload">dropzone image upload</a></li>
+<li><a href="https://tuts.codingo.me/tag/dropzone-js">dropzone.js</a></li>
+<li><a href="https://tuts.codingo.me/tag/dropzone">dropzone</a></li>
+<li><a href="https://tuts.codingo.me/tag/ubuntu">ubuntu</a></li>
+<li><a href="https://tuts.codingo.me/tag/data-visualization">Data Visualization</a></li>
+<li><a href="https://tuts.codingo.me/tag/ssl">ssl</a></li>
+<li><a href="https://tuts.codingo.me/tag/twilio">twilio</a></li>
+<li><a href="https://tuts.codingo.me/tag/https">https</a></li>
+<li><a href="https://tuts.codingo.me/tag/ssl-certificate">ssl certificate</a></li>
+<li><a href="https://tuts.codingo.me/tag/apache">apache</a></li>
+<li><a href="https://tuts.codingo.me/tag/email">email</a></li>
+<li><a href="https://tuts.codingo.me/tag/sms">SMS</a></li>
+<li><a href="https://tuts.codingo.me/tag/install-certificate">install certificate</a></li>
+<li><a href="https://tuts.codingo.me/tag/thingspeak">Thingspeak</a></li>
+<li><a href="https://tuts.codingo.me/tag/pubsubclient">PubSubClient</a></li>
+<li><a href="https://tuts.codingo.me/tag/wi-fi">Wi-Fi</a></li>
+<li><a href="https://tuts.codingo.me/tag/domain-validation">domain validation</a></li>
+<li><a href="https://tuts.codingo.me/tag/cloudant-db">Cloudant DB</a></li>
+<li><a href="https://tuts.codingo.me/tag/iot-workbench">IoT Workbench</a></li>
+<li><a href="https://tuts.codingo.me/tag/application">Application</a></li>
+<li><a href="https://tuts.codingo.me/tag/motion-sensor">Motion Sensor</a></li>
+<li><a href="https://tuts.codingo.me/tag/disabled-javascript">disabled JavaScript</a></li>
+<li><a href="https://tuts.codingo.me/tag/activation-middleware">activation middleware</a></li>
+<li><a href="https://tuts.codingo.me/tag/email-activation">email activation</a></li>
+<li><a href="https://tuts.codingo.me/tag/activation">activation</a></li>
+<li><a href="https://tuts.codingo.me/tag/maknz-slack">maknz-slack</a></li>
+<li><a href="https://tuts.codingo.me/tag/spatie">spatie</a></li>
+<li><a href="https://tuts.codingo.me/tag/laravel-backup">laravel-backup</a></li>
+<li><a href="https://tuts.codingo.me/tag/backup">backup</a></li>
+<li><a href="https://tuts.codingo.me/tag/multi-authentication">multi-authentication</a></li>
+<li><a href="https://tuts.codingo.me/tag/blocked-ga">blocked ga</a></li>
+<li><a href="https://tuts.codingo.me/tag/nojs">noJS</a></li>
+<li><a href="https://tuts.codingo.me/tag/measurement-protocol">Measurement Protocol</a></li>
+<li><a href="https://tuts.codingo.me/tag/ir">IR</a></li>
+<li><a href="https://tuts.codingo.me/tag/google-analytics">Google Analytics</a></li>
+<li><a href="https://tuts.codingo.me/tag/iot">iot</a></li>
+<li><a href="https://tuts.codingo.me/tag/fractal">fractal</a></li>
+<li><a href="https://tuts.codingo.me/tag/php">php</a></li>
+<li><a href="https://tuts.codingo.me/tag/api-development">api development</a></li>
+<li><a href="https://tuts.codingo.me/tag/dingo-api">dingo api</a></li>
+<li><a href="https://tuts.codingo.me/tag/edit-image">edit image</a></li>
+<li><a href="https://tuts.codingo.me/tag/dropzone-refresh">dropzone refresh</a></li>
+<li><a href="https://tuts.codingo.me/tag/dropzone-uploaded">dropzone uploaded</a></li>
+<li><a href="https://tuts.codingo.me/tag/remote">remote</a></li>
+<li><a href="https://tuts.codingo.me/tag/automation">automation</a></li>
+<li><a href="https://tuts.codingo.me/tag/upload-image">upload image</a></li>
+<li><a href="https://tuts.codingo.me/tag/css">css</a></li>
+<li><a href="https://tuts.codingo.me/tag/edit">edit</a></li>
+<li><a href="https://tuts.codingo.me/tag/laravel-image-upload">laravel image upload</a></li>
+<li><a href="https://tuts.codingo.me/tag/social-logins">Social logins</a></li>
+<li><a href="https://tuts.codingo.me/tag/social">Social</a></li>
+<li><a href="https://tuts.codingo.me/tag/recaptcha">reCaptcha</a></li>
+<li><a href="https://tuts.codingo.me/tag/queue">queue</a></li>
+<li><a href="https://tuts.codingo.me/tag/password-reset">Password reset</a></li>
+<li><a href="https://tuts.codingo.me/tag/parsley">parsley</a></li>
+<li><a href="https://tuts.codingo.me/tag/mandrill">Mandrill</a></li>
+<li><a href="https://tuts.codingo.me/tag/login">Login</a></li>
+<li><a href="https://tuts.codingo.me/tag/laravel-stripe">laravel stripe</a></li>
+<li><a href="https://tuts.codingo.me/tag/laravel-queue">laravel queue</a></li>
+<li><a href="https://tuts.codingo.me/tag/laravel-5-1">laravel 5.1</a></li>
+<li><a href="https://tuts.codingo.me/tag/stripe-checkout">stripe checkout</a></li>
+<li><a href="https://tuts.codingo.me/tag/image">image</a></li>
+<li><a href="https://tuts.codingo.me/tag/google-oauth">Google+ oAuth</a></li>
+<li><a href="https://tuts.codingo.me/tag/email-registration">Email registration</a></li>
+<li><a href="https://tuts.codingo.me/tag/dropzone-upload-with-removal-links">dropzone upload with removal links</a></li>
+<li><a href="https://tuts.codingo.me/tag/drag-and-drop-upload">drag and drop upload</a></li>
+<li><a href="https://tuts.codingo.me/tag/developer">Developer</a></li>
+<li><a href="https://tuts.codingo.me/tag/client-side-validation">Client Side Validation</a></li>
+<li><a href="https://tuts.codingo.me/tag/chrome-extension">chrome extension</a></li>
+<li><a href="https://tuts.codingo.me/tag/chrome">chrome</a></li>
+<li><a href="https://tuts.codingo.me/tag/checkout">checkout</a></li>
+<li><a href="https://tuts.codingo.me/tag/browser-plugin">browser plugin</a></li>
+<li><a href="https://tuts.codingo.me/tag/stripe">Stripe</a></li>
+<li><a href="https://tuts.codingo.me/tag/supervisor">supervisor</a></li>
+<li><a href="https://tuts.codingo.me/tag/croppic">croppic</a></li>
+<li><a href="https://tuts.codingo.me/tag/gulp">gulp</a></li>
+<li><a href="https://tuts.codingo.me/tag/crop-image">crop image</a></li>
+<li><a href="https://tuts.codingo.me/tag/crop">crop</a></li>
+<li><a href="https://tuts.codingo.me/tag/nodejs">node.js</a></li>
+<li><a href="https://tuts.codingo.me/tag/node">node</a></li>
+<li><a href="https://tuts.codingo.me/tag/aws-ses">aws ses</a></li>
+<li><a href="https://tuts.codingo.me/tag/js">js</a></li>
+<li><a href="https://tuts.codingo.me/tag/group">group</a></li>
+<li><a href="https://tuts.codingo.me/tag/minify">minify</a></li>
+<li><a href="https://tuts.codingo.me/tag/version">version</a></li>
+<li><a href="https://tuts.codingo.me/tag/grunt">grunt</a></li>
+<li><a href="https://tuts.codingo.me/tag/elixir-laravel">elixir laravel</a></li>
+<li><a href="https://tuts.codingo.me/tag/telegram">Telegram</a></li>
+<li><a href="https://tuts.codingo.me/tag/elixir">elixir</a></li>
+<li><a href="https://tuts.codingo.me/tag/cache-tags">cache tags</a></li>
+<li><a href="https://tuts.codingo.me/tag/redis-server">redis server</a></li>
+<li><a href="https://tuts.codingo.me/tag/caching">caching</a></li>
+<li><a href="https://tuts.codingo.me/tag/cache">cache</a></li>
+<li><a href="https://tuts.codingo.me/tag/redis-laravel">redis laravel</a></li>
+<li><a href="https://tuts.codingo.me/tag/redis">redis</a></li>
+<li><a href="https://tuts.codingo.me/tag/validation">validation</a></li>
+<li><a href="https://tuts.codingo.me/tag/upload">upload</a></li>
+<li><a href="https://tuts.codingo.me/tag/twitter">Twitter</a></li>
+<li><a href="https://tuts.codingo.me/tag/telegram-bot-api">Telegram Bot API</a></li>
+<li><a href="https://tuts.codingo.me/tag/user-activation">user activation</a></li>
+</ul>
+ 
+</div>
+ 
+</div>
+</div>
+</div>
+ 
+ 
+<div class="footer-v1" id="contact">
+<div class="footer">
+<div class="container">
+<div class="row">
+ 
+<div class="col-md-3 md-margin-bottom-40">
+<a href="https://tuts.codingo.me/"><img id="logo-footer" class="footer-logo" width="190" src="./Google reCaptcha in Laravel application _ Codingo Tuts_files/logo-codingo-on-black.png" alt=""></a>
+<p>Codingo LLC is outsourcing agency with expert team in application development. Our clients are startup companies from US and UK.</p>
+<p>With extensive experience in working with worldwide startups we can follow you through all the steps of lean methodology.</p>
+</div> 
+ 
+ 
+<div class="col-md-offset-3 col-md-3 md-margin-bottom-40">
+<div class="headline"><h2>In-house Projects</h2></div>
+<ul class="list-unstyled link-list">
+<li><a href="http://tuts.codingo.me/" target="_blank">Codingo Tuts</a><i class="fa fa-angle-right"></i></li>
+<li><a href="http://mailnode.io/" target="_blank">MailNode</a><i class="fa fa-angle-right"></i></li>
+<li><a href="http://kodiraj.me/" target="_blank">Kodiraj.me</a><i class="fa fa-angle-right"></i></li>
+</ul>
+</div> 
+ 
+ 
+<div class="col-md-3 map-img md-margin-bottom-40">
+<div class="headline"><h2>Contact Us</h2></div>
+<address class="md-margin-bottom-40">
+<b>Codingo LLC - USA</b><br>
+16192 Coastal Highway<br>
+Lewes 19958<br>
+Delaware, County of Sussex<br>
+Phone: +1 (781) 728 - 5329 <br>
+</address>
+<address class="md-margin-bottom-40">
+<b>Codingo DOO - Montenegro</b><br>
+Ulica Baku br. 52 <br>
+Podgorica, Montenegro<br>
+Phone: +382 20 240 672 <br>
+Email: <a href="mailto:contact@codingo.me" class="">contact@codingo.me</a>
+</address>
+</div> 
+ 
+</div>
+</div>
+</div> 
+<div class="copyright">
+<div class="container">
+<div class="row">
+<div class="col-md-6">
+<p>
+©2015-2017 Codingo LLC </p>
+</div>
+ 
+<div class="col-md-6">
+<ul class="footer-socials list-inline">
+<li>
+<a href="https://tuts.codingo.me/feed" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Feed" target="_blank">
+<i class="fa fa-rss-square"></i>
+</a>
+</li>
+<li>
+<a href="https://github.com/codingo-me" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="GitHub" target="_blank">
+<i class="fa fa-github-alt"></i>
+</a>
+</li>
+<li>
+<a href="https://www.facebook.com/codingo.me" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Facebook" target="_blank">
+<i class="fa fa-facebook"></i>
+</a>
+</li>
+<li>
+<a href="https://twitter.com/codingo_me" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Twitter" target="_blank">
+<i class="fa fa-twitter"></i>
+</a>
+</li>
+</ul>
+</div>
+ 
+</div>
+</div>
+</div> 
+</div>
+ 
+</div> 
+ 
+<script type="text/rocketscript" data-rocketsrc="/js/all.js" data-rocketoptimized="true"></script>
+ 
+<!--[if lt IE 9]>
+<script src="https://tuts.codingo.me/assets/plugins/respond.js"></script>
+<script src="https://tuts.codingo.me/assets/plugins/html5shiv.js"></script>
+<script src="https://tuts.codingo.me/assets/plugins/placeholder-IE-fixes.js"></script>
+<![endif]-->
+<script type="text/rocketscript" data-rocketsrc="https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/prism.min.js" data-rocketoptimized="true"></script>
+<script id="dsq-count-scr" data-rocketsrc="//codingo-tuts.disqus.com/count.js" async="" type="text/rocketscript" data-rocketoptimized="true"></script>
+<script data-rocketsrc="https://tuts.codingo.me/assets/plugins/scroll-magic/ScrollMagic.min.js" type="text/rocketscript" data-rocketoptimized="true"></script>
+<script data-rocketsrc="https://tuts.codingo.me/assets/plugins/scroll-magic/plugins/debug.addIndicators.min.js" type="text/rocketscript" data-rocketoptimized="true"></script>
+<script data-rocketsrc="//code.jquery.com/ui/1.11.4/jquery-ui.js" type="text/rocketscript" data-rocketoptimized="true"></script>
+<script data-rocketsrc="https://devniac.me/scripts/embed.js" type="text/rocketscript" data-rocketoptimized="true"></script>
+<script type="text/rocketscript" data-rocketoptimized="true">
+        var titleMap = [];
+
+        var controller = new ScrollMagic.Controller();
+
+
+        //Search for H2 tags inside post
+        $('.post-content-only > h2').each(function()
+        {
+            var h2Value = $(this).text();
+
+            //create slugs for id and attach them to each h2
+            trimmed = $.trim(h2Value);
+            slug = trimmed.replace(/[^a-z0-9-]/gi, '-').
+                    replace(/-+/g, '-').
+                    replace(/^-|-$/g, '');
+
+            //attach id to h2
+            $(this).attr('id', slug);
+
+            //insert these h2 texts into select as option
+            $('#select-h2').append("<option value='"+slug+"'>"+ h2Value +"</option>");
+
+
+            titleMap.push({'start': $(this).position().top, 'slug': slug});
+
+        });
+
+
+        for(i=0;i<titleMap.length;i++)
+        {
+            var slug = titleMap[i].slug;
+            var start = titleMap[i].start;
+            var end = start + 200;
+            if (titleMap[i+1] !== undefined) {
+                end = titleMap[i+1].start - 15;
+            }
+            var duration = end - start;
+
+            //ScrollMagic
+            (function (slug, duration) {
+                new ScrollMagic.Scene({triggerElement: "#"+slug, duration: duration})
+                        .addTo(controller)
+                        .on("enter leave", function (e) {
+                            $("option:selected").removeAttr("selected");
+                            $("#select-h2").val(slug);
+                            $("#select-content-box").css('width', '100%');
+                        });
+            })(slug, duration);
+        }
+
+        $(document).on('change',"#select-h2", function(){
+            var eventValue = this.value;
+            ga('send', 'event', 'Content Index', 'Change', eventValue);
+
+            $('html, body').animate({
+                scrollTop: $("#" + this.value).offset().top
+            }, 500);
+        });
+
+        $(function() {
+
+            var $sidebar   = $("#select-content-box"),
+                    $window    = $(window),
+                    offset     = $sidebar.offset(),
+                    topPadding = window.innerHeight/2 - $("#select-content-box").height();
+
+            $window.scroll(function() {
+                if ($window.scrollTop() > offset.top) {
+                    $sidebar.stop().animate({
+                        marginTop: $window.scrollTop() - offset.top + topPadding
+                    });
+                } else {
+                    $sidebar.stop().animate({
+                        marginTop: 0
+                    });
+                }
+            });
+
+        });
+
+
+
+
+    </script>
+<script type="text/rocketscript" data-rocketoptimized="true">
+
+    window.addEventListener('load', function () {
+        if (!window.ga || !ga.create) {
+            var img = document.createElement('img');
+            img.setAttribute('style','display:none;');
+            img.src = '/common.png';
+            document.body.appendChild(img);
+        }
+    });
+</script>
+<script type="text/rocketscript" data-rocketoptimized="true">
+    window._urq = window._urq || [];
+    _urq.push(['initSite', 'bc95a360-89c8-4ad6-a7a1-34b7d4476d9e']);
+    (function() {
+        var ur = document.createElement('script'); ur.type = 'text/javascript'; ur.async = true;
+        ur.src = ('https:' == document.location.protocol ? 'https://cdn.userreport.com/userreport.js' : 'http://cdn.userreport.com/userreport.js');
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ur, s);
+    })();
+</script>
+<script type="text/javascript" charset="utf-8" data-rocketsrc="//s3.amazonaws.com/downloads.mailchimp.com/js/signup-forms/popup/1.0/popup.js" data-rocketoptimized="true"></script><script type="text/rocketscript" data-rocketsrc="//s3.amazonaws.com/downloads.mailchimp.com/js/signup-forms/popup/embed.js" data-dojo-config="usePlainJson: true, isDebug: false" data-rocketoptimized="true"></script><script type="text/rocketscript" data-rocketoptimized="true">require(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us11.list-manage.com","uuid":"61defc691f1cd89ac743ef606","lid":"c94f5511b5"}) })</script>
+<script>/* <![CDATA[ */(function(d,s,a,i,j,r,l,m,t){try{l=d.getElementsByTagName('a');t=d.createElement('textarea');for(i=0;l.length-i;i++){try{a=l[i].href;s=a.indexOf('/cdn-cgi/l/email-protection');m=a.length;if(a&&s>-1&&m>28){j=28+s;s='';if(j<m){r='0x'+a.substr(j,2)|0;for(j+=2;j<m&&a.charAt(j)!='X';j+=2)s+='%'+('0'+('0x'+a.substr(j,2)^r).toString(16)).slice(-2);j++;s=decodeURIComponent(s)+a.substr(j,m-j)}t.innerHTML=s.replace(/</g,'&lt;').replace(/\>/g,'&gt;');l[i].href='mailto:'+t.value}}catch(e){}}}catch(e){}})(document);/* ]]> */</script>
+<ins class="adsbygoogle" data-adsbygoogle-status="done" style="display: none; width: auto; height: auto;"><ins id="aswift_0_expand" style="display:inline-table;border:none;height:0px;margin:0;padding:0;position:relative;visibility:visible;width:0px;background-color:transparent"><ins id="aswift_0_anchor" style="display:block;border:none;height:0px;margin:0;padding:0;position:relative;visibility:visible;width:0px;background-color:transparent"><iframe width="0" height="0" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;width:0px;height:0px;" src="./Google reCaptcha in Laravel application _ Codingo Tuts_files/saved_resource(5).html"></iframe></ins></ins></ins><div id="topcontrol" title="Scroll Back to Top" style="position: fixed; bottom: 5px; right: 5px; opacity: 1; cursor: pointer;"></div><iframe style="display: none;" src="./Google reCaptcha in Laravel application _ Codingo Tuts_files/saved_resource(6).html"></iframe><div id="PopupSignupForm_0" widgetid="PopupSignupForm_0">
+    <!-- MC BANNER -->
+    <div class="mc-banner" data-dojo-attach-point="bannerContainer" style="display: none;">
+        <div class="mc-layout__bannerContent">
+            <iframe src="./Google reCaptcha in Laravel application _ Codingo Tuts_files/saved_resource(7).html" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="width: 100%; height: 150px;" data-dojo-attach-point="iframeBannerContainer"></iframe>
+        </div>
+    </div>
+
+    <!-- MC MODAL -->
+    <div class="mc-modal" data-dojo-attach-point="modalContainer" style="display: none;">
+        <div class="mc-closeModal" data-action="close-mc-modal" data-dojo-attach-point="modalClose">x</div>
+        <div class="mc-layout__modalContent">
+            <iframe src="./Google reCaptcha in Laravel application _ Codingo Tuts_files/saved_resource(8).html" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="width: 100%; height: 758px;" data-dojo-attach-point="iframeModalContainer"></iframe>
+        </div>
+    </div>
+
+    <!-- MC MODAL OVERLAY -->
+    <div class="mc-modal-bg" data-dojo-attach-point="modalOverlay" style="display: none;"></div>
+</div><iframe id="userreport-tag-system" src="./Google reCaptcha in Laravel application _ Codingo Tuts_files/server.html" style="position: absolute; width: 1px; height: 1px; top: -1000px; left: -1000px;"></iframe><div style="width: auto; height: auto; position: fixed; z-index: 1000000093; display: block; visibility: visible; overflow-x: hidden; pointer-events: all; top: 50%; right: 0px;"><iframe id="crowd-shortcut" name="crowd-shortcut" frameborder="0" scrolling="no" class="urp-no-hide" src="./Google reCaptcha in Laravel application _ Codingo Tuts_files/saved_resource(9).html" style="max-width: none !important; width: 145px; display: block; height: 44px; margin-right: -101px; border-top-left-radius: 2px; border-bottom-left-radius: 2px; visibility: visible;"></iframe></div></body></html>

@@ -1,0 +1,980 @@
+Backend 			– администраторская директория ,где хранятся контроллеры,модели,вид,темы  и assets файлы админ Части
+Environments 	- для настройки окружения под development и production режимами
+Console 			– для консольных приложений
+Vendor 				- создаётся компосером для установки библиотек
+Common 				- общая директория где лежат файлы,которые могут быть использованы и в frontend и в backend
+Frontend 			– клиентская директория ,где хранятся контроллеры,модели,вид,темы  и assets файлы клиентской части
+	Frontend-> assets  			- для создания Bundle
+	Frontend -> cache 			– для хранения кэш файлов
+	Frontend -> components	– для компонентов  фронтенд системы
+	Frontend -> config 			– для конфиг файлов фронтенд системы
+	Frontend -> controllers	– для контроллеров фронтенд системы
+	Frontend -> modules			– для моделей фронтенд системы
+	Frontend -> modules			– для модулей фронтенд системы
+	Frontend -> runtime			– для хранения внутренних файлов фреймворка фронтенд системы
+	Frontend -> themes			– для хранения тем фронтенд системы
+	Frontend -> web 				– точка входа  фронтенд системы
+	Frontend -> web-> assets – хранение доступных через браузер файлов  фронтенд системы
+	Frontend -> widgets 		– виджеты  фронтенд системы
+
+
+config -> main
+
+	return [
+			'id' => 'app-frontend',
+			'basePath' => dirname(__DIR__),
+			'aliases' => [
+		        '@name1' => 'path/to/path1',
+		    ],
+	    'bootstrap' => ['log'],
+	    'catchAll' => [
+	        'offline/notice',
+	    ],
+	    'components' => [],
+	    'controllerMap' => [
+	        'account' => 'app\controllers\UserController',
+	        'article' => [
+	            'class' => 'app\controllers\PostController',
+	            'enableCsrfValidation' => false,
+	        ],
+	    ],
+	    'controllerNamespace' => 'frontend\controllers',
+	    'language' => 'ru-RU',
+	    'name' => $_SERVER['HTTP_HOST'],
+	    'modules' => [
+	        'main' => [
+	            'class' => 'app\modules\main\Modules',
+	        ],
+	    ],
+	    'params' => [
+	        'thumbnail.size' => [128, 128],
+	    ],
+	    'timeZone' => 'Europe/Kiev',
+	    'charset' => 'UTF-8',
+	    'version' => '2.0',
+	    'defaultRoute' => 'test/index',
+	    'extensions' => [],
+	    'layout' => '@app/views/layouts/main.php',
+	    'layoutPath' => '@app/views/layouts',
+	    'runtimePath' => '@app/runtime',
+	    'viewPath' => '@app/views',
+	    'vendorPath' => '@app/vendor',
+	    'enableCoreCommands' => true,
+	],
+
+компоненты
+	'components' => [
+			'assetManager' 		=> 'используется для управления и опубликования ресурсов приложения. Более детальная информация представлена в разделе Ресурсы',
+			'db' 							=> 'соединение с базой данных',
+			'errorHandler' 		=> 'осуществляет обработку PHP ошибок и исключений. Более детальная информация представлена в разделе Обработка ошибок',
+			'formatter' 			=> 'форматирует данные для отображения их конечному пользователю',
+			'i18n' 						=> 'используется для перевода сообщений и форматирования',
+			'log' 						=> 'обработка и маршрутизация логов',
+			'mailer' 					=> 'предоставляет возможности для составления и рассылки писем',
+			'response' 				=> 'данные от сервера',
+			'request' 				=> 'запрос, полученный от конечных пользователей',
+			'session' 				=> 'информация о сессии',
+			'urlManager' 			=> 'разбора и создания URL',
+			'user' 						=> 'информацию аутентифицированного пользователя',
+			'view' 						=> 'для отображения представлений'
+	]
+
+Alias
+
+		@yii			 	- Указывает на папку с фреймворком в vendor
+		@app				– Указывает на папку frontend
+		@runtime		- указывает на папку frontend/runtime
+		@webroot 		- указывает на папку frontend/web
+		@web 				- указывает URL на папку frontend/web
+		@vendor 		- указывает на папку vendor
+		@bower 			– указывает на папку vendor/bower
+		@npm 				– указывает на  папку vendor/npm
+		@frontend 	– указывает на frontend,алиас @app
+		@backend 		– указывает на папку backend/
+		@common 		– указывает на папку common/
+
+		Yii::setAlias(‘components’,’@frontend/components’);
+		Yii::getAlias(“@frontend”);
+
+		'aliases' => [
+	        '@name1' => 'path/to/path1',
+	        '@name2' => 'www.pathto.path2',
+    	],
+
+
+НазваниеController.php 	наследуется от   yii\web\Controller
+
+main.php – основной конфигурационный файл
+
+defaultRoute – роутер,который будет открыт по умолчанию.Это может быть контроллер или модуль
+controllerNamespace – указывает где находятся контроллеры для автоподгрузки
+modules – указываются модули системы
+components – укказываются компоненты системы
+params – указываются кастомные параметры системы
+
+PARAMS
+
+		params.php – кастомные параметры,которые задаются как ключ – значение и потом можно извлекать как Yii::$app->params[‘ключ’]
+
+
+Service Locator
+
+		В Компоненты можно вносить любые вспомогательные методы (frontend/components ||	backend/components)
+		Модуль это отдельная сущность	( frontend/modules || backend/modules)
+		Service Locator является объектом, предоставляющим всевозможные сервисы (или компоненты), которые могут понадобиться приложению
+
+		$service = new \yii\di\ServiceLocator();
+		$service->set("cache",'yii\caching\FileCache');
+		$application = new yii\web\Application($config);
+		$application->set('locator',$service);
+		$application->run();
+
+URL - Manager																										// 		https://yiiframework.com.ua/ru/doc/guide/2/runtime-routing/
+
+в common/config/main.php -> добавляем в 'components'
+	'urlManager' => [
+		'class' => 'yii\web\UrlManager',
+		'enablePrettyUrl' => true,
+		'showScriptName' => false,						// not show index.php
+		'enableStrictParsing' => false,					//		позволяет включить строгий разбор URL
+		'suffix' => '.html',										//		возможность добавления к URL суффиксов
+		'rules' => [														//		содержит набор правил для разбора и создания URL
+			'test' => 'test/index',						// вместо test/index будет test
+			'help' => 'test/help',
+      	],
+      	'normalizer' => [
+    	  'class' => 'yii\web\UrlNormalizer',
+          'action' => UrlNormalizer::ACTION_REDIRECT_TEMPORARY, // используем временный редирект вместо постоянного
+      	],
+      	'normalizer' => false, 									// отключаем нормализатор для этого правила
+      	'rules' => [
+            [
+                'pattern' => 'tags',
+                'route' => 'tag/index',
+                'normalizer' => [
+                    'collapseSlashes' => false, // не убираем дублирующиеся слеши для этого правила
+                ],
+            ],
+        ],
+	],
+
+	Yii::$app->urlManager->createUrl(['twel/url', 'id' => $coment->id]);
+
+	use yii\helpers\Url;
+	Url::to() вызывает UrlManager::createUrl() для создания URL
+	$url = Url::to(['post/view', 'id' => 100]);		// создает URL для маршрута с параметрами: /index.php?r=post/view&id=100
+	$url = Url::to(['view']);											// создает URL для метода view текущего контроллера
+	$url = Url::to(['']);													// создает URL для метода index текущего контроллера
+	$url = Url::to(['/post/index']);							// текущим модулем admin, а текущим контроллером - post. rezult:   /index.php?r=post/index
+	$url = Url::to(['@posts']);									// псевдоним "@posts" определен как "/post/index"
+				/index.php?r=post/view&id=100
+				/index.php/post/100
+				/post/100
+
+	в config:
+		'defaultRoute' => 'test/index',
+	в controller:
+		public $defaultAction = 'help';
+	для режима обслуживания все запросы перенаправляем в site/offline. в config:
+	'catchAll' => ['site/offline'],
+
+представления
+					//	 перед именем вида соответствует дирректории @app/views/ViewName ( //site/about 	->	 @app/views/site/about.php )
+					/	 перед именем вида - вид будет искаться в папке видов по умолчанию текущего модуля (папка видов приложения по умолчанию		-	@app/views	)
+
+		//
+					<?php
+						use yii\helpers\Html;
+						use yii\helpers\HtmlPurifier;
+					?>
+
+					<?= Html::encode($message) ?>							-	показать обычный текст
+					<?= HtmlPurifier::process($post->text) ?>				-	 чтобы отфильтровать потенциально опасное содержимое
+
+					<?= $this->render('_overview') ?>
+		//
+
+
+
+DB
+
+	'components' => [
+        'db' => [
+            'class' => 'yii\db\Connection',
+            'dsn' => 'mysql:host=localhost;dbname=yii2basic',
+            'username' => 'root',
+            'password' => '',
+            'charset' => 'utf8',
+            'tablePrefix' => 'yb_',
+        ],
+
+Action
+
+		namespace frontend\controllers;
+		
+		use yii\web\Controller;
+
+		class TestController extends Controller
+		{
+		    public $defaultAction = 'help';
+		    public $layout = 'post';
+
+		    public function actionIndex(){
+
+			    $this->layout = 'post';
+
+			    $this->view->title = "Home";
+			    $this->view->registerMetaTag(['name' => 'keywords', 'content' => 'some text ...']);
+
+			    return $this->render('index');
+		    }
+
+		    public function actionHelp(){}
+
+		}
+
+Модель																																//////////////////////////////////////////////////////		yii\base\Model::scenarios()	 ////////////////////////////////////////////////
+			namespace app\models;
+			use yii\db\ActiveRecord;
+			use app\models\ContactForm;
+			class Country extends ActiveRecord
+			{
+			    public static function tableName()
+			    { return 'country'; }
+
+			    public function rules()
+			    {
+			        return [
+			        	[['username', 'email'], 'trim'],
+			            [['code', 'name'], 'required'],												// 	применяется во всех сценариях
+			            ['username', 'required', 'message' => 'Please choose a username.'],
+			            ['password' => [['password'], 'string', 'max' => 60],
+			            [['code', 'name'], 'required', 'on' => self::SCENARIO_REGISTER],
+			            [['username', 'password'], 'required', 'on' => self::SCENARIO_LOGIN],
+			            [['population', 'id'], 'integer'],
+			            [['website'], 'url'],
+			            [['slug'], 'unique'],
+			            ['occurred', 'date', 'format' => 'yyyy-M-d'],
+			            ['occurred', 'default', 'value' => date("Y-m-d")],
+			            [['thought'], 'trim'],
+			            [['goodness'], 'boolean'],
+			            ['deleted', 'boolean', 'trueValue' => true, 'falseValue' => false, 'strict' => true],
+			            [['code'], 'string', 'max' => 2],
+			            ['country', CountryValidator::className()],
+			            [['name'], 'string', 'max' => 52],
+			            ['agree', 'required', 'isEmpty' => function ($value) {
+														        return empty($value);
+														    }]
+			            ['email', 'email'],												// 	email должен быть emailom
+			            [['title', 'description'], 'safe'],								//	title и description - обьявлены безопасными и допущены к массовому присвоению
+			        ];
+			    }
+
+			    public function attributeLabels()
+			    {
+			        return [
+			            'code' => 'Code',
+			            'name' => 'Name',
+			            'population' => 'Population',
+			            'id' => 'ID',
+			        ];
+			    }
+
+		 		...if ($model->validate()) {
+				    $model->attributes = \Yii::$app->request->post('ContactForm');
+				} else {
+				    $errors = $model->errors;
+				}...
+
+				public function fields()
+				{
+				    return [
+				        'id', 															// здесь имя поля совпадает с именем атрибута
+				        'email' => 'email_address',										// здесь имя поля - "email", соответствующее ему имя атрибута - "email_address"
+				        'name' => function () {
+				            return $this->first_name . ' ' . $this->last_name;			// здесь имя поля - "name", а значение определяется обратным вызовом PHP
+				        },
+				    ];
+				}
+
+			}
+
+Массовое Присвоение
+			$model = new \app\models\ContactForm;
+			$model->attributes = \Yii::$app->request->post('ContactForm');
+
+			if($model->load(Yii::$app->request->post())){
+				if($model->validate()){
+					Yii::$app->session->setFlash('success', 'All good');
+				} else {
+					Yii::$app->session->setFlash('error', 'All bad');
+				}
+			}
+
+Экспорт Данных
+			yii\web\JsonResponseFormatter 		--		универсального инструмента форматирования данных
+
+			$post = \app\models\Post::findOne(100);
+			$array = $post->attributes;															-				преобразования модели в массив
+
+			$model = new \app\models\Post;
+			$array = $model->toArray([], ['prettyName', 'fullAddress']);									-				преобразования модели в массив
+
+//////////////////////////////////////////////////////		validators	 /////////////////////////////////////////////////////
+
+$email = 'test@example.com';
+$validator = new yii\validators\EmailValidator();
+
+if ($validator->validate($email, $error)) {
+    echo 'Email is valid.';
+} else {
+    echo $error;
+}
+
+namespace app\components;
+use yii\validators\Validator;
+class CountryValidator extends Validator
+{
+    public function validateAttribute($model, $attribute)
+    {
+        if (!in_array($model->$attribute, ['USA', 'Web'])) {
+            $this->addError($model, $attribute, 'The country must be either "USA" or "Web".');
+        }
+    }
+}
+
+
+
+
+
+//////////////////////////////////////////////////////		request	 /////////////////////////////////////////////////////
+
+return Yii::$app->getResponse()->redirect(Yii::$app->request->hostInfo);
+
+Yii::$app->getResponse()->redirect(Yii::$app->request->hostInfo)->send();
+exit;
+
+
+
+Yii::$app->request
+
+		Yii::$app->request->isPost
+
+		$request = Yii::$app->request;
+
+		$get = $request->get(); 
+		// эквивалентно: $get = $_GET;
+
+		$id = $request->get('id');   
+		// эквивалентно: $id = isset($_GET['id']) ? $_GET['id'] : null;
+
+		$id = $request->get('id', 1);   
+		// эквивалентно: $id = isset($_GET['id']) ? $_GET['id'] : 1;
+
+		$post = $request->post(); 
+		// эквивалентно: $post = $_POST;
+
+		$name = $request->post('name');   
+		// эквивалентно: $name = isset($_POST['name']) ? $_POST['name'] : null;
+
+		$name = $request->post('name', '');   
+		// эквивалентно: $name = isset($_POST['name']) ? $_POST['name'] : '';
+
+
+	if ($request->isAjax) { /* текущий запрос является AJAX запросом */ }
+	if ($request->isGet)  { /* текущий запрос является GET запросом */ }
+	if ($request->isPost) { /* текущий запрос является POST запросом */ }
+	if ($request->isPut)  { /* текущий запрос является PUT запросом */ }
+
+	URL запроса 	- 		http://example.com/admin/index.php/product?id=100
+			Yii::$app->request->url
+		url: 					вернёт адрес /admin/index.php/product?id=100, который содержит URL без информации об имени хоста.
+		absoluteUrl: 			вернёт адрес http://example.com/admin/index.php/product?id=100, который содержит полный URL, включая имя хоста.
+		hostInfo: 				вернёт адрес http://example.com, который содержит только имя хоста.
+		pathInfo: 				вернёт адрес /product, который содержит часть между адресом начального скрипта и параметрами запроса, которые идут после знака вопроса.
+		queryString: 			вернёт адрес id=100, который содержит часть URL после знака вопроса.
+		baseUrl: 				вернёт адрес /admin, который является частью URL после информации о хосте и перед именем входного скрипта.
+		scriptUrl: 				вернёт адрес /admin/index.php, который содержит URL без информации о хосте и параметрах запроса.
+		serverName: 			вернёт адрес example.com, который содержит имя хоста в URL.
+		serverPort: 			вернёт 80, что является адресом порта, который использует веб-сервер.
+
+	HTTP заголовки
+
+		// переменная $headers является объектом yii\web\HeaderCollection 
+		$headers = Yii::$app->request->headers;
+
+		// возвращает значения заголовка Accept
+		$accept = $headers->get('Accept');
+
+		if ($headers->has('User-Agent')) { /* в запросе есть заголовок User-Agent */ }
+
+		userAgent: 				возвращает значение заголовка User-Agent.
+		contentType: 			возвращает значение заголовка Content-Type, который указывает на MIME тип данных в теле запроса.
+		acceptableContentTypes: возвращает список MIME типов данных, которые принимаются пользователем.
+		acceptableLanguages: 	возвращает языки, которые поддерживает пользователь.
+
+	$userHost = Yii::$app->request->userHost;
+	$userIP = Yii::$app->request->userIP;
+
+
+
+###################################				Uploading Files 		##################################################################
+<?= $form->field($model, 'password')->passwordInput() ?>
+	Creating Models
+		namespace app\models;
+		use yii\base\Model;
+		use yii\web\UploadedFile;
+		class UploadForm extends Model
+		{
+		    public $imageFile;
+		    public function rules()
+		    {
+		        return [
+		            [['imageFile'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],
+		        ];
+		    }
+		    
+		    public function upload()
+		    {
+		        if ($this->validate()) {
+		//          $this->imageFile->saveAs('uploads/' . $this->imageFile->name);
+		            $this->imageFile->saveAs('uploads/' . $this->imageFile->baseName . '.' . $this->imageFile->extension);
+		            return true;
+		        } else {
+		            return false;
+		        }
+		    }
+		}
+
+	Rendering File Input (upload.php)
+		<?php
+		use yii\widgets\ActiveForm;
+		?>
+		<?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]) ?>
+		    <?= $form->field($model, 'imageFile')->fileInput() ?>
+		    <button>Submit</button>
+		<?php ActiveForm::end() ?>
+
+	In controller
+		namespace app\controllers;
+		use Yii;
+		use yii\web\Controller;
+		use app\models\UploadForm;
+		use yii\web\UploadedFile;
+		class SiteController extends Controller
+		{
+		    public function actionUpload()
+		    {
+		        $model = new UploadForm();
+		        if (Yii::$app->request->isPost) {
+		            $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+		            if ($model->upload()) {
+		                // file is uploaded successfully
+		                return;
+		            }
+		        }
+		        return $this->render('upload', ['model' => $model]);
+		    }
+		}
+
+	Uploading Multiple Files
+		model
+			namespace app\models;
+			use yii\base\Model;
+			use yii\web\UploadedFile;
+			class UploadForm extends Model
+			{
+			    public $imageFiles;
+			    public function rules()
+			    {
+			        return [
+			            [['imageFiles'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg', 'maxFiles' => 4],
+			        ];
+			    }
+			    public function upload()
+			    {
+			        if ($this->validate()) { 
+			            foreach ($this->imageFiles as $file) {
+			                $file->saveAs('uploads/' . $file->baseName . '.' . $file->extension);
+			            }
+			            return true;
+			        } else {
+			            return false;
+			        }
+			    }
+			}
+		view
+			<?php
+				use yii\widgets\ActiveForm;
+			?>
+			<?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]) ?>
+			    <?= $form->field($model, 'imageFiles[]')->fileInput(['multiple' => true, 'accept' => 'image/*']) ?>
+			    <button>Submit</button>
+			<?php ActiveForm::end() ?>
+		controller
+			namespace app\controllers;
+			use Yii;
+			use yii\web\Controller;
+			use app\models\UploadForm;
+			use yii\web\UploadedFile;
+			class SiteController extends Controller
+			{
+			    public function actionUpload()
+			    {
+			        $model = new UploadForm();
+			        if (Yii::$app->request->isPost) {
+			            $model->imageFiles = UploadedFile::getInstances($model, 'imageFiles');
+			            if ($model->upload()) {
+			                // file is uploaded successfully
+			                return;
+			            }
+			        }
+			        return $this->render('upload', ['model' => $model]);
+			    }
+			}
+
+
+
+##################################################################################################################
+
+###################################				Session 		##############################################
+
+$session = Yii::$app->session;
+
+$name = Yii::$app->session->get('name');
+
+$session->set('name', $value);
+$session->remove('name');
+
+Yii::$app->session->setFlash('success', 'All good'); 					// live one load
+if(Yii::$app->session->hasFlash('success')){...} 						// boolean
+Yii::$app->session->getFlash('success') 								// get data
+
+##################################################################################################################
+
+###################################				Cookies 		##############################################
+
+Set
+	$cookies = Yii::$app->response->cookies;
+	$cookies->add(new \yii\web\Cookie([
+		'name' => 'name',
+		'value' => $value
+	]));
+
+Get
+	$cookies = Yii::$app->request->cookies;
+	$perem = $cookies->getValue('params');
+
+Remove
+	$cookies->remove('param');
+
+
+##################################################################################################################
+
+###################################				Exception 		##############################################
+
+use yii\web\NotFoundHttpException;
+...
+throw new NotFoundHttpException('Fuck ... ! Bad request!');
+
+return Yii::$app->getResponse()->redirect('/twel/url');
+throw new NotFoundHttpException('Fuck ... ! Bad request!');
+return Yii::$app->response->setStatusCode(500);
+
+throw new \yii\web\NotFoundHttpException('Fuck ... ! Bad request!');
+
+BadRequestHttpException — 400 ошибка
+UnauthorizedHttpException — 401 ошибка
+ForbiddenHttpException — 403 ошибка
+NotFoundHttpException — 404 ошибка
+MethodNotAllowedHttpException — 405 ошибка
+NotAcceptableHttpException — 406 ошибка
+ConflictHttpException — 409 ошибка
+GoneHttpException — 410 ошибка
+UnsupportedMediaTypeHttpException — 415 ошибка
+TooManyRequestsHttpException — 429 ошибка
+ServerErrorHttpException — 500 ошибка
+
+##################################################################################################################
+
+
+##################################################################################################################
+
+###################################				Model 		##############################################
+
+namespace app\models;
+use Yii;
+use yii\base\Model;
+class LoginForm extends Model
+{
+    public $username;
+    public $password;
+    public $rememberMe = true;
+    private $_user = false;
+    public function rules()
+    {
+        return [
+            [['username', 'password'], 'required', 'message' => 'Wat a suck?'],
+            ['rememberMe', 'boolean'],
+            ['password', 'validatePassword'],
+        ];
+    }
+    public function validatePassword($attribute, $params)
+    {
+        if (!$this->hasErrors()) {
+            $user = $this->getUser();
+
+            if (!$user || !$user->validatePassword($this->password)) {
+                $this->addError($attribute, 'Incorrect username or password.');
+            }
+        }
+    }
+    public function login()
+    {
+        if ($this->validate()) {
+            return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600*24*30 : 0);
+        }
+        return false;
+    }
+    public function getUser()
+    {
+        if ($this->_user === false) {
+            $this->_user = User::findByUsername($this->username);
+        }
+
+        return $this->_user;
+    }
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+use yii\bootstrap\ActiveForm;
+$form = ActiveForm::begin([
+    'layout' => 'horizontal',
+    'fieldConfig' => [
+        'template' => "{label}\n{beginWrapper}\n{input}\n{hint}\n{error}\n{endWrapper}",
+        'horizontalCssClasses' => [
+            'label' => 'col-sm-4',
+            'offset' => 'col-sm-offset-4',
+            'wrapper' => 'col-sm-8',
+            'error' => '',
+            'hint' => '',
+        ],
+    ],
+]);
+
+	<?= $form->field($model, 'text', ['template' => "{label}\n{hint}\n{input}\n{error}"])->hint('подсказка для поля text')->widget(Widget::classname(), [
+                   'settings' => [
+                        'lang' => 'ru',
+                        'removeWithoutAttr' => [],
+                        'minHeight' => 300,
+                        'pastePlainText' => true,
+                        'buttonSource' => true,
+                        'replaceDivs' => false,
+                        'plugins' => [
+                            'clips',
+                            'fullscreen',
+                            'fontfamily',
+                            'fontsize',
+                            'fontcolor',
+                            'video',
+                            'table'
+                        ],
+                        'imageUpload' => Url::to(['/blog/image-upload']),
+                        'imageManagerJson' => Url::to(['/blog/images-get']),
+                        'fileManagerJson' => Url::to(['/blog/files-get']),
+                        'fileUpload' => Url::to(['/blog/file-upload'])
+                    ]
+                ]);?>
+
+    <?php $form = ActiveForm::begin([
+        'id' => 'contact-form',
+        'options' => ['class'=>'form2 form-horizontal'], 
+        'fieldConfig' => ['template' => "{label}\n{beginWrapper}\n{input}\n{hint}\n{error}\n{endWrapper}"]
+    ]); ?>
+        <?= $form->field($model, 'name', ['enableLabel' => false])->textInput(array('placeholder' => 'Ваше имя', 'class'=>'form-control text-center')); ?>
+        <?= $form->field($model, 'email', ['enableLabel' => false])->textInput(array('placeholder' => 'Ваше email', 'class'=>'form-control text-center')); ?>
+        <?= $form->field($model, 'phone', ['enableLabel' => false])->textInput(array('placeholder' => 'Номер Вашего телефона', 'class'=>'form-control text-center')); ?>
+        <?= $form->field($model, 'message', [
+            'template' => '{label}{input}{hint}{error}'
+        ])->textArea(['rows' => 6, 'enableLabel' => true])->label('Ваши пожелания'); ?>
+                    
+                    <div class="form-group">
+                    	<?= yii\helpers\Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+                        <?= yii\helpers\Html::submitButton('<img src="/images/send.png" />', ['class' => 'form2 button_zvon uppercase', 'name' => 'contact-button']) ?>
+                    </div>
+                    <?php ActiveForm::end(); ?>
+
+##################################################################################################################
+
+
+###################################				Pagination`s 		##############################################
+
+Controller action:
+	public function actionIndex()
+	{
+		
+	    $query = Article::find()->where(['status' => 1]);
+	    $countQuery = clone $query;
+	    $pages = new Pagination(['totalCount' => $countQuery->count()]);
+	    $models = $query->offset($pages->offset)
+	        ->limit($pages->limit);
+	        // ->all();
+	    return $this->render('index', [
+	         'models' => $models,
+	         'pages' => $pages,
+	    ]);
+	}
+
+View:
+	foreach ($models as $model) {
+	}
+	echo LinkPager::widget([
+	    'pagination' => $pages,
+	]);
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+$vacancys = JobVacansy::find()->where($filter)->andWhere([
+		    'OR',
+			['like', 'company_phone', '%'.$search.'%', false],
+			['like', 'company_email', '%'.$search.'%', false],
+			['like', 'city_title', '%'.$search.'%', false]
+		    ]);
+$page = new Pagination([
+	'defaultPageSize' => 2,
+	'params' => array_merge($_GET, $this->filter()),
+	'totalCount' => $vacancys->count(),
+]);
+$vacancy = $vacancys->offset($page->offset)->limit($page->limit)->all();
+
+##################################################################################################################
+
+###################################				Widget 		######################################################
+
+in /widgets/JobcenterMenu.php
+
+	namespace app\widgets;
+	use yii\base\widgets;
+	use yii\helpers\Html;
+
+	class JobcenterMenu extends Widget
+	{
+		public $message;
+		
+	    public function init(){
+	    	// some do
+	    }
+
+	    public function run()
+	    {
+
+	    	$view = $this->getView();
+			$view->registerJsFile(
+			    '@web/js/axemple.js',	// dir - /web/js/axemple.js
+			    ['depends' => [\yii\web\JqueryAsset::className()]]
+			);
+
+	    	$b = Html::tag('b', $this->message);
+	    	$p = Html::tag('p', $b);
+			return $p;
+
+			return $this->render('view',['data' => $data]);
+	    }
+	}
+
+in view
+	<?php use app\widgets\JobcenterMenu; ?>
+	... <?= JobcenterMenu::widget(['message' => 'Hello world']); ?>
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+in vidget
+	...
+	public function init(){
+	    	parent::init();
+	    	ob_start();
+	    }
+
+	public function run()
+	    {
+	    	$content = ob_get_clean();
+	    	$content = mb_strtoupper($content, 'utf-8');
+
+			return $this->render('view',['content' => $content]);
+	    }
+	...
+
+in view
+	<?php app\widget\Mywidget::begin(); ?>
+		<h1>hello world!</h1>
+	<?php Mywidget::end(); ?>
+
+
+##################################################################################################################
+
+###################################				breadcrumbs,htlm 		######################################################
+
+$this->params['breadcrumbs'][] = ['label' => 'url', 'url' => ['twel/url']];
+$this->params['breadcrumbs'][] = $this->title;
+
+	view
+		<?= Html::a('Profile', ['user/view', 'id' => $id], ['class' => 'profile-link']) ?>
+
+// $this is the view object currently being used
+echo Breadcrumbs::widget([
+    'itemTemplate' => "<li><i>{link}</i></li>\n", // template for all links
+    'links' => [
+        [
+            'label' => 'Post Category',
+            'url' => ['post-category/view', 'id' => 10],
+            'template' => "<li><b>{link}</b></li>\n", // template for this link only
+        ],
+        ['label' => 'Sample Post', 'url' => ['post/edit', 'id' => 1]],
+        'Edit',
+    ],
+]);
+
+##################################################################################################################
+
+###################################				view -> layout 		##############################################
+
+veiw:
+	<?php $this->beginBlock('blok1'); ?>
+		<h1>Hello world</h1>
+	<?php $this->endBlock(); ?>
+
+layout:
+	<?php if(isset($this->blocks['blok1'])): ?>
+		<?= $this->blocks['blok1']; ?>
+	<?php endif; ?>
+
+##################################################################################################################
+
+###################################				js, css 		######################################################
+
+global
+	/assets/AppAsset.php
+
+		<?php
+		namespace app\assets;
+		use yii\web\AssetBundle;
+		class AppAsset extends AssetBundle
+		{
+		    public $basePath = '@webroot';
+		    public $baseUrl = '@web';
+		    public $css = [
+		        'css/site.css',
+		    ];
+		    public $js = [
+		    ];
+		    public $depends = [
+		        'yii\web\YiiAsset',
+		        'yii\bootstrap\BootstrapAsset',
+		    ];
+		}
+
+
+
+
+
+in view
+
+
+	$this->registerJs(
+	    "$('#myButton').on('click', function() { alert('Button clicked!'); });",
+	    yii\web\View::POS_READY,
+	    'my-button-handler'
+	);
+	$this->registerJs(<<<JS
+		
+		JS,
+	    yii\web\View::POS_READY,
+	    'my-button-handler'
+	);
+
+		View::POS_READY
+			POS_HEAD: in the head section
+			POS_BEGIN: at the beginning of the body section
+			POS_END: at the end of the body section
+			POS_LOAD: enclosed within jQuery(window).load(). Note that by using this position, the method will automatically register the jQuery js file.
+			POS_READY: enclosed within jQuery(document).ready(). This is the default value. Note that by using this position, the method will automatically register the jQuery js file.
+
+	$this->registerJsFile(
+	    '@web/js/axemple.js',														// dir - /web/js/axemple.js (url)
+	    ['depends' => [\yii\web\JqueryAsset::className()]]
+	);
+		depends: ~[\yii\web\JqueryAsset::className()]
+		position: specifies where the JS script tag should be inserted in a page. The possible values are:
+			POS_HEAD: in the head section
+			POS_BEGIN: at the beginning of the body section
+			POS_END: at the end of the body section. This is the default value.
+
+	$this->registerCss("body { background: #f00; }");
+
+	$this->registerCssFile("@web/css/themes/black-and-white.css", [
+	    'depends' => [\yii\bootstrap\BootstrapAsset::className()],
+	    'media' => 'print',
+	], 'css-print-theme');
+
+Passing translated messages
+	$message = \yii\helpers\Json::htmlEncode(
+	    \Yii::t('app', 'Button clicked!')
+	);
+	$this->registerJs(<<<JS
+	    $('#myButton').on('click', function() { alert( $message ); });",
+	JS, View::POS_READY
+	);
+
+
+
+##################################################################################################################
+
+###################################				extension 		######################################################
+
+	Ставить будем yii2-ckeditor.
+
+	- Идём в https://github.com/MihailDev/yii2-ckeditor, забираем архив.
+	- Смотрим его composer.json.
+	- Там у нас есть секция autoload, в ней упоминание PSR-4 и mihaildev/ckeditor.
+	- Распаковываем файлы в vendor/mihaildev/ckeditor.
+	- В vendor/composer/autoload_psr4.php добавляем:
+		'mihaildev\\ckeditor\\' => array($vendorDir . '/mihaildev/ckeditor'),
+	- В vendor/yiisoft/extensions.php добавляем:
+		'vova07/imperavi' => array (
+		    'name' => 'vova07/imperavi',
+		    'version' => '2',
+		    'alias' => array (
+		        '@vova07/imperavi' => $vendorDir . '/vova07/imperavi/src',
+		    ),
+		),
+	Всё это делает за вас Composer. Лучше изучите его и не теряйте время.
+
+
+	php composer.phar require --prefer-dist mihaildev/yii2-ckeditor "*"
+
+	<?php echo $form->field($twel, 'text')->label(false)->textarea(['rows' => 6, 'id' => 'butiful_textarea', 'plaeholder' => 'Dude, Where\'s My Car?'])->widget(sadovojav\ckeditor\CKEditor::className(), [
+//			'extraPlugins' => [
+//			    ['test', '@root/uploads/plugins/test-plugin/', 'plugin.js']
+//			],
+			'editorOptions' => [
+			    'toolbar' => [
+				['Source', 'NewPage', 'Preview', 'Viewss'],
+				['PasteText', '-', 'Undo', 'Redo'],
+				['Replace', 'SelectAll', 'Scayt'],
+				['Format', 'FontSize'],
+				['Bold', 'Italic', 'Underline', 'TextColor', 'StrikeThrough', '-', 'Outdent', 'Indent', 'RemoveFormat',
+				    'Blockquote', 'HorizontalRule'],
+				['NumberedList', 'BulletedList', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight',
+				    'JustifyBlock'],
+				['Image', 'oembed', 'Video', 'Iframe'],
+				['Link', 'Unlink'],
+				['Maximize', 'ShowBlocks'],
+//				['test']
+			    ],
+			    'allowedContent' => true,
+			    'forcePasteAsPlainText' => true,
+//			    'extraPlugins' => 'test,image2,widget,oembed,video',
+			    'language' => Yii::$app->language,
+			    'height' => 160
+			],
+		    ]); ?>
+
+##################################################################################################################

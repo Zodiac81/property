@@ -1,0 +1,181 @@
+php artisan make:model tasks 										-	создать модель таск таблице таск
+php artisan make:migration create_tasks_table --create=users 		-	создать таблицу
+php artisan make:migration add_votes_to_users_table --table=users 	-	изменить таблицу
+php artisan make:migration add_votes_to_users_table ... --path=путь 	-	путь относительный
+
+php artisan make:model Post -m 										-	создать модель + миграцию
+php artisan migrate													-   зупустить migrate
+php artisan migrate --force											-	принудительный зупустить migrate
+php artisan migrate:rollback										-	Для отката последней выполненной миграции
+php artisan migrate:reset											-	отменит все миграции
+php artisan migrate:refresh											-	откат всех миграций + migrate
+
+php artisan make:seeder PostTableSeeder		-	создает seeder
+php artisan db:seed							-	запустить seeds DatabaseSeeder по умолчанию
+php artisan db:seed --class=UsersSeeder		-	запустить seeds Users
+php artisan migrate:refresh --seed 			-	сделает откат изменений и применит все миграции заново + seed
+
+if("class not found"){	"composer dump-autoload"	}
+
+		<?php
+		use Illuminate\Support\Facades\Schema;
+		use Illuminate\Database\Schema\Blueprint;
+		use Illuminate\Database\Migrations\Migration;
+		class CreatePostsTable extends Migration
+		{
+		    public function up()
+		    {
+		        Schema::create('posts', function (Blueprint $table) {
+		            $table->increments('id');
+		            $table->timestamps();
+		        });
+		    }
+		    public function down()
+		    {
+		        Schema::dropIfExists('posts');
+		    }
+		}
+
+if (Schema::hasTable('users')) {...}			- проверка существования таблицы
+if (Schema::hasColumn('users', 'email')) {...}	- проверка существования колонок
+
+Schema::connection('foo')->create('users', function ($table) {
+    $table->increments('id');
+});												- подключение, отличное от дефолтного
+
+Schema::create('users', function ($table) {
+    $table->engine = 'InnoDB';
+    $table->increments('id');
+}); 											- установка движка таблицы
+
+Schema::rename($from, $to);						- Переименование таблицы
+Schema::drop('users');							- удаление таблицы
+Schema::dropIfExists('users');					- удаление таблицы с проверкой
+
+Schema::table('users', function ($table) {
+    $table->string('email');
+}); 											- Добавление столбца в таблицу
+
+Schema::table('users', function ($table) {
+    $table->string('email')->nullable();
+}); 											- Модификация столбцов (Добавим столбцу возможность принимать значения NULL)
+
+
+КОМАНДА									ОПИСАНИЕ
+$table->bigIncrements('id');				Инкремент ID (первичный ключ) с использованием эквивалента «UNSIGNED BIG INTEGER». / Incrementing ID (primary key) using a "UNSIGNED BIG INTEGER" equivalent.
+$table->bigInteger('votes');				BIGINT эквивалент для базы данных. 					/ BIGINT equivalent for the database.
+$table->binary('data');						BLOB эквивалент для базы данных. 					/ BLOB equivalent for the database.
+$table->boolean('confirmed');				Эквивалент BOOLEAN для базы данных. 				/ BOOLEAN equivalent for the database.
+$table->char('name', 4);					Эквивалент CHAR с длиной. 							/ CHAR equivalent with a length.
+$table->date('created_at');					Эквивалент DATE для базы данных. 					/ DATE equivalent for the database.
+$table->dateTime('created_at');				Эквивалент DATETIME для базы данных. 				/ DATETIME equivalent for the database.
+$table->decimal('amount', 5, 2);			DECIMAL эквивалент точности и масштаба. 			/ DECIMAL equivalent with a precision and scale.
+$table->double('column', 15, 8);			ДВОЙНОЙ эквивалент с точностью, всего 15 цифр и 8 после десятичной точки. / DOUBLE equivalent with precision, 15 digits in total and 8 after the decimal point.
+$table->enum('choices', ['foo', 'bar']);	ENUM эквивалент для базы данных. 					/ ENUM equivalent for the database.
+$table->float('amount');					Эквивалент FLOAT для базы данных. 					/ FLOAT equivalent for the database.
+$table->increments('id');					Инкремент ID (первичный ключ) с использованием эквивалента «UNSIGNED INTEGER». / Incrementing ID (primary key) using a "UNSIGNED INTEGER" equivalent.
+$table->integer('votes');					Эквивалент INTEGER для базы данных. 				/ INTEGER equivalent for the database.
+$table->json('options');					Эквивалент JSON для базы данных. 					/ JSON equivalent for the database.
+$table->jsonb('options');					Эквивалент JSONB для базы данных. 					/ JSONB equivalent for the database.
+$table->longText('description');			Эквивалент LONGTEXT для базы данных. 				/ LONGTEXT equivalent for the database.
+$table->mediumInteger('numbers');			MEDIUMINT эквивалент для базы данных. 				/ MEDIUMINT equivalent for the database.
+$table->mediumText('description');			Эквивалент MEDIUMTEXT для базы данных. 				/ MEDIUMTEXT equivalent for the database.
+$table->morphs('taggable');					Добавляет INTEGER taggable_id и STRING taggable_type. / Adds INTEGER taggable_id and STRING taggable_type.
+$table->nullableTimestamps();				То же, что и timestamps (), кроме NULL. 			/ Same as timestamps(), except allows NULLs.
+$table->rememberToken();					Добавляет remember_token как VARCHAR (100) NULL. 	/ Adds remember_token as VARCHAR(100) NULL.
+$table->smallInteger('votes');				Эквивалент SMALLINT для базы данных. 				/ SMALLINT equivalent for the database.
+$table->softDeletes();						Добавляет столбец deleted_at для мягких удалений. 	/ Adds deleted_at column for soft deletes.
+$table->string('email');					Эквивалентный столбец VARCHAR. 						/ VARCHAR equivalent column.
+$table->string('name', 100);				Эквивалент VARCHAR с длиной. 						/ VARCHAR equivalent with a length.
+$table->text('description');				ТЕКСТ эквивалент для базы данных. 					/ TEXT equivalent for the database.
+$table->time('sunrise');					TIME эквивалент для базы данных. 					/ TIME equivalent for the dаatabase.
+$table->tinyInteger('numbers');				Эквивалент TINYINT для базы данных. 				/ TINYINT equivalent for the database.
+$table->timestamp('added_on');				TIMESTAMP эквивалентен для базы данных. 			/ TIMESTAMP equivalent for the database.
+$table->timestamps();						Добавляет столбцы created_at и updated_at. 			/ Adds created_at and updated_at columns.
+$table->uuid('id');							UUID эквивалент для базы данных. 					/ UUID equivalent for the database.
+
+
+МОДИФИКАТОР					ОПИСАНИЕ
+->first()																Place the column "first" in the table (MySQL Only)
+->after('column')														Place the column "after" another column (MySQL Only)
+->nullable()				Разрешить ввод значений NULL в столбец 		/ Allow NULL values to be inserted into the column
+->default($value)			Укажите значение по умолчанию для столбца 	/ Specify a "default" value for the column
+->unsigned()				положительный интеджер
+->unique();					Уникальное значение
+
+
+Перед изменением столбца убедитесь, что в файле composer.json есть зависимость doctrine/dbal. 
+
+Schema::table('users', function ($table) {
+    $table->string('name', 50)->change();
+});											- change меняет тип столбца либо атрибуты
+
+Schema::table('users', function ($table) {
+    $table->string('name', 50)->nullable()->change();
+});											- Добавить вставку значений NULL
+
+Schema::table('users', function ($table) {
+    $table->renameColumn('from', 'to');
+});											- Переименование столбца
+
+Schema::table('users', function ($table) {
+    $table->dropColumn('votes');
+});											- Удаление столбца
+
+Schema::table('users', function ($table) {
+    $table->dropColumn(['votes', 'avatar', 'location']);
+});											- Удаление нескольких столбцов
+
+Создание индексов
+
+$table->string('email')->unique();			- Уникальный индекс
+$table->unique('email');					- Уникальный индекс для существующего столбца
+$table->index(['account_id', 'created_at']); - Индекс на основе нескольких столбцов
+$table->index('email', 'my_index_name');	- указать имя самому во втором параметре метода
+
+КОМАНДА										ОПИСАНИЕ
+$table->primary('id');						Add a primary key.
+$table->primary(['first', 'last']);			Add composite keys.
+$table->unique('email');					Add a unique index.
+$table->unique('state', 'my_index_name');	Add a custom index name.
+$table->index('state');						Add a basic index.
+
+Удаление индексов
+КОМАНДА										ОПИСАНИЕ
+$table->dropPrimary('users_id_primary');	Удалить primary key из таблицы "users".
+$table->dropUnique('users_email_unique');	Удалить уникальный индекс из таблицы "users".
+$table->dropIndex('geo_state_index');		Удалить обычный индекс из таблицы "geo".
+
+Schema::table('geo', function ($table) {
+    $table->dropIndex(['state']); 			- Удалить индекс 'geo_state_index' по столбцу state
+});
+
+Schema::table('posts', function ($table) {
+    $table->integer('user_id')->unsigned();
+    $table->foreign('user_id')->references('id')->on('users');		- столбец user_id в таблице posts сылается на столбец id таблицы users
+});
+
+$table->dropForeign('posts_user_id_foreign');		- Удаление внешнего ключа
+
+
+Seeding
+	
+	<?php
+
+	use Illuminate\Database\Seeder;
+	use Illuminate\Database\Eloquent\Model;
+	class DatabaseSeeder extends Seeder
+	{
+	    /**
+	     * Run the database seeds.
+	     * @return void
+	     */
+	    public function run()
+	    {
+	        DB::table('users')->insert([
+	            'name' => str_random(10),
+	            'email' => str_random(10).'@gmail.com',
+	            'password' => bcrypt('secret'),
+	        ]);
+	    }
+	}

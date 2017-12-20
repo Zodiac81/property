@@ -1,0 +1,41 @@
+1)
+	php -f yiic webapp ..
+
+
+2)
+	.htaccess
+		AddDefaultCharset UTF-8
+
+		RewriteEngine on
+		# не позволять httpd отдавать файлы, начинающиеся с точки (.htaccess, .svn, .git и прочие)
+		RedirectMatch 403 /\..*$
+		# если директория или файл существуют, использовать их напрямую
+		RewriteCond %{REQUEST_FILENAME} !-f
+		RewriteCond %{REQUEST_FILENAME} !-d
+		# иначе отправлять запрос на файл index.php
+		RewriteRule . index.php
+
+3)
+	Соединение с db:
+		.../protected/config/database.php
+		
+			'connectionString' => 'mysql:host=localhost;dbname=yii_db',
+			'tablePrefix'=>'tbl_',
+
+4)
+	Настройка main config:
+		...protected/config/main.php
+
+			'name'=>'Smil_e',
+			'language'=>'ru',
+
+		no_comment - 'gii'
+		no_comment - 'urlManager'
+
+			
+Приложение может выполняться в отладочном (debug) или рабочем (production) режиме в зависимости от значения константы YII_DEBUG
+Экземпляр приложения доступен из любой его точки посредством Yii::app()
+
+
+
+

@@ -1,0 +1,547 @@
+config/database.php
+
+'mysql' => [
+    'read' => [
+        'host' => '192.168.1.1',
+    ],
+    'write' => [
+        'host' => '196.168.1.2'
+    ],
+    'driver'    => 'mysql',
+    'database'  => 'database',
+    'username'  => 'root',
+    'password'  => '',
+    'charset'   => 'utf8',
+    'collation' => 'utf8_unicode_ci',
+    'prefix'    => '',
+],
+
+ЗАПРОСЫ НА ЧИСТОМ SQL
+	
+	$users = DB::select('select * from users where active = ?', [1]);		-	второй аргумент - массив со значениями, подставляемыми в запрос
+				 update
+				 insert
+				 delete
+				 statement
+
+	Каждое значение в массиве будет объектом PHP StdClass
+
+	$results = DB::select('select * from users where id = :id', ['id' => 1]); 	-	Именованные параметры запроса
+	DB::insert('insert into users (id, name) values (?, ?)', [1, 'Dayle']);
+	DB::update('update users set votes = 100 where name = ?', ['John']);		-	Возвращает количество обновленных строк
+	DB::delete('delete from users');											-	Возвращает количество удаленных строк
+
+	DB::statement('drop table users');
+
+	namespace App\Providers;
+	use Illuminate\Support\Facades\DB;
+	use Illuminate\Support\ServiceProvider;
+	class AppServiceProvider extends ServiceProvider
+	{
+	    public function boot(){
+	        DB::listen(function ($query) {
+			    print('<script type="text/javascript">' .
+				    'console.log('.json_encode($query->sql).'); ' .
+				    '</script> ');
+		//	    dump($query->sql);
+		//	    $query->bindings;
+		//	    $query->time;
+			});
+	    }
+//////////////////////////////////////////////////////////////////////////////////////////////// 5.0
+	    \Illuminate\Support\Facades\DB::listen(function($sql, $bindings, $time) {
+		    print('<script type="text/javascript">' .
+			    'console.log('.json_encode($sql).'); ' .
+			    '</script> ');
+		    print('<script type="text/javascript">' .
+			    'console.log('.json_encode($bindings).'); ' .
+			    '</script> ');
+		    print('<script type="text/javascript">' .
+			    'console.log('.json_encode($time).'); ' .
+			    '</script> ');
+		});
+	}											-	Постобработчик запросов. Регистрация постобработчика в service provider
+
+    ТРАНЗАКЦИИ
+    	DB::transaction(function () {
+		    DB::table('users')->update(['votes' => 1]);
+		    DB::table('posts')->delete();
+		});											-	Если будет брошено исключение в функции-замыкании, то транзакция будет отменена
+
+
+КОНСТРУКТОР ЗАПРОСОВ
+
+	$users = DB::table('users')->get();				-	получаем все строки из таблицы
+	$user = DB::table('users')->value('name');		-	получить данные поля name
+	$user = DB::table('users')->where('name', 'John')->first();		-	получить одну строку из таблицы
+	$email = DB::table('users')->where('name', 'John')->value('email'); 		-	из этой одной строки требуется только одна колонка
+
+
+	DB::table('users')->chunk(100, function($users) {
+	    foreach ($users as $user) {...}
+	    return false;				-	Остановить отбор результатов
+	});																- 	работать со всей таблицей users частями по 100 записей
+
+	$titles = DB::table('roles')->pluck('title');					-	получить массив значений одного столбца
+	$roles = DB::table('roles')->pluck('title', 'name');			-	задать столбец, значения которого будут ключами для возвращаемого массива
+		foreach ($roles as $name => $title) {
+		    echo $title;
+		}
+
+	count, max, min, avg, и sum
+
+	$users = DB::table('users')->count();
+	$price = DB::table('orders')->max('price');
+
+	$price = DB::table('orders')
+                ->where('finalized', 1)
+                ->avg('price');
+
+    $users = DB::table('users')->select('name', 'email as user_email')->get();
+    $users = DB::table('users')->distinct()->select('name')->get(); 				-	получить уникальные значения
+
+    $query = DB::table('users')->select('name');
+	$users = $query->addSelect('age')->get();		-	добавить колонку к существующему выражению выборки
+
+	$users = DB::table('users')
+                     ->select(DB::raw('count(*) as user_count, status'))
+where
+                     ->where('status', '<>', 1)
+                     ->where('name', 'like', '%ohan%')
+                     ->where('name', 'like', '%admin%', 'or')
+orWhere
+                     ->orWhere('name', 'like', '%admin%')
+whereNull
+                     ->whereNull('name')
+                     ->whereNotNull('name')
+whereBetween
+                     ->whereBetween('id', [1,5])
+                     ->whereNotBetween('id', [1,5])
+whereIn
+                     ->whereIn('id', [1,2,3,5])
+                     ->whereNotIn('id', [1,2,3,5])
+date
+                     ->whereDate('created_at', '2016-12-31')
+                     ->whereMonth('created_at', '12')
+                     ->whereDay('created_at', '31')
+                     ->whereYear('created_at', '2016')
+
+                     ->whereColumn('first_name', 'last_name')		- first_name = last_name
+                     ->whereColumn('updated_at', '>', 'created_at')
+                     ->whereColumn([
+	                    ['first_name', '=', 'last_name'],
+	                    ['updated_at', '>', 'created_at']
+                     ])
+limit
+                     ->take(4)							- limit 4
+                     ->skip(4)							- offset 4
+                     ->offset(10)
+                	 ->limit(5)
+groupBy
+                     ->groupBy('status')
+Ordering
+                     ->orderBy('name', 'desc')
+
+                     ->having('account_id', '>', 100) 	- like where
+                     ->inRandomOrder() 					- извлечения случайного
+
+					->latest()->first();				- По умолчанию результат будет упорядочен по created_at столбцу. Или вы можете передать имя столбца, по которое хотите отсортировать
+
+                     ->get();						-	DB::raw не создадут возможности для SQL инъекций
+
+     $users = DB::table('users')
+                     ->where([
+                     	['status', '<>', 1],
+                     	['name', 'like', '%ohan%'],
+                     	['name', 'like', '%admin%', 'or']
+                 	 ])
+                     ->groupBy('status')
+                     ->get();						-	DB::raw не создадут возможности для SQL инъекций
+
+Join
+     
+	$users = DB::table('users')
+	            ->join('contacts', 'users.id', '=', 'contacts.user_id')
+	            ->join('orders', 'users.id', '=', 'orders.user_id')
+	            ->select('users.*', 'contacts.phone', 'orders.price')
+	            ->get();
+
+	$users = DB::table('users')
+	            ->leftJoin('posts', 'users.id', '=', 'posts.user_id')
+	            ->get();
+
+	$users = DB::table('sizes')
+	            ->crossJoin('colours')
+	            ->get();
+
+Unions
+	$first = DB::table('users')
+            	->whereNull('first_name');
+
+	$users = DB::table('users')
+	            ->whereNull('last_name')
+	            ->union($first)
+	            ->get();
+
+Inserts
+
+	DB::table('users')->insert(
+	    ['email' => 'john@example.com', 'votes' => 0]
+	);
+
+	DB::table('users')->insert([
+	    ['email' => 'taylor@example.com', 'votes' => 0],
+	    ['email' => 'dayle@example.com', 'votes' => 0]
+	]);
+
+	$id = DB::table('users')->insertGetId(
+	    ['email' => 'john@example.com', 'votes' => 0]
+	);															- insert + return id
+
+Updates
+
+	DB::table('users')
+            ->where('id', 1)
+            ->update(['votes' => 1]);
+
+Deletes
+
+	DB::table('users')->delete();
+
+	DB::table('users')->where('votes', '>', 100)->delete();
+
+
+Model
+
+	create
+		php artisan make:model User -m
+
+		<?php
+		namespace App;
+		use Illuminate\Database\Eloquent\Model;
+		class Flight extends Model
+		{
+		    protected $table = 'my_flights';
+
+		    protected $attributes = array(
+										'currency_id' => 1 				// default values
+								    );
+		    public $timestamps = false;									// if в таблице нет столбцов create_at update_at
+
+		// не обязвтельные
+		    protected 	$primaryKey = 'id';								// изменить primaryKey fo teble
+		    public 		$incrementing = false;							// изменить свойствo если строковый primaryKey
+		    
+		    protected 	$dateFormat = 'U';
+    		protected $connection = 'connection-name';					// Соединение с базой данных
+
+    		protected $fillable = ['name']; 				// разрешаем запиьс через model::create
+
+    		protected $guarded = ['price']; 				// закрываем запиьс через model::create
+    		protected $guarded = ['*'];						// default
+		}
+
+	use
+
+		use App\User;
+
+		public function postOrganizeRaces(Request $request){
+
+			$flights = User::All();
+
+			$flights = App\Flight::where('active', 1)
+							               ->orderBy('name', 'desc')
+							               ->take(10)
+							               ->get();
+
+			$flight = App\Flight::find(1);
+
+			$model = App\Flight::findOrFail(1);   					// найди или сгенерируй исключение
+
+				Route::get('/api/flights/{id}', function ($id) {
+				    return App\Flight::findOrFail($id);
+				});
+
+			$flight = App\Flight::where('active', 1)->first();
+
+			$count = App\Flight::where('active', 1)->count();
+			$max = App\Flight::where('active', 1)->max('price');
+
+		Inserting
+
+			App\Flight::::Create(['name' => 'Flight 10']);	
+
+			$flight = new Flight;
+	        $flight->name = $request->name;
+	        $flight->save();
+
+	        $flight = App\Flight::firstOrCreate(['name' => 'Flight 10']);
+	        $flight = App\Flight::firstOrNew(['name' => 'Flight 10']);
+	        $flight->save();
+
+	    Update
+
+	    	$flight = App\Flight::find(1);
+			$flight->name = 'New Flight Name';
+			$flight->save();
+
+			App\Flight::where('active', 1)
+							          ->where('destination', 'San Diego')
+							          ->update(['delayed' => 1]);
+
+		Deleting
+
+			$flight = App\Flight::find(1);
+			$flight->delete();
+
+			App\Flight::destroy(1);
+			App\Flight::destroy([1, 2, 3]);
+			App\Flight::destroy(1, 2, 3);
+
+			$deletedRows = App\Flight::where('active', 0)->delete();
+
+Eloquent
+
+	php artisan make:model Post -m
+
+	use App\Post;
+
+	ленивая загрузка
+
+		$data = Post::all()->toArray();         // arr arr
+		$data = Post::all();                    // arr models
+				$first = $data->first();
+				$last = $data->last();
+
+
+		$data = Post::find(id);                 // find by id
+				$tempArr = array(5,7,9);
+			//	$post = Post::find($tempArr)->limit(2);
+
+		$data = Post::where('id', 5)->get();      // find by id
+				$post = Post::where('email', 'LIKE', '%@mail%')->get();
+				$post = Post::where('email', 'LIKE', '%@mail%')->limit(2)->get();
+
+
+	жадная загрузка ( if has relations )
+
+		$data = Post::all();
+			$data -> load('user'); 					// дозагрузка связей с указаной тоблицей
+		foreach($data as $item){
+			$item->user;						// bad request (mani query in DB)
+		}
+
+		$data = Post::with('user')->get();
+
+		foreach($data as $item){
+			$item->user;						// good request ( 1 query in DB )
+		}  
+
+		$data = Post::with('user','role')->get();
+		$data = Post::with('user','role')->where('id',5)->get();											// it is post id
+		$post = Post::with('user')->where('email', 'LIKE', '%@mail%')->whereBetween('id', [1,7])->get();
+		$post = Post::with('user')->where('email', 'LIKE', '%@mail%')->whereIn('id', [1,3,7])->get();
+
+		$user = User::has('posts')->get(); 							// только пользователи, которые имеют связь с другой таблицей
+		$user = User::has('posts', '>=', 3)->get(); 				// только пользователи, которые имеют связь с другой таблицей ,больше 2
+
+	SAVE one
+		1)						
+			$post = new Post();
+			$post->name = str_random(10);
+			$post->email = str_random(10).'@gmail.com';
+			$post->description = str_random(70);
+			
+			$user = User::find(1);
+			$user->posts()->save($post);								// в save передается объек
+
+		2) 							
+			$user = User::find(1);
+			$user->posts()->create([									// в create передается масив
+			    'name' => str_random(10),
+			    'email' => str_random(10).'@gmail.com',
+			    'description' => str_random(70),
+			]);
+	
+	SAVE many
+		1)
+			$user = User::find(1);
+			$user->posts()->saveMany([									// в saveMany передается масив объектов
+							new Post(['name' => str_random(10),'email' => str_random(10).'@gmail.com','description' => str_random(70)]),
+							new Post(['name' => str_random(10),'email' => str_random(10).'@gmail.com','description' => str_random(70)]),
+							new Post(['name' => str_random(10),'email' => str_random(10).'@gmail.com','description' => str_random(70)]),
+			]);
+
+	UPDATE
+		$user = User::find(1);
+		$user->posts()->where('id',5)->update(['name' => 'someNew']);
+
+		$user = User::find(2);
+		$post = Post::find(8);
+		$post->user()->associate($user);
+		$post->save();
+
+		relation mani-yo-many
+
+			$user = User::find(1);
+			$role_id = Role::find(2)->id;
+			$user->roles()->attach($role_id); 						// при связи много-много добавляем запись во вспомогательную таблицу
+			$user->roles()->detach($role_id); 						// при связи много-много убираем запись из вспомогательной таблицы
+
+Mutators
+	
+	class User extends Model
+
+		public function getFirstNameAttribute($value)
+	    {
+	        return ucfirst($value); 								// при вызове FirstName преобразует его
+	    }
+
+	    public function setFirstNameAttribute($value)
+	    {
+	        $this->attributes['first_name'] = strtolower($value);  	// при вызове FirstName преобразует его
+	    }	
+
+	Attribute Casting												// произойдет динамическое преобразование данных к необходимому типу
+		types are: integer,
+				   real,
+				   float, 
+				   double, 
+				   string, 
+				   boolean, 
+				   object, 
+				   array, 
+				   collection,  
+				   date, 
+				   datetime, 
+				   timestamp.
+
+		protected $casts = [
+	        'is_admin' => 'boolean',
+	    ];
+
+
+
+
+Soft Deleting
+
+	1) new migrate : add column fo table
+		php artisan make:migration change_post_table_soft --table=posts
+
+		    public function up()
+		    {
+		        Schema::table('posts', function (Blueprint $table) {
+		            $table->softDeletes();
+		        });
+		    }
+
+		    public function down()
+		    {
+		        Schema::table('posts', function (Blueprint $table) {
+		            $table->dropColumn('deleted_at');
+		        });
+		    }
+	2) in model
+		use Illuminate\Database\Eloquent\SoftDeletes;
+		class Post extends Model{
+    		use SoftDeletes;
+    		protected $dates = ['deleted_at'];
+
+    3) delete
+    	$delet = Post::find(2);
+		$delet->delete();
+
+    3) find deleted
+    	$flights = App\Flight::withTrashed()
+                ->where('account_id', 1)
+                ->get();
+
+        $data[] = Post::onlyTrashed()->where('airline_id', 1)->get();
+        $data[] = Post::withTrashed()->where('deleted_at', '!=', 'NULL')->get();
+
+        $data = Post::withTrashed()->get();
+        	foreach($data as $item){
+        		if($item->trashed()) echo 'was deleted'; 							// $item->trashed() - проверка на удаление
+        		$item->restore(); 													// восстанавливаем запись
+        	}
+
+        App\Flight::withTrashed()
+	        ->where('airline_id', 1)
+	        ->restore();
+
+    3) hard delete
+    	
+    	$flight->forceDelete();
+		$flight->history()->forceDelete();
+
+
+Eloquent: Relationships
+	php artisan make:migration add_colum_userid_post --table=users
+	
+	class AddColumUseridPost extends Migration
+	{
+	    public function up()
+	    {
+	        Schema::table('posts', function (Blueprint $table) {
+	            $table->integer('user_id')->unsigned()->default(1);
+		    	$table->foreign('user_id')->references('id')->on('users');
+	        });
+	    }
+	    public function down()
+	    {
+	        Schema::table('posts', function (Blueprint $table) {
+	            $table->dropColumn('user_id');
+	        });
+	    }
+
+hasOne - belongsTo
+	model User
+		public function post(){
+			return $this->hasOne('\App\Post');
+		// return $this->hasOne('App\Post', 'user_id', 'id');
+	    }
+	model Post
+		public function user(){
+	        return $this->belongsTo('App\User');
+		//	return $this->belongsTo('App\User', 'id', 'user_id');
+	    }
+	controller
+		$post = Post::find(1);
+		$data[] = $post->user;
+
+hasMany - belongsTo
+	model User
+		public function posts(){
+			return $this->hasMany('App\Post');
+	    //	return $this->hasMany('App\Post', 'user_id', 'id');
+	    }
+	model Post
+		public function user(){
+	        return $this->belongsTo('App\User');
+		//	return $this->belongsTo('App\User', 'id', 'user_id');
+	    }
+	controller
+		$user = User::find(1);
+		$data[] = $user->posts;
+		$data[] = $user->posts()->where('id',24)->get;
+		
+belongsToMany
+	model User
+		public function posts(){
+			return $this->belongsToMany('App\Post');
+	    //	return $this->belongsToMany('App\Post', 'post_user', 'user_id', 'post_id');
+	    }
+	model Post
+		public function user(){
+	        return $this->belongsToMany('App\User');
+		//	return $this->belongsToMany('App\User', 'post_user', 'post_id', 'user_id');
+	    }
+	controller
+		$user = User::find(1);
+		$data[] = $user->posts;
+		$data[] = $user->posts()->where('id',24)->get;
+		
+		$post = Post::find(1);
+		$data[] = $post->user;
+		$data[] = $post->user()->where('id',24)->get;
+

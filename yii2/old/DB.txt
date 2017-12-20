@@ -1,0 +1,228 @@
+return [
+    // ...
+    'components' => [
+        // ...
+        'db' => [
+            'class' => 'yii\db\Connection',
+            'dsn' => 'mysql:host=localhost;dbname=example',
+            'username' => 'root',
+            'password' => '',
+            'charset' => 'utf8',
+            ...
+            'tablePrefix' => 'tbl_',            // use {{%table name}}
+        ],
+    ],
+    // ...
+];
+
+Выполнение SQL запросов
+    $posts = Yii::$app->db->createCommand('SELECT * FROM post')->queryAll();
+    $post = Yii::$app->db->createCommand('SELECT * FROM post WHERE id=1')->queryOne();
+    $titles = Yii::$app->db->createCommand('SELECT title FROM post')->queryColumn();
+    $count = Yii::$app->db->createCommand('SELECT COUNT(*) FROM post')->queryScalar();
+
+Привязка параметров
+    $post = Yii::$app->db->createCommand('SELECT * FROM post WHERE id=:id AND status=:status')
+           ->bindValue(':id', $_GET['id'])
+           ->bindValue(':status', 1)
+           ->queryOne();
+
+        bindValue(): привязка одного параметра по значению
+        bindValues(): привязка нескольких параметров в одном вызове
+        bindParam(): похоже на bindValue(), но привязка происходит по ссылке.
+
+        $params = [':id' => $_GET['id'], ':status' => 1];
+
+        $post = Yii::$app->db->createCommand('SELECT * FROM post WHERE id=:id AND status=:status')
+                   ->bindValues($params)
+                   ->queryOne();
+                   
+        $post = Yii::$app->db->createCommand('SELECT * FROM post WHERE id=:id AND status=:status', $params)
+                   ->queryOne();
+
+Работа со схемой базы данных
+    
+    createTable():      создание таблицы
+    renameTable():      переименование таблицы
+    dropTable():        удаление таблицы
+    truncateTable():    удаление всех записей в таблице
+    addColumn():        добавление столбца
+    renameColumn():     переименование столбца
+    dropColumn():       удаление столбца
+    alterColumn():      преобразование столбца
+    addPrimaryKey():    добавление первичного ключа
+    dropPrimaryKey():   удаление первичного ключа
+    addForeignKey():    добавление внешнего ключа
+    dropForeignKey():   удаление внешнего ключа
+    createIndex():      создания индекса
+    dropIndex():        удаление индекса
+
+    // CREATE TABLE
+        Yii::$app->db->createCommand()->createTable('post', [
+            'id' => 'pk',
+            'title' => 'string',
+            'text' => 'text',
+        ]);
+
+    $table = Yii::$app->db->getTableSchema('post');                 // get info about table
+
+Построитель запросов
+
+        use \yii\db\Query()
+
+            $rows = (new \yii\db\Query())
+                ->select(['id', 'email'])
+                ->from('user')
+                ->where(['last_name' => 'Smith'])
+                ->limit(10)
+                ->all();                                        // SELECT `id`, `email` FROM `user` WHERE `last_name` = :last_name LIMIT 10
+    select()
+                $query = new \yii\db\Query();
+                $data = $query->select('id')->from('user')->all();
+                $data = $query->select(['id','email'])->from('user')->all();
+    from()
+                $query->from(['public.user u', 'public.post p']);
+    where()
+                $query->where('status=1');
+                $query->where('status=:status', [':status' => $status]);
+                $query->where('status=:status')->addParams([':status' => $status]);    //  вы можете вызывать params() или addParams()
+    filterWhere()
+                $query->filterWhere([
+                    'username' => $username,
+                    'email' => $email,
+                ]);                                                                          // $username и $email вводит пользователь
+    orderBy()
+                $query->orderBy([
+                    'id' => SORT_ASC,
+                    'name' => SORT_DESC,
+                ]);                                                               // ... ORDER BY `id` ASC, `name` DESC
+    groupBy()
+                $query->groupBy(['id', 'status']);                                          // ... GROUP BY `id`, `status`
+    having()
+                $query->having(['status' => 1]);                                    // ... HAVING `status` = 1
+    limit() 
+    offset()
+                $query->limit(10)->offset(20);                                      // ... LIMIT 10 OFFSET 20
+    join()
+        innerJoin()
+        leftJoin()
+        rightJoin()
+                $query->join('LEFT JOIN', 'post', 'post.user_id = user.id');        // ... LEFT JOIN `post` ON `post`.`user_id` = `user`.`id`
+                $query->leftJoin('post', 'post.user_id = user.id');
+    union()
+                $query1 = (new \yii\db\Query())->select("id, category_id AS type, name")->from('post')->limit(10);
+                $query2 = (new \yii\db\Query())->select('id, type, name')->from('user')->limit(10);
+                $query1->union($query2);
+    Методы выборки
+        all():      возвращает массив строк, каждая из которых это ассоциативный массив пар ключ-значение.
+        one():      возвращает первую строку запроса.
+        column():   возвращает первый столбец результата.
+        scalar():   возвращает скалярное значение первого столбца первой строки результата.
+        exists():   возвращает значение указывающее, что выборка содержит результат.
+        count():    возвращает результат COUNT запроса.
+                    Другие методы агрегирования запросов, включая sum($q), average($q), max($q), min($q). Параметр $q обязателен для этих методов и могут содержать либо имя столбца, либо выражение БД.
+
+###################################             ActiveRecord        ##############################################
+
+    namespace app\models;
+    use yii\db\ActiveRecord;
+
+    class Customer extends ActiveRecord
+    {
+        const STATUS_INACTIVE = 0;
+        const STATUS_ACTIVE = 1;
+        public static function tableName(){
+            return '{{customer}}';
+        }
+
+~~ Преобразование данных ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        public function getBirthdayText(){
+            return date('d.m.Y', $this->birthday);
+        }
+        
+        public function setBirthdayText($value){
+            $this->birthday = strtotime($value);
+        }
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+    }
+    
+    $db->createCommand('INSERT INTO `customer` (`name`) VALUES (:name)', [':name' => 'Qiang',])->execute();
+
+$sql = 'SELECT * FROM customer WHERE status=:status';
+$customers = Customer::findBySql($sql, [':status' => Customer::STATUS_INACTIVE])->all();
+
+find()
+findAll()
+findOne()
+        $comments =     Comments::          find()->all();
+        $post =         \app\models\Post::  findOne(100);
+        $customers =    Customer::          find()->limit(100)->all();
+        $customer =     Customer::          find()->where(['id' => 123])->one();
+        $customers =    Customer::          find()->where(['status' => Customer::STATUS_ACTIVE])->orderBy('id')->all();
+        $customers =    Customer::          find()->where(['status' => Customer::STATUS_ACTIVE])->orderBy(['id' => SORT_DESC])->all();
+        $count =        Customer::          find()->where(['status' => Customer::STATUS_ACTIVE])->count();
+        $customers =    Customer::          find()->indexBy('id')->all();
+        $customers =    Customer::          findAll([100, 101, 123, 124]);
+        $customer =     Customer::          findOne(['id' => 123,'status' => Customer::STATUS_ACTIVE]);
+        $customer =     Customer::          findOne(['id' => 123,'status' => Customer::STATUS_ACTIVE]);
+        $customers =    Customer::          findAll(['status' => Customer::STATUS_INACTIVE]);
+
+$model = Post::find($id)->limit(10)->asArray()->all();
+$model = Post::find($id)->select('id,name as full')->asArray()->one();
+$model = Post::find($id)->select('id,name as full')->asArray()->all();
+$model = Post::find()->where(['slug'=>$slug])->asArray()->one();
+
+$id = $customer->id;
+$email = $customer->email;
+
+foreach (Customer::find()->batch(10) as $customers) { }
+foreach (Customer::find()->each(10) as $customer) { }
+foreach (Customer::find()->with('orders')->each() as $customer) { }
+
+// insert a new row of data
+$customer = new Customer();
+$customer->name = 'James';
+$customer->email = 'james@example.com';
+$customer->save();
+
+// update an existing row of data
+$customer = Customer::findOne(123);
+$customer->email = 'james@newexample.com';
+$customer->save();
+
+Customer::updateAll(['status' => Customer::STATUS_ACTIVE], ['like', 'email', '@example.com']);
+
+Customer::find()->asArray()->where(['like', 'email', '@example.com'])->all();
+Customer::find()->asArray()->where(['<=', 'id', 695])->all();
+
+$customer = Customer::findOne(123);
+
+$customer->delete();
+JobVacansy::deleteAll();                        //del all
+JobVacansy::deleteAll(['<=', 'id', 695]);       //del all where id <= 695
+
+$vacancys = JobVacansy::find()->where(['like', 'company_phone', $search]);
+
+
+http://www.yiiframework.com/doc-2.0/yii-db-baseactiverecord.html#hasOne()-detail
+
+
+Работа со связными данными
+    class Customer extends ActiveRecord
+    {
+        public function getOrders(){
+            return $this->hasMany(Order::className(), ['customer_id' => 'id']);
+        }
+    }
+
+    class Order extends ActiveRecord
+    {
+        public function getCustomer(){
+            return $this->hasOne(Customer::className(), ['id' => 'customer_id']);
+        }
+    }
+    
+    $customer = Customer::findOne(123);
+    $orders = $customer->orders;                        // метод получения связных данных возвращает объект запроса yii\db\ActiveQuery

@@ -1,0 +1,138 @@
+<?php
+
+class MyForm extends CFormModel
+{
+    public $username;
+    public $password;
+    public $rememberMe=false;
+
+     private $_identity;
+
+    public function rules()
+    {
+        return array(
+            array('username, password', 'required'),
+            array('rememberMe', 'boolean'),
+            array('password', 'authenticate'),
+        );
+    }
+
+    public function authenticate($attribute,$params)
+    {
+        $this->_identity=new UserIdentity($this->username,$this->password);
+        if(!$this->_identity->authenticate())
+            $this->addError('password','Неправильное имя пользователя или пароль.');
+    }
+}
+
+$model=new LoginForm;
+if(isset($_POST['LoginForm']))
+    $model->attributes=$_POST['LoginForm'];
+
+
+список предопределенных псевдонимов валидаторов, включенных в состав Yii:
+
+boolean: псевдоним класса CBooleanValidator, который проверяет, равно ли значение атрибута CBooleanValidator::trueValue или CBooleanValidator::falseValue;
+captcha: псевдоним класса CCaptchaValidator, который проверяет, равно ли значение атрибута коду верификации на капче;
+compare: псевдоним класса CCompareValidator, который проверяет, совпадает ли значение атрибута со значением другого атрибута или константой;
+email: псевдоним класса CEmailValidator, который отвечает за проверку корректности email адреса;
+date: псевдоним класса CDateValidator, проверяющего, является ли атрибут корректной датой, временем или и тем и другим.
+default: псевдоним класса CDefaultValueValidator, который присваивает значение по умолчанию выбранным атрибутам;
+exist: псевдоним класса CExistValidator, который проверяет наличие значения атрибута в указанном столбце таблицы базы данных;
+file: псевдоним класса CFileValidator, отвечающего за проверку атрибута на наличие в нём имени загруженного файла;
+filter: псевдоним класса CFilterValidator, преобразующего атрибут с использованием фильтра;
+in: псевдоним класса CRangeValidator, который проверяет, содержится ли значение атрибута в указанном наборе значений;
+length: псевдоним класса CStringValidator, который проверяет, находится ли длина строкового значения атрибута в указанном интервале;
+match: псевдоним класса CRegularExpressionValidator, проверяющего значение атрибута на соответствие регулярному выражению;
+numerical: псевдоним класса CNumberValidator, проверяющего, является ли значение атрибута числом;
+required: псевдоним класса CRequiredValidator, который проверяет, не является ли значение атрибута пустым;
+type: псевдоним класса CTypeValidator, проверяющего значение атрибута на соответствие указанному типу данных;
+unique: псевдоним класса CUniqueValidator, который проверяет, является ли значение атрибута уникальными в пределах столбца таблицы базы данных;
+url: псевдоним класса CUrlValidator, отвечающего за проверку корректности URL.
+
+// имя пользователя — обязательное поле формы
+array('username', 'required'),
+// длина имени пользователя должна быть от 3 до 12 символов включительно
+array('username', 'length', 'min'=>3, 'max'=>12),
+// в сценарии регистрации значения полей «password» и «password2» должны быть равны
+array('password', 'compare', 'compareAttribute'=>'password2', 'on'=>'register'),
+// в сценарии аутентификации поле `password` должно быть проверено на соответствие указанному имени пользователя
+array('password', 'authenticate', 'on'=>'login'),
+
+// в виде массива имён сценариев
+'on'=>array('update', 'create'),
+// строкой с именами, разделённой запятыми (пробелы не учитываются)
+'except'=>'ignore, this, scenarios, at-all',
+
+
+Описание безопасных атрибутов
+
+array('username, password', 'required', 'on'=>'login, register'),
+array('email', 'required', 'on'=>'register'),
+
+// сценарий входа
+$model=new User('login');
+if(isset($_POST['User']))
+    $model->attributes=$_POST['User'];
+
+// сценарий регистрации
+$model=new User('register');
+if(isset($_POST['User']))
+    $model->attributes=$_POST['User'];
+
+if($model->validate())   // если данные верны
+    …
+else
+    …
+
+array('content', 'safe')		//	объявить атрибут безопасным
+array('permission', 'unsafe')	//	объявить атрибут не безопасным
+
+Информация об ошибках
+CModel::getErrors()				//	все ошибки для указанного атрибута модели
+CModel::getError()				//	только первую ошибку.
+if(CModel::hasErrors()){...}
+
+public function actionLogin()
+{
+    $model=new LoginForm;
+    if(isset($_POST['LoginForm']))
+    {
+        // получаем данные от пользователя
+        $model->attributes=$_POST['LoginForm'];
+        // проверяем полученные данные и, если результат проверки положительный,
+        // перенаправляем пользователя на предыдущую страницу
+        if($model->validate())
+            $this->redirect(Yii::app()->user->returnUrl);
+    }
+    // рендерим представление
+    $this->render('login',array('model'=>$model));
+}
+
+
+<div class="form">
+<?php echo CHtml::beginForm(); ?>
+
+<?php echo CHtml::errorSummary($model); ?>
+
+<div class="row">
+<?php echo CHtml::activeLabel($model,'username'); ?>
+<?php echo CHtml::activeTextField($model,'username'); ?>
+</div>
+
+<div class="row">
+<?php echo CHtml::activeLabel($model,'password'); ?>
+<?php echo CHtml::activePasswordField($model,'password'); ?>
+</div>
+
+<div class="row rememberMe">
+<?php echo CHtml::activeCheckBox($model,'rememberMe'); ?>
+<?php echo CHtml::activeLabel($model,'rememberMe'); ?>
+</div>
+
+<div class="row submit">
+<?php echo CHtml::submitButton('Войти'); ?>
+</div>
+
+<?php echo CHtml::endForm(); ?>
+</div><!-- form -->

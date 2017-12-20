@@ -1,0 +1,23 @@
+Using Connect with Custom Accounts
+    https://stripe.com/docs/connect/custom-accounts
+1)
+    Identify the country to use
+2)
+    Curl
+	curl https://api.stripe.com/v1/accounts \
+       -u sk_test_BQokikJOvBiI2HlWgH4olfQ2: \
+       -d country=US \
+       -d type=custom
+
+    Php
+	// Set your secret key: remember to change this to your live secret key in production
+	// See your keys here: https://dashboard.stripe.com/account/apikeys
+	\Stripe\Stripe::setApiKey("sekret_key");
+
+	$acct = \Stripe\Account::create(array(
+	    "country" => "US",
+	    "type" => "custom"
+	));
+3)
+    Start the identity verification process
+    

@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<!-- saved from url=(0045)https://sleepingowladmin.ru/docs/installation -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+	<title>Установка - Документация -  SleepingOwl - Laravel Admin Panel.</title>
+	<meta name="author" content="butschster">
+	<meta name="description" content="SleepingOwl - Laravel Admin Panel.">
+	<meta name="keywords" content="laravel, php, framework, admin">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+			<link rel="canonical" href="https://sleepingowladmin.ru/docs/installation">
+	
+	<link href="./Установка - Документация - SleepingOwl - Laravel Admin Panel._files/css" rel="stylesheet">
+	<link rel="stylesheet" href="./Установка - Документация - SleepingOwl - Laravel Admin Panel._files/app-346d9f135e.css">
+    <script type="text/javascript" async="" src="./Установка - Документация - SleepingOwl - Laravel Admin Panel._files/watch.js"></script><script async="" src="./Установка - Документация - SleepingOwl - Laravel Admin Panel._files/analytics.js"></script><script src="./Установка - Документация - SleepingOwl - Laravel Admin Panel._files/vue.min.js"></script>
+	<link rel="icon" type="image/x-icon" href="https://sleepingowladmin.ru/favicon.ico">
+<style type="text/css">/* This is not a zero-length file! */</style><style type="text/css">/* This is not a zero-length file! */</style></head>
+
+<body class="docs language-php scotchified" style=""><div class="scotch-panel-wrapper" style="position: relative; overflow: hidden; width: 100%;"><div class="scotch-panel-canvas" style="position: relative; height: 100%; width: 100%; transform: translate3d(0px, 0px, 0px); backface-visibility: hidden; transition: all 300ms ease;">
+	<span class="overlay"></span>
+
+	<header class="main">
+		<a href="https://sleepingowladmin.ru/" class="brand nav-block">
+			<svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="SleepingOwlLogo" x="0px" y="0px" viewBox="0 0 216.123 216.123" xml:space="preserve">
+    <g>
+        <path d="M173.65,106.51c6.549-7.024,10.567-16.436,10.567-26.774c0-8.585-2.775-16.529-7.464-23.001
+        c5.319-16.633,5.063-34.71-0.795-51.16L173.974,0l-5.827,1.03c-12.002,2.121-23.325,6.931-33.201,14.037H81.537v0.252
+        C71.577,8.071,60.122,3.176,47.977,1.03L42.149,0l-1.985,5.575c-5.858,16.45-6.114,34.527-0.795,51.16
+        c-4.689,6.472-7.464,14.417-7.464,23.001c0,10.338,4.018,19.75,10.567,26.773c-1.028,0.797-1.846,1.88-2.308,3.179
+        c-10.874,30.534-2.352,64.292,21.71,86c1.048,0.945,2.171,1.862,3.332,2.761v10.673c0,3.866,3.134,7,7,7s7-3.134,7-7v-2.194
+        c8.347,3.957,17.834,6.887,27.532,8.373c0.352,0.054,0.706,0.081,1.06,0.081s0.708-0.027,1.06-0.081
+        c4.446-0.681,16.123-2.878,28.059-8.434v2.255c0,3.866,3.134,7,7,7s7-3.134,7-7v-10.656c1.139-0.883,2.254-1.805,3.332-2.777
+        c24.062-21.709,32.583-55.466,21.71-86C175.496,108.389,174.678,107.306,173.65,106.51z M107.969,152.066
+        c-4.506-10.226-11.165-19.465-19.743-27.206c-2.717-2.451-5.583-4.7-8.571-6.748c13.12-2.887,23.804-12.341,28.406-24.734
+        c4.602,12.393,15.286,21.847,28.406,24.734c-2.988,2.048-5.854,4.297-8.57,6.748C119.346,132.575,112.595,141.88,107.969,152.066z
+        M71.206,54.436c13.951,0,25.301,11.35,25.301,25.301s-11.35,25.301-25.301,25.301s-25.301-11.35-25.301-25.301
+        S57.255,54.436,71.206,54.436z M170.218,79.736c0,13.951-11.35,25.301-25.301,25.301s-25.301-11.35-25.301-25.301
+        s11.35-25.301,25.301-25.301S170.218,65.786,170.218,79.736z M108.041,48.088c-3.04-6.825-7.023-13.231-11.845-19.021h23.699
+        C115.052,34.867,111.074,41.273,108.041,48.088z M164.562,16.17c2.468,9.767,2.65,20.018,0.566,29.875
+        c-5.909-3.558-12.824-5.61-20.21-5.61c-7.254,0-14.05,1.983-19.889,5.425c3.327-5.397,7.423-10.367,12.248-14.72
+        C145.142,24.043,154.479,18.934,164.562,16.17z M51.562,16.17c10.082,2.763,19.419,7.872,27.286,14.97
+        c4.792,4.324,8.877,9.293,12.205,14.695c-5.83-3.426-12.61-5.401-19.847-5.401c-7.386,0-14.301,2.051-20.21,5.61
+        C48.912,36.188,49.094,25.937,51.562,16.17z M51.555,120.283c10.084,2.763,19.425,7.873,27.293,14.972
+        c13.908,12.549,21.704,29.884,21.95,48.812v15.742c-10.093-2.564-21.543-7.294-29.546-14.514
+        C52.951,168.783,45.553,143.818,51.555,120.283z M144.871,185.295c-7.99,7.21-19.708,11.96-30.073,14.539v-15.766
+        c0.239-18.349,8.431-36.14,22.478-48.813c7.868-7.1,17.209-12.209,27.293-14.972C170.57,143.818,163.172,168.783,144.871,185.295z"></path>
+
+        <circle cx="71.206" cy="79.736" r="9.757"></circle>
+        <circle cx="144.917" cy="79.736" r="9.757"></circle>
+    </g>
+</svg>
+			<span>SleepingOwlAdmin</span>
+		</a>
+
+        <div class="search nav-block">
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/" x="0px" y="0px" width="16px" height="16px" viewBox="0 0 16 16" enable-background="new 0 0 16 16" xml:space="preserve">
+<defs>
+</defs>
+<g>
+	<g>
+		<path fill="#A1A1A1" d="M5.8,11.7c-1.6,0-3-0.6-4.1-1.7S0,7.4,0,5.8s0.6-3,1.7-4.1C2.8,0.6,4.3,0,5.8,0s3,0.6,4.1,1.7
+			c2.3,2.3,2.3,6,0,8.3C8.9,11.1,7.4,11.7,5.8,11.7z M5.8,1C4.5,1,3.3,1.5,2.4,2.4C1.5,3.3,1,4.5,1,5.8s0.5,2.5,1.4,3.4
+			c0.9,0.9,2.1,1.4,3.4,1.4s2.5-0.5,3.4-1.4c1.9-1.9,1.9-5,0-6.9C8.4,1.5,7.1,1,5.8,1z"></path>
+	</g>
+	<g>
+		<path fill="#A1A1A1" d="M15.5,16c-0.1,0-0.3,0-0.3-0.1L9.3,10c-0.2-0.2-0.2-0.5,0-0.7s0.5-0.2,0.7,0l5.9,5.9
+			c0.2,0.2,0.2,0.5,0,0.7C15.8,16,15.6,16,15.5,16z"></path>
+	</g>
+</g>
+</svg>
+
+            <span class="twitter-typeahead" style="position: relative; display: inline-block; direction: ltr;"><input placeholder="Поиск по документации" type="text" v-model="search" id="search-input" v-on:blur="reset" class="tt-input" autocomplete="off" spellcheck="false" dir="auto" style="position: relative; vertical-align: top;"><pre aria-hidden="true" style="position: absolute; visibility: hidden; white-space: pre; font-family: Roboto, sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; word-spacing: 0px; letter-spacing: 0px; text-indent: 0px; text-rendering: auto; text-transform: none;"></pre><span class="tt-dropdown-menu" style="position: absolute; top: 100%; left: 0px; z-index: 100; display: none; right: auto;"><div class="tt-dataset-0"></div></span></span>
+        </div>
+
+        <div class="responsive-sidebar-nav">
+			<a href="https://sleepingowladmin.ru/docs/installation#" class="toggle-slide menu-link btn">☰</a>
+		</div>
+	</header>
+
+	<div class="header-menu-container">
+		<nav class="container header-menu">
+			<ul class="main-nav">
+				<li><a href="https://sleepingowladmin.ru/docs">Документация</a></li>
+
+<li>
+    <a href="https://sleepingowladmin.ru/donate" style="background-color: red; color: #fff; padding: 3px 8px">
+        <i class="glyphicon glyphicon-heart" style="font-size: 13px;"></i>
+        Помощь проекту    </a>
+</li>
+
+<li class="divider"></li>
+<li><a href="http://demo.sleepingowladmin.ru/" target="_blank">Демо</a></li>
+<li><a href="https://github.com/LaravelRUS/SleepingOwlAdmin/issues" target="_blank">Поддержка</a></li>
+
+<li class="divider"></li>
+
+<li><a href="http://laravel.su/" target="_blank">Laravel.su</a></li>
+<li class="dropdown community-dropdown">
+    <a href="https://sleepingowladmin.ru/docs/installation#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+        Еще...        <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu" role="menu">
+        <li><a href="https://github.com/LaravelRUS/SleepingOwlAdmin" target="_blank">GitHub</a></li>
+        <li><a href="https://github.com/SleepingOwlAdmin/demo" target="_blank">GitHub Demo</a></li>
+        <li><a href="https://github.com/SleepingOwlAdmin/docs" target="_blank">GitHub Docs</a></li>
+        <li class="divider"></li>
+        <li><a href="https://gitter.im/LaravelRUS/SleepingOwlAdmin" target="_blank">Чат (Gitter)</a></li>
+        <li><a href="https://vk.com/sleepingowladm" target="_blank">ВКонтакте</a></li>
+        <li>
+            <a href="https://www.youtube.com/playlist?list=PL82X9fw4S8uB-SVTMkfVk69BjJcXiND6-" target="_blank">YouTube</a>
+        </li>
+    </ul>
+</li>				<li class="switcher">
+	<div class="dropdown">
+		<button class="btn dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+			Ru
+			<span class="caret"></span>
+		</button>
+		<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+							<li role="presentation">
+					<a role="menuitem" tabindex="-1" href="https://en.sleepingowladmin.ru/docs/installation">En</a>
+				</li>
+							<li role="presentation">
+					<a role="menuitem" tabindex="-1" href="https://sleepingowladmin.ru/docs/installation">Ru</a>
+				</li>
+					</ul>
+	</div>
+</li>
+			</ul>
+		</nav>
+	</div>
+
+	<nav id="slide-menu" class="slide-menu scotch-panel-left" role="navigation" style="top: 0px; left: -70%; width: 70%; height: 100%; position: absolute; z-index: 888888; overflow: hidden; backface-visibility: hidden; display: block;">
+
+	<div class="brand">
+		<a href="https://sleepingowladmin.ru/">
+            <svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="SleepingOwlLogo" x="0px" y="0px" viewBox="0 0 216.123 216.123" xml:space="preserve">
+    <g>
+        <path d="M173.65,106.51c6.549-7.024,10.567-16.436,10.567-26.774c0-8.585-2.775-16.529-7.464-23.001
+        c5.319-16.633,5.063-34.71-0.795-51.16L173.974,0l-5.827,1.03c-12.002,2.121-23.325,6.931-33.201,14.037H81.537v0.252
+        C71.577,8.071,60.122,3.176,47.977,1.03L42.149,0l-1.985,5.575c-5.858,16.45-6.114,34.527-0.795,51.16
+        c-4.689,6.472-7.464,14.417-7.464,23.001c0,10.338,4.018,19.75,10.567,26.773c-1.028,0.797-1.846,1.88-2.308,3.179
+        c-10.874,30.534-2.352,64.292,21.71,86c1.048,0.945,2.171,1.862,3.332,2.761v10.673c0,3.866,3.134,7,7,7s7-3.134,7-7v-2.194
+        c8.347,3.957,17.834,6.887,27.532,8.373c0.352,0.054,0.706,0.081,1.06,0.081s0.708-0.027,1.06-0.081
+        c4.446-0.681,16.123-2.878,28.059-8.434v2.255c0,3.866,3.134,7,7,7s7-3.134,7-7v-10.656c1.139-0.883,2.254-1.805,3.332-2.777
+        c24.062-21.709,32.583-55.466,21.71-86C175.496,108.389,174.678,107.306,173.65,106.51z M107.969,152.066
+        c-4.506-10.226-11.165-19.465-19.743-27.206c-2.717-2.451-5.583-4.7-8.571-6.748c13.12-2.887,23.804-12.341,28.406-24.734
+        c4.602,12.393,15.286,21.847,28.406,24.734c-2.988,2.048-5.854,4.297-8.57,6.748C119.346,132.575,112.595,141.88,107.969,152.066z
+        M71.206,54.436c13.951,0,25.301,11.35,25.301,25.301s-11.35,25.301-25.301,25.301s-25.301-11.35-25.301-25.301
+        S57.255,54.436,71.206,54.436z M170.218,79.736c0,13.951-11.35,25.301-25.301,25.301s-25.301-11.35-25.301-25.301
+        s11.35-25.301,25.301-25.301S170.218,65.786,170.218,79.736z M108.041,48.088c-3.04-6.825-7.023-13.231-11.845-19.021h23.699
+        C115.052,34.867,111.074,41.273,108.041,48.088z M164.562,16.17c2.468,9.767,2.65,20.018,0.566,29.875
+        c-5.909-3.558-12.824-5.61-20.21-5.61c-7.254,0-14.05,1.983-19.889,5.425c3.327-5.397,7.423-10.367,12.248-14.72
+        C145.142,24.043,154.479,18.934,164.562,16.17z M51.562,16.17c10.082,2.763,19.419,7.872,27.286,14.97
+        c4.792,4.324,8.877,9.293,12.205,14.695c-5.83-3.426-12.61-5.401-19.847-5.401c-7.386,0-14.301,2.051-20.21,5.61
+        C48.912,36.188,49.094,25.937,51.562,16.17z M51.555,120.283c10.084,2.763,19.425,7.873,27.293,14.972
+        c13.908,12.549,21.704,29.884,21.95,48.812v15.742c-10.093-2.564-21.543-7.294-29.546-14.514
+        C52.951,168.783,45.553,143.818,51.555,120.283z M144.871,185.295c-7.99,7.21-19.708,11.96-30.073,14.539v-15.766
+        c0.239-18.349,8.431-36.14,22.478-48.813c7.868-7.1,17.209-12.209,27.293-14.972C170.57,143.818,163.172,168.783,144.871,185.295z"></path>
+
+        <circle cx="71.206" cy="79.736" r="9.757"></circle>
+        <circle cx="144.917" cy="79.736" r="9.757"></circle>
+    </g>
+</svg>
+		</a>
+	</div>
+
+	<ul class="slide-main-nav">
+		<li><a href="https://sleepingowladmin.ru/">Домой</a></li>
+		<li><a href="https://sleepingowladmin.ru/docs">Документация</a></li>
+
+<li>
+    <a href="https://sleepingowladmin.ru/donate" style="background-color: red; color: #fff; padding: 3px 8px">
+        <i class="glyphicon glyphicon-heart" style="font-size: 13px;"></i>
+        Помощь проекту    </a>
+</li>
+
+<li class="divider"></li>
+<li><a href="http://demo.sleepingowladmin.ru/" target="_blank">Демо</a></li>
+<li><a href="https://github.com/LaravelRUS/SleepingOwlAdmin/issues" target="_blank">Поддержка</a></li>
+
+<li class="divider"></li>
+
+<li><a href="http://laravel.su/" target="_blank">Laravel.su</a></li>
+<li class="dropdown community-dropdown">
+    <a href="https://sleepingowladmin.ru/docs/installation#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+        Еще...        <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu" role="menu">
+        <li><a href="https://github.com/LaravelRUS/SleepingOwlAdmin" target="_blank">GitHub</a></li>
+        <li><a href="https://github.com/SleepingOwlAdmin/demo" target="_blank">GitHub Demo</a></li>
+        <li><a href="https://github.com/SleepingOwlAdmin/docs" target="_blank">GitHub Docs</a></li>
+        <li class="divider"></li>
+        <li><a href="https://gitter.im/LaravelRUS/SleepingOwlAdmin" target="_blank">Чат (Gitter)</a></li>
+        <li><a href="https://vk.com/sleepingowladm" target="_blank">ВКонтакте</a></li>
+        <li>
+            <a href="https://www.youtube.com/playlist?list=PL82X9fw4S8uB-SVTMkfVk69BjJcXiND6-" target="_blank">YouTube</a>
+        </li>
+    </ul>
+</li>	</ul>
+
+	<div class="slide-docs-nav">
+		<h2>Документация</h2>
+		<ul>
+<li>Введение
+<ul>
+<li><a href="https://sleepingowladmin.ru/docs/installation">Установка</a></li>
+<li><a href="https://sleepingowladmin.ru/docs/fast_start">Быстрый старт</a></li>
+<li><a href="https://sleepingowladmin.ru/docs/configuration">Конфигурация</a></li>
+<li><a href="https://sleepingowladmin.ru/docs/global">Описание работы системы</a></li>
+<li><a href="https://sleepingowladmin.ru/docs/update">Руководство по обновлению</a></li>
+<li><a href="https://sleepingowladmin.ru/docs/contributions">Участие в разработке</a></li>
+<li><a href="https://sleepingowladmin.ru/docs/releases">Версии пакета</a></li>
+</ul></li>
+<li>C чего начать
+<ul>
+<li><a href="https://sleepingowladmin.ru/docs/authentication">Авторизация</a></li>
+<li><a href="https://sleepingowladmin.ru/docs/routes_configuration">Конфигурация роутов</a></li>
+<li><a href="https://sleepingowladmin.ru/docs/menu_configuration">Конфигурация меню</a></li>
+<li><a href="https://sleepingowladmin.ru/docs/model_configuration">Конфигурация модели</a></li>
+<li><a href="https://sleepingowladmin.ru/docs/model_configuration_section">Конфигурация моделей через сервис провайдер</a></li>
+<li><a href="https://sleepingowladmin.ru/docs/localization">Локализация</a></li>
+</ul></li>
+<li>Основные элементы
+<ul>
+<li><a href="https://sleepingowladmin.ru/docs/displays">Типы отображения данных</a></li>
+<li><a href="https://sleepingowladmin.ru/docs/filters">Фильтры</a></li>
+<li><a href="https://sleepingowladmin.ru/docs/columns">Столбцы</a></li>
+<li><a href="https://sleepingowladmin.ru/docs/columnfilters">Фильтры столбцов</a></li>
+<li><a href="https://sleepingowladmin.ru/docs/form">Формы</a></li>
+<li><a href="https://sleepingowladmin.ru/docs/form-element">Элементы формы</a></li>
+</ul></li>
+<li>Прочее
+<ul>
+<li><a href="https://sleepingowladmin.ru/docs/javascript">Javascript API</a></li>
+<li><a href="https://sleepingowladmin.ru/docs/assets">Управление ресурсами (Assets)</a></li>
+<li><a href="https://sleepingowladmin.ru/docs/image_upload">Загрузка картинок</a></li>
+<li><a href="https://sleepingowladmin.ru/docs/html_attributes">HTML атрибуты</a></li>
+<li><a href="https://sleepingowladmin.ru/docs/widgets">Виджеты</a></li>
+<li><a href="https://sleepingowladmin.ru/docs/extend">Создание элементов</a></li>
+<li><a href="https://sleepingowladmin.ru/docs/faq">Вопрос-ответ</a></li>
+</ul></li>
+</ul>
+	</div>
+</nav>
+
+<div class="docs-wrapper container">
+	<section class="sidebar">
+		<h3>Документация</h3>
+		<ul>
+<li>Введение
+<ul>
+<li><a href="https://sleepingowladmin.ru/docs/installation">Установка</a></li>
+<li><a href="https://sleepingowladmin.ru/docs/fast_start">Быстрый старт</a></li>
+<li><a href="https://sleepingowladmin.ru/docs/configuration">Конфигурация</a></li>
+<li><a href="https://sleepingowladmin.ru/docs/global">Описание работы системы</a></li>
+<li><a href="https://sleepingowladmin.ru/docs/update">Руководство по обновлению</a></li>
+<li><a href="https://sleepingowladmin.ru/docs/contributions">Участие в разработке</a></li>
+<li><a href="https://sleepingowladmin.ru/docs/releases">Версии пакета</a></li>
+</ul></li>
+<li>C чего начать
+<ul>
+<li><a href="https://sleepingowladmin.ru/docs/authentication">Авторизация</a></li>
+<li><a href="https://sleepingowladmin.ru/docs/routes_configuration">Конфигурация роутов</a></li>
+<li><a href="https://sleepingowladmin.ru/docs/menu_configuration">Конфигурация меню</a></li>
+<li><a href="https://sleepingowladmin.ru/docs/model_configuration">Конфигурация модели</a></li>
+<li><a href="https://sleepingowladmin.ru/docs/model_configuration_section">Конфигурация моделей через сервис провайдер</a></li>
+<li><a href="https://sleepingowladmin.ru/docs/localization">Локализация</a></li>
+</ul></li>
+<li>Основные элементы
+<ul>
+<li><a href="https://sleepingowladmin.ru/docs/displays">Типы отображения данных</a></li>
+<li><a href="https://sleepingowladmin.ru/docs/filters">Фильтры</a></li>
+<li><a href="https://sleepingowladmin.ru/docs/columns">Столбцы</a></li>
+<li><a href="https://sleepingowladmin.ru/docs/columnfilters">Фильтры столбцов</a></li>
+<li><a href="https://sleepingowladmin.ru/docs/form">Формы</a></li>
+<li><a href="https://sleepingowladmin.ru/docs/form-element">Элементы формы</a></li>
+</ul></li>
+<li>Прочее
+<ul>
+<li><a href="https://sleepingowladmin.ru/docs/javascript">Javascript API</a></li>
+<li><a href="https://sleepingowladmin.ru/docs/assets">Управление ресурсами (Assets)</a></li>
+<li><a href="https://sleepingowladmin.ru/docs/image_upload">Загрузка картинок</a></li>
+<li><a href="https://sleepingowladmin.ru/docs/html_attributes">HTML атрибуты</a></li>
+<li><a href="https://sleepingowladmin.ru/docs/widgets">Виджеты</a></li>
+<li><a href="https://sleepingowladmin.ru/docs/extend">Создание элементов</a></li>
+<li><a href="https://sleepingowladmin.ru/docs/faq">Вопрос-ответ</a></li>
+</ul></li>
+</ul>
+	</section>
+
+	<article>
+		<h1>Установка</h1>
+<ul>
+<li><a href="https://sleepingowladmin.ru/docs/installation#composer">Composer</a></li>
+<li><a href="https://sleepingowladmin.ru/docs/installation#service-provider">Добавление сервис провайдера</a></li>
+<li><a href="https://sleepingowladmin.ru/docs/installation#artisan">Artisan</a></li>
+</ul>
+<p><a name="composer"></a></p>
+<h2><a href="https://sleepingowladmin.ru/docs/installation#composer">Composer</a></h2>
+<p>Установить пакет можно помощью командной строки</p>
+<pre class=" language-bash"><code class=" language-bash">$ composer require <span class="token string">"laravelrus/sleepingowl"</span><span class="token punctuation">:</span><span class="token string">"4.*@dev"</span></code></pre>
+<p>или вручную добавив пакет в <code class=" language-php">composer<span class="token punctuation">.</span>json</code></p>
+<pre><code class="language-json">{
+  ...
+  "require": {
+     ...
+     "laravelrus/sleepingowl": "4.*@dev"
+  }
+}</code></pre>
+<p>и выполнить команду</p>
+<pre class=" language-bash"><code class=" language-bash">$ composer update</code></pre>
+<p><a name="service-provider"></a></p>
+<h2><a href="https://sleepingowladmin.ru/docs/installation#service-provider">Service Provider</a></h2>
+<p>После установки пакета необходимо добавить сервис провайдер
+(<a href="https://laravel.com/docs/5.3/providers">Service Provider</a>) <code class=" language-php"><span class="token scope">SleepingOwl<span class="token punctuation">\</span>Admin<span class="token punctuation">\</span>Providers<span class="token punctuation">\</span>SleepingOwlServiceProvider<span class="token punctuation">::</span></span><span class="token keyword">class</span></code>,
+в соответсвующий раздел <code class=" language-php">providers</code> файла <code class=" language-php">config<span class="token operator">/</span>app<span class="token punctuation">.</span>php</code>:</p>
+<p><strong>Пример</strong></p>
+<pre class=" language-php"><code class=" language-php"><span class="token string">'providers'</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+    <span class="token comment" spellcheck="true">/**
+     * SleepingOwl Service Provider
+     */</span>
+    <span class="token scope">SleepingOwl<span class="token punctuation">\</span>Admin<span class="token punctuation">\</span>Providers<span class="token punctuation">\</span>SleepingOwlServiceProvider<span class="token punctuation">::</span></span><span class="token keyword">class</span><span class="token punctuation">,</span>
+
+    <span class="token comment" spellcheck="true">/**
+     * Application Service Providers...
+     */</span>
+    <span class="token scope">App<span class="token punctuation">\</span>Providers<span class="token punctuation">\</span>AppServiceProvider<span class="token punctuation">::</span></span><span class="token keyword">class</span><span class="token punctuation">,</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token punctuation">]</span></code></pre>
+<p><a name="artisan"></a></p>
+<h2><a href="https://sleepingowladmin.ru/docs/installation#artisan">Artisan</a></h2>
+<p>Используйте эту команду для начальной конфигурации SleepingOwl Admin. Она создаст все необходимые файлы и директории.</p>
+<pre class=" language-bash"><code class=" language-bash">$ php artisan sleepingowl<span class="token punctuation">:</span>install</code></pre>
+<h4>Что делает эта команда</h4>
+<ul>
+<li>Публикует конфигурацию SleepingOwl Admin.</li>
+<li>
+<p>Публикует ассеты из SleepingOwl Admin в <code class=" language-php"><span class="token keyword">public</span><span class="token operator">/</span>packages<span class="token operator">/</span>sleepingowl<span class="token operator">/</span><span class="token keyword">default</span></code>.</p>
+<pre class=" language-bash"><code class=" language-bash">$ php artisan vendor<span class="token punctuation">:</span>publish <span class="token operator">--</span>tag<span class="token operator">=</span>assets <span class="token operator">--</span>force</code></pre>
+</li>
+<li>Создает директорию автозапуска (По умолчанию <code class=" language-php">app<span class="token operator">/</span>Admin</code>).</li>
+<li>Создает файл конфигурации меню по умолчанию. (По умолчанию <code class=" language-php">app<span class="token operator">/</span>Admin<span class="token operator">/</span>navigation<span class="token punctuation">.</span>php</code>)</li>
+<li>Создает файл автозапуска по умолчанию. (По умолчанию <code class=" language-php">app<span class="token operator">/</span>Admin<span class="token operator">/</span>bootstrap<span class="token punctuation">.</span>php</code>)</li>
+<li>Создает файл роутов по умолчанию. (По умолчанию <code class=" language-php">app<span class="token operator">/</span>Admin<span class="token operator">/</span>routes<span class="token punctuation">.</span>php</code>)</li>
+<li>Создает структуру директории public (<em>создает директорию <code class=" language-php">images<span class="token operator">/</span>uploads</code></em>)</li>
+<li>Создает <a href="https://sleepingowladmin.ru/docs/model_configuration_section.md">сервис провайдер</a> <code class=" language-php">app\<span class="token package">Providers<span class="token punctuation">\</span>AdminSectionsServiceProvider</span></code></li>
+</ul>
+<p><a name="what-next"></a></p>
+<h2><a href="https://sleepingowladmin.ru/docs/installation#what-next">Следующий этап</a></h2>
+<ul>
+<li><a href="https://sleepingowladmin.ru/docs/configuration">Настройка</a></li>
+<li><a href="https://sleepingowladmin.ru/docs/update">Обновление</a></li>
+</ul>
+	</article>
+</div>
+
+	
+
+	<script>
+	var algolia_app_id = 'UMFF5WHE7M';
+	var algolia_search_key = 'b9db0fa17378d8db6be5669fa84e2b1d';
+	var locale = 'ru';
+</script>
+
+<script id="search_suggestion_template" type="text/template">
+	<div class="autocomplete-wrapper">
+		{{#_highlightResult.h1}}
+		<div class="h1">
+			{{{ _highlightResult.h1.value }}}
+		</div>
+		{{/_highlightResult.h1}}
+
+		<div class="sub-section">
+			{{#_highlightResult.h2}}
+			<div class="h2">
+				<span class="hash">#</span> {{{ _highlightResult.h2.value }}}
+			</div>
+			{{/_highlightResult.h2}}
+
+			{{#_highlightResult.h3}}
+			<div class="h3">
+				> {{{ _highlightResult.h3.value }}}
+			</div>
+			{{/_highlightResult.h3}}
+
+			{{#_highlightResult.h4}}
+			<div class="h4">
+				> {{{ _highlightResult.h4.value }}}
+			</div>
+			{{/_highlightResult.h4}}
+		</div>
+
+		{{#_highlightResult.content}}
+		<div class="content">
+			{{{ _highlightResult.content.value }}}
+		</div>
+		{{/_highlightResult.content}}
+	</div>
+</script>
+
+<script id="search_empty_template" type="text/template">
+	<div class="autocomplete-wrapper empty">
+		<div class="h2">Мы не смогли ничего найти по запросу "{{query}}". Сожалеем! :(</div>
+	</div>
+</script>
+
+<script id="search_footer_template" type="text/template">
+	<div class="footer">
+		<a target="_blank" href="http://www.algolia.com/?utm_source=lavarel&utm_medium=link&utm_campaign=lavarel_documentation_search">
+			<img width="50" src="/assets/img/algolia-logo.png">
+			<div class="powered">powered by</div>
+			<div style="clear: both"></div>
+		</a>
+	</div>
+</script>
+	<script src="./Установка - Документация - SleepingOwl - Laravel Admin Panel._files/app-78b4170991.js"></script>
+
+	<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-47325178-4', 'auto');
+    ga('send', 'pageview');
+</script>
+
+<script type="text/javascript">
+    (function (d, w, c) {
+        (w[c] = w[c] || []).push(function() {
+            try {
+                w.yaCounter40925319 = new Ya.Metrika({
+                    id:40925319,
+                    clickmap:true,
+                    trackLinks:true,
+                    accurateTrackBounce:true,
+                    webvisor:true
+                });
+            } catch(e) { }
+        });
+
+        var n = d.getElementsByTagName("script")[0],
+            s = d.createElement("script"),
+            f = function () { n.parentNode.insertBefore(s, n); };
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+        if (w.opera == "[object Opera]") {
+            d.addEventListener("DOMContentLoaded", f, false);
+        } else { f(); }
+    })(document, window, "yandex_metrika_callbacks");
+</script>
+<noscript>&lt;div&gt;&lt;img src="https://mc.yandex.ru/watch/40925319" style="position:absolute; left:-9999px;" alt="" /&gt;&lt;/div&gt;</noscript><p style="transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); margin: 0px;"></p>
+
+
+</div></div><a id="go-top" title="Вверх" style="display: none;"><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="48px" height="20px" viewBox="0 0 20 20" enable-background="new 0 0 20 20" xml:space="preserve"><polygon fill="#ffffff" points="19,9.962 10,2 1,9.962 2.33,11.463 8.977,5.582 8.977,18 10.981,18 10.981,5.543 17.671,11.463 "></polygon></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 216.123 216.123" style="enable-background:new 0 0 216.123 216.123;" xml:space="preserve" width="48px" height="48px"><g><path d="M173.65,106.51c6.549-7.024,10.567-16.436,10.567-26.774c0-8.585-2.775-16.529-7.464-23.001   c5.319-16.633,5.063-34.71-0.795-51.16L173.974,0l-5.827,1.03c-12.002,2.121-23.325,6.931-33.201,14.037H81.537v0.252   C71.577,8.071,60.122,3.176,47.977,1.03L42.149,0l-1.985,5.575c-5.858,16.45-6.114,34.527-0.795,51.16   c-4.689,6.472-7.464,14.417-7.464,23.001c0,10.338,4.018,19.75,10.567,26.773c-1.028,0.797-1.846,1.88-2.308,3.179   c-10.874,30.534-2.352,64.292,21.71,86c1.048,0.945,2.171,1.862,3.332,2.761v10.673c0,3.866,3.134,7,7,7s7-3.134,7-7v-2.194   c8.347,3.957,17.834,6.887,27.532,8.373c0.352,0.054,0.706,0.081,1.06,0.081s0.708-0.027,1.06-0.081   c4.446-0.681,16.123-2.878,28.059-8.434v2.255c0,3.866,3.134,7,7,7s7-3.134,7-7v-10.656c1.139-0.883,2.254-1.805,3.332-2.777   c24.062-21.709,32.583-55.466,21.71-86C175.496,108.389,174.678,107.306,173.65,106.51z M107.969,152.066   c-4.506-10.226-11.165-19.465-19.743-27.206c-2.717-2.451-5.583-4.7-8.571-6.748c13.12-2.887,23.804-12.341,28.406-24.734   c4.602,12.393,15.286,21.847,28.406,24.734c-2.988,2.048-5.854,4.297-8.57,6.748C119.346,132.575,112.595,141.88,107.969,152.066z    M71.206,54.436c13.951,0,25.301,11.35,25.301,25.301s-11.35,25.301-25.301,25.301s-25.301-11.35-25.301-25.301   S57.255,54.436,71.206,54.436z M170.218,79.736c0,13.951-11.35,25.301-25.301,25.301s-25.301-11.35-25.301-25.301   s11.35-25.301,25.301-25.301S170.218,65.786,170.218,79.736z M108.041,48.088c-3.04-6.825-7.023-13.231-11.845-19.021h23.699   C115.052,34.867,111.074,41.273,108.041,48.088z M164.562,16.17c2.468,9.767,2.65,20.018,0.566,29.875   c-5.909-3.558-12.824-5.61-20.21-5.61c-7.254,0-14.05,1.983-19.889,5.425c3.327-5.397,7.423-10.367,12.248-14.72   C145.142,24.043,154.479,18.934,164.562,16.17z M51.562,16.17c10.082,2.763,19.419,7.872,27.286,14.97   c4.792,4.324,8.877,9.293,12.205,14.695c-5.83-3.426-12.61-5.401-19.847-5.401c-7.386,0-14.301,2.051-20.21,5.61   C48.912,36.188,49.094,25.937,51.562,16.17z M51.555,120.283c10.084,2.763,19.425,7.873,27.293,14.972   c13.908,12.549,21.704,29.884,21.95,48.812v15.742c-10.093-2.564-21.543-7.294-29.546-14.514   C52.951,168.783,45.553,143.818,51.555,120.283z M144.871,185.295c-7.99,7.21-19.708,11.96-30.073,14.539v-15.766   c0.239-18.349,8.431-36.14,22.478-48.813c7.868-7.1,17.209-12.209,27.293-14.972C170.57,143.818,163.172,168.783,144.871,185.295z" fill="#FFFFFF"></path><circle cx="71.206" cy="79.736" r="9.757" fill="#FFFFFF"></circle><circle cx="144.917" cy="79.736" r="9.757" fill="#FFFFFF"></circle></g></svg></a></body></html>

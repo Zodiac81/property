@@ -1,0 +1,32 @@
+php artisan make:seeder UsersTableSeeder
+
+http://laravel.su/docs/5.2/seeding
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+<?php
+use Illuminate\Database\Seeder;
+use Illuminate\Database\Eloquent\Model;
+class DatabaseSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        DB::table('users')->insert([
+            'name' => str_random(10),
+            'email' => str_random(10).'@gmail.com',
+            'password' => bcrypt('secret'),
+        ]);
+    }
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+
+
+php artisan db:seed
+
+php artisan db:seed --class=UsersTableSeeder
+
+php artisan migrate:refresh --seed

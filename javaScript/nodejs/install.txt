@@ -1,0 +1,55 @@
+1)
+	npm install node-static
+
+2)
+	server.js
+
+2.1)
+	node server.js.
+
+3)
+	var http = require('http');
+	var static = require('node-static');
+	var file = new static.Server('.');
+
+	http.createServer(function(req, res) {
+	  file.server(req, res);
+	}).listen(8080);
+
+	console.log('Server running on port 8080');
+
+4)
+	var http = require("http");		 				// work
+
+	http.createServer(function(request, response){
+	  response.writeHead(200, {"Content-Type": "text/plain"});
+	  response.write("Hello World");
+	  response.end();
+	}).listen(8888);
+
+
+5)
+	var http = require('http');		 				// предоставляет базовые методы для взаимодействия
+	var url = require('url');						// позволяет парсить url
+	var querystring = require('querystring');		// инструмент для парсинга и форматирования раздела query в url
+
+	function accept(req, res) {
+
+	  res.writeHead(200, {
+	    'Content-Type': 'text/plain',
+	    'Cache-Control': 'no-cache'
+	  });
+
+	  res.end("OK");
+	}
+
+	http.createServer(accept).listen(8080);
+
+6)
+	req – объект запроса («request»), то есть то, что прислал клиент (обычно браузер), из него читаем данные.
+	res – объект ответа («response»), в него пишем данные в ответ клиенту.
+	вызов res.writeHead(HTTP-код, [строка статуса], {заголовки}) пишет заголовки.
+	вызов res.write(txt) пишет текст в ответ.
+	вызов res.end(txt) – завершает запрос ответом.
+
+7)

@@ -1,0 +1,71 @@
+#!/bin/bash
+
+#for elem in {$@..1}
+#do
+#	clear
+#	toilet -f mono12 "$elem"
+#	echo "$elem"
+#	espeak -s 120 "$elem"
+#done
+
+echo -n "Какой день? (1,3,5) "
+
+read item
+case "$item" in
+    3) echo "Ввели «3», продолжаем..."
+		for podhod in {4..1}
+		do
+			echo -n "Продолжить? (Y/n)"
+			read itempod
+			case "$itempod" in
+
+				n|N) echo "Выход"
+        		exit 0;;
+
+        		*) echo "Go"
+					for elem in {90..1}
+					do
+						clear
+						toilet -f mono12 "$elem"
+						# echo "$elem"
+						espeak -s 120 "$elem"
+					done;;
+			esac;
+		done;;
+    5) echo "Ввели «5», завершаем..."
+        for podhod in {4..1}
+        do
+			echo -n "Продолжить? (Y/n)"
+			read itempod
+			case "$itempod" in
+				n|N) echo "Выход"
+        		exit 0;;
+        		*) echo "Go"
+					for elem in {120..1}
+					do
+						clear
+						toilet -f mono12 "$elem"
+						# echo "$elem"
+						espeak -s 120 "$elem"
+					done;;
+			esac;
+		done;;
+    *) echo "Выполняем 1"
+        for podhod in {4..1}
+        do
+			echo -n "Продолжить? (Y/n)"
+			read itempod
+			case "$itempod" in
+				n|N) echo "Выход"
+        		exit 0;;
+        		*) echo "Go"
+					for elem in {60..1}
+					do
+						clear
+						toilet -f mono12 "$elem"
+						# echo "$elem"
+						espeak -s 120 "$elem"
+					done;;
+			esac;
+		done;;
+esac

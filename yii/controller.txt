@@ -1,0 +1,64 @@
+<?php
+
+class TestController extends Controller
+{
+	public $layout='//layouts/column1';
+	public $defaultAction='index';
+
+	public function actionIndex()
+	{
+		$this->render('index');
+		$this-> renderPartial();
+	}
+
+//	Действие	
+	public function actions()
+    {
+        return array(
+            'edit'=>'application.controllers.post.UpdateAction',
+        );
+    }
+
+//	Привязка параметров действий	
+    public function actionCreate($category, $language='en')
+    {
+        $category=(int)$category;
+        // $category и $language получаются автоматически из $_GET
+    }
+	
+//	Фильтры
+    public function filterAccessControl($filterChain)		//	Имя метода должно начинаться на filter, метод filterAccessControl определяет фильтр accessControl
+    														//	$filterChain — экземпляр класса CFilterChain
+	{	// для выполнения последующих фильтров и выполнения действия вызовите метод $filterChain->run()	}
+
+	protected function preFilter($filterChain)
+    {
+        // код, выполняемый до выполнения действия
+        return true; // false — для случая, когда действие не должно быть выполнено
+    }
+
+    protected function postFilter($filterChain)
+    {
+        // код, выполняемый после выполнения действия
+    }
+
+    public function filters()		//	чтобы применить фильтр к действию, необходимо переопределить метод CController::filters()
+    {
+        return array(
+            'postOnly + edit, create',		//	будет применён к действиям edit и create
+            array(
+                'application.filters.PerformanceFilter - edit, create',		//	ко всем действиям, кроме edit и create
+                'unit'=>'second',
+            ),
+        );
+    }
+
+}
+
+class UpdateAction extends CAction
+{
+    public function run()
+    {
+        echo 'Ok';
+    }
+}

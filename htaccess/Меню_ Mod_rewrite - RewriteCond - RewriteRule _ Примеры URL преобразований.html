@@ -1,0 +1,1146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- saved from url=(0052)http://www.htaccess.net.ru/doc/mod_rewrite/index.php -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru" lang="ru"><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+
+<title>Меню: Mod_rewrite - RewriteCond - RewriteRule / Примеры URL преобразований</title>
+
+<meta name="description" content=".htaccess  Примеры URL преобразований с помощью Mod rewrite">
+<meta name="keywords" content=".htaccess, Mod_rewrite, примеры урл преоброзований, Mod rewrite - примеры">
+<link rel="stylesheet" type="text/css" href="./Меню_ Mod_rewrite - RewriteCond - RewriteRule _ Примеры URL преобразований_files/style.css">
+
+<link rel="shortcut icon" href="http://www.htaccess.net.ru/images/logotype/favicon.ico">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="./Меню_ Mod_rewrite - RewriteCond - RewriteRule _ Примеры URL преобразований_files/cb=gapi.loaded_0" async=""></script><script type="text/javascript" async="" src="./Меню_ Mod_rewrite - RewriteCond - RewriteRule _ Примеры URL преобразований_files/stat.php"></script><script type="text/javascript" async="" src="./Меню_ Mod_rewrite - RewriteCond - RewriteRule _ Примеры URL преобразований_files/rotaban.js"></script><script type="text/javascript" id="_rotaban_js_28e7b38a9eff4a9aa1e03e0099a1a527" src="./Меню_ Mod_rewrite - RewriteCond - RewriteRule _ Примеры URL преобразований_files/28e7b38a9eff4a9aa1e03e0099a1a527.js" async="async"></script><style type="text/css">div.rotaban_190901{width:100%;display:block;}div.rotaban_190901 a{width:468px;}div.rotaban_190901 a img{padding:0;}div.rotaban_190901 a em{font-style:normal;}html>body div.rotaban_190901 a{display:block;font-size:11px;color:#888;font-family:verdana,sans-serif;margin:0 4px 10px 0;text-align:center;text-decoration:none;overflow:hidden;}html>body div.rotaban_190901 img{border:0;clear:right;}html>body div.rotaban_190901 a.rb_adhere{color:#666;font-weight:bold;font-size:12px;border:1px solid #ccc;background:#e7e7e7;text-align:center;}html>body div.rotaban_190901 a.rb_adhere:hover{border:1px solid #999;background:#ddd;color:#333;}html>body div.rotaban_190901 a{display:inline-block;position:relative;vertical-align:top;}div.rotaban_190901 a.rb_adhere{width:468px;height:60px;line-height:480%;}div.rotaban_190901 a.rb_adhere{width:466px;height:58px;border:1px solid #ccc;background:#e7e7e7;color:#444;}div.rotaban_190901 a.rb_adhere:hover{border:1px solid #999;background:#ddd;color:#222;}div.rotaban_190901 img.s{height:0;width:0;}</style><style type="text/css" id="ya_share_style">.b-share-popup-wrap{z-index:1073741823;position:absolute;width:500px}.b-share-popup{position:absolute;z-index:1073741823;border:1px solid #888;background:#FFF;color:#000}.b-share-popup-wrap .b-share-popup_down{top:0}.b-share-popup-wrap .b-share-popup_up{bottom:0}.b-share-popup-wrap_state_hidden{position:absolute!important;top:-9999px!important;right:auto!important;bottom:auto!important;left:-9999px!important;visibility:hidden!important}.b-share-popup,x:nth-child(1){border:0;padding:1px!important}@media all and (resolution=0){.b-share-popup,x:nth-child(1),x:-o-prefocus{padding:0!important;border:1px solid #888}}.b-share-popup__i{display:-moz-inline-box;display:inline-block;padding:5px 0!important;overflow:hidden;vertical-align:top;white-space:nowrap;visibility:visible;background:#FFF;-webkit-box-shadow:0 2px 9px rgba(0,0,0,.6);-moz-box-shadow:0 2px 9px rgba(0,0,0,.6);box-shadow:0 2px 9px rgba(0,0,0,.6)}.b-share-popup__item{font:1em/1.25em Arial,sans-serif;display:block;padding:5px 15px!important;white-space:nowrap;background:#FFF}.b-share-popup__item,a.b-share-popup__item:link,a.b-share-popup__item:visited{text-decoration:none!important;border:0!important}a.b-share-popup__item{cursor:pointer}a.b-share-popup__item .b-share-popup__item__text{display:inline;text-decoration:underline;color:#1A3DC1}a.b-share-popup__item:hover{word-spacing:0}a.b-share-popup__item:hover .b-share-popup__item__text{color:red;cursor:pointer}.b-share-popup__icon{display:-moz-inline-box;display:inline-block;margin:-3px 0 0;padding:0 5px 0 0!important;vertical-align:middle}.b-share-popup__icon_input{width:21px;height:16px;margin-top:-6px;padding:0!important}.b-share-popup__icon__input{margin-right:0;margin-left:2px;vertical-align:top}.b-share-popup__spacer{display:block;padding-top:10px!important}.b-share-popup__header{font:86%/1em Verdana,sans-serif;display:block;padding:10px 15px 5px!important;color:#999}.b-share-popup__header_first{padding-top:5px!important}.b-share-popup__input{font:86%/1em Verdana,sans-serif;display:block;padding:5px 15px!important;color:#999;text-align:left}.b-share-popup__input__input{font:1em/1em Verdana,sans-serif;display:block;width:10px;margin:5px 0 0;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;resize:none;text-align:left;direction:ltr}.b-share-popup_down .b-share-popup_with-link .b-share-popup__input_link{position:absolute;top:5px;right:0;left:0}.b-share-popup_up .b-share-popup_with-link .b-share-popup__input_link{position:absolute;right:0;bottom:5px;left:0}.b-share-popup_down .b-share-popup_with-link{padding-top:55px!important}.b-share-popup_up .b-share-popup_with-link{padding-bottom:55px!important}.b-share-popup_down .b-share-popup_expandable .b-share-popup__main{padding-bottom:25px!important}.b-share-popup_up .b-share-popup_expandable .b-share-popup__main{padding-top:25px!important}.b-share-popup_down .b-share-popup_yandexed{padding-bottom:10px!important}.b-share-popup_up .b-share-popup_yandexed{padding-top:10px!important}.b-share-popup__yandex{position:absolute;right:4px;bottom:2px;font:78.125%/1em Verdana,sans-serif;padding:3px!important;background:0 0}a.b-share-popup__yandex:link,a.b-share-popup__yandex:visited{color:#C6C5C5;text-decoration:none}a.b-share-popup__yandex:link:hover,a.b-share-popup__yandex:visited:hover{color:red;text-decoration:underline}.b-share-popup_up .b-share-popup__yandex{top:2px;bottom:auto}.b-share-popup_expandable .b-share-popup__yandex{right:auto;left:4px}.b-share-popup_to-right .b-share-popup_expandable .b-share-popup__yandex{right:4px;left:auto}.b-share-popup__expander .b-share-popup__item{position:absolute;bottom:5px;font:86%/1em Verdana,sans-serif;margin:10px 0 0;padding:5px 10px!important;cursor:pointer;color:#999;background:0 0}.b-share-popup_to-right,.b-share-popup_to-right .b-share-popup__expander{direction:rtl}.b-share-popup_to-right .b-share-popup__expander .b-share-popup__icon{padding:0 0 0 5px!important}.b-share-popup_up .b-share-popup__expander .b-share-popup__item{top:-5px;bottom:auto}.b-share-popup__expander .b-share-popup__item:hover .b-share-popup__item__text{text-decoration:underline}.b-share-popup__expander .b-ico_action_rarr,.b-share-popup_to-right .b-share-popup__expander .b-ico_action_larr,.b-share-popup_full .b-share-popup__expander .b-ico_action_larr,.b-share-popup_to-right .b-share-popup_full .b-share-popup__expander .b-ico_action_rarr,.b-share-popup__expander .b-share-popup__item__text_collapse,.b-share-popup_full .b-share-popup__item__text_expand{display:none}.b-share-popup_to-right .b-share-popup__expander .b-ico_action_rarr,.b-share-popup_full .b-share-popup__item__text_collapse,.b-share-popup_full .b-share-popup__expander .b-ico_action_rarr,.b-share-popup_to-right .b-share-popup_full .b-share-popup__expander .b-ico_action_larr{display:inline}.b-ico_action_rarr,.b-ico_action_larr{width:8px;height:7px;border:0}.b-share-popup__main,.b-share-popup__extra{direction:ltr;vertical-align:bottom;text-align:left}.b-share-popup_down .b-share-popup__main,.b-share-popup_down .b-share-popup__extra{vertical-align:top}.b-share-popup__main{display:-moz-inline-stack;display:inline-block}.b-share-popup__extra{display:none;margin:0 -10px 0 0}.b-share-popup_full .b-share-popup__extra{display:-moz-inline-stack;display:inline-block}.b-share-popup_to-right .b-share-popup__extra{margin:0 0 0 -10px}.b-share-popup__tail{position:absolute;width:21px;height:10px;margin:0 0 0 -11px}.b-share-popup_down .b-share-popup__tail{top:-10px;background:url("//yastatic.net/share/static/b-share-popup_down__tail.gif") 0 0 no-repeat}.b-share-popup_up .b-share-popup__tail{bottom:-10px;background:url("//yastatic.net/share/static/b-share-popup_up__tail.gif") 0 0 no-repeat}.b-share-popup_down .b-share-popup__tail,x:nth-child(1){top:-9px;background-image:url("//yastatic.net/share/static/b-share-popup_down__tail.png")}.b-share-popup_up .b-share-popup__tail,x:nth-child(1){bottom:-9px;background-image:url("//yastatic.net/share/static/b-share-popup_up__tail.png")}@media all and (resolution=0){.b-share-popup_down .b-share-popup__tail,x:nth-child(1),x:-o-prefocus{top:-10px;background-image:url("//yastatic.net/share/static/b-share-popup_down__tail.gif")}.b-share-popup_up .b-share-popup__tail,x:nth-child(1),x:-o-prefocus{bottom:-10px;background-image:url("//yastatic.net/share/static/b-share-popup_up__tail.gif")}}.b-share-popup .b-share-popup_show_form_mail,.b-share-popup .b-share-popup_show_form_html{padding:0!important}.b-share-popup .b-share-popup_show_form_mail .b-share-popup__main,.b-share-popup .b-share-popup_show_form_html .b-share-popup__main,.b-share-popup .b-share-popup_show_form .b-share-popup__main,.b-share-popup .b-share-popup_show_form_mail .b-share-popup__extra,.b-share-popup .b-share-popup_show_form_html .b-share-popup__extra,.b-share-popup .b-share-popup_show_form .b-share-popup__extra{height:15px;padding:0!important;overflow:hidden;visibility:hidden}.b-share-popup_show_form_mail .b-share-popup__expander,.b-share-popup_show_form_html .b-share-popup__expander,.b-share-popup_show_form .b-share-popup__expander,.b-share-popup_show_form_mail .b-share-popup__input_link,.b-share-popup_show_form_html .b-share-popup__input_link,.b-share-popup_show_form .b-share-popup__input_link{display:none}.b-share-popup__form{position:relative;display:none;overflow:hidden;padding:5px 0 0!important;margin:0 0 -15px;white-space:normal}.b-share-popup_show_form_mail .b-share-popup__form_mail,.b-share-popup_show_form_html .b-share-popup__form_html,.b-share-popup_show_form .b-share-popup__form{display:block}.b-share-popup__form__link{padding:5px!important;margin:0 0 5px 10px;text-decoration:underline;cursor:pointer;color:#1A3DC1}.b-share-popup__form__link,.b-share-popup__form__button{font:86%/1.4545em Verdana,sans-serif;float:left;display:inline}.b-share-popup__form__button{margin:5px 0 0 15px}.b-share-popup__form__close{font:86%/1.4545em Verdana,sans-serif;float:right;display:inline;padding:5px!important;margin:0 10px 5px 0;cursor:pointer;color:#999}a.b-share-popup__form__link:hover,a.b-share-popup__form__close:hover{text-decoration:underline;color:red}.b-share-popup_font_fixed .b-share-popup__item{font-size:12.8px}.b-share-popup_font_fixed .b-share-popup__header,.b-share-popup_font_fixed .b-share-popup__input,.b-share-popup_font_fixed .b-share-popup__expander .b-share-popup__item,.b-share-popup_font_fixed .b-share-popup__form__link,.b-share-popup_font_fixed .b-share-popup__form__button,.b-share-popup_font_fixed .b-share-popup__form__close{font-size:11px}.b-share-popup_font_fixed .b-share-popup__yandex{font-size:10px}.b-share-form-button{font:86%/17px Verdana,Arial,sans-serif;display:-moz-inline-box;display:inline-block;position:relative;height:19px;margin:0 3px;padding:0 4px;cursor:default;white-space:nowrap;text-decoration:none!important;color:#000!important;border:none;outline:none;background:url("//yastatic.net/share/static/b-share-form-button.png") 0 -20px repeat-x}.b-share-form-button:link:hover,.b-share-form-button:visited:hover{color:#000!important}.b-share-form-button__before,.b-share-form-button__after{position:absolute;width:3px;height:19px;background:url("//yastatic.net/share/static/b-share-form-button.png")}.b-share-form-button__before{margin-left:-7px}.b-share-form-button__after{margin-left:4px;background-position:-3px 0}.b-share-form-button::-moz-focus-inner{border:none}button.b-share-form-button .b-share-form-button__before,button.b-share-form-button .b-share-form-button__after{margin-top:-1px}@-moz-document url-prefix(){button.b-share-form-button .b-share-form-button__after{margin-top:-2px;margin-left:6px}button.b-share-form-button .b-share-form-button__before{margin-top:-2px;margin-left:-9px}}SPAN.b-share-form-button:hover,.b-share-form-button_state_hover{background-position:0 -60px}SPAN.b-share-form-button:hover .b-share-form-button__before,.b-share-form-button_state_hover .b-share-form-button__before{background-position:0 -40px}SPAN.b-share-form-button:hover .b-share-form-button__after,.b-share-form-button_state_hover .b-share-form-button__after{background-position:-3px -40px}.b-share-form-button_state_pressed,.b-share-form-button_state_pressed .b-share-form-button_share{background-position:0 -100px!important}.b-share-form-button_state_pressed .b-share-form-button__before{background-position:0 -80px!important}.b-share-form-button_state_pressed .b-share-form-button__after{background-position:-3px -80px!important}button.b-share-form-button_state_pressed{overflow:visible}.b-share-form-button_icons{position:relative;padding:0;background-position:0 -20px!important}.b-share-form-button_icons .b-share-form-button__before{left:0;margin-left:-3px;background-position:0 0!important}.b-share-form-button_icons .b-share-form-button__after{z-index:-1;margin-left:0;background-position:-3px 0!important}.b-share-form-button_icons .b-share__handle{padding:2px!important}.b-share-form-button_icons .b-share__handle_more{position:relative;padding-right:6px!important;margin-right:-4px}.b-share-form-button_icons .b-share-icon{opacity:.5;background-image:url("//yastatic.net/share/static/b-share-icon_size_14.png")}.b-share-form-button_icons A.b-share__handle:hover .b-share-icon{opacity:1}.b-share{font:86%/1.4545em Arial,sans-serif;display:-moz-inline-box;display:inline-block;padding:1px 3px 1px 4px!important;vertical-align:middle}.b-share .b-share-form-button{font-size:1em}.b-share__text .b-share-icon{margin:0 5px 0 0;border:none}.b-share__text{margin-right:5px}.b-share__handle{float:left;height:16px;padding:5px 3px 5px 2px!important;cursor:pointer;text-align:left;text-decoration:none!important}.b-share__handle_cursor_default{cursor:default}.b-share__handle .b-share-form-button{margin-top:-2px}.b-share__hr{display:none;float:left;width:1px;height:26px;margin:0 3px 0 2px}a.b-share__handle:hover .b-share__text{text-decoration:underline;color:red}.b-share_bordered{padding:0 2px 0 3px!important;border:1px solid #E4E4E4;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px}.b-share_bordered .b-share__hr{display:inline;background:#E4E4E4}.b-share_link{margin:-8px 0}a.b-share_link{margin:0}.b-share_link .b-share__text{text-decoration:underline;color:#1A3DC1}.b-share-form-button_share{padding-left:26px!important;vertical-align:top}.b-share-form-button_share .b-share-form-button__before{margin-left:-29px}.b-share-form-button_share .b-share-form-button__icon{position:absolute;width:20px;height:17px;margin:1px 0 0 -23px;background:url("//yastatic.net/share/static/b-share-form-button_share__icon.png") 0 0 no-repeat}.b-share-pseudo-link{border-bottom:1px dotted;cursor:pointer;text-decoration:none!important}.b-share_font_fixed{font-size:11px}.b-share__handle_more{font-size:9px;margin-top:-1px;color:#7B7B7B}A.b-share__handle_more:hover{color:#000}.b-share__group{float:left}.b-share-icon{float:left;display:inline;overflow:hidden;width:16px;height:16px;padding:0!important;vertical-align:top;border:0;background:url("//yastatic.net/share/static/b-share-icon.png") 0 99px no-repeat}.b-share-icon_vkontakte,.b-share-icon_custom{background-position:0 0}.b-share-icon_yaru,.b-share-icon_yaru_photo,.b-share-icon_yaru_wishlist{background-position:0 -17px}.b-share-icon_lj{background-position:0 -34px}.b-share-icon_twitter{background-position:0 -51px}.b-share-icon_facebook{background-position:0 -68px}.b-share-icon_moimir{background-position:0 -85px}.b-share-icon_friendfeed{background-position:0 -102px}.b-share-icon_mail{background-position:0 -119px}.b-share-icon_html{background-position:0 -136px}.b-share-icon_postcard{background-position:0 -153px}.b-share-icon_odnoklassniki{background-position:0 -170px}.b-share-icon_blogger{background-position:0 -187px}.b-share-icon_delicious{background-position:0 -221px}.b-share-icon_gbuzz{background-position:0 -238px}.b-share-icon_linkedin{background-position:0 -255px}.b-share-icon_myspace{background-position:0 -272px}.b-share-icon_evernote{background-position:0 -289px}.b-share-icon_digg{background-position:0 -306px}.b-share-icon_juick{background-position:0 -324px}.b-share-icon_moikrug{background-position:0 -341px}.b-share-icon_yazakladki{background-position:0 -358px}.b-share-icon_liveinternet{background-position:0 -375px}.b-share-icon_tutby{background-position:0 -392px}.b-share-icon_diary{background-position:0 -409px}.b-share-icon_gplus{background-position:0 -426px}.b-share-icon_pocket{background-position:0 -443px}.b-share-icon_surfingbird{background-position:0 -460px}.b-share-icon_pinterest{background-position:0 -477px}.b-share-icon_renren{background-position:0 0}.b-share-icon_renren,.b-share-icon_sina_weibo{background:url("//yastatic.net/share/static/b-share-icon__china.png") no-repeat}.b-share-icon_sina_weibo{background-position:-18px 0}.b-share-icon_qzone{background-position:-36px 0}.b-share-icon_qzone,.b-share-icon_tencent_weibo{background:url("//yastatic.net/share/static/b-share-icon__china.png") no-repeat}.b-share-icon_tencent_weibo{background-position:-54px 0}.b-share_theme_dark .b-share-icon{background:url("//yastatic.net/share/static/b-share-icons__theme_dark.png") 99px 0 no-repeat}.b-share_theme_dark .b-share-icon_odnoklassniki{background-position:-4px -3px}.b-share_theme_dark .b-share-icon_vkontakte{background-position:-24px -3px}.b-share_theme_dark .b-share-icon_twitter{background-position:-44px -3px}.b-share_theme_dark .b-share-icon_facebook{background-position:-64px -3px}.b-share_theme_dark .b-share-icon_lj{background-position:-85px -3px}.b-share_theme_dark .b-share-icon_yaru{background-position:-105px -3px}.b-share_theme_dark .b-share-popup .b-share-icon_odnoklassniki,.b-share_theme_dark .b-share-icon_odnoklassniki:hover{background-position:-4px -28px}.b-share_theme_dark .b-share-popup .b-share-icon_vkontakte,.b-share_theme_dark .b-share-icon_vkontakte:hover{background-position:-24px -28px}.b-share_theme_dark .b-share-popup .b-share-icon_twitter,.b-share_theme_dark .b-share-icon_twitter:hover{background-position:-44px -28px}.b-share_theme_dark .b-share-popup .b-share-icon_facebook,.b-share_theme_dark .b-share-icon_facebook:hover{background-position:-64px -28px}.b-share_theme_dark .b-share-popup .b-share-icon_lj,.b-share_theme_dark .b-share-icon_lj:hover{background-position:-85px -28px}.b-share_theme_dark .b-share-popup .b-share-icon_yaru,.b-share_theme_dark .b-share-icon_yaru:hover{background-position:-105px -28px}.b-share_theme_dark .b-share-form-button_share .b-share-form-button__icon{background-image:url("//yastatic.net/share/static/b-share-form-button_share__icon_dark.png")}.b-share_theme_dark .b-share-form-button{color:#fff!important;opacity:.8}.b-share_theme_dark .b-share__handle:hover .b-share-form-button,.b-share_theme_dark .b-share-form-button:hover{opacity:1;cursor:pointer}.b-share_theme_dark .b-share-form-button,.b-share_theme_dark .b-share-form-button__before,.b-share_theme_dark .b-share-form-button__after{background:0 0}.b-share_theme_dark .b-share-popup__i{background-color:#333;border-radius:10px;-webkit-box-shadow:0 2px 9px rgba(255,255,255,.6);-moz-box-shadow:0 2px 9px rgba(255,255,255,.6);box-shadow:0 2px 9px rgba(255,255,255,.6)}.b-share_theme_dark .b-share__text{color:#AAA}.b-share_theme_dark .b-share-popup{color:#AAA;border-radius:10px;background-color:#333;background-color:rgba(50,50,50,.3)}.b-share_theme_dark .b-share-popup__item{background:0 0;color:#ccc}.b-share_theme_dark .b-share-popup .b-share-popup__item__text{color:#ccc}.b-share_theme_counter .b-share{display:inline-block;vertical-align:middle;white-space:nowrap}.b-share-counter{font:14px Arial,sans-serif;line-height:18px;display:none;float:left;margin:3px 6px 3px 3px;color:#fff}.b-share_theme_counter .b-share_type_small .b-share-counter{font-size:11px;line-height:14px;margin:2px 6px 2px 1px}.b-share_theme_counter .b-share-btn__counter .b-share-counter{display:block}.b-share-btn__counter{text-decoration:none}.b-share_theme_counter .b-share-btn__wrap{position:relative;float:left;margin-left:5px}.b-share_theme_counter .b-share_type_small .b-share-btn__wrap{margin-left:4px}.b-share_theme_counter .b-share-btn__wrap:first-child{margin-left:0}.b-share_theme_counter .b-share__link{display:inline-block;cursor:pointer;-webkit-border-radius:3px;border-radius:3px}.b-share_theme_counter .b-share_type_small .b-share__link{-webkit-border-radius:2px;border-radius:2px}.b-share_theme_counter .b-share-icon{display:block;float:left;width:24px;height:24px;background-image:url("//yastatic.net/share/static/b-share_counter_large.png");background-position:-20px 0}.b-share_theme_counter .b-share_type_small .b-share-icon{width:18px;height:18px;background-image:url("//yastatic.net/share/static/b-share_counter_small.png")}.b-share_theme_counter .b-share-icon_facebook{background-position:0 0}.b-share_theme_counter .b-share-btn__facebook{background-color:#3c5a98}.b-share_theme_counter .b-share-btn__facebook:hover{background-color:#30487a}.b-share_theme_counter .b-share-btn__facebook:active{border-top:2px solid #24365a;background-color:#334d81}.b-share_theme_counter .b-share-icon_moimir{background-position:0 -29px}.b-share_theme_counter .b-share-btn__moimir{background-color:#226eb7}.b-share_theme_counter .b-share-btn__moimir:hover{background-color:#1b5892}.b-share_theme_counter .b-share-btn__moimir:active{border-top:2px solid #14426d;background-color:#1d5e9c}.b-share_theme_counter .b-share-icon_vkontakte{background-position:0 -58px}.b-share_theme_counter .b-share-btn__vkontakte{background-color:#48729e}.b-share_theme_counter .b-share-btn__vkontakte:hover{background-color:#3a5b7e}.b-share_theme_counter .b-share-btn__vkontakte:active{border-top:2px solid #2b445e;background-color:#3d6186}.b-share_theme_counter .b-share-icon_twitter{background-position:0 -87px}.b-share_theme_counter .b-share-btn__twitter{background-color:#00aced}.b-share_theme_counter .b-share-btn__twitter:hover{background-color:#008abe}.b-share_theme_counter .b-share-btn__twitter:active{border-top:2px solid #00668d;background-color:#0092ca}.b-share_theme_counter .b-share-icon_odnoklassniki{background-position:0 -116px}.b-share_theme_counter .b-share-btn__odnoklassniki{background-color:#ff9f4d}.b-share_theme_counter .b-share-btn__odnoklassniki:hover{background-color:#cc7f3e}.b-share_theme_counter .b-share-btn__odnoklassniki:active{border-top:2px solid #975e2e;background-color:#d98742}.b-share_theme_counter .b-share-icon_gplus{background-position:0 -145px}.b-share_theme_counter .b-share-btn__gplus{background-color:#c25234}.b-share_theme_counter .b-share-btn__gplus:hover{background-color:#9b422a}.b-share_theme_counter .b-share-btn__gplus:active{border-top:2px solid #73311f;background-color:#a5462c}.b-share_theme_counter .b-share-icon_yaru{background-position:0 -174px}.b-share_theme_counter .b-share-btn__yaru{background-color:#d83933}.b-share_theme_counter .b-share-btn__yaru:hover{background-color:#ad2e29}.b-share_theme_counter .b-share-btn__yaru:active{border-top:2px solid #80221e;background-color:#b8312b}.b-share_theme_counter .b-share-icon_pinterest{background-position:0 -203px}.b-share_theme_counter .b-share-btn__pinterest{background-color:#cd1e27}.b-share_theme_counter .b-share-btn__pinterest:hover{background-color:#a4181f}.b-share_theme_counter .b-share-btn__pinterest:active{border-top:2px solid #7b1217;background-color:#ae1921}.b-share_theme_counter .b-share__link:active{height:22px}.b-share_theme_counter .b-share_type_small .b-share__link:active{height:16px}.b-share_theme_counter .b-share__link:active .b-share-icon,.b-share_theme_counter .b-share__link:active .b-share-counter{position:relative;top:-1px}.b-share_theme_counter .b-share__link::after{position:absolute;top:0;right:0;bottom:0;left:0;content:"";background-image:url(data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==)}.b-share_theme_counter .b-share__handle{height:auto;padding:0!important}</style><style type="text/css">/* This is not a zero-length file! */</style><style type="text/css">/* This is not a zero-length file! */</style></head>
+
+<body>
+<!-- ================== Логотипы ====================== -->
+<div id="header">
+
+
+
+<noindex>
+<div id="box_rotaban_ru">
+<!-- RotaBan Ad Code -->
+<script type="text/javascript">
+(function(){
+    var rb = document.createElement('script');
+        d = new Date();
+    d.setHours(0);
+    d.setMinutes(0);
+    d.setSeconds(0);
+    d.setMilliseconds(0);
+    rb.type = 'text/javascript';
+    rb.async = true;
+    rb.src = '//s1.rotaban.ru/rotaban.js?v=' + d.getTime();
+    (document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(rb);
+})();
+</script>
+<!-- END RotaBan Ad Code -->
+<!-- RotaBan Code -->
+<div id="rotaban_190901" class="rotaban_190901 rotaban"><iframe width="568" height="70" src="./Меню_ Mod_rewrite - RewriteCond - RewriteRule _ Примеры URL преобразований_files/rotaban_190901.html" frameborder="0" hspace="0" vspace="0" marginheight="0" marginwidth="0" scrolling="no" allowtransparency="true" style="left:0;top:0;"></iframe></div>
+
+<!-- END RotaBan Code -->
+</div>
+</noindex>
+
+
+<div id="box_apache">
+<a href="http://htaccess.net.ru/" title="Перейти на главную страницу сайта"><img src="./Меню_ Mod_rewrite - RewriteCond - RewriteRule _ Примеры URL преобразований_files/apache_pb.gif" alt="Логотип" width="480" height="80" border="0 "></a>
+</div>
+
+
+
+
+</div>
+<div style="font-size: 3px;">&nbsp;</div>
+<!-- **************** Горизонтальное меню *** TOP ********** -->
+<div id="nav_txt">
+<ul>
+
+
+
+<li><a href="http://htaccess.net.ru/" title="Перейти на главную страницу сайта">Главная</a></li>
+<li>|<a href="http://htaccess.net.ru/forums/" title="Форум http://htaccess.net.ru">Форум</a></li> 
+<li>|<a class="style101" href="http://www.htaccess.net.ru/v_menu/about_itself.php" title="Немного об авторе творения">Поддержка проекта</a></li>
+<li>|<a href="http://www.htaccess.net.ru/v_menu/searching.php" title="Поиск по сайту http://htaccess.net.ru с помощью поисковика">Поиск</a></li>
+<li>|<a class="style101" href="http://www.htaccess.net.ru/v_menu/info/index.php" title="Инфо">Инфо</a></li>
+<li>|<a href="http://www.htaccess.net.ru/v_menu/karta_site.php" title="Подробная карта сайта">Карта сайта </a></li>
+<li>|
+
+<noindex>
+<a class="style101" onclick="alert(&#39;Чтобы добавить сайт в закладки, нажмите комбинацию клавишь Ctrl+D&#39;);return false;" href="http://www.htaccess.net.ru/doc/mod_rewrite/index.php#">
+<img src="./Меню_ Mod_rewrite - RewriteCond - RewriteRule _ Примеры URL преобразований_files/star.gif" height="17" border="0" style="float: right;"><b>В закладки&nbsp;</b>
+</a>
+</noindex>
+
+</li>
+</ul>
+</div> <div style="font-size: 5px;">&nbsp;</div>
+
+<div id="outer_wrapper">
+	<div id="wrapper">
+		<div id="container">
+			<div id="content">
+<!-- _______________________Левое меню________________________ -->
+<div id="left">
+
+		
+			<!-- Глав левый 0  -->
+<a href="http://htaccess.net.ru/" title="На главную"><img src="./Меню_ Mod_rewrite - RewriteCond - RewriteRule _ Примеры URL преобразований_files/apache.gif" border="0" width="38" height="13" align="left" alt="• • •"></a>			
+<div class="blocktitle titleleft">Apache - httpd.conf - Log 
+</div>
+<div class="block blockleft"><ul>
+
+
+
+<li><a href="http://www.htaccess.net.ru/doc/Apache/index.php" title="Цикл обработки запроса клиента веб-сервером">•&nbsp;Цикл обработки запроса клиента</a></li>
+
+<li><a href="http://www.htaccess.net.ru/doc/Apache/conf.php" title="Httpd.conf - основной файл конфигурации Apache">•&nbsp;Httpd.conf -&nbsp;файл конфигурации</a></li>
+
+<li><a href="http://www.htaccess.net.ru/doc/Apache/server_name.php" title="Переменные окружения веб-сервера Apache">•&nbsp;Переменные окружения веб-сервера</a></li>
+
+<li><a href="http://www.htaccess.net.ru/doc/Apache/log.php" title="Описание значений элементов log - журнала Apache">•&nbsp;Описание значений элементов log</a></li>
+
+</ul>
+</div>
+<div class="blockfooter blockfl">&nbsp;</div>			
+
+		
+		
+			<!-- Глав левый 1  -->
+<a href="http://htaccess.net.ru/" title="На главную"><img src="./Меню_ Mod_rewrite - RewriteCond - RewriteRule _ Примеры URL преобразований_files/apache.gif" border="0" width="38" height="13" align="left" alt="• • •"></a>			
+
+<div class="blocktitle titleleft">Options - Order - Auth
+</div>
+<div class="block blockleft"><ul>
+
+<li><a href="http://www.htaccess.net.ru/doc/htaccess/index.php" title=".htaccess - кто это?">•&nbsp;Конфигурационный файл - .htaccess</a></li>
+
+
+
+<li><a href="http://www.htaccess.net.ru/doc/htaccess/Conf-htaccess.php" title="Настройка Conf - файла для .htaccess">•&nbsp;Настройка httpd.conf для .htaccess</a></li>
+
+
+
+<li><a href="http://www.htaccess.net.ru/doc/htaccess/Options.php" title="Запрет выдачи листинга каталога">•&nbsp;Запрет выдачи листинга каталога</a></li>
+
+<li><a href="http://www.htaccess.net.ru/doc/htaccess/directoryIndex.php" title="Переопределение индексного файла">•&nbsp;Переопределение индексного файла</a></li>
+
+<li><a href="http://www.htaccess.net.ru/doc/htaccess/order.php" title="Запрет доступа клиенту">•&nbsp;Запрет доступа клиенту</a></li>
+
+<li><a href="http://www.htaccess.net.ru/doc/htaccess/syntax.php" title="Синтаксис регулярных выражений">•&nbsp;Синтаксис регулярных выражений</a></li>
+
+<li><a href="http://www.htaccess.net.ru/doc/htaccess/auth.php" title="Защита паролем">• Защита паролем, авторизация-вход на сайт по логину-паролю</a></li>
+
+</ul>
+</div>
+<div class="blockfooter blockfl">&nbsp;</div>
+
+		
+			<!-- Глав левый 2  -->
+<a href="http://htaccess.net.ru/" title="На главную"><img src="./Меню_ Mod_rewrite - RewriteCond - RewriteRule _ Примеры URL преобразований_files/apache.gif" border="0" width="38" height="13" align="left" alt="• • •"></a>			
+<div class="blocktitle titleleft">ErrorDocument
+</div>
+<div class="block blockleft"><ul>
+
+<li><a href="http://www.htaccess.net.ru/doc/ErrorDocument/index.php" title="Код возврата -состояния">•&nbsp;Код возврата -состояния</a></li>
+
+<li><a href="http://www.htaccess.net.ru/doc/ErrorDocument/ErrorDocument2.php" title="Обработка сообщений об ошибках">•&nbsp;Обработка сообщений об ошибках</a></li>
+
+</ul>
+</div>
+<div class="blockfooter blockfl">&nbsp;</div>	
+
+			<!-- Глав левый 3  -->
+<a href="http://htaccess.net.ru/" title="На главную"><img src="./Меню_ Mod_rewrite - RewriteCond - RewriteRule _ Примеры URL преобразований_files/apache.gif" border="0" width="38" height="13" align="left" alt="• • •"></a>
+<div class="blocktitle titleleft">AddType  - MIME types
+</div>
+<div class="block blockleft"><ul>
+
+<li><a href="http://www.htaccess.net.ru/doc/AddType-MIME/index.php" title="Типы файлов - MIME types">•&nbsp;Типы файлов - MIME types</a></li>
+
+
+<li><a href="http://www.htaccess.net.ru/doc/AddType-MIME/AddType.php" title="Добавление собственных типов файлов">•&nbsp;Добавление собственных типов</a></li>
+
+
+</ul></div>
+<div class="blockfooter blockfl">&nbsp;</div>
+
+
+			<!-- Глав левый 4  -->
+<a href="http://htaccess.net.ru/" title="На главную"><img src="./Меню_ Mod_rewrite - RewriteCond - RewriteRule _ Примеры URL преобразований_files/apache.gif" border="0" width="38" height="13" align="left" alt="• • •"></a>
+<div class="blocktitle titleleft">CharsetDefault - CharsetSourceEnc
+</div>
+<div class="block blockleft"><ul>
+
+<li><a href="http://www.htaccess.net.ru/doc/AddType-charset/index.php" title="Кодировка кириллицы - русского языка">•&nbsp;Кодировка кириллицы - русского</a></li>
+
+<li><a href="http://www.htaccess.net.ru/doc/AddType-charset/CharsetDefault.php" title="Задание явной кодировки документов">•&nbsp;Указание явной кодировки</a></li>
+
+</ul></div>
+<div class="blockfooter blockfl">&nbsp;</div>
+
+	<!-- Глав левый 6  -->
+<a href="http://htaccess.net.ru/" title="На главную"><img src="./Меню_ Mod_rewrite - RewriteCond - RewriteRule _ Примеры URL преобразований_files/apache.gif" border="0" width="38" height="13" align="left" alt="• • •"></a>				
+<div class="blocktitle titleleft">Redirect - RedirectMatch
+</div>
+<div class="block blockleft">
+
+<ul>
+<li><a href="http://www.htaccess.net.ru/doc/Redirect/Redirect.php" title="Редиректы - перенаправления">•&nbsp;Редиректы - перенаправления</a></li>
+
+<li><a href="http://www.htaccess.net.ru/doc/Redirect/index.php" title=" Смена домена, или имени - названия сайта. Склейка.">•&nbsp;Смена домена сайта с htaccess</a></li>
+
+
+<li><a href="http://www.htaccess.net.ru/doc/Redirect/Redirect_html.php" title="Грамотное перенаправление без Redirect">•&nbsp;Грамотное перенаправление ссылок</a></li>
+
+
+
+</ul></div>
+<div class="blockfooter blockfl">&nbsp;</div>
+
+			<!-- Глав левый 7  -->
+<a href="http://htaccess.net.ru/" title="На главную"><img src="./Меню_ Mod_rewrite - RewriteCond - RewriteRule _ Примеры URL преобразований_files/apache.gif" border="0" width="38" height="13" align="left" alt="• • •"></a>				
+<div class="blocktitle titleleft">Mod_rewrite - RewriteCond
+</div>
+<div class="block blockleft">
+
+<ul>
+<li><div id="above"><a href="http://www.htaccess.net.ru/doc/mod_rewrite/mod_rewrite.php" title="Модуль mod_rewrite - URL преобразований Apache">•&nbsp;Модуль mod_rewrite - URL преобразований</a></div></li>
+
+<li><div id="above"><a href="http://www.htaccess.net.ru/doc/mod_rewrite/RewriteRule.php" title="RewriteRule - Устанавливает специальные опции для механизма преобразований">•&nbsp;Директива модуля - RewriteRule flags</a></div></li>
+
+
+<li><div id="above"><a href="http://www.htaccess.net.ru/doc/mod_rewrite/RewriteBase.php" title="Устанавливает базовый URL для преобразований в контексте каталога">•&nbsp;Директива модуля - RewriteBase</a></div></li>
+
+<li><div id="above"><a href="http://www.htaccess.net.ru/doc/mod_rewrite/RewriteCond.php" title="RewriteCond - Определяет условие при котором происходит преобразование">•&nbsp;Директива модуля - RewriteCond</a></div></li>
+
+<li><div id="above"><a href="http://www.htaccess.net.ru/doc/mod_rewrite/RewriteEngine.php" title="RewriteEngine - Включает или выключает работу механизма преобразования">•&nbsp;Директива модуля - RewriteEngine</a></div></li>
+
+<li><div id="above"><a href="http://www.htaccess.net.ru/doc/mod_rewrite/RewriteOptions.php" title="RewriteOptions - Устанавливает специальные опции для механизма преобразований">•&nbsp;Директива модуля - RewriteOptions</a></div></li>
+
+
+<li><div id="current_ok">•&nbsp;Примеры URL преобразований!!!!!</div></li>
+
+
+
+
+<li><div id="above"><a href="http://www.htaccess.net.ru/doc/mod_rewrite/Primer-RewriteRule.php" title="Пример правила со сложным УРЛ - ЧПУ">•&nbsp;Пример правила с УРЛ - ЧПУ</a></div></li>
+
+
+
+<li><div id="above"><a href="http://www.htaccess.net.ru/doc/mod_rewrite/Bot-User-agent_Mod_rewrite.php" title="Mod_rewrite - Боты - роботы Mod rewrite">•&nbsp;Боты - роботы через Mod rewrite</a></div></li>
+
+<li><div id="above"><a href="http://www.htaccess.net.ru/doc/mod_rewrite/guard_rar_jpg.php" title="Защита от прямого скачивания">•&nbsp;Защита от прямого скачивания</a></div></li>
+
+</ul></div>
+<div class="blockfooter blockfl">&nbsp;</div>
+
+			<!-- Глав левый 8  -->
+<a href="http://htaccess.net.ru/" title="На главную"><img src="./Меню_ Mod_rewrite - RewriteCond - RewriteRule _ Примеры URL преобразований_files/apache.gif" border="0" width="38" height="13" align="left" alt="• • •"></a>			
+<div class="blocktitle titleleft"> AddHandler - Pass(Set)Env
+</div>
+<div class="block blockleft"><ul>
+
+<li><a href="http://www.htaccess.net.ru/doc/Pass_Set_Env/index.php" title="Включение SII">•&nbsp;Включение SII</a></li>
+
+<li><a href="http://www.htaccess.net.ru/doc/Pass_Set_Env/SSI_in_PHP_2.php" title="Включение SSI и PHP в .html файлах">•&nbsp;Включение SSI и PHP в .html файлах</a></li>
+
+<li><a href="http://www.htaccess.net.ru/doc/Pass_Set_Env/PassEnv3.php" title="Задание переменных окружения">•&nbsp;Задание переменных окружения</a></li>
+
+<li><a href="http://www.htaccess.net.ru/doc/Pass_Set_Env/cache4.php" title="Принудительное кэширование">•&nbsp;Принудительное кэширование</a></li>
+
+</ul></div>
+<div class="blockfooter blockfl">&nbsp;</div>
+
+	
+	<!-- Глав левый 9  -->
+<a href="http://htaccess.net.ru/" title="На главную"><img src="./Меню_ Mod_rewrite - RewriteCond - RewriteRule _ Примеры URL преобразований_files/apache.gif" border="0" width="38" height="13" align="left" alt="• • •"></a>			
+<div class="blocktitle titleleft"> PHP - .htaccess
+</div>
+<div class="block blockleft"><ul>
+
+<li><a href="http://www.htaccess.net.ru/doc/php/index.php" title="Конфигурация PHP в .htaccess">•&nbsp;Конфигурация PHP в .htaccess</a></li>
+
+<li><a href="http://www.htaccess.net.ru/doc/php/php.php" title="Директивы конфигурации PHP ">•&nbsp;Директивы конфигурации PHP </a></li>
+
+</ul></div>
+<div class="blockfooter blockfl">&nbsp;</div>
+
+
+
+<!-- Глав левый 10  -->
+<a href="http://htaccess.net.ru/" title="На главную"><img src="./Меню_ Mod_rewrite - RewriteCond - RewriteRule _ Примеры URL преобразований_files/apache.gif" border="0" width="38" height="13" align="left" alt="• • •"></a>				
+<div class="blocktitle titleleft">Дополнительный  материал
+</div>
+<div class="block blockleft">
+
+
+
+
+
+<ul>
+
+<li><a href="http://www.htaccess.net.ru/doc/additional_material/docroot.php" title="Меняем значение $_SERVER[’DOCUMENT_ROOT’] - docroot.php">•&nbsp;Меняем значение <font size="-2">$_SERVER[’DOCUMENT_ROOT’]</font> - docroot.php</a></li>
+
+<li><a href="http://www.htaccess.net.ru/doc/additional_material/index.php" title="Полезные ссылки по теме">•&nbsp;Полезные ссылки по теме</a></li>
+</ul>
+
+
+<!-- реклама 000 --> 
+<hr color="#000000">
+<div align="Left">
+<font size="+1">
+</font>
+</div>
+
+
+
+
+
+
+</div>
+<div class="blockfooter blockfl">&nbsp;</div>
+
+
+
+
+       <!-- Глав левый 14 -->  
+                
+<div class="blocktitle titleleft">Рекомендуем
+</div>
+<div class="block blockleft">
+
+
+
+
+
+<!-- реклама 111 --> 
+<div align="Left">
+<font size="+1">
+</font>
+</div>
+
+
+<noindex>
+<center>
+
+<!-- реклама телдери 
+<a href="http://www.telderi.ru/?pid=cac701" rel="nofollow"><img src="http://htaccess.net.ru/images/baners/teldery.jpg" border="0" alt=""></a>
+ -->
+
+<noindex><a href="http://www.telderi.ru/?pid=cac701" rel="nofollow" target="_blank"><img src="./Меню_ Mod_rewrite - RewriteCond - RewriteRule _ Примеры URL преобразований_files/200x400-5.gif"></a></noindex><br><noindex><a href="https://hosting.reg.ru/?rid=263005" rel="nofollow" target="_blank"><img src="./Меню_ Mod_rewrite - RewriteCond - RewriteRule _ Примеры URL преобразований_files/vps1_anim_240x400.gif"></a></noindex>
+
+
+
+</center>
+</noindex>
+
+
+
+<!-- реклама 222 -->
+
+
+
+
+
+
+
+
+
+	
+</div>
+<div class="blockfooter blockfl">&nbsp;</div>
+
+
+
+
+ <!-- left закрытие -->				
+</div>
+
+
+
+
+
+
+
+<!-- _________________________________ Центр_________________________________________ -->
+				
+<div id="main">
+				<!-- Информ часть первый блок  -->
+<div class="roundblock">
+<!--Уголок рамки круглый прав нижний -->				
+<div class="roundtop"><img src="./Меню_ Mod_rewrite - RewriteCond - RewriteRule _ Примеры URL преобразований_files/top_corner.gif" alt="" width="12" height="12" class="corner">
+	Примеры URL преобразований
+</div>
+<div class="inroundblock2">
+<div class="inroundblock3">
+<br>
+
+<h1>Примеры URL преобразований</h1>
+<noindex>
+<div id="border777">
+
+
+
+
+<p>
+<a href="http://hosting.reg.ru/?rid=263005" rel="nofollow" style="color: #000000" target="_blank">
+<img src="./Меню_ Mod_rewrite - RewriteCond - RewriteRule _ Примеры URL преобразований_files/stat.jpg" width="83px" style="border: 0; float: left; margin: 0px 7px 0px 5px;"> Хостинг! У меня  виртуальный хостинг держит 10 000 посетителей со стандартным кэшем Joomla (Host-1). А у Вас?</a>
+</p><p style="font-size: 82%;">
+Полная поддержка директив .htaccess прилагается... 
+</p>
+
+
+<hr>
+
+<p>
+<a href="http://www.hostland.ru/?r=40008605" rel="nofollow" style="color: #000000" target="_blank">
+<img src="./Меню_ Mod_rewrite - RewriteCond - RewriteRule _ Примеры URL преобразований_files/1.jpg" style="border: 0; float: left; margin: 0px 7px 0px 5px;">
+Нужен хостинг для сайта - визитки с минимальными тратами? Хостинг на 12 мес. - 1188-00 (Простор 1)</a>
+</p><p style="font-size: 85%;">
+Пролонгации домена 139-00 (регистрация бесплатно!)
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+<div align="Right">
+<font size="-2">
+Реклама - рекомендация от администрации сайта</font></div><font size="-2">
+</font>
+</div>
+
+
+
+</noindex></div>
+<p>Правила преобразования ссылок:</p>
+
+<p>Если в подкаталогах в .htaccess нет ни одной директивы модуля mod_rewrite, то все правила преобразования наследуются из родительского каталога. 
+</p><p>При наличии в файле .htaccess каких либо директив модуля mod_rewrite не наследуется ничего, а состояние по умолчанию выставляется таким же, как в главном конфигурационном файле веб-сервера (по умолчанию "off"). Поэтому, если нужны правила преобразования для конкретного каталога, то нужно еще раз вставить директиву "RewriteEngine on" в .htaccess для конкретного каталога. 
+</p><p>При наследовании правил из верхних каталогов и добавлении к ним новых свойственных только данному каталогу -  необходимо выставить в начале следущее: "RewriteEngine on" и <a href="http://htaccess.net.ru/doc/mod_rewrite/RewriteOptions.php">"RewriteOptions inherit"</a> - последняя директива сообщает серверу о продолжении.
+</p>
+
+
+
+
+
+<h2>Для того что бы склеить веб-домен</h2>
+<p>Для того что бы избавиться раз и навсегда от www, и склеить домен без www (http://htaccess.net.ru  т.е. в адресной строке больше ни когда не будет домена с www - http://www.htaccess.net.ru), нужно использовать следующий код:</p>
+<div id="border_primer">
+ <p>RewriteEngine on</p>
+ <p>RewriteCond %{HTTP_HOST} ^www\.htaccess.net.ru [NC] </p>
+ <p>RewriteRule ^(.*)$ http://htaccess.net.ru/$1 [R=301,L] </p>
+</div>
+
+ <p>Htaccess перенаправление - редиректом 301 - "документ перемещен навсегда" с легкостью решает эту задачу. </p>
+
+<p>Что бы сделать наоборот - склеить сайт без www (http://htaccess.net.ru), с www (http://www.htaccess.net.ru - т.е. использовать в урлах только его) необходимо использовать следующий код .htaccess размещенный в корне домена:</p>
+
+<div id="border_primer">
+<p>RewriteEngine on</p>
+<p>RewriteCond %{HTTP_HOST} ^htaccess.net.ru [NC]</p>
+<p>RewriteRule ^(.*)$ http://www.htaccess.net.ru/$1 [R=301,L]</p>
+</div>
+<hr>
+
+
+
+<p>Выставляем на суд общественности присланную нам конфигурацию - настройку .htaccess  "/" - слеша, с подстановкой его в конце и так же с принудительным его убираем. </p>
+<h3>Убрать слэш в конце url, .htaccess убираем слэш в конце строки урла - ссылки</h3>
+<div id="border_primer">
+<p># убрать слэш в конце строки ссылки, в конце url</p>
+<p>RewriteEngine on</p>
+<p> </p>
+<p>RewriteCond %{REQUEST_FILENAME} !-d # не каталог</p>
+<p>RewriteCond %{REQUEST_URI} ^(.+)/$ # окончивается в том числе на точку в конце</p>
+<p>RewriteRule ^(.+)/$ /$1 [R=301,L] # убираем слеш в конце url - после последнего символа</p>
+</div>
+<hr>
+
+
+<h3>Добавить слэш в конце url, htaccess добавляем слэш в конце строки урла - ссылки</h3>
+
+<div id="border_primer">
+<p>#добавить слэш в конце строки ссылки, в конце url</p>
+<p>RewriteEngine on</p>
+<p> </p>
+<p>RewriteBase /</p>
+<p>RewriteCond %{REQUEST_FILENAME} !-f # не файл</p>
+<p>RewriteCond %{REQUEST_URI} !(.*)/$ # не окончивается в том числе на точку в конце</p>
+<p>RewriteRule ^(.*[^/])$ $1/ [L,R=301] # ставим - добавляем слеш в конце url - после последнего символа</p>
+</div>
+<hr>
+
+
+
+
+
+
+
+
+
+
+<p>Посетители веб-сайта авторизуются при помощи стандартной авторизации ( AuthType BasicAuth ). Необходимо по ссылке / home  показывать содержимое их домашних каталогов:</p>
+<div id="border_primer">
+<p>RewriteCond %{ REMOTE _ USER } !="" </p>
+<p>RewriteCond /home/(%{REMOTE_USER}) -d </p>
+<p>RewriteRule (.*) /home/%1/$1 </p>
+</div>
+
+
+<hr>
+<p>Есть два каталога /home/net/storag1 и /home/net/storage2, в которых нужно искать запрашиваемые файлы:</p>
+<div id="border_primer">
+<p>RewriteCond /home/net/storage1/%{REQUEST_FILENAME} -f </p>
+<p>RewriteRule (.+) /home/net/storage1/$1 [L] </p>
+<p>RewriteCond /home/net/storage2/%{REQUEST_FILENAME} -f </p>
+<p>RewriteRule (.+) /home/net/storage2/$1 [L] </p>
+</div>
+
+<hr>
+<p>Закрыть доступ к веб-сайту в рабочее время:</p>
+<div id="border_primer">
+<p>RewriteCond %{TIME_HOUR}%{TIME_MIN} &gt;1000 </p>
+<p>RewriteCond %{TIME_HOUR}%{TIME_MIN} &lt;1900 </p>
+<p>RewriteRule .* - [ F ] </p>
+</div>
+
+
+
+
+
+
+
+<hr>
+<p>Перенаправление пользователя с определенным юзер-агентом - браузером на определенную версию сайта (например, при заходе с айфона - перенаправлять направить пользователя на поддомен с специальной мобильной версией сайта:</p>
+<div id="border_primer">
+<p>RewriteEngine on</p>
+<p>RewriteCond %{HTTP_USER_AGENT} iPhone</p>
+<p>RewriteRule .* http://iphone.htaccess.net.ru/ [R]</p>
+</div>
+
+<p>Или же перенаправлять не на поддомен, а в специальный каталог сайта /iPhone-versia/, код .htaccess следующий:</p>
+<div id="border_primer">
+<p>RewriteEngine on</p>
+<p>RewriteCond %{HTTP_USER_AGENT} iPhone</p>
+<p>RewriteCond %{REQUEST_URI} !^/iPhone-versia/</p>
+<p>RewriteRule .* /iPhone-versia/ [R]</p>
+</div>
+<p>В данном случае мы применили глобальную переменную HTTP заголовка "User-Agent", который отправляют все браузеры при заходе на любой ресурс (этот заголовок в ряде браузером можно изменять на любое значение, но в 99% это ни кто не делает, так как это снижает комфорт серфинга в интернете, так как, например ряд сайтов верстает версту -дизайн сайта под каждый браузер, с учетом его специфики выполнения спецификаций HTML5, CSS и других стандартов, которые разные браузеры часто выполняют со значительными отличиями.</p>
+
+<p>Браузер iPhone имеет значение "User-Agent" следующее:</p> 
+<div id="border_primer">
+<p>Mozilla/5.0 (iPhone; U; CPU like Mac OS X; ru)</p>
+<p>AppleWebKit/420+ (KHTML, like Gecko) Version/3.1 Mobile/1C25 Safari/419.5</p>
+</div>
+
+
+
+
+
+
+<hr>
+<p><u>Перенаправление домашних каталогов для чужаков</u></p>
+<p>Описание: </p>
+<p>Мы хотим перенаправить URL домашних каталогов на другой веб-сервер www.somewhere.com когда запрашиваемый пользователь не принадлежит локальному домену ourdomain.com. Это иногда используется в контексте виртуальных хостов. </p>
+<p>Решение: </p>
+<p>Просто правило на перенаправление: </p>
+<div id="border_primer">
+<p>RewriteEngine on </p>
+<p>RewriteCond %{REMOTE_HOST} !^.+\.ourdomain\.com$ </p>
+<p>RewriteRule ^(/~.+) http://www.somewhere.com/$1 [R,L] </p>
+</div>	
+
+<hr>
+<p><u>Перенаправление несуществующих URL на другой веб-сервер</u> </p>
+<p>Описание: </p>
+<p>Типичный часто задаваемый вопрос по URL преобразованиям — это как перенаправить несуществующие запросы с сервера А на сервер B. Обычно это делается через ErrorDocument CGI-скрипты на Perl, однако с модулем mod_rewrite тоже есть решение. Заметьте однако, что это менее ресурсоёмко чем использвание ErrorDocument CGI-скрипта! </p>
+<p>Решение: </p>
+<p>Первое решение имеет лучшую производительность однако меньшую гибкость и меньшую защиту от ошибок: </p>
+<div id="border_primer">
+<p>RewriteEngine on </p>
+<p>RewriteCond /your/docroot/%{REQUEST_FILENAME} !-f </p>
+<p>RewriteRule ^(.+) http://webserverB.dom/$1 </p>
+</div>	
+<p>Проблема здесь в том, что это будет работать только для страниц находяшихся внутри DocumentRoot. Тогда как вы можете добавить больше условий (например ещё и для управления домашними каталогами, и т.д.) есть лучший вариант: </p>
+<div id="border_primer">
+<p>RewriteEngine on </p>
+<p>RewriteCond %{REQUEST_URI} !-U </p>
+<p>RewriteRule ^(.+) http://webserverB.dom/$1 </p>
+</div>	
+<p>Здесь используется функция опережающей проверки URL (look-ahead), присутствующая в mod_rewrite. В результате это будет работать для всех типов URL и к тому же это безопасно. Однако это снижает производительность веб-сервера, потому что для каждого запроса производится более одного внутреннего подзапроса. Поэтому, если ваш веб-сервер имеет мощный процессор, используйте этот вариант. Если это медленная машина, используйте первый или лучше ErrorDocument CGI-скрипта. </p>
+
+<hr>
+<p><u>Редиректы в зависимости от времени </u></p>
+<p>Описание: </p>
+<p>Когда нужно применять уловки типа содержания зависящего от времени масса вебмастеров все ещё используют CGI скрипты которые производят редиректы на специальные страницы. Как это может быть сделано через mod_rewrite? </p>
+<p>Решение: </p>
+<p>Есть много переменных названных TIME_xxx для условий редиректа. В связке со специальными лексикографическими образцами для сравнения &lt;STRING, &gt;STRING и =STRING мы можем производить редиректы зависящие от времени: </p>
+<div id="border_primer">
+<p>RewriteEngine on </p>
+<p>RewriteCond %{TIME_HOUR}%{TIME_MIN} &gt;0700 </p>
+<p>RewriteCond %{TIME_HOUR}%{TIME_MIN} &lt;1900 </p>
+<p>RewriteRule ^foo\.html$ foo.day.html </p>
+<p>RewriteRule ^foo\.html$ foo.night.html </p>
+</div>	
+<p>Это выдает содержимое foo.day.html при запросе URL foo.html с 07:00 до 19:00 а в оставшееся время содержимое foo.night.html. Просто класная вещь для какой-либо странички… </p>
+
+<hr>
+<p><u>Управление содержанием  - От старого с новому (внутреннее)</u></p>
+<p>Описание: </p>
+<p>Предположим что мы недавно переименовали страницу bar.html в foo.html и сейчас хотим для обратной совместимости сделать доступным и старый URL. В действительности мы хотим чтобы пользователи использующие старый URL даже не узнали что страницы были переименованы. </p>
+<p>Решение: </p>
+<p>Мы перенаправим старый URL на новый через внутренний редирект путем следующих директив: </p>
+<div id="border_primer">
+<p>RewriteEngine on </p>
+<p>RewriteBase /~quux/ </p>
+<p>RewriteRule ^foo\.html$ bar.html </p>
+</div>	
+
+<hr>
+<p><u>От старого с новому (внешнее)</u> </p>
+<p>Описание: </p>
+<p>Снова предположим что мы недавно переименовали страницу bar.html в foo.html и хотим сейчас для обратной совместимости сделать доступным и старый URL. Однако, в этот раз мы хотимчтобы пользователи использующие старый URL узнали этот новый URL, т.е. адресная строка их браузеров также должна измениться. </p>
+<p>Решение: </p>
+<p>Мы используем HTTP редирект на новый URL который приведет к к изменениям в браузерах(в адресной строке) и таким образом это видят пользователи: </p>
+<div id="border_primer">
+<p>RewriteEngine on </p>
+<p>RewriteBase /~quux/ </p>
+<p>RewriteRule ^foo\.html$ bar.html [R] </p>
+</div>	
+
+<hr>
+<p><u>Содержимое зависимое от браузера</u> </p>
+<p>Описание: </p>
+<p>Иногда, по крайней мере для важных страниц верхнего уровня необходимо предоставить оптимизированное для конкретного браузера содержание, т.е. для одного нужно выдавать полную версию для последних версий Netscape, минимальную для браузеров Lynx и промежуточную для всех других. </p>
+<p>Решение: </p>
+<p>Мы не можем использовать content negotiation потому что браузеры не не представляют свой тип в этой форме. Вместо этого мы должны использовать HTTP заголовок «User-Agent». Следующее условие делает следующее: Если HTTP заголовок «User-Agent» начинается с «Mozilla/3», страница foo.html преобразуется в foo.NS.html и редирект прекращается. Если браузер «Lynx» или «Mozilla» версий 1 или 2 URL становится foo.20.html. Все остальные браузеры получают страницу foo.32.html. Это делается следующим набором директив: </p>
+<div id="border_primer">
+<p>RewriteCond %{HTTP_USER_AGENT} ^Mozilla/3.* </p>
+<p>RewriteRule ^foo\.html$ foo.NS.html [L] </p>
+<p>RewriteCond %{HTTP_USER_AGENT} ^Lynx/.* [OR] </p>
+<p>RewriteCond %{HTTP_USER_AGENT} ^Mozilla/[12].* </p>
+<p>RewriteRule ^foo\.html$ foo.20.html [L] </p>
+<p>RewriteRule ^foo\.html$ foo.32.html [L] </p>
+</div>	
+
+<hr>
+<p><u>Динамическое зеркало</u> </p>
+<p>Описание: </p>
+<p>Предположим что есть чудесные страницы на удалённых хостах и мы хотим внести их в наше пространство имен(сайт). Для FTP серверов мы бы использовали программу зеркало которая в действительности управляет обновлениями копий удалённых данных на локальной машине. Для веб-сервера мы могли бы использовать программу webcopy которая делает похожие вещи по HTTP. Однако обе эти технологии имеют один главный недостток: локальная копия актуальна всегда настолько, насколько часто мы запускаем эту программу. Было бы намного лучше если бы зеркало было не статическим должно быть полное соответствие копий, вне зависимости от частоты запуска этой программы. Вместо этого мы хотим динамическое зеркало с автоматическим обновлением данных когда это необходимо (обновление данных на удаленном сервере). </p>
+<p>Решение: </p>
+<p>Для обеспечения этой функции мы отобразим удаленную страницу или даже полностью удаленный сайт в наше веб-пространство используя Proxy Throughput опцию ( флаг [P]): </p>
+<div id="border_primer">
+<p>RewriteEngine on </p>
+<p>RewriteBase /~quux/ </p>
+<p>RewriteRule ^hotsheet/(.*)$ http://www.tstimpreso.com/hotsheet/$1 [P] </p>
+<p>RewriteEngine on </p>
+<p>RewriteBase /~quux/ </p>
+<p>RewriteRule ^usa-news\.html$ http://www.quux-corp.com/news/index.html [P] </p>
+</div>	
+
+<hr>
+<p><u>Обратное динамическое зеркало</u> </p>
+<p>Описание: </p>
+<p>… </p>
+<p>Решение: </p>
+<div id="border_primer">
+<p>RewriteEngine on </p>
+<p>RewriteCond /mirror/of/remotesite/$1 -U </p>
+<p>RewriteRule ^http://www\.remotesite\.com/(.*)$ /mirror/of/remotesite/$1 </p>
+</div>	
+
+<hr>
+<p><u>От статики к динамике</u> </p>
+<p>Описание: </p>
+<p>Как можно трансформировать статическую страницу foo.html в её динамический вариант foo.cgi незаметным образом, т.е. так чтобы ни браузер ни пользователь не заметили этого. </p>
+<p>Решение: </p>
+<p>Мы просто перенаправляем URL на CGI-скрипт и корректируем MIME-тип так чтобы это действительно работало как CGI-скрипт. Таким образом запрос к /~quux/foo.html внутренне приведет к вызову /~quux/foo.cgi. </p>
+<div id="border_primer">
+<p>RewriteEngine on </p>
+<p>RewriteBase /~quux/ </p>
+<p>RewriteRule ^foo\.html$ foo.cgi [T=application/x-httpd-cgi] </p>
+</div>	
+
+<hr>
+<p><u>Регенерация содержания на лету</u> </p>
+<p>Описание:</p>
+<p>Здесь рассматривается действительно вещь для посвященных: Динамически созданные однако статически обслуживаемые страницы, т.е. страницы которые должны передаваться как чисто статические (считываемые из файловой системы и затем передаваемые по запросу), однако они должны быть динамически сгенерированны веб-сервером если они отсутствуют в файловой системе. Таким образом вы можете иметь страницы сгенерированные CGI которые являются статически обслуживаемыми если только кто-либо (либо планировщик) не удалит статическое содержание. В таком случае содержание обновляется. </p>
+<p>Решение:</p>
+<p>Это делается следующим набором директив:</p>
+<div id="border_primer">
+<p>RewriteCond %{REQUEST_FILENAME} !-s </p>
+<p>RewriteRule ^page\.html$ page.cgi [T=application/x-httpd-cgi,L] </p>
+</div>	
+<p>Здесь, запрос к page.html приводит к внутреннему запуску соответствующего page.cgi если page.html все-ещё отсутствует или имеет нулевой размер. Фокус здесь в том что page.cgi это обычный CGI скрипт который (в дополнение к собственному STDOUT) записывает свой вывод в файл page.html. Запустив это один раз, сервер передает данные page.html. Когда вебмастер хочет обновить содержание, он просто удаляет page.html (обычно с помощью cronjob). </p>
+
+
+
+<hr>
+<p><u>Перенаправление по языку определенному по веб-браузеру зашедшего</u> </p>
+<p>Описание:</p>
+<p>Файл  Htaccess перенаправит посетителя с определенным языком на определенную вами страницу с соответствующим содержанием.</p>
+<p>Решение:</p>
+<p>Оставляем естественное нужный язык (например zh -китайский), и ставим свою страницу вместо http://htaccess.net.ru/doc/additional_material/index.php:</p>
+<div id="border_primer">
+<p>RewriteEngine on</p>
+<p>RewriteCond %{HTTP:Accept-Language} (aa|ab|af|am|ar|as|ay|az|ba|be|bg|bh|bi|bn|bo|br|ca|co|cs|cy|da|de|dz|el|en|eo|es|et|eu|fa|fi|fj|fo|fr|fy|ga|gd|gl|gn|gu|ha|hi|hr|hu|hy|ia|ie|ik|in|is|it|iw|ja|ji|jw|ka|kk|kl|km|kn|ko|ks|ku|ky|la|ln|lo|lt|lv|mg|mi|mk|ml|mn|mo|mr|ms|mt|my|na|ne|nl|no|oc|om|or|pa|pl|ps|pt|qu|rm|rn|ro|ru|rw|sa|sd|sg|sh|si|sk|sl|sm|sn|so|sq|sr|ss|st|su|sv|sw|ta|te|tg|th|ti|tk|tl|tn|to|tr|ts|tt|tw|uk|ur|uz|vi|vo|wo|xh|yo|zh|zu) [NC]</p>
+<p>RewriteRule .* http://htaccess.net.ru/doc/additional_material/index.php [R,L]</p>
+</div>
+
+
+
+
+
+
+
+<noindex>
+
+<div id="border777">
+
+
+<div align="Right"><font size="-2">Рекламная информация</font></div>
+<!-- бегун здесь 3 раза эффек меню -->
+<p>Недавно освободившиеся домены с PR и ТИЦ:</p>
+<font size="-1">
+<p>
+Сервис http://reg.ru - крупнейшего хостинга и регистратора доменов позволяет подать заявку на регистрацию доменного имени, которое недавно было освобождено прежним Администратором. Освобожденные домены часто имеют высокие показатили ТИЦ и PR и могут быть интересны к приобретению. 
+</p>
+
+<table border="0" width="99%">
+
+<tbody><tr>
+<td align="center" width="32%">
+<font size="-2">Обычный хостинг:</font><br>
+
+<link href="./Меню_ Mod_rewrite - RewriteCond - RewriteRule _ Примеры URL преобразований_files/host1.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./Меню_ Mod_rewrite - RewriteCond - RewriteRule _ Примеры URL преобразований_files/get_hosting_data"></script>
+<script type="text/javascript" src="./Меню_ Mod_rewrite - RewriteCond - RewriteRule _ Примеры URL преобразований_files/hosting_informer.js" charset="windows-1251"></script><div id="hosting_informer" style="width: 250px; padding: 0 0; margin: 0 0;">
+<table cellspacing="0" cellpadding="0" border="0" class="host-inner-table">
+<thead><tr><th>Хостинг</th><th>Цена</th></tr></thead><tbody>
+<tr valign="top" class="host-row-odd pointer" onclick="window.location.href=&#39;http://www.reg.ru/hosting/index?plan=Host-Lite-0910&amp;referer=263005&amp;rid=263005&#39;;">
+    <td><span class="title">Host-Lite</span><br>
+    <small><nobr>HDD: 5Гб,</nobr>
+    <nobr>БД: нет,</nobr><br>
+    <nobr>Доменов: 10,</nobr>
+    <nobr>PHP&nbsp;5.2: нет</nobr></small><nobr>
+    </nobr></td><td width="55px"><div class="price">
+    <small>&nbsp;<span>руб.</span><br>&nbsp;мес.</small></div>
+    <div class="price"><b><big>99</big></b></div></td></tr>
+<tr valign="top" class="host-row-even pointer" onclick="window.location.href=&#39;http://www.reg.ru/hosting/index?plan=Host-0-0910&amp;referer=263005&amp;rid=263005&#39;;">
+    <td><span class="title">Host-0</span><br>
+    <small><nobr>HDD: 1Гб,</nobr>
+    <nobr>БД: 1,</nobr><br>
+    <nobr>Доменов: 1,</nobr>
+    <nobr>PHP&nbsp;5.2: есть</nobr></small><nobr>
+    </nobr></td><td width="55px"><div class="price">
+    <small>&nbsp;<span>руб.</span><br>&nbsp;мес.</small></div>
+    <div class="price"><b><big>149</big></b></div></td></tr>
+<tr valign="top" class="host-row-odd pointer" onclick="window.location.href=&#39;http://www.reg.ru/hosting/index?plan=Host-1-1209&amp;referer=263005&amp;rid=263005&#39;;">
+    <td><span class="title">Host-1</span><br>
+    <small><nobr>HDD: 5Гб,</nobr>
+    <nobr>БД: 10,</nobr><br>
+    <nobr>Доменов: 10,</nobr>
+    <nobr>PHP&nbsp;5.2: есть</nobr></small><nobr>
+    </nobr></td><td width="55px"><div class="price">
+    <small>&nbsp;<span>руб.</span><br>&nbsp;мес.</small></div>
+    <div class="price"><b><big>249</big></b></div></td></tr>
+<tr valign="top" class="host-row-even pointer" onclick="window.location.href=&#39;http://www.reg.ru/hosting/index?plan=Host-2-1209&amp;referer=263005&amp;rid=263005&#39;;">
+    <td><span class="title">Host-2</span><br>
+    <small><nobr>HDD: 7Гб,</nobr>
+    <nobr>БД: 20,</nobr><br>
+    <nobr>Доменов: 20,</nobr>
+    <nobr>PHP&nbsp;5.2: есть</nobr></small><nobr>
+    </nobr></td><td width="55px"><div class="price">
+    <small>&nbsp;<span>руб.</span><br>&nbsp;мес.</small></div>
+    <div class="price"><b><big>349</big></b></div></td></tr>
+<tr valign="top" class="host-row-odd pointer" onclick="window.location.href=&#39;http://www.reg.ru/hosting/index?plan=Host-3-0413&amp;referer=263005&amp;rid=263005&#39;;">
+    <td><span class="title">Host-3</span><br>
+    <small><nobr>HDD: 10Гб,</nobr>
+    <nobr>БД: 30,</nobr><br>
+    <nobr>Доменов: 30,</nobr>
+    <nobr>PHP&nbsp;5.2: есть</nobr></small><nobr>
+    </nobr></td><td width="55px"><div class="price">
+    <small>&nbsp;<span>руб.</span><br>&nbsp;мес.</small></div>
+    <div class="price"><b><big>449</big></b></div></td></tr>
+<tr valign="top" class="host-row-even pointer" onclick="window.location.href=&#39;http://www.reg.ru/hosting/index?plan=Host-CMS-0413&amp;referer=263005&amp;rid=263005&#39;;">
+    <td><span class="title">Host-CMS</span><br>
+    <small><nobr>HDD: 25Гб,</nobr>
+    <nobr>БД: 30,</nobr><br>
+    <nobr>Доменов: 30,</nobr>
+    <nobr>PHP&nbsp;5.2: есть</nobr></small><nobr>
+    </nobr></td><td width="55px"><div class="price">
+    <small>&nbsp;<span>руб.</span><br>&nbsp;мес.</small></div>
+    <div class="price"><b><big>799</big></b></div></td></tr>
+</tbody></table></div>
+
+
+
+
+</td>
+<td align="center" width="32%" class="style101">
+<font size="-2">VPS - виртуальный - сервер:</font><br>
+
+<link href="./Меню_ Mod_rewrite - RewriteCond - RewriteRule _ Примеры URL преобразований_files/host2.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./Меню_ Mod_rewrite - RewriteCond - RewriteRule _ Примеры URL преобразований_files/get_vps_data"></script>
+<script type="text/javascript" src="./Меню_ Mod_rewrite - RewriteCond - RewriteRule _ Примеры URL преобразований_files/vps_informer.js" charset="windows-1251"></script><div id="hosting_informer" style="width: 250px; padding: 0 0; margin: 0 0;">
+<table cellspacing="0" cellpadding="0" border="0" class="host-inner-table">
+<thead><tr><th>Виртуальный сервер</th><th style="padding-left:2em;">Цена</th></tr></thead><tbody>
+<tr valign="top" class="host-row-odd pointer" onclick="window.location.href=&#39;http://www.reg.ru/vps/index?plan=VPS-1-0615&amp;referer=263005&amp;rid=263005&#39;;">
+    <td width="140px"><span class="title">VPS-1</span><br>
+    <small><nobr>Процессор: 500МГц,</nobr><br>
+    <nobr>HDD: 20Гб,</nobr>
+    <nobr>Память: 256Мб</nobr></small>
+    </td><td><div class="price">
+    <small>&nbsp;<span>руб.</span><br>&nbsp;мес.</small></div>
+    <div class="price"><b>
+    <big>175</big></b></div></td></tr>
+<tr valign="top" class="host-row-even pointer" onclick="window.location.href=&#39;http://www.reg.ru/vps/index?plan=VPS-2-0615&amp;referer=263005&amp;rid=263005&#39;;">
+    <td width="140px"><span class="title">VPS-2</span><br>
+    <small><nobr>Процессор: 1000МГц,</nobr><br>
+    <nobr>HDD: 30Гб,</nobr>
+    <nobr>Память: 512Мб</nobr></small>
+    </td><td><div class="price">
+    <small>&nbsp;<span>руб.</span><br>&nbsp;мес.</small></div>
+    <div class="price"><b>
+    <big>350</big></b></div></td></tr>
+<tr valign="top" class="host-row-odd pointer" onclick="window.location.href=&#39;http://www.reg.ru/vps/index?plan=VPS-3-0615&amp;referer=263005&amp;rid=263005&#39;;">
+    <td width="140px"><span class="title">VPS-3</span><br>
+    <small><nobr>Процессор: 2000МГц,</nobr><br>
+    <nobr>HDD: 60Гб,</nobr>
+    <nobr>Память: 1024Мб</nobr></small>
+    </td><td><div class="price">
+    <small>&nbsp;<span>руб.</span><br>&nbsp;мес.</small></div>
+    <div class="price"><b>
+    <big>700</big></b></div></td></tr>
+<tr valign="top" class="host-row-even pointer" onclick="window.location.href=&#39;http://www.reg.ru/vps/index?plan=VPS-4-0615&amp;referer=263005&amp;rid=263005&#39;;">
+    <td width="140px"><span class="title">VPS-4</span><br>
+    <small><nobr>Процессор: 2x2000МГц,</nobr><br>
+    <nobr>HDD: 90Гб,</nobr>
+    <nobr>Память: 2048Мб</nobr></small>
+    </td><td><div class="price">
+    <small>&nbsp;<span>руб.</span><br>&nbsp;мес.</small></div>
+    <div class="price"><b>
+    <big>1 400</big></b></div></td></tr>
+<tr valign="top" class="host-row-even pointer" onclick="window.location.href=&#39;http://www.reg.ru/vps/index?plan=VPS-5-0615&amp;referer=263005&amp;rid=263005&#39;;">
+    <td width="140px"><span class="title">VPS-5</span><br>
+    <small><nobr>Процессор: 4x2000МГц,</nobr><br>
+    <nobr>HDD: 120Гб,</nobr>
+    <nobr>Память: 4096Мб</nobr></small>
+    </td><td><div class="price">
+    <small>&nbsp;<span>руб.</span><br>&nbsp;мес.</small></div>
+    <div class="price"><b>
+    <big>2 800</big></b></div></td></tr>
+</tbody></table></div>
+
+
+
+</td>
+<td width="32%"> </td>
+</tr>
+
+
+
+
+
+
+
+<tr border="1">
+<td align="center" width="32%">
+<font size="-2">Освобожденные домены .RU c ТИЦ:</font><br>
+
+<script type="text/javascript" src="./Меню_ Mod_rewrite - RewriteCond - RewriteRule _ Примеры URL преобразований_files/freedomains"></script>
+<script type="text/javascript" src="./Меню_ Mod_rewrite - RewriteCond - RewriteRule _ Примеры URL преобразований_files/freedomains_informer.js" charset="windows-1251"></script><div class="rereg-outer-block">
+<table class="rereg-inner-table" border="0" cellpadding="3" cellspacing="0">
+<tbody><tr class="rereg-header" bgcolor="#FFFFFF">
+<th align="left">Домен</th>
+<th>CY</th>
+<th>PR</th>
+<th>&nbsp;</th>
+</tr>
+<tr class="rereg-row-odd">
+<td><a href="http://www.reg.ru/domain/new/checkmany?rid=263005&amp;domains=mobile-mall.su">mobile-mall.su</a></td>
+<td align="center">3800</td>
+<td align="center">0</td>
+<td align="right"><a href="http://www.reg.ru/domain/new/checkmany?rid=263005&amp;domains=mobile-mall.su"><img src="./Меню_ Mod_rewrite - RewriteCond - RewriteRule _ Примеры URL преобразований_files/basket.gif" alt="" width="14" height="14" border="0"></a></td>
+</tr>
+<tr class="rereg-row-even">
+<td><a href="http://www.reg.ru/domain/new/checkmany?rid=263005&amp;domains=arowana.su">arowana.su</a></td>
+<td align="center">900</td>
+<td align="center">0</td>
+<td align="right"><a href="http://www.reg.ru/domain/new/checkmany?rid=263005&amp;domains=arowana.su"><img src="./Меню_ Mod_rewrite - RewriteCond - RewriteRule _ Примеры URL преобразований_files/basket.gif" alt="" width="14" height="14" border="0"></a></td>
+</tr>
+<tr class="rereg-row-odd">
+<td><a href="http://www.reg.ru/domain/new/checkmany?rid=263005&amp;domains=economica.su">economica.su</a></td>
+<td align="center">40</td>
+<td align="center">0</td>
+<td align="right"><a href="http://www.reg.ru/domain/new/checkmany?rid=263005&amp;domains=economica.su"><img src="./Меню_ Mod_rewrite - RewriteCond - RewriteRule _ Примеры URL преобразований_files/basket.gif" alt="" width="14" height="14" border="0"></a></td>
+</tr>
+<tr class="rereg-row-even">
+<td><a href="http://www.reg.ru/domain/new/checkmany?rid=263005&amp;domains=vilmar.su">vilmar.su</a></td>
+<td align="center">20</td>
+<td align="center">0</td>
+<td align="right"><a href="http://www.reg.ru/domain/new/checkmany?rid=263005&amp;domains=vilmar.su"><img src="./Меню_ Mod_rewrite - RewriteCond - RewriteRule _ Примеры URL преобразований_files/basket.gif" alt="" width="14" height="14" border="0"></a></td>
+</tr>
+<tr class="rereg-row-odd">
+<td><a href="http://www.reg.ru/domain/new/checkmany?rid=263005&amp;domains=movers-auto.su">movers-auto.su</a></td>
+<td align="center">20</td>
+<td align="center">0</td>
+<td align="right"><a href="http://www.reg.ru/domain/new/checkmany?rid=263005&amp;domains=movers-auto.su"><img src="./Меню_ Mod_rewrite - RewriteCond - RewriteRule _ Примеры URL преобразований_files/basket.gif" alt="" width="14" height="14" border="0"></a></td>
+</tr>
+<tr class="rereg-row-even">
+<td><a href="http://www.reg.ru/domain/new/checkmany?rid=263005&amp;domains=fastwalker.su">fastwalker.su</a></td>
+<td align="center">20</td>
+<td align="center">0</td>
+<td align="right"><a href="http://www.reg.ru/domain/new/checkmany?rid=263005&amp;domains=fastwalker.su"><img src="./Меню_ Mod_rewrite - RewriteCond - RewriteRule _ Примеры URL преобразований_files/basket.gif" alt="" width="14" height="14" border="0"></a></td>
+</tr>
+<tr class="rereg-row-odd">
+<td><a href="http://www.reg.ru/domain/new/checkmany?rid=263005&amp;domains=%u0433%u043E%u0440%u043D%u043E%u0437%u0430%u0432%u043E%u0434%u0441%u043A%u0446%u0435%u043C%u0435%u043D%u0442.su">горнозаводскцемент.su</a></td>
+<td align="center">20</td>
+<td align="center">0</td>
+<td align="right"><a href="http://www.reg.ru/domain/new/checkmany?rid=263005&amp;domains=%E3%EE%F0%ED%EE%E7%E0%E2%EE%E4%F1%EA%F6%E5%EC%E5%ED%F2.su"><img src="./Меню_ Mod_rewrite - RewriteCond - RewriteRule _ Примеры URL преобразований_files/basket.gif" alt="" width="14" height="14" border="0"></a></td>
+</tr>
+</tbody></table>
+</div>
+
+<link href="./Меню_ Mod_rewrite - RewriteCond - RewriteRule _ Примеры URL преобразований_files/style3.css" rel="stylesheet" type="text/css">
+
+</td>
+<td align="center" width="32%" class="style101">
+<font size="-2">Свободные премиум-домены:</font><br>
+
+
+<script charset="windows-1251" type="text/javascript" src="./Меню_ Mod_rewrite - RewriteCond - RewriteRule _ Примеры URL преобразований_files/get_premium_variants"></script>
+<script charset="windows-1251" type="text/javascript" src="./Меню_ Mod_rewrite - RewriteCond - RewriteRule _ Примеры URL преобразований_files/premium_informer.js"></script><div class="reg.premium">    <table class="rereg-inner-table" border="0" cellpadding="0" cellspacing="0">        <thead>            <tr bgcolor="#FFFFFF">                <th style="padding-right: 0.5em">Премиум-домен</th>                <th>Цена, р.</th>                <th><img src="./Меню_ Mod_rewrite - RewriteCond - RewriteRule _ Примеры URL преобразований_files/basket.gif" alt="" width="14" height="14" border="0"></th>            </tr>        </thead>        <tbody>
+            <tr class="rereg-row-odd">                <td>водныйкодексрф.рф</td>                <td>199</td>                <td><a href="https://www.reg.ru/domain/new/checkmany?rid=263005&amp;dname=%D0%B2%D0%BE%D0%B4%D0%BD%D1%8B%D0%B9%D0%BA%D0%BE%D0%B4%D0%B5%D0%BA%D1%81%D1%80%D1%84.%D1%80%D1%84" target="_blank" title="Зарегистрировать этот домен прямо сейчас">Купить</a></td>            </tr>
+            <tr class="rereg-row-even">                <td>programmijava.ru</td>                <td>199</td>                <td><a href="https://www.reg.ru/domain/new/checkmany?rid=263005&amp;dname=programmijava.ru" target="_blank" title="Зарегистрировать этот домен прямо сейчас">Купить</a></td>            </tr>
+            <tr class="rereg-row-odd">                <td>peintbolserver.su</td>                <td>600</td>                <td><a href="https://www.reg.ru/domain/new/checkmany?rid=263005&amp;dname=peintbolserver.su" target="_blank" title="Зарегистрировать этот домен прямо сейчас">Купить</a></td>            </tr>
+            <tr class="rereg-row-even">                <td>мюзиклы-русские.рф</td>                <td>199</td>                <td><a href="https://www.reg.ru/domain/new/checkmany?rid=263005&amp;dname=%D0%BC%D1%8E%D0%B7%D0%B8%D0%BA%D0%BB%D1%8B-%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B5.%D1%80%D1%84" target="_blank" title="Зарегистрировать этот домен прямо сейчас">Купить</a></td>            </tr>
+            <tr class="rereg-row-odd">                <td>biologiya-10.ru</td>                <td>199</td>                <td><a href="https://www.reg.ru/domain/new/checkmany?rid=263005&amp;dname=biologiya-10.ru" target="_blank" title="Зарегистрировать этот домен прямо сейчас">Купить</a></td>            </tr>
+            <tr class="rereg-row-even">                <td>domeni-rf.su</td>                <td>600</td>                <td><a href="https://www.reg.ru/domain/new/checkmany?rid=263005&amp;dname=domeni-rf.su" target="_blank" title="Зарегистрировать этот домен прямо сейчас">Купить</a></td>            </tr>
+            <tr class="rereg-row-odd">                <td>икеасайт.рф</td>                <td>199</td>                <td><a href="https://www.reg.ru/domain/new/checkmany?rid=263005&amp;dname=%D0%B8%D0%BA%D0%B5%D0%B0%D1%81%D0%B0%D0%B9%D1%82.%D1%80%D1%84" target="_blank" title="Зарегистрировать этот домен прямо сейчас">Купить</a></td>            </tr>
+            <tr class="rereg-row-even">                <td>fugabakha.ru</td>                <td>199</td>                <td><a href="https://www.reg.ru/domain/new/checkmany?rid=263005&amp;dname=fugabakha.ru" target="_blank" title="Зарегистрировать этот домен прямо сейчас">Купить</a></td>            </tr>
+            <tr class="rereg-row-odd">                <td>teatr-satiri.su</td>                <td>600</td>                <td><a href="https://www.reg.ru/domain/new/checkmany?rid=263005&amp;dname=teatr-satiri.su" target="_blank" title="Зарегистрировать этот домен прямо сейчас">Купить</a></td>            </tr>
+        </tbody>    </table></div>
+
+<link href="./Меню_ Mod_rewrite - RewriteCond - RewriteRule _ Примеры URL преобразований_files/style3.css" rel="stylesheet" type="text/css">
+
+
+</td>
+
+<td width="32%"> </td>
+</tr>
+</tbody></table>
+
+
+
+</font>
+</div>
+
+
+
+
+
+
+
+
+
+
+<br>
+<div align="Right"><a href="http://www.htaccess.net.ru/doc/mod_rewrite/index.php#top" rel="nofollow"><img src="./Меню_ Mod_rewrite - RewriteCond - RewriteRule _ Примеры URL преобразований_files/apache.gif" border="0" width="38" height="13"> Наверх</a></div>
+</noindex>	 <font size="-2"><center>Объем информации:   bytes </center></font>
+
+</div>
+</div>
+<!--Уголок рамки круглый прав нижний -->
+<div class="rbl"><img src="./Меню_ Mod_rewrite - RewriteCond - RewriteRule _ Примеры URL преобразований_files/lower_corner.gif" alt="" width="12" height="12" class="corner">
+Россия • admin@htaccess.net.ru 2005 - 2014 • <noindex>
+Рекомендуем хостинг: <a href="http://www.hosting.reg.ru/?rid=263005" rel="nofollow" style="color: white" target="_blank">Reg.ru (крупнейший)</a>,
+<a href="http://www.hostland.ru/?r=40008605" rel="nofollow" style="color: white" target="_blank">Hostland.ru (по-дешевле)</a> - договора, счета, акты.</noindex>
+
+
+</div>
+</div><br>
+
+		
+</div><br>
+</div>
+<!-- div id="content" -->	
+</div>
+<!-- div id="container" -->	
+</div>
+
+<div class="clearing">&nbsp;</div>	
+
+
+
+
+<noindex>
+<!-- соц кнопки -->
+<div align="Right">
+<script type="text/javascript" src="./Меню_ Mod_rewrite - RewriteCond - RewriteRule _ Примеры URL преобразований_files/share.js" charset="utf-8"></script>
+<div class="yashare-auto-init" data-yasharel10n="ru" data-yasharetype="none" data-yasharequickservices="yaru,vkontakte,facebook,twitter,odnoklassniki,moimir,lj,moikrug,gplus"><span class="b-share"><a rel="nofollow" target="_blank" title="ВКонтакте" class="b-share__handle b-share__link b-share-btn__vkontakte" href="https://share.yandex.net/go.xml?service=vkontakte&amp;url=http%3A%2F%2Fwww.htaccess.net.ru%2Fdoc%2Fmod_rewrite%2Findex.php&amp;title=%D0%9C%D0%B5%D0%BD%D1%8E%3A%20Mod_rewrite%20-%20RewriteCond%20-%20RewriteRule%20%2F%20%D0%9F%D1%80%D0%B8%D0%BC%D0%B5%D1%80%D1%8B%20URL%20%D0%BF%D1%80%D0%B5%D0%BE%D0%B1%D1%80%D0%B0%D0%B7%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B9" data-service="vkontakte"><span class="b-share-icon b-share-icon_vkontakte"></span></a><a rel="nofollow" target="_blank" title="Facebook" class="b-share__handle b-share__link b-share-btn__facebook" href="https://share.yandex.net/go.xml?service=facebook&amp;url=http%3A%2F%2Fwww.htaccess.net.ru%2Fdoc%2Fmod_rewrite%2Findex.php&amp;title=%D0%9C%D0%B5%D0%BD%D1%8E%3A%20Mod_rewrite%20-%20RewriteCond%20-%20RewriteRule%20%2F%20%D0%9F%D1%80%D0%B8%D0%BC%D0%B5%D1%80%D1%8B%20URL%20%D0%BF%D1%80%D0%B5%D0%BE%D0%B1%D1%80%D0%B0%D0%B7%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B9" data-service="facebook"><span class="b-share-icon b-share-icon_facebook"></span></a><a rel="nofollow" target="_blank" title="Twitter" class="b-share__handle b-share__link b-share-btn__twitter" href="https://share.yandex.net/go.xml?service=twitter&amp;url=http%3A%2F%2Fwww.htaccess.net.ru%2Fdoc%2Fmod_rewrite%2Findex.php&amp;title=%D0%9C%D0%B5%D0%BD%D1%8E%3A%20Mod_rewrite%20-%20RewriteCond%20-%20RewriteRule%20%2F%20%D0%9F%D1%80%D0%B8%D0%BC%D0%B5%D1%80%D1%8B%20URL%20%D0%BF%D1%80%D0%B5%D0%BE%D0%B1%D1%80%D0%B0%D0%B7%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B9" data-service="twitter"><span class="b-share-icon b-share-icon_twitter"></span></a><a rel="nofollow" target="_blank" title="Одноклассники" class="b-share__handle b-share__link b-share-btn__odnoklassniki" href="https://share.yandex.net/go.xml?service=odnoklassniki&amp;url=http%3A%2F%2Fwww.htaccess.net.ru%2Fdoc%2Fmod_rewrite%2Findex.php&amp;title=%D0%9C%D0%B5%D0%BD%D1%8E%3A%20Mod_rewrite%20-%20RewriteCond%20-%20RewriteRule%20%2F%20%D0%9F%D1%80%D0%B8%D0%BC%D0%B5%D1%80%D1%8B%20URL%20%D0%BF%D1%80%D0%B5%D0%BE%D0%B1%D1%80%D0%B0%D0%B7%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B9" data-service="odnoklassniki"><span class="b-share-icon b-share-icon_odnoklassniki"></span></a><a rel="nofollow" target="_blank" title="Мой Мир" class="b-share__handle b-share__link b-share-btn__moimir" href="https://share.yandex.net/go.xml?service=moimir&amp;url=http%3A%2F%2Fwww.htaccess.net.ru%2Fdoc%2Fmod_rewrite%2Findex.php&amp;title=%D0%9C%D0%B5%D0%BD%D1%8E%3A%20Mod_rewrite%20-%20RewriteCond%20-%20RewriteRule%20%2F%20%D0%9F%D1%80%D0%B8%D0%BC%D0%B5%D1%80%D1%8B%20URL%20%D0%BF%D1%80%D0%B5%D0%BE%D0%B1%D1%80%D0%B0%D0%B7%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B9" data-service="moimir"><span class="b-share-icon b-share-icon_moimir"></span></a><a rel="nofollow" target="_blank" title="LiveJournal" class="b-share__handle b-share__link b-share-btn__lj" href="https://share.yandex.net/go.xml?service=lj&amp;url=http%3A%2F%2Fwww.htaccess.net.ru%2Fdoc%2Fmod_rewrite%2Findex.php&amp;title=%D0%9C%D0%B5%D0%BD%D1%8E%3A%20Mod_rewrite%20-%20RewriteCond%20-%20RewriteRule%20%2F%20%D0%9F%D1%80%D0%B8%D0%BC%D0%B5%D1%80%D1%8B%20URL%20%D0%BF%D1%80%D0%B5%D0%BE%D0%B1%D1%80%D0%B0%D0%B7%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B9" data-service="lj"><span class="b-share-icon b-share-icon_lj"></span></a><a rel="nofollow" target="_blank" title="Google Plus" class="b-share__handle b-share__link b-share-btn__gplus" href="https://share.yandex.net/go.xml?service=gplus&amp;url=http%3A%2F%2Fwww.htaccess.net.ru%2Fdoc%2Fmod_rewrite%2Findex.php&amp;title=%D0%9C%D0%B5%D0%BD%D1%8E%3A%20Mod_rewrite%20-%20RewriteCond%20-%20RewriteRule%20%2F%20%D0%9F%D1%80%D0%B8%D0%BC%D0%B5%D1%80%D1%8B%20URL%20%D0%BF%D1%80%D0%B5%D0%BE%D0%B1%D1%80%D0%B0%D0%B7%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B9" data-service="gplus"><span class="b-share-icon b-share-icon_gplus"></span></a></span></div> 
+</div>
+
+					
+<!-- id="wrapper" -->
+
+
+
+
+<div id="N_Left">
+
+
+&nbsp;
+<a href="http://dmoz.org/World/Russian/%D0%9A%D0%BE%D0%BC%D0%BF%D1%8C%D1%8E%D1%82%D0%B5%D1%80%D1%8B/%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%BD%D0%B5%D1%82/%D0%94%D0%B8%D0%B7%D0%B0%D0%B9%D0%BD_%D0%B8_%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0_%D1%81%D0%B0%D0%B9%D1%82%D0%BE%D0%B2/%D0%92%D0%B5%D0%B1-%D1%81%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D1%81%D1%82%D0%B2%D0%BE/%D0%A0%D0%B5%D1%81%D1%83%D1%80%D1%81%D1%8B_%D0%B2%D0%B5%D0%B1%D0%BC%D0%B0%D1%81%D1%82%D0%B5%D1%80%D0%B0/" target="blank"><img src="./Меню_ Mod_rewrite - RewriteCond - RewriteRule _ Примеры URL преобразований_files/dmoz2.gif" alt="In Partnership with AOL Search" border="0"></a>
+&nbsp;&nbsp;
+
+
+
+
+
+<a href="http://host-tracker.com/ru/" rel="nofollow" onmouseover="this.href=&quot;http://host-tracker.com/ru/uptime-statistics/4672982/lvuc/&quot;;"><img width="88" height="31" border="0" alt="службы мониторинга серверов" src="./Меню_ Mod_rewrite - RewriteCond - RewriteRule _ Примеры URL преобразований_files/saved_resource"></a><noscript>&lt;a href='http://host-tracker.com/ru/' &gt;службы мониторинга серверов&lt;/a&gt;</noscript>
+
+
+           
+
+<!--
+<Br>
+<Font Size="-2">&nbsp; Рекламный материал:</Font>
+<Br> &nbsp; 
+
+<Br><Br>
+-->
+
+
+
+</div>
+<div id="N_Right">
+
+	
+	
+
+<div align="Right">
+<!--LiveInternet counter--><script language="JavaScript"><!--
+document.write('<a href="http://www.liveinternet.ru/click" '+
+'target=_blank><img src="http://counter.yadro.ru/hit?t16.6;r'+
+escape(document.referrer)+((typeof(screen)=='undefined')?'':
+';s'+screen.width+'*'+screen.height+'*'+(screen.colorDepth?
+screen.colorDepth:screen.pixelDepth))+';u'+escape(document.URL)+
+';'+Math.random()+
+'" title="LiveInternet: показано число просмотров за 24 часа, посетителей за 24 часа и за сегодн\я" '+
+'border=0 width=88 height=31></a>')//--></script><a href="http://www.liveinternet.ru/click" target="_blank"><img src="./Меню_ Mod_rewrite - RewriteCond - RewriteRule _ Примеры URL преобразований_files/hit" title="LiveInternet: показано число просмотров за 24 часа, посетителей за 24 часа и за сегодня" border="0" width="88" height="31"></a><!--/LiveInternet-->
+&nbsp;&nbsp;
+
+
+<!--Rating@Mail.ru COUNTEr--><script language="JavaScript" type="text/javascript"><!--
+d=document;var a='';a+=';r='+escape(d.referrer)
+js=10//--></script><script language="JavaScript1.1" type="text/javascript"><!--
+a+=';j='+navigator.javaEnabled()
+js=11//--></script><script language="JavaScript1.2" type="text/javascript"><!--
+s=screen;a+=';s='+s.width+'*'+s.height
+a+=';d='+(s.colorDepth?s.colorDepth:s.pixelDepth)
+js=12//--></script><script language="JavaScript1.3" type="text/javascript"><!--
+js=13//--></script><script language="JavaScript" type="text/javascript"><!--
+d.write('<a href="http://top.mail.ru/jump?from=967205"'+
+' target=_top><img src="http://d2.cc.be.a0.top.list.ru/counter'+
+'?id=967205;t=54;js='+js+a+';rand='+Math.random()+
+'" alt="Рейтинг@Mail.ru"'+' border=0 height=31 width=88/><\/a>')
+if(11<js)d.write('<'+'!-- ')//--></script><a href="http://top.mail.ru/jump?from=967205" target="_top"><img src="./Меню_ Mod_rewrite - RewriteCond - RewriteRule _ Примеры URL преобразований_files/counter" alt="Рейтинг@Mail.ru" border="0" height="31" width="88/"></a><!-- <noscript><a
+target=_top href="http://top.mail.ru/jump?from=967205"><img
+src="http://d2.cc.be.a0.top.list.ru/counter?js=na;id=967205;t=54"
+border=0 height=31 width=88
+alt="Рейтинг@Mail.ru"/></a></noscript><script language="JavaScript" type="text/javascript"><!--
+if(11<js)d.write('--'+'>')//--><!--/COUNTER-->
+</div>
+
+
+
+
+<!-- 
+<Font Size="-2">Рекламный материал:</Font><Br>
+<Div Align="Right">
+<Br>
+</Div>
+-->
+
+
+
+
+</div>	
+
+
+
+
+<!-- <div id="outer_wrapper"> -->	
+	
+<!--   Подвал   -->	
+<div id="footer">
+
+
+
+
+
+
+<center>
+<!-- reg.ru ,был -->
+</center>
+
+
+
+</div>
+
+
+
+
+
+<!-- гугл аналитик -->
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script src="./Меню_ Mod_rewrite - RewriteCond - RewriteRule _ Примеры URL преобразований_files/ga.js" type="text/javascript"></script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-3763512-1");
+pageTracker._initData();
+pageTracker._trackPageview();
+</script>
+
+
+<!-- Yandex.Metrika counter -->
+<div style="display:none;"><script type="text/javascript">
+(function(w, c) {
+    (w[c] = w[c] || []).push(function() {
+        try {
+            w.yaCounter764758 = new Ya.Metrika({id:764758, enableAll: true, webvisor:true});
+        }
+        catch(e) { }
+    });
+})(window, "yandex_metrika_callbacks");
+</script></div>
+<script src="./Меню_ Mod_rewrite - RewriteCond - RewriteRule _ Примеры URL преобразований_files/watch.js" type="text/javascript" defer="defer"></script>
+<noscript>&lt;div&gt;&lt;img src="//mc.yandex.ru/watch/764758" style="position:absolute; left:-9999px;" alt="" /&gt;&lt;/div&gt;</noscript>
+<!-- /Yandex.Metrika counter -->
+
+
+
+<!-- Разместите этот тег в теге head или непосредственно перед закрывающим тегом body -->
+<script type="text/javascript" src="./Меню_ Mod_rewrite - RewriteCond - RewriteRule _ Примеры URL преобразований_files/plusone.js" gapi_processed="true">
+  {lang: 'ru'}
+</script>
+
+
+</noindex>
+
+
+
+<!-- This document saved from © http://htaccess.net.ru/  -->
+</body></html>

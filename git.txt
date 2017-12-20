@@ -1,0 +1,63 @@
+github	||	bitbucket
+
+git config --list			все настройки
+git help commit				страница руководства
+
+git config --global user.name "User name"
+git config --global user.email "email"
+
+git remote show origin
+
+cd d:/new					переходим в дирректорию
+git init					создаЄт в текущем каталоге новый подкаталог с именем .git содержащий все необходимые файлы репозитори
+
+git status								показывает в каком статусе репозиторий
+git add .								добавить все (.) файлы
+git commit -m "first commit" 			"снимок" текущего состояния + коментируем
+git commit -a -m "ha ha" 			(add + commit)
+
+git log				 посмотреть историю коммитов (выход кнопкой q)
+git log -p		 	 посмотреть подробный коммит
+git log --graph		 посмотреть подробный коммит c изменениями
+
+git clone "URL-repositoria" [/your-folder]			пользуем репозиторий
+git pullor											стянуть с сервера
+git fetch											стянуть с сервера но не добавлять автоматически
+git checkout -- file.txt					исключить выбраный фаил из списка add вернув его в исходное состояние
+git push || git push -u origin master				залить комит на свой репозиторий
+git remote add origin https://github.com/lexus132/my_repositorii.git 			назначить локальной дирректории удаленный репозиторий
+
+git remote -v							 посмотреть все удаленные репозитории
+git branch		||		git branch -a			посмотреть все ветки
+
+git checkout 7b4asdq			 откат на коммит 7b4asdq (первые 7 симоволов хэша коммита)
+git checkout master				 перейти в ветку master
+git checkout 33002ff4
+git checkout f41b43fb
+
+git reset --hard origin/your_branch
+
+clear												очистить
+
+git diff										посмотреть изменени¤
+git reset HEAD file.txt 		убрать фаил из add
+
+git branch		||		git branch -a			посмотреть все ветки
+git branch bagFix								создать новую ветку
+git branch -d bagFix							удалить ветку bagFix
+git branch -D bagFix							удалить ветку bagFix принудительно
+git checkout bagFix								перейти в ветку bagFix
+git checkout event_paiment_mod
+git checkout -b bagFix							создать новувю ветку и перейти в ветку bagFix
+git merge bagFix								присоединит (сольет) ветку bagFix к текущей ветки
+
+git commit -a --amend							заменить последний коммит на локале
+git reset --soft HEAD^							убрать последний коммит на локале (но не изменения, которые внесли, они сохранятся)
+git reset --hard HEAD^							убрать последний коммит на локале
+
+git revert commit-sha1							коммит, который отменяет какой-то коммит на гите
+
+composer update ...
+composer remove ...
+
+git clone -b <branch> <remote_repo>

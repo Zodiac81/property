@@ -1,0 +1,41 @@
+#!/bin/bash
+
+notfiles=$(mysql -u root -p -e "SHOW DATABASES")
+
+tempdir=$(pwd)
+pathdir=/home/$USER
+dirnamebase=base
+dirdatabases=databases
+dirname=databases
+dirhosts=apache
+
+if ! [ -d "$pathdir/$dirnamebase" ]
+then
+	mkdir "$pathdir/$dirnamebase"
+fi
+
+if ! [ -d "$pathdir/$dirnamebase/$dirdatabases" ]
+then
+	mkdir "$pathdir/$dirnamebase/$dirdatabases"
+fi
+
+if [ -d "$pathdir/$dirnamebase/$dirdatabases" ]
+then
+	for elem in $notfiles
+	do
+		if [ $elem != "Database" ] && [ $elem != "information_schema" ]
+		then
+			mysqldump -u root -ppassword $elem > "$pathdir/$dirnamebase/$dirdatabases/$elem"
+		fi
+	done
+fi
+
+if ! [ -d "$pathdir/$dirnamebase/$dirhosts" ]
+then
+	mkdir "$pathdir/$dirnamebase/$dirhosts"
+fi
+
+if [ -d "$pathdir/$dirnamebase/$dirhosts" ]
+then
+	cp -rp /etc/apache2/sites-available -v $pathdir/$dirnamebase/$dirhosts
+fi

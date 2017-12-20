@@ -1,0 +1,147 @@
+
+$rules = array(
+	'name' => 'required | alpha_dash | alpha_num | max:20',
+	'email' => 'required | email',
+);
+
+use Illuminate\Support\Facades\Validator;	    
+
+$validator = Validator::make($request->all(), $rules);
+	    
+if ($validator->fails())
+{
+	// Переданные данные не прошли проверку
+}
+	    
+$messages = $validator->messages();		    // получить его сообщения
+$failed = $validator->failed();		    	// массив правил без самих сообщений
+	    
+$validator->after(function($validator){	    // запустить вашу функцию-замыкание, в которой вы можете, например, проверить что-то особенное или добавить какое-то своё сообщение об ошибке
+	if ($this->somethingElseIsInvalid()){
+	    $validator->errors()->add('field', 'Something is wrong with this field!');
+	}
+});
+	    
+if (! $validator->fails()){			    	// castom validate
+	if($request->input('name') != 'ivan'){
+	    $validator->errors()->add('name', 'Bad name');
+	}
+}
+
+if(count($validator->errors()) > 0 ){
+	return response()->json([
+	    //'error' => $validator->errors(), 							// get errors as objekts
+	    'error' => $validator->errors()->all(),  					// get only text errors as array
+	]);
+}
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ validate in controller ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+$input = $request->except(['_token']);
+        $user  = Auth::user();
+	$validator = Validator::make($request->all(),[
+            'carName'	    => 'required',
+            'transNumb'	    => 'required',
+            'cat'	    => 'required | integer',
+        ],[
+	    'cat.required'	    => 'There were errors. Please try again later or contact the site administration.',
+	    'cat.integer'	    => 'There were errors. Please try again later or contact the site administration.',
+	]);
+	
+	// custom validate
+	if (! $validator->fails()){
+	    if(empty($input['stripeToken'])){
+		$validator->getMessageBag()->add('iban', Lang::get('forms.individual_error_iban'));
+	    }
+	}
+	
+	if(count($validator->errors()) > 0 ){
+	    return response()->json([
+		'errors' => $validator->errors(),
+	    ]);
+	} else {
+	    return response()->json([
+		'successful' => $validator->errors(),
+	    ]);
+	    
+	}
+
+in view
+
+	$('a#add_car_{{ $categItem['id'] }}').on('click', function(e){
+				var form = $('form#AddCarForm ');
+				$(form).find('input[name="cat"]').val({{ $categItem['id'] }});
+				$(form).on('submit', function(e){
+				    $('div.error-message').remove();
+				    e.preventDefault();
+				    var csrf_token = $(form).find('input[name="_token"]').val();
+				    $.ajax($(form).attr('action'), {
+					type: 'POST',
+					data: $(form).serialize(),
+//					contentType: 'json',
+					headers:{
+					    'X-CSRF-Token': csrf_token
+					},
+					success: function (response) {
+					    console.log(response);
+					    if(response.errors){
+						for(var i in response.errors){
+						    if($(form).find("input[name=" + i + "]")){
+							$(form).find("input[name=" + i + "]").after('<div class="error-message"><span>'+ response.errors[i] +'</span></div>');
+						    }
+						}
+					    } else if(response.successful){
+//						window.location = response.successful;
+					    }
+					},
+					error: function(response) {
+					    console.log(response);
+					}
+				    });
+//				    console.log({{ $categItem['id'] }});
+				    return false;
+				});
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+MyController -> Controller -> ValidatesRequests
+
+
+accepted					Поле должно быть в значении yes, on или 1. Это полезно для проверки принятия правил и лицензий.
+active_url					Поле должно быть корректным URL, доступным через функцию checkdnsrr.
+after:date 					Поле должно быть датой, более поздней, чем date. Строки приводятся к датам функцией strtotime 		// after:tomorow
+alpha 						Поле можно содержать только алфавитные символы.
+alpha_dash					Поле можно содержать только алфавитные символы, цифры, знаки подчёркивания (_) и дефисы (-).
+alpha_num 					Поле можно содержать только алфавитные символы и цифры.
+array 						Поле должно быть массивом.
+before:date 				Поле должно быть датой, более ранней, чем date. Строки приводятся к датам функцией strtotime.
+between:min,max 			Поле должно быть числом в диапазоне от min до max. Строки, числа и файлы трактуются аналогично правилу size
+boolean 					Поле должно быть логическим (булевым). Разрешенные значения: true, false, 1, 0, "1" и "0"
+confirmed 					Значение поля должно соответствовать значению поля с этим именем, плюс foo_confirmation. Например, если проверяется поле password, то на вход должно быть передано совпадающее по значению поле password_confirmation
+date 						Поле должно быть правильной датой в соответствии с функцией strtotime
+date_format:format 			Поле должно подходить под формату даты format в соответствии с функцией date_parse_from_format
+different:field 	 		Значение проверяемого поля должно отличаться от значения поля field				
+email 						Поле должно быть корректным адресом e-mail
+exists:table,column 		Поле должно существовать в заданной таблице базе данных
+image 						Загруженный файл должен быть изображением в формате jpeg, png, bmp, gif или svg
+in:foo,bar,... 				Значение поля должно быть одним из перечисленных (foo, bar и т.д.).
+integer 					Поле должно иметь корректное целочисленное значение
+ip 							Поле должно быть корректным IP-адресом
+max:value 					Значение поля должно быть меньше или равно value. Строки, числа и файлы трактуются аналогично правилу size
+mimes:foo,bar,... 			MIME-тип загруженного файла должен быть одним из перечисленных  // 'photo' => 'mimes:jpeg,bmp,png'
+min:value 					Значение поля должно быть более value. Строки, числа и файлы трактуются аналогично правилу size
+not_in:foo,bar,... 			Значение поля не должно быть одним из перечисленных (foo, bar и т.д.
+numeric 					Поле должно иметь корректное числовое или дробное значение
+regex:pattern 				Поле должно соответствовать заданному регулярному выражению
+required 					Проверяемое поле должно иметь непустое значение
+sometimes
+required_if:field,value,... Проверяемое поле должно иметь непустое значение, если другое поле field имеет любое из значений value
+required_with:foo,bar,... 	Проверяемое поле должно иметь непустое значение, но только если присутствует хотя бы одно из перечисленных полей (foo, bar и т.д.).
+required_with_all:foo,bar,... Проверяемое поле должно иметь непустое значение, но только если присутствуют все перечисленные поля (foo, bar и т.д.).
+required_without:foo,bar,...  Проверяемое поле должно иметь непустое значение, но только если не присутствует хотя бы одно из перечисленных полей (foo, bar и т.д.).
+required_without_all:foo,bar,... Проверяемое поле должно иметь непустое значение, но только если не присутствуют все перечисленные поля (foo, bar и т.д.).
+same:field 					Поле должно иметь то же значение, что и поле field
+size:value 					Поле должно иметь совпадающий с value размер. Для строк это обозначает длину, для чисел - число, для файлов - размер в килобайтах
+timezone 					Поле должно содержать идентификатор часового пояса (таймзоны), один из перечисленных в php-функции timezone_identifiers_list
+unique:table,column,except,idColumn Значение поля должно быть уникальным в заданной таблице базы данных. Если column не указано, то будет использовано имя поля
+url 						Поле должно быть корректным URL.

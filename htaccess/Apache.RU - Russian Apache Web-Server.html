@@ -1,0 +1,2118 @@
+
+<!-- saved from url=(0037)http://www.apache.ru/docs/fishki.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1251"><title>Apache.RU - Russian Apache Web-Server</title>
+<style>body{margin:0px;background-color:white}
+td,th,.plain{font-family:verdana;font-size:9pt;color:#606060}
+a{color:#990000}
+.s{font-size:9pt}</style>
+
+
+
+
+
+<style type="text/css">/* This is not a zero-length file! */</style><style type="text/css">/* This is not a zero-length file! */</style></head><body marginheight="0" marginwidth="0">
+<table border="0" cellpadding="0" cellspacing="0" width="100%" height="100%">
+<tbody><tr><td background="./Apache.RU - Russian Apache Web-Server_files/top_bg.gif" height="92">
+<table width="100%" height="92" border="0" cellpadding="0" cellspacing="0">
+  <tbody><tr>
+    <td width="400" align="right" valign="top"><a href="http://www.apache.ru/"><img src="./Apache.RU - Russian Apache Web-Server_files/apachelogo.gif" width="400" height="92" border="0"></a></td>
+    <td background="./Apache.RU - Russian Apache Web-Server_files/bg2.gif">
+<table width="100%" height="92" border="0" cellpadding="10" cellspacing="0">
+  <tbody><tr>
+    <td align="right" valign="top">
+<!-- RLE code START -->
+<script language="JavaScript">
+<!--
+var RndNum4NoCash = Math.round(Math.random() * 1000000000);
+document.write(
+'<iframe src="http://ad.adriver.ru/cgi-bin/erle.cgi'
++ '?sid=45285&target=blank&bt=1&pz=0&rnd=' + RndNum4NoCash
++ '" frameborder=0 vspace=0 hspace=0 width=468 height=60 marginwidth=0 marginheight=0 scrolling=no>'
++ '<a href="http://ad.adriver.ru/cgi-bin/click.cgi'
++ '?sid=45285&bt=1&pz=0&rnd=' + RndNum4NoCash + '" target=_blank>'
++ '<img src="http://ad.adriver.ru/cgi-bin/rle.cgi?'
++ 'sid=45285&bt=1&pz=0&rnd=' + RndNum4NoCash
++ '" alt="-AdRiver-" border=0 width=468 height=60></a></iframe>')
+// -->
+</script><iframe src="./Apache.RU - Russian Apache Web-Server_files/erle.html" frameborder="0" vspace="0" hspace="0" width="468" height="60" marginwidth="0" marginheight="0" scrolling="no">&lt;a href="http://ad.adriver.ru/cgi-bin/click.cgi?sid=45285&amp;bt=1&amp;pz=0&amp;rnd=184844009" target=_blank&gt;&lt;img src="http://ad.adriver.ru/cgi-bin/rle.cgi?sid=45285&amp;bt=1&amp;pz=0&amp;rnd=184844009" alt="-AdRiver-" border=0 width=468 height=60&gt;&lt;/a&gt;</iframe>
+<noscript>
+&lt;iframe src="http://ad.adriver.ru/cgi-bin/erle.cgi?sid=45285&amp;target=blank&amp;bt=1&amp;pz=0&amp;rnd=1837014685" frameborder=0 vspace=0 hspace=0 width=468 height=60 marginwidth=0 marginheight=0 scrolling=no&gt;
+&lt;a href="http://ad.adriver.ru/cgi-bin/click.cgi?sid=45285&amp;bt=1&amp;pz=0&amp;rnd=1837014685" target=_blank&gt;
+&lt;img src="http://ad.adriver.ru/cgi-bin/rle.cgi?sid=45285&amp;bt=1&amp;pz=0&amp;rnd=1837014685" alt="-AdRiver-" border=0 width=468 height=60&gt;&lt;/a&gt;&lt;/iframe&gt;
+</noscript>
+<!-- RLE code END -->
+	</td>
+  </tr>
+</tbody></table>
+    </td>
+  </tr>
+  </tbody></table>
+</td></tr>
+<tr><td align="center" background="./Apache.RU - Russian Apache Web-Server_files/menu_bg.gif">
+<a href="http://www.apache.ru/news">Новости</a> | <a href="http://www.apache.ru/docs">Документация</a> | <a href="http://www.apache.ru/download">Download</a> | <a href="http://www.apache.ru/webboard">Webboard</a> | <a href="http://www.apache.ru/faq">FAQ</a> | <a href="http://www.apache.ru/search.html">Поиск</a> | <a href="http://www.apache.ru/feedback">Контакты</a>
+</td></tr>
+<tr><td background="./Apache.RU - Russian Apache Web-Server_files/menu_bottom_bg.gif"><img src="./Apache.RU - Russian Apache Web-Server_files/emp.gif" width="1" height="8"></td></tr>
+<tr><td>
+<br>
+<!-- Main text: start -->
+<table border="0" cellpadding="2" cellspacing="2" width="95%" height="100%" align="center">
+<tbody><tr valign="top">
+  <td>
+
+
+<h2 align="center">Основные особенности Apache</h2>
+<hr>
+<blockquote> 
+
+
+<p>Эти параметры конфигурации управляют настройкой ядра Apache, и всегда доступны. </p>
+
+<ul>
+
+  <li><a href="http://www.apache.ru/docs/fishki.html#AccessConfig директива">AccessConfig</a> 
+
+  </li><li><a href="http://www.apache.ru/docs/fishki.html#AccessFileName">AccessFileName</a> 
+
+
+
+  </li><li><a href="http://www.apache.ru/docs/fishki.html#AddModule">AddModule</a> 
+
+  </li><li><a href="http://www.apache.ru/docs/fishki.html#AllowOverride">AllowOverride</a> 
+
+  </li><li><a href="http://www.apache.ru/docs/fishki.html#AuthName">AuthName</a> 
+
+  </li><li><a href="http://www.apache.ru/docs/fishki.html#AuthType">AuthType</a> 
+
+  </li><li><a href="http://www.apache.ru/docs/fishki.html#BindAddress">BindAddress</a> 
+
+  </li><li><a href="http://www.apache.ru/docs/fishki.html#ClearModuleList">ClearModuleList</a> 
+
+  </li><li><a href="http://www.apache.ru/docs/fishki.html#DefaultType">DefaultType</a> 
+
+  </li><li><a href="http://www.apache.ru/docs/fishki.html#Directory">&lt;Directory&gt;</a> 
+
+  </li><li><a href="http://www.apache.ru/docs/fishki.html#DocumentRoot">DocumentRoot</a> 
+
+  </li><li><a href="http://www.apache.ru/docs/fishki.html#ErrorDocument">ErrorDocument</a> 
+
+  </li><li><a href="http://www.apache.ru/docs/fishki.html#ErrorLog">ErrorLog</a> 
+
+  </li><li><a href="http://www.apache.ru/docs/fishki.html#Files">&lt;Files&gt;</a> 
+
+  </li><li><a href="http://www.apache.ru/docs/fishki.html#Group">Group</a> 
+
+  </li><li><a href="http://www.apache.ru/docs/fishki.html#HostNameLookups">HostNameLookups</a> 
+
+  </li><li><a href="http://www.apache.ru/docs/fishki.html#IdentityCheck">IdentityCheck</a> 
+
+  </li><li><a href="http://www.apache.ru/docs/fishki.html#IfModule">&lt;IfModule&gt;</a> 
+
+  </li><li><a href="http://www.apache.ru/docs/fishki.html#KeepAlive">KeepAlive</a> 
+
+  </li><li><a href="http://www.apache.ru/docs/fishki.html#KeepAliveTimeout">KeepAliveTimeout</a> 
+
+  </li><li><a href="http://www.apache.ru/docs/fishki.html#Limit">&lt;Limit&gt;</a> 
+
+  </li><li><a href="http://www.apache.ru/docs/fishki.html#Listen">Listen</a> 
+
+  </li><li><a href="http://www.apache.ru/docs/fishki.html#Location">&lt;Location&gt;</a> 
+
+  </li><li><a href="http://www.apache.ru/docs/fishki.html#MaxClients">MaxClients</a> 
+
+  </li><li><a href="http://www.apache.ru/docs/fishki.html#MaxKeepAliveRequests">MaxKeepAliveRequests</a> 
+
+  </li><li><a href="http://www.apache.ru/docs/fishki.html#MaxRequestsPerChild">MaxRequestsPerChild</a> 
+
+  </li><li><a href="http://www.apache.ru/docs/fishki.html#MaxSpareServers">MaxSpareServers</a> 
+
+  </li><li><a href="http://www.apache.ru/docs/fishki.html#MinSpareServers">MinSpareServers</a> 
+
+  </li><li><a href="http://www.apache.ru/docs/fishki.html#Options">Options</a> 
+
+  </li><li><a href="http://www.apache.ru/docs/fishki.html#PidFile">PidFile</a> 
+
+  </li><li><a href="http://www.apache.ru/docs/fishki.html#Port">Port</a> 
+
+  </li><li><a href="http://www.apache.ru/docs/fishki.html#require">Require</a> 
+
+  </li><li><a href="http://www.apache.ru/docs/fishki.html#ResourceConfig">ResourceConfig</a> 
+
+  </li><li><a href="http://www.apache.ru/docs/fishki.html#RLimitCPU">RLimitCPU</a> 
+
+  </li><li><a href="http://www.apache.ru/docs/fishki.html#RLimitMEM">RLimitMEM</a> 
+
+  </li><li><a href="http://www.apache.ru/docs/fishki.html#RLimitNPROC">RLimitNPROC</a> 
+
+  </li><li><a href="http://www.apache.ru/docs/fishki.html#Satisfy">Satisfy</a> 
+
+  </li><li><a href="http://www.apache.ru/docs/fishki.html#ScoreBoardFile">ScoreBoardFile</a> 
+
+  </li><li><a href="http://www.apache.ru/docs/fishki.html#SendBufferSize">SendBufferSize</a> 
+
+  </li><li><a href="http://www.apache.ru/docs/fishki.html#ServerAdmin">ServerAdmin</a> 
+
+  </li><li><a href="http://www.apache.ru/docs/fishki.html#ServerAlias">ServerAlias</a> 
+
+  </li><li><a href="http://www.apache.ru/docs/fishki.html#ServerName">ServerName</a> 
+
+  </li><li><a href="http://www.apache.ru/docs/fishki.html#ServerPath">ServerPath</a> 
+
+  </li><li><a href="http://www.apache.ru/docs/fishki.html#ServerRoot">ServerRoot</a> 
+
+  </li><li><a href="http://www.apache.ru/docs/fishki.html#ServerType">ServerType</a> 
+
+  </li><li><a href="http://www.apache.ru/docs/fishki.html#StartServers">StartServers</a> 
+
+  </li><li><a href="http://www.apache.ru/docs/fishki.html#TimeOut">TimeOut</a> 
+
+  </li><li><a href="http://www.apache.ru/docs/fishki.html#User">User</a> 
+
+  </li><li><a href="http://www.apache.ru/docs/fishki.html#VirtualHost">&lt;VirtualHost&gt;</a> 
+
+  </li></ul>
+
+<p>
+
+</p><hr noshade="" color="#1B3661" size="1">
+
+
+
+<p></p>
+
+<h2><a name="AccessConfig директива"></a>AccessConfig директива</h2>
+
+<ul>
+
+  <p><b>Синтаксис:</b> AccessConfig <i>имя-файла</i> <br><b>Значение по 
+
+  умолчанию: </b>AccessConfig conf/<i>access.conf</i> <br><b>Контекст:</b> 
+
+  конфигурация сервера, virtual host <br><b>Состояние:</b> основное</p></ul>
+
+<p>Сервер будет читать этот файл для дополнительных директив после чтения <a href="http://www.apache.ru/docs/fishki.html#ResourceConfig">ResourceConfig</a> 
+
+файла. <i>Имя-файла</i> - относительно <a href="http://www.apache.ru/docs/fishki.html#ServerRoot">ServerRoot</a>. 
+
+Действие этой дерективы может быть заблокировано следующим образом: </p>
+
+<ul>
+
+  <p><tt>AccessConfig /dev/null</tt></p></ul>
+
+<p>Исторически, этот файл, содержит только <a href="http://www.apache.ru/docs/fishki.html#Directory">&lt;Directory&gt; 
+
+</a>разделы, хотя фактически, он может теперь содержать любую директиву сервера, 
+
+допустимую в контексте конфигурации сервера. </p>
+
+<h2>
+
+<hr noshade="" color="#1B3661" size="1">
+
+<a name="AccessFileName"></a>AccessFileName директива</h2>
+
+<ul>
+
+  <p><b>Синтаксис:</b> AccessFileName <i>имя-файла</i> <br><b>Значение по 
+
+  умолчанию:</b> AccessFileName .htaccess <br><b>Контекст: </b>конфигурация 
+
+  сервера, virtual host <br><b>Состояние:</b> основное</p></ul>
+
+<p>При выдаче документа клиенту сервер ищет файл управления доступом с этим 
+
+именем в каждом каталоге пути к документу, если файлы управления доступом 
+
+допускаются для того каталога. Например: </p>
+
+<ul>
+
+  <p><tt>AccessFileName .acl</tt></p></ul>
+
+<p>Перед возвратом документа <tt>/usr/local/web/index.html</tt>, сервер будет 
+
+читать <tt>/.acl, /usr/.acl, /usr/local/.acl и /usr/local/web/.acl</tt> для 
+
+проверки доступа, если они не были заблокированы с помощью </p>
+
+<ul>
+
+  <p><tt>&lt;Dirctory /&gt;</tt> <br><tt>AllowOverride None</tt> 
+
+  <br><tt>&lt;/Directory&gt;</tt></p></ul>
+
+<h2>
+
+<hr noshade="" color="#1B3661" size="1">
+
+<a name="AddModule"></a>AddModule директива</h2>
+
+<p><b>Синтаксис:</b> AddModule <i>модуль модуля ...</i> <br><b>Контекст:</b> 
+
+конфигурация сервера <br><b>Состояние:</b> основное <br><b>Совместимость:</b> 
+
+AddModule доступен тольоко в Apache 1.2 выше </p>
+
+<p>Сервер может иметь модули, которые были скомпилированы, но активно не 
+
+используются. Эта директива может применяться для того, чтобы инициализировать 
+
+использование этих модулей. Сервер поставляется со списком <tt>pre-loaded</tt> 
+
+активных модулей; этот список может быть очищен с помощью <a href="http://www.apache.ru/docs/fishki.html#ClearModuleList">ClearModuleList</a> 
+
+директивы. </p>
+
+<h2>
+
+<hr noshade="" color="#1B3661" size="1">
+
+<a name="AllowOverride"></a>AllowOverride директива</h2>
+
+<p><b>Синтаксис:</b> AllowOverride <i>override override ...</i> <br><b>Значение 
+
+по умолчанию: </b>AllowOverride<i><tt> All</tt></i> <br><b>Контекст:</b> каталог 
+
+<br><b>Состояние:</b> основное </p>
+
+<p>Когда сервер находит <tt>.htaccess</tt> файл (как определено <a href="http://www.apache.ru/docs/fishki.html#AccessFileName">AccessFileName</a>) 
+
+ему необходимо знать какие директивы, объявленные в том файле могут отменять 
+
+ранее утановленную информацию доступа. </p>
+
+<p>Эта директива может быть установлена в <tt>None</tt>, т.е. чтобы сервер не 
+
+читал файл .htaccess. Если она установленна в <tt>All </tt>- сервер будет 
+
+допускать все директивы .htaccess файла. Возможны следующие одно или несколько 
+
+значений: </p>
+
+<ul>
+
+  <li><b><tt>AuthConfig </tt></b>- допускает использование директив разрешения 
+
+  (<a href="http://www.apache.ru/docs/apache-rus/mod/mod_auth_dbm.html#NONE">AuthDBMGroupFile</a>, 
+
+  <a href="http://www.apache.ru/docs/apache-rus/mod/mod_auth.html#NONE">AuthDBMUserFile</a>, 
+
+  AuthGroupFile, <a href="http://www.apache.ru/docs/fishki.html#AuthName">AuthName</a>, 
+
+  <a href="http://www.apache.ru/docs/fishki.html#AuthType">AuthType</a>, 
+
+  AuthUserFile, <a href="http://www.apache.ru/docs/fishki.html#require">require</a>, и 
+
+  т.д..). 
+
+  </li><li><b><tt>FileInfo </tt></b>- допускает использование директив, управляющих 
+
+  типами документа (<a href="http://www.apache.ru/docs/apache-rus/mod/mod_mime.html#NONE">AddEncoding</a>, 
+
+  <a href="http://www.apache.ru/docs/apache-rus/mod/mod_mime.html#NONE">AddLanguage</a>, 
+
+  <a href="http://www.apache.ru/docs/apache-rus/mod/mod_mime.html#NONE">AddType</a>, 
+
+  <a href="http://www.apache.ru/docs/fishki.html#DefaultType">DefaultType</a>, 
+
+  <a href="http://www.apache.ru/docs/fishki.html#ErrorDocument">ErrorDocument</a>, 
+
+  <a href="http://www.apache.ru/docs/apache-rus/mod/mod_negotiation.html#NONE">LanguagePriority</a>, 
+
+  и т.д..). 
+
+  </li><li><b><tt>Indexes </tt></b>- допускает использование деректив управления 
+
+  индексацией каталога(<a href="http://www.apache.ru/docs/apache-rus/mod/mod_dir.html#NONE">AddDescription</a>, 
+
+  <a href="http://www.apache.ru/docs/apache-rus/mod/mod_dir.html#NONE">AddIcon</a>, 
+
+  <a href="http://www.apache.ru/docs/apache-rus/mod/mod_dir.html#NONE">AddIconByEncoding</a>, 
+
+  <a href="http://www.apache.ru/docs/apache-rus/mod/mod_dir.html#NONE">AddIconByType</a>, 
+
+  <a href="http://www.apache.ru/docs/apache-rus/mod/mod_dir.html#NONE">DefaultIcon</a>, 
+
+  <a href="http://www.apache.ru/docs/apache-rus/mod/mod_dir.html#NONE">DirectoryIndex</a>, 
+
+  <a href="http://www.apache.ru/docs/apache-rus/mod/mod_dir.html#NONE">FancyIndexing</a>, 
+
+  <a href="http://www.apache.ru/docs/apache-rus/mod/mod_dir.html#NONE">HeaderName</a>, 
+
+  <a href="http://www.apache.ru/docs/apache-rus/mod/mod_dir.html#NONE">IndexIgnore</a>, 
+
+  <a href="http://www.apache.ru/docs/apache-rus/mod/mod_dir.html#NONE">IndexOptions</a>, 
+
+  <a href="http://www.apache.ru/docs/apache-rus/mod/mod_dir.html#NONE">ReadmeName</a>, 
+
+  и т.д..). 
+
+  </li><li><b><tt>Limit </tt></b>- допускает использование основных директив 
+
+  управления доступом (<tt>allow</tt>, <tt>deny </tt>и <tt>order</tt>). 
+
+  </li><li><b><tt>Options </tt></b>- допускает использование директив, управляющих 
+
+  специфическими особенностями каталога (<a href="http://www.apache.ru/docs/fishki.html#Options">Options </a>и 
+
+  <a href="http://www.apache.ru/docs/apache-rus/mod/mod_include.html#XBitHack">XBitHack</a>). 
+
+  </li></ul>
+
+<h2>
+
+<hr noshade="" color="#1B3661" size="1">
+
+<a name="AuthName"></a>AuthName директива</h2>
+
+<p><b>Синтаксис: </b>AuthName <i>auth-область</i> <br><b>Контекст: </b>каталог, 
+
+.htaccess <br><b>Отмена:</b> AuthConfig <br><b>Состояние:</b> основное </p>
+
+<p>Эта директива присваивает каталогу имя как области доступа. Эта область 
+
+дается пользователю для запроса у него username и пароля. Директива должна 
+
+использоваться совместно с <a href="http://www.apache.ru/docs/fishki.html#AuthType">AuthType </a>и 
+
+<a href="http://www.apache.ru/docs/fishki.html#require">require 
+
+</a>директивами, и директивами типа <a href="http://www.apache.ru/docs/apache-rus/mod/mod_auth.html#NONE">AuthUserFile 
+
+</a>и <a href="http://www.apache.ru/docs/apache-rus/mod/mod_auth.html#NONE">AuthGroupFile</a>. 
+
+</p>
+
+<h2>
+
+<hr noshade="" color="#1B3661" size="1">
+
+<a name="AuthType"></a>AuthType директива</h2>
+
+<p><b>Синтаксис:</b> AuthType <i>тип</i> <br><b>Контекст:</b> каталог, .htaccess 
+
+<br><b>Отмена:</b> AuthConfig <br><b>Состояние: </b>основное </p>
+
+<p>Эта директива выбирает тип идентификации пользователя для каталога. Только 
+
+<tt>Basic </tt>в настоящее время реализован. Эта деректива должна использоваться 
+
+совместно с дерективами <a href="http://www.apache.ru/docs/fishki.html#AuthName">AuthName </a>и 
+
+<a href="http://www.apache.ru/docs/fishki.html#require">require</a>, и 
+
+директивами типа <a href="http://www.apache.ru/docs/apache-rus/mod/mod_auth.html#NONE">AuthUserFile 
+
+</a>и <a href="http://www.apache.ru/docs/apache-rus/mod/mod_auth.html#NONE">AuthGroupFile</a>. 
+
+</p>
+
+<h2>
+
+<hr noshade="" color="#1B3661" size="1">
+
+<a name="BindAddress"></a>BindAddress директива</h2>
+
+<p><b>Синтаксис: </b>BindAddress <i>saddr</i> <br><b>Значение по умолчанию: 
+
+</b>BindAddress * <br><b>Контекст: </b>конфигурация сервера <br><b>Состояние: 
+
+</b>основное </p>
+
+<p>UnixR http сервер может быть настроен на все IP-адреса машины сервера, или 
+
+только на один IP-адрес. <i>Saddr </i>может иметь одно из следующих значений: 
+
+</p>
+
+<ul>
+
+  <li>* 
+
+  </li><li>Адрес IP 
+
+  </li><li>Полное domain name </li></ul>
+
+<p>Если значение - *, то сервер будет отвечать на запросы с любого IP-адреса 
+
+машины, иначе он будет принимать запросы только на определенном адресе IP. </p>
+
+<p>Эта опция может использоваться как альтернативный метод для поддержки <a href="http://www.apache.ru/docs/apache-rus/virtual-host.html#NONE">виртуальных 
+
+серверов</a>, вместо использования <a href="http://www.apache.ru/docs/fishki.html#VirtualHost">&lt;VirtualHost&gt;</a> 
+
+разделов. </p>
+
+<p><b>См. Также:</b> <a href="http://www.apache.ru/docs/apache-rus/dns-caveats.html#NONE">DNS проблемы</a> 
+
+<br><b>См. Также:</b> <a href="http://www.apache.ru/docs/apache-rus/bind.html">Установка использования 
+
+адресов и портов Apache</a>. </p>
+
+<h2>
+
+<hr noshade="" color="#1B3661" size="1">
+
+<a name="ClearModuleList"></a>ClearModuleList директива</h2>
+
+<p><b>Синтаксис:</b> ClearModuleList <br><b>Контекст: </b>конфигурация сервера 
+
+<br><b>Состояние:</b> основное <br><b>Совместимость: </b>ClearModuleList 
+
+доступен только в Apache 1.2 и выше. </p>
+
+<p>Сервер поставляется со встроенным списком активных модулей. Эта директива 
+
+очищает список. Применение этой дерективы подразумевает, что список модулей 
+
+будет затем повторно заполнен с помощью директивы <a href="http://www.apache.ru/docs/fishki.html#AddModule">AddModule</a>. 
+
+</p>
+
+<h2>
+
+<hr noshade="" color="#1B3661" size="1">
+
+<a name="DefaultType"></a><font size="+2">DefaultType директива</font></h2>
+
+<p><b>Синтаксис:</b> DefaultType <i>mime-тип</i> <br><b>Значение по 
+
+умолчанию:</b> DefaultType <tt>text/html</tt> <br><b>Контекст: </b>конфигурация 
+
+сервера, virtual host, каталог, .htaccess <br><b>Отмена: </b>FileInfo 
+
+<br><b>Состояние: </b>основное </p>
+
+<p>Не исключена ситуация, когда сервер получает запрос на документ, mime-тип 
+
+которого не определен. </p>
+
+<p>Т.к. в ответе сервер должен сообщить клиенту Content-type документа, то в 
+
+случае неизвестного mime-типа он использует DefaultType. Например: </p>
+
+<ul>
+
+  <p><tt>DefaultType image/gif</tt></p></ul>
+
+<p>был бы подходящим для каталога, который содержит много gif изображений с 
+
+именами файлов с .gif расширением. </p>
+
+<h2>
+
+<hr noshade="" color="#1B3661" size="1">
+
+<font size="+2">&lt;<a name="Directory"></a>Directory&gt; директива</font></h2>
+
+<p><b>Синтаксис</b>: &lt;Directory <i>directory</i>&gt; ... &lt;/Directory&gt; 
+
+<br><b>Контекст</b>: конфигурация сервера, virtual host <br><b>Состояние</b>: 
+
+основное </p>
+
+<p>&lt;Directory&gt; и &lt;/Directory&gt; используется, чтобы включить группу 
+
+директив, которые необходимо применить только к указанному каталогу и его 
+
+подкаталогам. Может исполбзоваться любая директива применимая в контексте 
+
+каталога. <i>Directory </i>является или полным путем к каталогу, или wild-card 
+
+строкой. В wild-card строке, "? " соответствует любому одиночному символу, и " * 
+
+" соответствует любым последовательностям символов. Пример: </p>
+
+<ul>
+
+  <p><tt>&lt;Directory /usr/local/httpd/htdocs&gt;</tt> <br><tt>Options Indexes 
+
+  FollowSymLinks</tt> <br><tt>&lt;/Directory&gt;</tt></p></ul>
+
+<p><b>Apache 1.2 и выше:</b> Расширенные регулярные выражения могут также 
+
+использоваться, с добавлением ~ символа. Например: </p>
+
+<ul>
+
+  <p><tt>&lt;Directory ~ " ^/www/. * / [0-9] {3)"&gt;</tt></p></ul>
+
+<p>соответствует каталогам в /www/, имена которых состоят из трех чисел. </p>
+
+<p>Если несколько разделов &lt;Directory&gt; соответствуют каталогу (или 
+
+образцу) содержащему документ, то директивы применяются в порядке самого 
+
+короткого соответствия сначала в соответствии с директивами из <a href="http://www.apache.ru/docs/fishki.html#AccessFileName">.htaccess</a> 
+
+файла. Например, с </p>
+
+<ul>
+
+  <p><tt>&lt;Directory /&gt;</tt> <br><tt>AllowOverride None</tt> 
+
+  <br><tt>&lt;/Directory&gt;</tt> </p>
+
+  <p><tt>&lt;Directory /home/*&gt;</tt> <br><tt>AllowOverride FileInfo</tt> 
+
+  <br><tt>&lt;/Directory&gt;</tt></p></ul>
+
+<p>для доступа к документу <tt>/home/web/dir/doc.html</tt> будут выполнены 
+
+следующие шаги: </p>
+
+<ul>
+
+  <li>Выполнится директива<tt> AllowOverride None (</tt>отключение<tt> .htaccess 
+
+  файл).</tt> 
+
+  </li><li>Выполнится директива<tt> AllowOverride FileInfo (</tt>для каталога<tt> 
+
+  /home/web).</tt> 
+
+  </li><li>Выполнятся любые<tt> FileInfo </tt>директивы <tt>в 
+
+  /home/web/.htaccess</tt> </li></ul>
+
+<p><b>Обратите внимание, что по умолчанию Apache значение доступа для 
+
+<tt>&lt;Directory /&gt;</tt> - Allow from All. Это означает что Apache будет 
+
+выдавать любой файл содержащийся в URL. Рекомендуется, чтобы Вы заменили этот 
+
+блок на блок типа</b> </p>
+
+<ul>
+
+  <p><tt>&lt;Directory /&gt;</tt> <br><tt>Order Deny,Allow</tt> <br><tt>Deny 
+
+  from All</tt> <br><tt>&lt;/Directory&gt;</tt></p></ul>
+
+<p><b>и затем отмените это для каталогов, которые Вы хотите сделать доступными. 
+
+См. <a href="http://www.apache.ru/docs/apache-rus/misc/security_tips.html">Советы 
+
+По Защите</a> для более полной информации.</b> </p>
+
+<p>Разделы &lt;Directory&gt; обычно применяются в <tt>access.conf</tt> файле, но 
+
+они могут использоваться в любом файле конфигурации. &lt;Directory&gt; директивы 
+
+не могут быть вложенными, и не могут появляться в <a href="http://www.apache.ru/docs/fishki.html#Limit">&lt;Limit&gt;</a> 
+
+разделе. </p>
+
+<h2>
+
+<hr noshade="" color="#1B3661" size="1">
+
+<a name="DocumentRoot"></a><font size="+2">DocumentRoot директива</font></h2>
+
+<p><b>Синтаксис</b>: DocumentRoot <i>каталог-имя-файла</i> <br><b>Значение по 
+
+умолчанию: </b>DocumentRoot <tt>/usr/local/etc/httpd/htdocs</tt> 
+
+<br><b>Контекст</b>: конфигурация сервера, virtual host <br><b>Состояние</b>: 
+
+основное </p>
+
+<p>Эта директива устанавливает каталог, из которого httpd будет брать файлы. 
+
+Если это не согласовано директивой вроде Alias, сервер конкатенирует путь от 
+
+запрошенного URL до корня документа, чтобы определить путь к документу. Пример: 
+
+</p>
+
+<ul>
+
+  <p><tt>DocumentRoot /usr/web</tt></p></ul>
+
+<p>теперь обращение к <tt>http://www.my.host.com/index.html </tt>будет 
+
+транслироваться в <tt>/usr/web/index.html.</tt> </p>
+
+<p><b>Замечание: </b>имеется ошибка в mod_dir, которая вызывает проблемы, когда 
+
+DocumentRoot имеет конечным символом "/"(то есть " DocumentRoot /usr/web/ ") - 
+
+пожалуйста избегите таких объявлений. </p>
+
+<h2>
+
+<hr noshade="" color="#1B3661" size="1">
+
+<a name="ErrorDocument"></a><font size="+2">ErrorDocument директива</font></h2>
+
+<p><b>Синтаксис</b>: ErrorDocument<i> код-ошибки документ</i> 
+
+<br><b>Контекст:</b> конфигурация сервера, virtual host, каталог, .htaccess 
+
+<br><b>Состояние</b>: основное <br><b>Отмена</b>: FileInfo 
+
+<br><b>Совместимость</b>: контексты - каталог и .htaccess доступны только в 
+
+Apache, 1.1 и позже. </p>
+
+<p>В случае проблемы или ошибки, Apache может быть конфигурирован так, чтобы 
+
+выполнить одно из четырех действий: </p>
+
+<ol>
+
+  <li>выдать клиенту простое жестко закодированное сообщение об ошибках . 
+
+  </li><li>выдать настроенное сообщение . 
+
+  </li><li>перенаправить(redirect) запрос локальному URL, чтобы обработать 
+
+  проблему/ошибку 
+
+  </li><li>перенаправить(redirect) запрос внешнему URL, чтобы обработать 
+
+  проблему/ошибку </li></ol>
+
+<p>Первое действие выполняется по умолчанию, в то время как действия 2-4 должны 
+
+быть сконфигурированы директивой ErrorDocument, которая сопровождается 
+
+HTTP-кодом_ответа и сообщением или URL. </p>
+
+<p><i>Сообщения</i> в этом контексте начинаются с одиночной кавычки ("), которая 
+
+не включается в сообщение непосредственно. Apache будет иногда предлагать 
+
+дополнительную информацию относительно проблемы/ошибки. </p>
+
+<p>URLs может начинаться с наклонной черты вправо (/) для локального URLs, или 
+
+быть полным URL, который поможет пользователю решить проблему. Примеры: </p>
+
+<ul>
+
+  <p><tt>ErrorDocument 500 http://foo.example.com/cgi-bin/tester</tt> 
+
+  <br><tt>ErrorDocument 404 /cgi-bin/bad_urls.pl</tt> <br><tt>ErrorDocument 401 
+
+  /subscription_info.html</tt> <br><tt>ErrorDocument 403 "Извините, сегодня 
+
+  доступ Вам закрыт</tt></p></ul>
+
+<p>Обратите внимание, что, когда Вы определяете ErrorDocument, который указывает 
+
+на удаленный URL (то есть что-нибудь с методом типа "http" в начале) Apache 
+
+пошлет переназначающий ответ пользователю, чтобы сообщить ему, где найти нужный 
+
+документ, даже если документ находиться на том же самом сервере .. За этим 
+
+следуют некоторые особенности, наиболее важной является та, что <b>если Вы 
+
+используете директиву "ErrorDocument 401", то она должна ссылатся на локальный 
+
+документ</b>. Это обусловленно характером HTTP базисной опознавательной схемы. 
+
+</p>
+
+<p><b>См. Также:</b> <a href="http://www.apache.ru/docs/apache-rus/custom-error.html#NONE">документация 
+
+настраиваемых ответов</a>. </p>
+
+<h2>
+
+<hr noshade="" color="#1B3661" size="1">
+
+<a name="ErrorLog"></a>ErrorLog директива</h2>
+
+<p><b>Синтаксис</b>: ErrorLog <i>имя_файла</i> <br><b>Значение по умолчанию:</b> 
+
+ErrorLog <tt>logs/error_log</tt> <br><b>Контекст</b>: конфигурация сервера, 
+
+virtual host <br><b>Состояние</b>: основное </p>
+
+<p>Директива файла регистрации ошибок устанавливает имя файла, в котором сервер 
+
+регистрирует любые ошибки с которыми он сталкивается. Если имя файла не 
+
+начинается с символа слеш (/), то путь к файлу устанавливается относительно <a href="http://www.apache.ru/docs/fishki.html#ServerRoot">ServerRoot</a>. 
+
+Пример: </p>
+
+<ul>
+
+  <p><tt>ErrorLog /dev/null</tt></p></ul>
+
+<p>эта директива отключает регистрацию ошибок. </p>
+
+<p><b>ЗАЩИТА: </b>См. документ <a href="http://www.apache.ru/docs/apache-rus/misc/security_tips.html">"Советы по 
+
+конфигурации защиты сервера"</a> для информации о том, почему ваша защита может 
+
+быть сломана, если каталог, в котором хранятся logfiles доступны для записи 
+
+всем, а не только пользователю под которым стартует сервер. </p>
+
+<h2>
+
+<hr noshade="" color="#1B3661" size="1">
+
+&lt;<a name="Files"></a>Files&gt;</h2>
+
+<p><b>Синтаксис</b>: &lt;Files <i>имя-файла</i>&gt; ... &lt;/Files&gt; 
+
+<br><b>Контекст</b>: конфигурация сервера, virtual host, htaccess 
+
+<br><b>Состояние</b>: основное <br><b>Совместимость</b>: доступно в Apache 1.2 и 
+
+выше. </p>
+
+<p>&lt;Files&gt; директива предназначена для управления доступом к файлу. Эта 
+
+директива тесно связана с директивами <a href="http://www.apache.ru/docs/fishki.html#Directory">&lt;Directory&gt;</a> 
+
+и <a href="http://www.apache.ru/docs/fishki.html#Location">&lt;Locations&gt;</a>, 
+
+они должны быть согласованы с &lt;/Files&gt; директивой. Директивы, которые 
+
+применяются к данному имени файла должны быть перечислены внутри. &lt;Files&gt; 
+
+разделы обрабатываются в том порядке, в каком они появляются в файле 
+
+конфигурации, после &lt;Directory&gt; разделов и объявления .htaccess файлов, но 
+
+перед разделами &lt;Location&gt;. </p>
+
+<p>Параметр <i>имя-файла </i>должен включить имя файла, или wild-card, в котором 
+
+"?" соответствует любому одиночному символу, а "*" соответствует любой 
+
+последовательности символов. Расширенные регулярные выражения также могут 
+
+использоваться, с добавлением символа ~. Например: </p>
+
+<ul>
+
+  <p><tt>&lt;Fales ~ " \.(gif|jpe?g|png)$"&gt;</tt></p></ul>
+
+<p>будет соответствовать наиболее общим графическим форматам Internet. </p>
+
+<p>Обратите внимание, что в отличие от разделов &lt;Directory&gt; и 
+
+&lt;Location&gt;, &lt;Fales&gt; разделы могут использоваться внутри .htaccess 
+
+файлов. Это позволяет пользователям управлять доступом к их собственным файлам 
+
+на уровне file-by-file. Когда этот раздел используется в .htaccess файле, если 
+
+<i>имя-файла</i> не начинается с символа "/", путь к нему будет добавляться 
+
+автоматически. </p>
+
+<h2>
+
+<hr noshade="" color="#1B3661" size="1">
+
+<a name="Group"></a><b>Group директива</b></h2>
+
+<p><b>Синтаксис</b>: Group <i>unix-группа</i> <br><b>Значение по умолчанию:</b> 
+
+Group <tt>#-1</tt> <br><b>Контекст</b>: конфигурация сервера, virtual host 
+
+<br><b>Состояние</b>: основное </p>
+
+<p>Директива Group устанавливает группу, под которой сервер отвечает на запросы. 
+
+Директива имеет смысл, если сервер будет запущенн под root в режиме <a href="http://www.apache.ru/docs/fishki.html#ServerType">statdalone</a>. 
+
+<i>Unix-группа</i> - это или: </p>
+
+<ul>
+
+  <li><b><tt>Имя группы</tt></b> - дается имя группы. 
+
+  </li><li><b><tt># номер группы</tt></b> - ссылается на номер группы. </li></ul>
+
+<p>Рекомендуется, чтобы Вы создали новую группу специально для выполнения 
+
+сервера. Некоторые администраторы используют пользователя nobody, но это не 
+
+всегда возможно или желателено. </p>
+
+<p><b>Обратите внимание: </b>если Вы запускаете сервер как non-root 
+
+пользователь, то Вы не сможете изменить его группу на заданную директивой Group, 
+
+и он будет продолжать выполняться под группой первоначального запуска. </p>
+
+<p><b>Специальное примечание: </b>Использование этой директивы в <a href="http://www.apache.ru/docs/fishki.html#VirtualHost">&lt;VirtualHost&gt;</a> 
+
+требует правильной конфигурации <a href="http://www.apache.ru/docs/apache-rus/suexec.html#NONE">suEXEC</a> оболочки. 
+
+Если эта директива исползуется внутри &lt;VirtualHost&gt;, она будет иметь смысл 
+
+только для той группы, которой доступно выполнение CGI . </p>
+
+<p><b>ЗАЩИТА: </b>См. <a href="http://www.apache.ru/docs/fishki.html#User">User </a>для 
+
+обсуждения вопросов защиты. </p>
+
+<h2>
+
+<hr noshade="" color="#1B3661" size="1">
+
+<a name="HostNameLookups"></a>HostNameLookups директива</h2>
+
+<p><b>Синтаксис</b>: HostNameLookups <i>boolean</i> <br><b>Значение по 
+
+умолчанию: </b>HostNameLookups <tt>on</tt> <br><b>Контекст</b>: конфигурация 
+
+сервера, virtual host <br><b>Состояние</b>: основное </p>
+
+<p>Эта директива подключает поиск в DNS, чтобы host имена могли регистрироваться 
+
+в log-файлах. Наличие этой директивы позволяет использовать имена в <a href="http://www.apache.ru/docs/fishki.html#Limit">&lt;Limit&gt;</a> 
+
+блоках для управления доступом. </p>
+
+<p>На часто посещаемых сайтах рекомендуется установить эту директиву в 
+
+<tt>off</tt>, так как доступ к поисковым таблицам DNS длителен по времени. 
+
+Утилита <i>logresolve</i>, поставляемая в каталоге <i>support/</i>, может 
+
+применятся для поиска host имени по регестрируемому IP-адресу автономно. </p>
+
+<h2>
+
+<hr noshade="" color="#1B3661" size="1">
+
+<a name="IdentityCheck"></a>IdentityCheck директива</h2>
+
+<p><b>Синтаксис</b>: IdentityCheck <i>boolean</i> <br><b>Значение по 
+
+умолчанию:</b> IdentityCheck <tt>off</tt> <br><b>Контекст</b>: конфигурация 
+
+сервера, virtual host <br><b>Состояние</b>: основное </p>
+
+<p>Эта директива включает регистрации, соответствующую RFC1413, удаленного имени 
+
+пользователя для каждого соединения, где клиентская машина выполняет identd или 
+
+что - нибудь подобное. Эта информация сохраняется в файле регистрации доступа. 
+
+<i>Boolean </i>может быть установлен в <tt>on </tt>или <tt>off</tt>. </p>
+
+<p>Этой информации нельзя доверять, разве-что для элементарной трассировки. </p>
+
+<p>Обратите внимание, что это может вызывать серьезные временные задержки при 
+
+обращении к вашему серверу, так как для каждого запроса необходимо выполнить 
+
+поиск. Когда работает firewalls, каждый поиск, вероятней всего, будет неудачным 
+
+и добавлять за счет этого 30 секунд ожидания к каждой передаче. Т.о. это лучше 
+
+отключить для web-сервера, доступного в Internet. </p>
+
+<h2>
+
+<hr noshade="" color="#1B3661" size="1">
+
+&lt;<a name="IfModule"></a>IfModule&gt;</h2>
+
+<p><b>Синтаксис</b>: &lt;IfModule <i>[!]имя модуля </i>&gt; ... 
+
+&lt;/IfModule&gt; <br><b>Значение по умолчанию:</b> <tt>None</tt> 
+
+<br><b>Контекст</b>: all <br><b>Состояние</b>: основное 
+
+<br><b>Совместимость</b>: ScriptLog доступен только в Apache 1.2 и выше. </p>
+
+<p>&lt;IfModule <i>тест</i>&gt; ... &lt;/IfModule&gt; раздел используется, чтобы 
+
+отметить директивы, которые являются условными. Директивы внутри раздела 
+
+IfModule обрабатываются только, если тест true. Если тест false, все между 
+
+маркерами начала и конца раздела игнорируется. </p>
+
+<p><i>Тест </i>в &lt;IfModule&gt; директиве это одна из двух форм: </p>
+
+<ul>
+
+  <li><i>имя модуля</i> 
+
+  </li><li><i>!имя модуля</i> </li></ul>
+
+<p>В первом случае, директивы между маркерами начала и конца обрабатываются если 
+
+модуль <i>имя-модуля </i>компилирован в Apache. Второй формат выполняет 
+
+директивы раздела , если <i>имя-модуля </i><b>не</b> компилирован в Apache. </p>
+
+<p>Параметр имени модуля - <i>имя модуля </i>как имя файла модуля. Например,<tt> 
+
+mod_rewrite.c.</tt> </p>
+
+<p>&lt;IfModule&gt; разделы допускают вложеннность. </p>
+
+<h2>
+
+<hr noshade="" color="#1B3661" size="1">
+
+<a name="KeepAlive"></a>KeepAlive</h2>
+
+<p><b>Синтаксис: (Apache 1.1) </b>KeepAlive <i>максимальное-кол.запросов</i> 
+
+<br><b>Значение по умолчанию: (Apache 1.1)</b> KeepAlive <tt>5</tt> 
+
+<br><b>Синтаксис: (Apache 1.2)</b> KeepAlive <i>on/off</i> <br><b>Значение по 
+
+умолчанию: (Apache 1.2)</b> KeepAlive <tt>on</tt> <br><b>Контекст</b>: 
+
+конфигурация сервера <br><b>Состояние</b>: основное <br><b>Совместимость</b>: 
+
+KeepAlive доступен только в Apache 1.1 и выше. </p>
+
+<p>Эта директива включает <a href="http://www.apache.ru/docs/apache-rus/keepalive.html#NONE">Keep-Alive</a> 
+
+поддержку. </p>
+
+<p><b>Apache 1.1: </b>Устанавливает <i>max-кол.запросов </i>обрабатываемых 
+
+Apache одновременно. Ограничение наложено, чтобы предотвратить сервер от 
+
+перегрузки. Если установить эту директиву в 0 - сервер не будет отвечать на 
+
+клиентские запросы. </p>
+
+<p><b>Apache 1.2 и выше: </b>Установка в "on" включает постоянно открытое 
+
+соединение, "off" отключает. См. также <a href="http://www.apache.ru/docs/fishki.html#MaxKeepAliveRequests">MaxKeepAliveRequests 
+
+</a>директиву. </p>
+
+<h2>
+<hr noshade="" color="#1B3661" size="1">
+
+<a name="KeepAliveTimeout"></a>KeepAliveTimeout</h2>
+
+<p><b>Синтаксис</b>: KeepAliveTimeout <i>секунд</i> <br><b>Значение по 
+
+умолчанию:</b> KeepAliveTimeout <tt>15</tt> <br><b>Контекст</b>: конфигурация 
+
+сервера <br><b>Состояние</b>: основное <br><b>Совместимость</b>: 
+
+KeepAliveTimeout доступен только в Apache 1.1 и выше. </p>
+
+<p>Заданное число секунд Apache будет ждать следующий запрос перед закрытием 
+
+соединения. </p>
+
+<h2>
+
+<hr noshade="" color="#1B3661" size="1">
+
+<a name="Listen"></a>Listen</h2>
+
+<p><b>Синтаксис</b>: Listen <i>[IP адрес:] номер порта</i> <br><b>Контекст</b>: 
+
+конфигурация сервера <br><b>Состояние</b>: основное <br><b>Совместимость</b>: 
+
+Listen доступен только в Apache 1.1 и выше. </p>
+
+<p>Listen директива настраивает Apache на более чем один IP адрес или порт; по 
+
+умолчанию он отвечает на запросы на всех интерфейсах IP, но только на порте, 
+
+заданном директивой <a href="http://www.apache.ru/docs/fishki.html#Port">Port</a>. </p>
+
+<p><b>См. Также: </b><a href="http://www.apache.ru/docs/apache-rus/dns-caveats.html#NONE">DNS проблемы</a> 
+
+<br><b>См. Также:</b> <a href="http://www.apache.ru/docs/apache-rus/bind.html">Установка адресов и портов 
+
+Apache</a> <br><b>См. Также: </b><a href="http://www.apache.ru/docs/apache-rus/misc/known_bugs.html#NONE">Известные 
+
+Ошибки</a> </p>
+
+<h2>
+
+<hr noshade="" color="#1B3661" size="1">
+
+&lt;<a name="Limit"></a>Limit&gt; директива</h2>
+
+<p><b>Синтаксис</b>: &lt;Limit <i>метод метод </i>... &gt; ... &lt;/Limit&gt; 
+
+<br><b>Контекст</b>: любой <br><b>Состояние</b>: основное </p>
+
+<p>&lt;Limit&gt; и &lt;/Limit&gt; используется, чтобы включить группу директив 
+
+управления доступом, которые затем применяются только к определенным методам 
+
+доступа, где <i>метод</i> - любой допустимый HTTP метод. Любая директива за 
+
+исключением другой &lt;Limit&gt; или <a href="http://www.apache.ru/docs/fishki.html#Directory">&lt;Directory&gt;</a> 
+
+может использоваться. Пример: </p>
+
+<ul>
+
+  <p><tt>&lt;Limit GET POST&gt;</tt> <br><tt>require valid-user</tt> 
+
+  <br><tt>&lt;/Limit&gt;</tt></p></ul>
+
+<p>Если директива управления доступом появляется снаружи &lt;Limit&gt; 
+
+директивы, то она применяется ко всем методам доступа. </p>
+
+<h2>
+
+<hr noshade="" color="#1B3661" size="1">
+
+&lt;<a name="Location"></a>Location&gt;</h2>
+
+<p><b>Синтаксис</b>: &lt;Location <i>URL</i>&gt; ... &lt;/Location&gt; 
+
+<br><b>Контекст</b>: конфигурация сервера, virtual host <br><b>Состояние</b>: 
+
+основное <br><b>Совместимость</b>: Location доступно только в Apache 1.1 и выше. 
+
+</p>
+
+<p>&lt;Location&gt; директива обеспечивает управление доступом к URL. Она 
+
+подобна директиве <a href="http://www.apache.ru/docs/fishki.html#Directory">&lt;Directory&gt;</a> 
+
+и должна быть с ней согласована. Директивы, которые относятся к данному <i>URL 
+
+</i>должны быть перечислен внутри. &lt;Location&gt; разделы обрабатываются в 
+
+порядке их появления в файле конфигурации, после &lt;Directory&gt; раздела и 
+
+объявления .htaccess файлов. </p>
+
+<p>Обратите внимание, что <i>URL - </i>префикс должен быть сохранен для proxy 
+
+запросов в форме <tt>/path/,</tt> и не должен включить 
+
+<tt>http://servername.</tt> Он(URL) не обязательно должен защищать каталог (это 
+
+может быть индивидуальный файл, или ряд файлов), и может включать wild-card. В 
+
+wild-card строке, "?" cоответствует любому одиночному символу, и "*" 
+
+соответствует любой последовательности символов. </p>
+
+<p><b>Apache 1.2 и выше:</b> Расширенные регулярные выражения могут также 
+
+использоваться, с добавлением ~ символа. Например: </p>
+
+<ul>
+
+  <p><tt>&lt;Location ~ "/(extra|special)/data"&gt;</tt></p></ul>
+
+<p>соответствует URLs, которые содержат подстроку "/extra/data" или 
+
+"/special/data". </p>
+
+<p>Применение Location особенно эффективно когда она объединена с <a href="http://www.apache.ru/docs/apache-rus/mod/mod_mime.html#NONE">SetHandler 
+
+</a>директивой. Для примера, чтобы включить просмотр статуса сервера только в 
+
+браузере с foo.com, Вы могли бы использовать: </p>
+
+<ul>
+
+  <p><tt>&lt;Location /status&gt;</tt> <br><tt>SetHandler server-status</tt> 
+
+  <br><tt>order deny,allow</tt> <br><tt>deny from all</tt> <br><tt>allow from 
+
+  .foo.com</tt> <br><tt>&lt;/Location&gt;</tt></p></ul>
+
+<h2>
+
+<hr noshade="" color="#1B3661" size="1">
+
+<a name="MaxClients"></a>MaxClients директива</h2>
+
+<p><b>Синтаксис</b>: MaxClients <i>число</i> <br><b>Значение по умолчанию:</b> 
+
+MaxClients <tt>256</tt> <br><b>Контекст</b>: конфигурация сервера 
+
+<br><b>Состояние</b>: основное </p>
+
+<p>MaxClients директива устанавливает ограничение числа одновременно 
+
+обслуживаемых запросов; не более чем это число порожденнных процессов сервера 
+
+будут созданы. </p>
+
+<h2>
+
+<hr noshade="" color="#1B3661" size="1">
+
+<a name="MaxKeepAliveRequests"></a>MaxKeepAliveRequests</h2>
+
+<p><b>Синтаксис</b>: MaxKeepAliveRequests <i>число</i> <br><b>Значение по 
+
+умолчанию:</b> MaxKeepAliveRequests <tt>100</tt> <br><b>Контекст</b>: 
+
+конфигурация сервера <br><b>Состояние</b>: основное <br><b>Совместимость</b>: 
+
+Доступна только в Apache1.2 и выше. </p>
+
+<p>MaxKeepAliveRequests директива ограничивает число допустимых запросов на одно 
+
+соединение когда <a href="http://www.apache.ru/docs/fishki.html#KeepAlive">KeepAlive 
+
+</a>включен. Если она установлена в "0", допускаются неограниченные запросы. Мы 
+
+рекомендуем, чтобы эта установка была по возможности выше для большей 
+
+производительности сервера. </p>
+
+<h2>
+
+<hr noshade="" color="#1B3661" size="1">
+
+<a name="MaxRequestsPerChild"></a>MaxRequestsPerChild директива</h2>
+
+<p><b>Синтаксис</b>: MaxRequestsPerChild <i>номер</i> <br><b>Значение по 
+
+умолчанию:</b> MaxRequestsPerChild <tt>0</tt> <br><b>Контекст</b>: конфигурация 
+
+сервера <br><b>Состояние</b>: основное </p>
+
+<p>MaxRequestsPerChild директива устанавливает ограничение числа запросов 
+
+обрабатываемых порожденнным процессом сервера. После MaxRequestsPerChild 
+
+запросов, порожденнный процесс умрет. Если MaxRequestsPerChild - 0, то 
+
+порожденный процесс никогда не будет завершен. </p>
+
+<p>Установка MaxRequestsPerChild в ненулевое значение имеет два полезных 
+
+эффекта: </p>
+
+<ul>
+
+  <li>это ограничивает объем памяти потребляемой процессом (через случайную 
+
+  утечку памяти); 
+
+  </li><li>ограничени времени жизни процесса позволяет уменьшить число процессов при 
+
+  старте сервера. </li></ul>
+
+<h2>
+
+<hr noshade="" color="#1B3661" size="1">
+
+<a name="MaxSpareServers"></a>MaxSpareServers директива</h2>
+
+<p><b>Синтаксис</b>: MaxSpareServers <i>число</i> <br><b>Значение по 
+
+умолчанию:</b> MaxSpareServers <tt>10</tt> <br><b>Контекст</b>: конфигурация 
+
+сeрвера <br><b>Состояние</b>: основное </p>
+
+<p>MaxSpareServers директива устанавливает желательное максимальное число 
+
+неактивных порожденнных процессов сервера. Неактивный Процесс - тот, который не 
+
+обрабатывает запрос в данный момент. Если имеются больше чем MaxSpareServers 
+
+неактивных процессов, то Родительский процесс уничтожит лишние. </p>
+
+<p>Настройка этого параметра рекомендуется только на очень посещаемых сайтах. 
+
+Установка этого параметра в большое число - плохая идея. </p>
+
+<p><b>См. также </b><a href="http://www.apache.ru/docs/fishki.html#MinSpareServers">MinSpareServers 
+
+</a>и <a href="http://www.apache.ru/docs/fishki.html#StartServers">StartServers</a>. 
+
+</p>
+
+<h2>
+
+<hr noshade="" color="#1B3661" size="1">
+
+<a name="MinSpareServers"></a>MinSpareServers директива</h2>
+
+<p><b>Синтаксис</b>: MinSpareServers <i>число</i> <br><b>Значение по 
+
+умолчанию:</b> MinSpareServers <tt>5</tt> <br><b>Контекст</b>: конфигурация 
+
+сервера <br><b>Состояние</b>: основное </p>
+
+<p>MinSpareServers директива устанавливает желаемое минимальное число неактивных 
+
+порожденнных процессов сервера. Неактивный Процесс - тот, который не 
+
+обрабатывает запрос в данный момент. Если имеется меньшее количество чем 
+
+MinSpareServers неактивных процессов, то родительский процесс создает новые 
+
+порожденные процессы за максимум 1 секунду. </p>
+
+<p>Настройка этого параметра рекомендуется только на очень посещаемых сайтах. 
+
+Установка этого параметра в большое число - плохая идея. </p>
+
+<p><b>См. также </b><a href="http://www.apache.ru/docs/fishki.html#MaxSpareServers">MaxSpareServers 
+
+</a>и <a href="http://www.apache.ru/docs/fishki.html#StartServers">StartServers</a>. 
+
+</p>
+
+<h2>
+
+<hr noshade="" color="#1B3661" size="1">
+
+<a name="Options"></a>Options директива</h2>
+
+<p><b>Синтаксис</b>: Options <i>[+|-]option [+|-]option ...</i> 
+
+<br><b>Контекст</b>: конфигурация сервера, virtual host, directory, .htaccess 
+
+<br><b>Отмена</b>: Options <br><b>Состояние</b>: основное </p>
+
+<p>Директива Options опредиляет, какие особенности сервера являются доступными в 
+
+данном каталоге. </p>
+
+<p><tt>option </tt>может быть установлена в <tt>None</tt>, когда ни одна из 
+
+опций не допускается и возможно одно или несколько следующих полей: </p>
+
+<ul>
+
+  <li><b><tt>All</tt> </b>- все опции кроме MultiViews. 
+
+  </li><li><b><tt>ExecCGI </tt></b>- разрешается выполнение сценариев CGI. 
+
+  </li><li><b><tt>FollowSymLinks </tt></b>- сервер будет следовать за символическими 
+
+  связями в этом каталоге. 
+
+  </li><li><b><tt>Includes </tt></b>- Server-site includes(SSI), разрешаются. 
+
+  </li><li><b><tt>IncludesNOEXEC </tt></b>- Server-site includes(SSI), разрешается, 
+
+  но команда #exec и #include CGI-скриптов заблокированны. 
+
+  </li><li><b><tt>Indexes </tt></b>- если запрошенный URL соответствует каталогу, и в 
+
+  этом катлоге нет ничего соответствующего DirectoryIndex (например Index.html), 
+
+  то сервер возвратит форматированную распечатку содерщания каталога. 
+
+  </li><li><b><tt>MultiViews </tt></b>- <a href="http://www.apache.ru/docs/apache-rus/content-negotiation.html#Multiviews">Content 
+
+  negotiated</a> MultiViews допускаются. 
+
+  </li><li><b><tt>SymLinksIfOwnerMatch </tt></b>- сервер будет следовать только тем 
+
+  символическим связям, для которых целевой файл или каталог имеют тот же 
+
+  идентификатор пользователя что и связь. </li></ul>
+
+<p>Обычно, если несколько опций директивы Options применяются к каталогу, а 
+
+затем наиболее специфический применяются к его подкаталогу, то опции не 
+
+обьединяются. Однако, если любой опции в директиве Options предшествует символ 
+
+"+" или "-", то опции обьединяются. Любые опции, которым предшествует "+" будут 
+
+добавлены к опциям включенным в настоящее время, и любые опции, которым 
+
+предшествует "-" будут удалены из включенных опций. </p>
+
+<p>Например, без любого + и - символа: </p>
+
+<ul>
+
+  <p><tt>&lt;Directory /web/docs&gt;</tt> <br><tt>Options Indexes 
+
+  FollowSymLinks</tt> <br><tt>&lt;/Directory&gt;</tt> <br><tt>&lt;Directory 
+
+  /web/docs/spec&gt;</tt> <br><tt>Options Includes</tt> 
+
+  <br><tt>&lt;/Directory&gt;</tt></p></ul>
+
+<p>только опция <tt>Includes</tt>, будет установлен для каталога 
+
+<tt>/web/docs/spec</tt>. Однако, если вторая Options директива использует + и - 
+
+символы: </p>
+
+<ul>
+
+  <p><tt>&lt;Directory /web/docs&gt;</tt> <br><tt>Options Indexes 
+
+  FollowSymLinks</tt> <br><tt>&lt;/Directory&gt;</tt> <br><tt>&lt;Directory 
+
+  /web/docs/spec&gt;</tt> <br><tt>Options +Includes -Indexes</tt> 
+
+  <br><tt>&lt;/Directory&gt;</tt></p></ul>
+
+<p>то опции <tt>FollowSymLinks </tt>и <tt>Includes </tt>будут установлены для 
+
+каталога <tt>/web/docs/spec</tt>. </p>
+
+<h2>
+
+<hr noshade="" color="#1B3661" size="1">
+
+<a name="PidFile"></a>PidFile директива</h2>
+
+<p><b>Синтаксис</b>: PidFile <i>имя-файла</i> <br><b>Значение по умолчанию: 
+
+</b>PidFile <tt>logs/httpd.pid</tt> <br><b>Контекст</b>: конфигурация сервера 
+
+<br><b>Состояние</b>: основное </p>
+
+<p>PidFile директива устанавливает файл, в котором сервер записывает 
+
+идентификатор процесса daemon. Если <i>имя файла </i>не начинается с символа 
+
+(/), имя будет принято относительно <a href="http://www.apache.ru/docs/fishki.html#ServerRoot">ServerRoot</a>. 
+
+PidFile используется только в <a href="http://www.apache.ru/docs/fishki.html#ServerType">standalone 
+
+</a>режиме. </p>
+
+<p>Часто бывает необходимо изменить конфигурацию сервера, т.е., чтобы он 
+
+перечитал файлы конфигурации. Этого можно добиться посылкой сигнала SIGHUP (-1) 
+
+процессу с идентификатором, содержащимся, в PidFile. </p>
+
+<p>На PidFile распространяются тем же предупреждения относительно <a href="http://www.apache.ru/docs/apache-rus/misc/security_tips.html">защиты</a>, что 
+
+и на log-файлы. </p>
+
+<h2>
+
+<hr noshade="" color="#1B3661" size="1">
+
+<a name="Port"></a>Port директива</h2>
+
+<p><b>Синтаксис</b>: Port <i>номер-порта</i> <br><b>Значение по умолчанию:</b> 
+
+Port <tt>80</tt> <br><b>Контекст</b>: конфигурация ссервера 
+
+<br><b>Состояние</b>: основное </p>
+
+<p><i>Номер </i>- номер от 0 до 65535; некоторые номера портов (особенно ниже 
+
+1024) зарезервированы. См. <tt>/etc/services</tt> для списка некоторых 
+
+определенных портов; стандартный порт для http протокола - 80. </p>
+
+<p>Директива Port имеет два аспекта; первый - необходим для совместимости в 
+
+обратном направлении с NCSA ( и который путают в контексте Apache).. </p>
+
+<ul>
+
+  <li>В отсутствие <a href="http://www.apache.ru/docs/fishki.html#Listen">Listen </a>или 
+
+  <a href="http://www.apache.ru/docs/fishki.html#BindAddress">BindAddress 
+
+  </a>директив, определяющих номер порта, директива Port устанавливает сетевой 
+
+  порт, на котором сервер слушает. Если имеется, любая из директив Listen или 
+
+  BindAddress опредиляющая номер порта, то директива Port игнорируется. 
+
+  </li><li>Директива Port устанавливает системную переменную <tt>SERVER_PORT 
+
+  </tt>(для <a href="http://www.apache.ru/docs/apache-rus/mod/mod_cgi.html">CGI 
+
+  </a>и <a href="http://www.apache.ru/docs/apache-rus/mod/mod_include.html#NONE">SSI</a>), и 
+
+  используется сервером для генерации URL, который ссылается на себя (например 
+
+  при создании внешнего переназначения на себя). </li></ul>
+
+<p>Установка Port не воздействует на то, на каком порте работает <a href="http://www.apache.ru/docs/fishki.html#VirtualHost">VirtualHost</a>. 
+
+Директива VirtualHost непосредственно используется для этого. </p>
+
+<p>Действие директивы Port подобно действию <a href="http://www.apache.ru/docs/fishki.html#ServerName">ServerName 
+
+</a>директивы. ServerName и Port вместе определяют канонический адрес сервера. 
+
+</p>
+
+<p>Port 80 - один из специальных портов Unix's. Все порты, ниже 1024 
+
+зарезервированы для использования системы, т.е. обычным (non-root) пользователям 
+
+они не доступны; они могут использовать только более высокие номера портов. 
+
+Используя Port 80, Вы можете запустить сервер только как root. После привязки к 
+
+порту и перед принятием запросов, привелегии Apache изменяются на более низкие 
+
+привилегии пользователя установленого директивой <a href="http://www.apache.ru/docs/fishki.html#User">User</a>. </p>
+
+<p>Если Вы не можете использовать порт 80, выберите любой другой неиспользуемый 
+
+порт. Пользователи non-root должны будут выбрать порт номером выше чем 1023, 
+
+типа 8000. </p>
+
+<p><b>ЗАЩИТА: </b>если Вы запускаете сервер как root, убедитесь, что не 
+
+установили User в root. Если Вы запускаете сервер как root, пока устанавливаются 
+
+соединения, защита вашего сайта открыта для атаки. </p>
+
+<h2>
+
+<hr noshade="" color="#1B3661" size="1">
+
+<a name="require"></a>require директива</h2>
+
+<p><b>Синтаксис</b>: require <i>имя-объекта объект объект ...</i> 
+
+<br><b>Контекст</b>: directory, .htaccess <br><b>Отмена</b>: AuthConfig 
+
+<br><b>Состояние</b>: основное </p>
+
+<p>Эта директива устанавливает пользователей имеющих доступ к каталогу. 
+
+Допустимый синтаксис: </p>
+
+<ul>
+
+  <li><b><tt>require user userid userid ...</tt></b> - только указанные 
+
+  пользователи имеют доступ к каталогу. 
+
+  </li><li><b><tt>require group имя-группы имя-группы ...</tt></b> - только 
+
+  пользователи из указанных групп имеют доступ к каталогу. 
+
+  </li><li><b><tt>require valid-user</tt></b> - все допустимые пользователи имеют 
+
+  доступ к каталогу. </li></ul>
+
+<p>Если директива require, появляется в <a href="http://www.apache.ru/docs/fishki.html#Limit">&lt;Limit&gt;</a> 
+
+разделе, то она ограничивает доступ к перечисленным методам, иначе она 
+
+ограничивает доступ для всех методов. Пример: </p>
+
+<ul>
+
+  <p><tt>AuthType Basic</tt> <br><tt>AuthName somedomain</tt> 
+
+  <br><tt>AuthUserFile /web/users</tt> <br><tt>AuthGroupFile /web/groups</tt> 
+
+  <br><tt>&lt;Limit GET POST&gt;</tt> <br><tt>require group admin</tt> 
+
+  <br><tt>&lt;/Limit&gt;</tt></p></ul>
+
+<p>Require должена сопровождаться <a href="http://www.apache.ru/docs/fishki.html#AuthName">AuthName </a>и 
+
+<a href="http://www.apache.ru/docs/fishki.html#AuthType">AuthType 
+
+</a>директивами, и директивами типа <a href="http://www.apache.ru/docs/apache-rus/mod/mod_auth.html#NONE">AuthUserFile 
+
+</a>и <a href="http://www.apache.ru/docs/apache-rus/mod/mod_auth.html#NONE">AuthGroupFile 
+
+</a>(определяющие пользователей и группы) чтобы работать правильно. </p>
+
+<h2>
+
+<hr noshade="" color="#1B3661" size="1">
+
+<a name="ResourceConfig"></a>ResourceConfig директива</h2>
+
+<p><b>Синтаксис</b>: ResourceConfig <i>имя-файла</i> <br><b>Значение по 
+
+умолчанию: </b>ResourceConfig <tt>conf/srm.conf</tt> <br><b>Контекст</b>: 
+
+конфигурация сервера, virtual host <br><b>Состояние</b>: основное </p>
+
+<p>Сервер считывает этот файл с дополнительными директивами после чтения 
+
+httpd.conf файла. <i>Имя-файла</i> - относительно ServerRoot. Эта директива 
+
+может быть заблокирована т.о.: </p>
+
+<ul>
+
+  <p><tt>ResourceConfig /dev/null</tt></p></ul>
+
+<p>Исторически, этот файл содержал большинство директив кроме директив 
+
+конфигурации сервера и <a href="http://www.apache.ru/docs/fishki.html#Directory">&lt;Directory&gt;</a> 
+
+разделов; фактически он может теперь содержать любую директиву сервера, 
+
+допустимую в контексте <i>конфигурации сервера</i>. </p>
+
+<p><b>См. также </b><a href="http://www.apache.ru/docs/fishki.html#AccessConfig ДЙТЕЛФЙЧБ">AccessConfig</a>. 
+
+</p>
+
+<h2>
+
+<hr noshade="" color="#1B3661" size="1">
+
+<a name="RLimitCPU"></a>RLimitCPU директива</h2>
+
+<p><b>Синтаксис</b>: RLimitCPU <i># или 'max' [# или 'max']</i> <br><b>Значение 
+
+по умолчанию:</b> Возврат к исходному состоянию используя значения по умолчанию 
+
+операционной системы <br><b>Контекст</b>: конфигурация сервера, virtual host 
+
+<br><b>Состояние</b>: основное <br><b>Совместимость</b>: RLimitCPU доступен 
+
+только в Apache 1.2 и выше </p>
+
+<p>Получает 1 или 2 параметра. 1-й параметр устанавливает ограничение ресурса 
+
+программного обеспечения для всех процессов и 2-й параметр устанавливает 
+
+максимальное ограничение ресурса. Любой параметр может быть числовой или "max", 
+
+чтобы указать серверу, что ограничение должно быть установлено к максимуму, 
+
+позволенному конфигурацией операционной системы. Подъем максимального 
+
+ограничения ресурса требует, чтобы сервер выполнилась под root, или в начальной 
+
+фазе запуска. </p>
+
+<p>Ограничения ресурса ЦЕНТРАЛЬНОГО ПРОЦЕССОРА сказываются на процессе. </p>
+
+<p><b>См. также </b><a href="http://www.apache.ru/docs/fishki.html#RLimitMEM">RLimitMEM 
+
+</a>или <a href="http://www.apache.ru/docs/fishki.html#RLimitNPROC">RLimitNPROC</a>. 
+
+</p>
+
+<h2>
+
+<hr noshade="" color="#1B3661" size="1">
+
+<a name="RLimitMEM"></a>RLimitMEM директива</h2>
+
+<p><b>Синтаксис</b>: RLimitMEM <i># или 'max' [# или 'max']</i> <br><b>Значение 
+
+по умолчанию:</b> Возврат к исходному состоянию используя значения по умолчанию 
+
+операционной системы <br><b>Контекст</b>: конфигурация сервера, virtual host 
+
+<br><b>Состояние</b>: основное <br><b>Совместимость</b>: RLimitMEM доступен 
+
+только в Apache 1.2 и выше </p>
+
+<p>Получает 1 или 2 параметра. 1-й параметр устанавливает ограничение ресурса 
+
+программного обеспечения для всех процессов и 2-й параметр устанавливает 
+
+максимальное ограничение ресурса. Любой параметр может быть числовой, или max, 
+
+чтобы указать серверу, что ограничение должно быть установлено к максимуму, 
+
+допустимому конфигурацией операционной системы. Подъем максимального ограничения 
+
+ресурса требует, чтобы сервер выполнился с полномочиями root, или в начальной 
+
+фазе запуска. </p>
+
+<p>Ограничения ресурса Памяти выражены в байтах на процесс. </p>
+
+<p><b>См. также</b> <a href="http://www.apache.ru/docs/fishki.html#RLimitCPU">RLimitCPU 
+
+</a>или <a href="http://www.apache.ru/docs/fishki.html#RLimitNPROC">RLimitNPROC</a>. 
+
+</p>
+
+<h2>
+
+<hr noshade="" color="#1B3661" size="1">
+
+<a name="RLimitNPROC"></a>RLimitNPROC директива</h2>
+
+<p><b>Синтаксис</b>: RLimitNPROC <i># или 'max' [# или 'max']</i> 
+
+<br><b>Значение по умолчанию: </b>Возврат к исходному состоянию используя 
+
+значения по умолчанию операционной системы <br><b>Контекст</b>: конфигурация 
+
+сервера, virtual host <br><b>Состояние</b>: основное <br><b>Совместимость</b>: 
+
+RLimitNPROC доступен только в Apache 1.2 и выше </p>
+
+<p>Получает 1 или 2 параметра. 1-й параметр устанавливает ограничение ресурса 
+
+программного обеспечения для всех процессов и 2-й параметр устанавливает 
+
+максимальное ограничение ресурса. Любой параметр может быть число, или max, 
+
+чтобы указать серверу, что ограничение должно быть установлено к максимуму, 
+
+допустимому конфигурацией операционной системы. Подъем максимального ограничения 
+
+ресурса требует, чтобы сервер работал с root-полномочиями, или в начальной фазе 
+
+запуска. </p>
+
+<p>Управляет ограничением процессов числом процессов на пользователя. </p>
+
+<p><b>Обратите внимание:</b> Если CGI процессы выполняются под тем же userids 
+
+что и сервер, эта директива будет ограничивать число процессов, которые сервер 
+
+непосредственно может создавать. Доказательством этой ситуации будет 
+
+<b><tt>cannot fork</tt></b> сообщения в error_log. </p>
+
+<p><b>См. также</b> <a href="http://www.apache.ru/docs/fishki.html#RLimitMEM">RLimitMEM 
+
+</a>или <a href="http://www.apache.ru/docs/fishki.html#RLimitCPU">RLimitCPU</a>. 
+
+</p>
+
+<h2>
+
+<hr noshade="" color="#1B3661" size="1">
+
+<a name="Satisfy"></a>Satisfy</h2>
+
+<p><b>Синтаксис</b>: Satisfy<i> 'any' или 'all'</i> <br><b>Значение по 
+
+умолчанию:</b> Satisfy <tt>all</tt> <br><b>Контекст</b>: directory, .htaccess 
+
+<br><b>Состояние</b>: основное <br><b>Совместимость</b>: Satisfy доступен только 
+
+в Apache 1.2 и выше </p>
+
+<p>Определяет стратегию доступа, если используются и allow и require. Параметр 
+
+может быть или <i>'all'</i> или <i>'any'</i>. Эта директива полезна только, если 
+
+доступ к области ограничивается и, username/password и адресом машины-клиента. В 
+
+этом случае заданное по умолчанию значение ("all") требует, чтобы пользователь 
+
+передал адрес, которому доступна ограниченная область, и ввел допустимый 
+
+username и пароль. С "any" опцией клиенту будет предоставлен доступ, если он или 
+
+передаст адрес хоста, которому открыт доступ к данной области, или введет 
+
+допустимый username и пароль. Это может использоваться для ограничения доступа к 
+
+области паролем и открытого доступа к этой же области хостам с определенными 
+
+адресами. </p>
+
+<h2>
+
+<hr noshade="" color="#1B3661" size="1">
+
+<a name="ScoreBoardFile"></a>ScoreBoardFile директива</h2>
+
+<p><b>Синтаксис</b>: ScoreBoardFile <i>имя-файла</i> <br><b>Значение по 
+
+умолчанию:</b> ScoreBoardFile <tt>logs/apache_status</tt> <br><b>Контекст</b>: 
+
+конфигурация сервера <br><b>Состояние</b>: основное </p>
+
+<p>ScoreBoardFile директива требуется в некоторых архитектурах, чтобы разместить 
+
+файл, используемый сервером для связи между порожденными процессами и 
+
+родительским. Самый простой способ выяснять, требует ли ваша архитектура 
+
+файл-табло это - запустить Apache и посмотреть, создает ли он файл, указанный в 
+
+директиве. Если вашей архитектуре это необходимо, Вы должны гарантировать, что 
+
+этот файл не используется в то же самое время больше чем одним вызовом Apache. 
+
+</p>
+
+<p>Вы можете увеличить быстродействие сервера размещая ScoreBoardFile на 
+
+RAM-диске. Но будьте внимательны, Вы должны учитывать те же предупреждения 
+
+относительно размещения ScoreBoardFile, что и к log-файлам, с точки зрения <a href="http://www.apache.ru/docs/apache-rus/misc/security_tips.html">защиты</a>. 
+
+</p>
+
+<p><b>Apache 1.2 и выше:</b> </p>
+
+<p>Пользователи Linux 1.x могут добавить флаг -DHAVE_SHMGET к EXTRA_CFLAGS в 
+
+файл Configuration, но это не будет работать во всех версиях Linux 1.x. </p>
+
+<p>Пользователи SVR4, так же могут попробовать добавить флаг -DHAVE_SHMGET к 
+
+EXTRA_CFLAGS в свой Configuration файл. Это, вероятно, должно сработать, но мы 
+
+не успели проверить это для версии 1.2. </p>
+
+<p><b>См. Также: </b><a href="http://www.apache.ru/docs/apache-rus/stopping.html">Остановка и перезапуск 
+
+Apache</a> </p>
+
+<h2>
+
+<hr noshade="" color="#1B3661" size="1">
+
+<a name="SendBufferSize"></a>SendBufferSize директива</h2>
+
+<p><b>Синтаксис</b>: SendBufferSize <i>байты</i> <br><b>Контекст</b>: 
+
+конфигурация сервера, virtual host <br><b>Состояние</b>: основное </p>
+
+<p>Cервер установит размер буфера TCP к указанному кол. <i>байт</i>. </p>
+
+<h2>
+
+<hr noshade="" color="#1B3661" size="1">
+
+<a name="ServerAdmin"></a>ServerAdmin директива</h2>
+
+<p><b>Синтаксис</b>: ServerAdmin <i>email-адрес</i> <br><b>Контекст</b>: 
+
+конфигурация сервера, virtual host <br><b>Состояние</b>: основное </p>
+
+<p>ServerAdmin устанавливает адрес электронной почты, который сервер включает в 
+
+любые сообщения об ошибках, которые он возвращает клиенту. </p>
+
+<p>Для этой установки стоит выделить специальный адрес, например. </p>
+
+<ul>
+
+  <p><tt>ServerAdmin www-admin@foo.bar.com</tt></p></ul>
+
+<p>поскольку пользователи не всегда контролируют то, что они говорят о сервере! 
+
+</p>
+
+<h2>
+
+<hr noshade="" color="#1B3661" size="1">
+
+<a name="ServerAlias"></a>ServerAlias директива</h2>
+
+<p><b>Синтаксис</b>: ServerAlias <i>host1 host2 ...</i> <br><b>Контекст</b>: 
+
+virtual host <br><b>Состояние</b>: основное <br><b>Совместимость</b>: 
+
+ServerAlias доступно только в Apache 1.1 и выше. </p>
+
+<p>ServerAlias директива устанавливает альтернативные имена хостов, для 
+
+использования с virtual host <a href="http://www.apache.ru/docs/apache-rus/host.html#NONE">базирующихся на 
+
+Host-header</a>. </p>
+
+<p><b>См. Также:</b> <a href="http://www.apache.ru/docs/apache-rus/vhosts-in-depth.html#NONE">Подробное 
+
+описание соответствия Virtual Host</a> </p>
+
+<h2>
+
+<hr noshade="" color="#1B3661" size="1">
+
+<a name="ServerName"></a>ServerName директива</h2>
+
+<p><b>Синтаксис</b>: ServerName <i>полное имя домена</i> <br><b>Контекст</b>: 
+
+конфигурация сервера, virtual host <br><b>Состояние</b>: основное </p>
+
+<p>ServerName директива устанавливает hostname сервера; это используется только 
+
+для переадресации URLs. Если она не определена, то сервер пытается вывести ее из 
+
+собственного IP-адреса, но это может работать не надежно, или может не 
+
+возвращать привилегированное hostname. Например: </p>
+
+<ul>
+
+  <p><tt>ServerName www.wibble.com</tt></p></ul>
+
+<p>будет работать, если фактическое имя машины будет что-то вроде 
+
+<tt>monster.wibble.com.</tt> </p>
+
+<p><b>См. Также:</b> <a href="http://www.apache.ru/docs/apache-rus/dns-caveats.html#NONE">DNS проблемы</a> 
+
+</p>
+
+<h2>
+
+<hr noshade="" color="#1B3661" size="1">
+
+<a name="ServerPath"></a>ServerPath директива</h2>
+
+<p><b>Синтаксис</b>: ServerPath <i>имя пути</i> <br><b>Контекст</b>: virtual 
+
+host <br><b>Состояние</b>: основное <br><b>Совместимость</b>: ServerPath 
+
+доступно только в Apache 1.1 и выше. </p>
+
+<p>ServerPath директива устанавливает наследование имя-пути URL для хоста, чтобы 
+
+использовать virtual host <a href="http://www.apache.ru/docs/apache-rus/host.html#NONE">базирующийся на 
+
+Host-header</a>. </p>
+
+<p><b>См. Также:</b> <a href="http://www.apache.ru/docs/apache-rus/vhosts-in-depth.html#NONE">Подробное 
+
+описание соответствия Virtual Host</a> </p>
+
+<h2>
+
+<hr noshade="" color="#1B3661" size="1">
+
+<a name="ServerRoot"></a>ServerRoot директива</h2>
+
+<p><b>Синтаксис</b>: ServerRoot <i>каталог - имя файла</i> <br><b>Значение по 
+
+умолчанию: </b>ServerRoot <tt>/usr/local/etc/httpd</tt> <br><b>Контекст</b>: 
+
+конфигурация сервера <br><b>Состояние</b>: основное </p>
+
+<p>ServerRoot директива устанавливает корневой каталог сервера. Обычно он 
+
+содержит подкаталоги <tt>conf/ </tt>и <tt>logs/</tt>. Пути для других файлов 
+
+конфигурации устанавливаются относительно этого каталога. </p>
+
+<p><b>См. также</b> <a href="http://www.apache.ru/docs/apache-rus/invoking.html#NONE">опцию -d к 
+
+httpd</a>. </p>
+
+<h2>
+
+<hr noshade="" color="#1B3661" size="1">
+
+<a name="ServerType"></a>ServerType директива</h2>
+
+<p><b>Синтаксис</b>: ServerType <i>тип</i> <br><b>Значение по умолчанию:</b> 
+
+ServerType <tt>standalone</tt> <br><b>Контекст</b>: конфигурация сервера 
+
+<br><b>Состояние</b>: основное </p>
+
+<p>ServerType директива устанавливает то, как сервер запускается в системе. 
+
+<i>Тип </i>- один из двух: </p>
+
+<ul>
+
+  <li><b><tt>inetd </tt></b>- сервер будет запущен в системе процессом inetd; 
+
+  команда для старта сервера будет добавлена к <tt>/etc/inetd.conf</tt> 
+
+  </li><li><b><tt>standalone </tt></b>- сервер запускается как daemon; команда для 
+
+  запуска сервера будет добавлена в системные сценарии запуска. 
+
+  (<tt>/etc/rc.local или /etc/rc3.d/ ....</tt>) </li></ul>
+
+<p>Inetd используется меньше. Для каждого http соединения, запускается новая 
+
+копия сервера; после завершения соединение - программа выгружается. Это высокая 
+
+цена за соединение, но из соображений безопасности, некоторые администраторы 
+
+предпочитают эту опцию. </p>
+
+<p>Standalone - наиболее общая установка для ServerType, так как она более 
+
+эффективна. Сервер запускается один раз, и обслуживает все последующие 
+
+соединения. Если Вы предполагаете выполнять Apache на очень загруженном сайте, 
+
+установите эту опцию. </p>
+
+<p><b>ЗАЩИТА</b>: если Вы параноидально беспокоитесь о защите, запускайтесь в 
+
+inetd режиме, хотя он тоже не гарантирует безопасность. Во всяком случае, сейчас 
+
+большинство администраторов счастливо используют режим standalone, просто inetd 
+
+более устойчив к атакам. </p>
+
+<h2>
+
+<hr noshade="" color="#1B3661" size="1">
+
+<a name="StartServers"></a>StartServers директива</h2>
+
+<p><b>Синтаксис</b>: StartServers <i>число</i> <br><b>Значение по умолчанию:</b> 
+
+StartServers <i>5</i> <br><b>Контекст</b>: конфигурация сервера 
+
+<br><b>Состояние</b>: основное </p>
+
+<p>StartServers директива устанавливает число порожденнных процессов сервера при 
+
+запуске. Так как число процессов динамически контролируется в зависимости от 
+
+загрузки, то обычно нет причин корректировать этот параметр. </p>
+
+<p><b>См. также </b><a href="http://www.apache.ru/docs/fishki.html#MinSpareServers">MinSpareServers 
+
+</a>и <a href="http://www.apache.ru/docs/fishki.html#MaxSpareServers">MaxSpareServers</a>. 
+
+</p>
+<h2>
+<hr noshade="" color="#1B3661" size="1">
+<a name="TimeOut"></a>TimeOut директива</h2>
+<p><b>Синтаксис</b>: TimeOut <i>число</i> <br><b>Значение по умолчанию:</b> 
+TimeOut <tt>300</tt> <br><b>Контекст</b>: конфигурация сервера 
+<br><b>Состояние</b>: основное</p>
+<p>Директива TimeOut в настоящее время определяет количество времени, которое 
+Apache будет ожидать три вещи:</p>
+<ol>
+  <li>Общее кол. времени, которое набежит за GET запрос. 
+  </li><li>Количество времени между получением TCP пакетов на POST или PUT запросе. 
+  </li><li>Количество времени между ACK на передачах TCP пакетов в ответах. </li></ol>
+<p>В будующем планируется сделать их отдельно настраиваемыми. Таймер, 
+использовавший раньше по умолчанию значение 1200, был понижен до 300, что все 
+еще является избыточным в большинстве случаев. Это не следует установливать 
+ниже, потому что могут все еще быть лишние места в коде, где таймер не 
+сбросится, после отправки пакета.</p>
+<h2>
+<hr noshade="" color="#1B3661" size="1">
+<a name="User"></a>User директива</h2>
+<p><b>Синтаксис</b>: User <i>unix-userid</i> <br><b>Значение по умолчанию:</b> 
+User <tt>#-1</tt> <br><b>Контекст</b>: конфигурация сервера, virtual host 
+<br><b>Состояние</b>: основное </p>
+<p>Директива User устанавливает userid, под которым сервер отвечает на запросы. 
+Чтобы правильно использовать эту директиву, сервер должен быть запущен как root. 
+<tt>Unix-userid </tt>это одно из: </p>
+<ul>
+  <li><b><tt>Username</tt></b> - ссылается на имя пользователя. 
+  </li><li><b><tt># код-пользователя</tt></b> - ссылается на пользователя по номеру. 
+  </li></ul>
+<p>User не должен иметь таких привилегий, которые могут привести к нарушению 
+безопасности системы, и аналогично, User не должен иметь возможности выполнить 
+код, который не предназначен для запросов httpd. Рекомендуется, чтобы Вы завели 
+нового пользователя и группу специально для работы сервера. Некоторые 
+администраторы используют пользователя nobody, но это не всегда возможно или 
+желательно.</p>
+<p><b>Примечания:</b> Если Вы запускаете сервер как non-root пользователь, то 
+сервер не сможет изменить свои полномочия на привелегии менее привилегированного 
+пользователя, и будет продолжать работу как тот первоначальный пользователь. 
+Если Вы запускаете сервер как root, то родительский процесс продолжит выполнятся 
+как root, что нормально.</p>
+<p><b>Специальное примечание: </b>Использование этой директивы в <a href="http://www.apache.ru/docs/fishki.html#VirtualHost">&lt;VirtualHost&gt;</a> 
+требует правильной конфигурации <a href="http://www.apache.ru/docs/apache-rus/suexec.html#NONE">suEXEC</a> оболочки. 
+Когда эта директива применяется внутри &lt;VirtualHost&gt;, то только для 
+пользователя которому доступно выполнение CGI она будет иметьсмысл. Не - CGI 
+запросы будут обрабатываться под пользователем, определенным в основной 
+директиве User.</p>
+<p><b>ЗАЩИТА:</b> Не установите User (или <a href="http://www.apache.ru/docs/fishki.html#Group">Group</a>) в root, 
+если Вы не знаете точно, что Вы делаете, и какая Вам грозит опасность. </p>
+<h2>
+<hr noshade="" color="#1B3661" size="1">
+&lt;<a name="VirtualHost"></a>VirtualHost&gt; директива</h2>
+<p><b>Синтаксис</b>: &lt;VirtualHost <i>адрес[:порт]</i> ...&gt; ... 
+&lt;/VirtualHost&gt; <br><b>Контекст</b>: конфигурация сервера 
+<br><b>Состояние</b>: основное <br><b>Совместимость</b>: не базирующийся 
+IP-адресе VirtualHost доступен только в Apache 1.1 и выше. 
+<br><b>Совместимость</b>: Многоадресная поддержка доступна только в Apache 1.2 и 
+выше.</p>
+<p>&lt;VirtualHost&gt; и &lt;/VirtualHost&gt; используются, чтобы включить 
+группу директив, которые применятся только к данному virtual host. Может 
+использоваться любая директива допустимая контексте virtual host. Когда сервер 
+получает запрос на документ относящийся к VirtualHost, он использует директивы 
+конфигурации включенные в раздел &lt; VirtualHost &gt;. <i>Адрес </i>может </p>
+<ul>
+  <li>IP-адрес virtual host 
+  </li><li>Полное имя домена для IP-адреса virtual host. </li></ul>
+<p>Пример: </p>
+<ul>
+  <p><tt>&lt;VirtualHost 10.1.2.3&gt;</tt> <br><tt>ServerAdmin 
+  webmaster@host.foo.com</tt> <br><tt>DocumentRoot /www/docs/host.foo.com</tt> 
+  <br><tt>ServerName host.foo.com</tt> <br><tt>ErrorLog 
+  logs/host.foo.com-error_log</tt> <br><tt>TransferLog 
+  logs/host.foo.com-access_log</tt> <br><tt>&lt;/VirtualHost&gt;</tt></p></ul>
+<p>Все VirtualHost должны соответствовать разным IP-адресам или различном 
+host-именам для сервера, в последнем случае машина сервера должна быть 
+конфигурирована так, чтоб принимать IP пакеты для нескольких адресов. (Если 
+машина не имеет нескольких сетевых интерфейсов, это можно поправить с помощью 
+команды ifconfig (если ваша OS поддерживает это), или патчами ядра вроде VIF 
+(для SunOS(TM)4.1.x)). </p>
+<p>Специальное имя <tt>_default_</tt> может быть определено, когда этот virtual 
+host будет соответствовать любому адресу IP явно не указанному в объявлении 
+другого virtual host. Если объявление <tt>_default_</tt> virtual host 
+отсутствует в конфигурации сервера и запрос не подходит ни под какой из 
+известных virtual host, то для ответа используется основной сервер. </p>
+<p>Вы можете определить порт, чтобы изменить соответствующий порт. Если порт не 
+определен, то по умолчанию используется порт установленный в конфигурации 
+основного сервера. В установке порта Вы можете использовать *, что будет 
+соответствовать всем портам на этом адресе. (Это рекомендуется использовать 
+вместе с <tt>_default_</tt>.) </p>
+<p><b>ЗАЩИТА</b>: См. документ советов по <a href="http://www.apache.ru/docs/apache/security_tips.html">защите </a>для 
+деталей о том, почему ваша защита могла быть сломана если каталог log-файлов 
+доступен для записи любому другому пользователь, кроме пользователя, под которым 
+стартует сервер. </p>
+
+</blockquote> 
+<br>
+<!--//
+<center>
+<a href="http://www.inside.ru/?referer1=reklama&referer2=apache-1" title="Создание сайтов">Создание сайтов</a> и  
+<a href="http://www.inside.ru/?referer1=reklama&referer2=apache-2" title="Разработка сайтов">Разработка сайтов</a>
+</center>
+//-->
+<br><br>
+
+
+
+
+
+
+  </td>
+</tr>
+</tbody></table>
+<!-- Main text: stop -->
+
+<br>
+</td></tr><tr><td bgcolor="e3e3e3">
+<table border="0" cellpadding="0" cellspacing="0" width="100%" height="40"><tbody><tr>
+<td width="15">&nbsp;</td>
+<td><small><b>Copyright Apache.ru © 1999-2017, All Rights Reserved</b></small></td>
+<td align="right"><small>Разработка сайта: <a href="http://www.inside.ru/">Inside.ru</a></small></td>
+<td width="15">&nbsp;</td>
+</tr>
+<tr>
+<td width="15">&nbsp;</td>
+<td colspan="2">
+<font size="-2">
+<a href="http://www.apache.ru/feedback/?reklama"><b>РЕКЛАМА НА САЙТЕ:</b></a>
+
+<!--<ml_getver>6.4.2</ml_getver>--> | 
+</font>
+</td>
+<td width="15">&nbsp;</td>
+</tr>
+</tbody></table>
+</td></tr></tbody></table>
+
+
+
+</body></html>

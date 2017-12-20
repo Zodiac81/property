@@ -1,0 +1,78 @@
+1)
+	https://hackware.ru/?p=149
+
+	IP провайдера
+		https://2ip.ua/ru/services/information-service/provider-ip?a=act
+
+		curl -s -L --data "ip=109.104.179.48" https://2ip.ua/ru/services/information-service/provider-ip?a=act | grep -o -E '[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}/[0-9]{1,2}' > diap_ip_vild.txt
+
+	IP города, области
+		http://ipgeobase.ru/cgi-bin/AdvSearch.cgi 		задайте нужные вам опции и скопируйте адрес получившейся страницы
+
+		curl -s 'URL' | grep -o -E '[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3} - [0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}' > diap_ip.txt
+
+		curl -s 'http://ipgeobase.ru/cgi-bin/AdvSearch.cgi?country=UA&city=%ED%E8%EA%EE%EB%E0%E5%E2&region=&district=&adv_srch_sbmt=%C8%F1%EA%E0%F2%FC&action_type=adv_search' | grep -o -E '[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3} - [0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}' > diap_ip.txt
+
+	|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
+
+2)
+
+	https://hackware.ru/?p=1703
+
+	Поиск FTP серверов с анонимным входом
+		скрипт ftp-anon
+
+		sudo nmap -p 21 -n --script "ftp-anon" -iL diap_ip.txt
+		sudo nmap -p 21 -n --script "ftp-anon" -iL diap_ip.txt | grep -E -A 10 'FTP code 230'
+
+	|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
+
+	Поиск MySQL серверов, позволяющий вход root без пароля или анонимный вход
+		скрипт mysql-empty-password:
+
+		sudo nmap -p 3306 -n --script "mysql-empty-password" -iL mysql.ip2
+
+	|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
+
+	Брутфорс DNS
+		dns-brute
+
+		sudo nmap -p 80 --script "dns-brute" digitalocean.com
+
+	|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
+
+	Поиск хостов на одном IP
+		скриптов три: hostmap-bfk, hostmap-ip2hosts, hostmap-robtex
+
+		nmap -sn --script "hostmap-bfk" spryt.ru
+		nmap -sn --script "hostmap-ip2hosts" spryt.ru
+		nmap -sn --script "hostmap-robtex" spryt.ru
+
+	|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
+
+	Traceroute с геолокацией
+		sudo nmap --traceroute --script "traceroute-geolocation" -p 80 samy.pl
+
+	|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
+
+	Поиск интересных файлов на веб-сервере
+		sudo nmap --script "http-enum" spryt.ru
+
+	|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
+
+	Сбор названий (title) веб-страниц
+		sudo nmap --script "http-title" -sV -p 80 185.117.153.0/24
+		echo -e "$(sudo nmap --script "http-title" -sV -p 80 185.117.153.0/24)"
+
+	|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
+
+	Запуск всех скриптов для сбора информации о веб-сервере и веб-сайте
+		sudo nmap --script "auth,discovery,version" -p 80,443 suip.biz
+		echo -e "$(sudo nmap --script "auth,discovery,version" -p 80,443 suip.biz)"
+
+	|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
+
+	Получение информации о системах от SMB
+		Скрипт smb-os-discovery пытается определить операционную систему, имя компьютера, домен, рабочую группу и текущее время по протоколу SMB (порты 445 или 139)
+
+		sudo nmap -p 445 --script "smb-os-discovery" 192.168.0.1/24

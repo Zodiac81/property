@@ -1,0 +1,42 @@
+/***
+ * Layout 1:Text only *
+ ***/
+
+.modalContent{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: 980px;
+    background: #FFFFFF;
+}
+.modalContent__content{
+    clear:both;
+    width: 90%;
+    padding: 30px;
+    margin-left: auto;
+    margin-right:auto;
+}
+
+.content__titleDescription{
+    margin-bottom: 20px;
+}
+.content__button{
+    margin-bottom: 20px;
+    height: 36px;
+}
+
+.modalContent__image {
+    display:none;
+}
+/* Media Queries */
+@media only screen and (max-width:960px) {
+
+    .modalContent,
+    .modalContent__content,
+    .modalContent__image{
+        width: 100%;
+    }
+}

@@ -1,0 +1,102 @@
+http://doc.prestashop.com/display/PS16/Displaying+content+on+the+front+office
+mymodule.php
+
+		Tools::isSubmit();	проверяет , если указанная форма была подтверждена.
+	    Tools:getValue();	извлекать содержимое из POST или GET
+	    strval(); 			обработка данных из формы
+	    Validate::isGenericName(); prestashop Validate
+
+
+		$helper->module: Требует экземпляр модуля, который будет использовать форму.
+		$helper->name_controller: Требуется имя модуля.
+		$helper->token: Требуется уникальный маркер для модуля. getAdminTokenLite()помогает нам генерировать один.
+		$helper->currentIndex:
+		$helper->default_form_language: Требует языка по умолчанию для магазина.
+		$helper->allow_employee_form_lang: Требует языка по умолчанию для магазина.
+		$helper->title: Требуется заголовок формы.
+		$helper->show_toolbar: Требуется логическое значение - отображается ли панель инструментов или нет.
+		$helper->toolbar_scroll: Требуется логическое значение - будь всегда видна панель при прокрутке или нет.
+		$helper->submit_action: Требует атрибут действия для формы в <submit>теге.
+		$helper->toolbar_btn: Требует кнопок, которые отображаются на панели инструментов. В нашем примере, кнопка «Сохранить» и кнопка «Назад».
+		$helper->fields_value[]: Это где мы можем определить значение имени тега.
+
+
+		hookDisplayLeftColumn(): Зацепит код в левой колонке, который должен быть расположен в /views/templates/hook/папке.
+		hookDisplayRightColumn(): Просто делать то же самое , как hookDisplayLeftColumn(), но в правой колонке.
+		hookDisplayHeader(): Будет добавить ссылку на файл CSS модуля, /css/mymodule.css
+
+		Telmpate`s
+			/views/templates/front/: Передний офис особенности.
+			/views/templates/admin/: Особенности бэк-офис.
+			/views/templates/hook/: Особенности зацепили на PrestaShop (так может отображаться на фронт-офиса или бэк-офис).
+
+	$this->tab
+			administration			администрация
+			advertising_marketing	Реклама и маркетинг
+			analytics_stats			Аналитика и статистика
+			billing_invoicing		Billing & счетов-фактур
+			checkout				Проверять, выписываться
+			content_management		Управление содержанием
+			dashboard				Панель приборов
+			emailing				E-рассылки
+			export					экспорт
+			front_office_features	Front Office Особенности
+			i18n_localization		I18n и локализация
+			market_place			Market Place
+			merchandizing			искусство сбыта
+			migration_tools			Миграционные инструменты
+			mobile					мобильный
+			others					Другие модули
+			payments_gateways		Платежи и Шлюзы
+			payment_security		Безопасность платежей
+			pricing_promotion		Цены & Promotion
+			quick_bulk_update		Быстрый / Массовое обновление
+			search_filter			Поиск и фильтр
+			seo	SEO
+			shipping_logistics		Доставка и логистика
+			slideshows				Слайды
+			smart_shopping			Смарт Магазины
+			social_networks			Социальные сети
+
+	Configuration::get('myVariable'); 	Извлекает конкретное значение из базы данных.
+
+	Configuration::getMultiple(array('myFirstVariable', 'mySecondVariable', 'myThirdVariable')); Возвращает несколько значений из базы данных, и возвращает 																								массив PHP.
+	
+	Configuration::updateValue('myVariable', $value);	Обновляет существующую переменную базы данных с новым значением. Если переменная еще не существует, 													он создает его с этим значением.
+	
+	Configuration::deleteByName('myVariable'); 			Удаляет переменные базы данных.
+
+	// Storing a serialized array.
+	Configuration::updateValue('MYMODULE_SETTINGS', serialize(array(true, true, false)));
+ 
+	// Retrieving the array.
+	$configuration_array = unserialize(Configuration::get('MYMODULE_SETTINGS'));
+
+	Configuration::get('PS_LANG_DEFAULT'): Возвращает идентификатор для языка по умолчанию.
+	
+	Configuration::get('PS_TIMEZONE'): Возвращает имя текущего часового пояса, в стандартном формате TZ (см http://en.wikipedia.org/wiki/List_of_tz_database_time_zones ).
+
+	Configuration::get('PS_DISTANCE_UNIT'): Возвращает расстояние по умолчанию группы ( «км» для километров, и т.д.).
+
+	Configuration::get('PS_SHOP_EMAIL'): Извлекает основной контактный адрес электронной почты.
+	
+	Configuration::get('PS_NB_DAYS_NEW_PRODUCT'): Возвращает количество дней, в течение которого недавно добавил продукт считается «New» на PrestaShop.
+
+
+	
+	config.xmlФайл позволяет оптимизировать загрузку списка модулей в бэк - офисе.
+		<?xml version="1.0" encoding="UTF-8" ?>
+        <module>
+            <name>mymodule</name>
+            <displayName><![CDATA[My module]]></displayName>
+            <version><![CDATA[1.0]]></version>
+            <description><![CDATA[Description of my module.]]></description>
+            <author><![CDATA[Firstname Lastname]]></author>
+            <tab><![CDATA[front_office_features]]></tab>
+            <confirmUninstall>Are you sure you want to uninstall?</confirmUninstall>
+            <is_configurable>0</is_configurable>					// указывает на то, имеет ли модуль страницу конфигурации или нет.
+            <need_instance>0</need_instance>						// должен ли быть создан экземпляр модуля, когда он отображается в списке модулей
+            <limited_countries></limited_countries>					// для обозначения стран , к которым модуль ограничен (fr, es)
+        </module>
+
+

@@ -1,0 +1,954 @@
+install LAMP
+	1.1)	Установка Apache
+				sudo apt-get update && sudo apt-get upgrade
+				sudo apt-get install apache2
+	
+		Настройка глобальной переменной ServerName
+			sudo apache2ctl configtest					//	Syntax OK
+			// sudo nano /etc/apache2/apache2.conf 		//	.. + ServerName 109.238.10.84
+			// sudo nano /etc/apache2/apache2.conf 		//	.. + ServerName 34.234.136.52
+			sudo subl /etc/apache2/apache2.conf 		//	.. + ServerName домен_или_IP_адрес_сервера
+			sudo apache2ctl configtest					//	проверка конфига	->	Syntax OK
+			sudo systemctl restart apache2
+			sudo systemctl status apache2
+
+		Настройка файрвола
+			sudo ufw app list							//	Available applications:
+														//	  Apache
+														//	  Apache Full
+														//	  Apache Secure
+														//	OpenSSH
+			sudo ufw app info "Apache Full"				//	проверка разрешений трафика для портов 80 и 443:
+			sudo ufw allow in "Apache Full"				//	Разрешим входящий трафик для этого профиля
+			chrome -> http://домен_или_IP_аlдрес_сервера		//	проверка	->	Apache...
+
+		найти публичный IP адрес вашего сервера
+			ifconfig -a 								//	see all connect`s
+			ip addr show имя_соединения(eth0) | grep inet | awk '{ print $2; }' | sed 's/\/.*$//'
+
+			как curl видит ваш сервер
+				sudo apt-get install curl
+				curl http://icanhazip.com
+
+			настройка:
+
+			enable
+				sudo a2enmod rewrite
+				sudo a2enmod headers
+				sudo a2enmod expires
+				sudo a2enmod cgi
+				sudo a2enmod alias
+				service apache2 restart
+				
+			disable
+				sudo a2dismod headers
+				sudo a2dismod expires
+				sudo a2dismod cgi
+				sudo a2dismod alias
+
+				sudo apt-get install openssh-client
+				sudo apt-get install openssh-server
+				
+
+				sudo subl /etc/apache2/apache2.conf 		//	AllowOverride None -> AllowOverride All
+				sudo service apache2 restart
+
+				/etc/apache2/apache2.conf 					//	KeepAlive Off
+			Disable the event module and enable prefork
+				sudo a2dismod mpm_event
+				sudo a2enmod mpm_prefork
+
+		Configure Virtual Hosts
+
+			Create a copy of the default Apache configuration
+				sudo cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/example.com.conf
+		Use:
+
+			sudo apache2ctl start
+							stop
+							restart
+							fullstatus
+							status
+							graceful 					// мягкий перезапуск
+							graceful-stop
+							configtest
+							startssl
+
+			sudo systemctl restart apache2
+							reload
+							status
+							stop
+							start
+							disable
+							enable
+
+			sudo update-rc.d apache2 disable
+			sudo update-rc.d apache2 enable
+
+			sudo service apache2 restart
+									reload
+									force-reload
+									status
+									stop
+									start
+									graceful-stop
+
+
+		dell apache
+			sudo apt-get remove apache2
+			sudo apt-get purge apache2
+
+	1.2)	Установка Nginx
+				sudo apt-get install nginx
+				sudo service nginx start
+
+	2)	Установка MySQL
+			// dpkg -l | grep mysql    				// see all pakeg
+			sudo apt-get update
+		    sudo apt-get install mysql-server mysql-client
+		    // sudo mysql_secure_installation
+
+			password
+
+			Install MySQL 5.6
+				sudo apt-get install software-properties-common
+				sudo add-apt-repository -y ppa:ondrej/mysql-5.6
+				sudo apt-get update
+				sudo apt-get install mysql-server-5.6
+				$ mysql --version 
+					mysql  Ver 14.14 Distrib 5.6.35, for debian-linux-gnu (x86_64) ...
+
+		удаление MySQL 					( /var/run/mysqld/mysqld.sock )
+			sudo apt-get purge mysql* -V
+			sudo rm -rv /var/lib/mysql
+			sudo rm -rv /var/log/mysql*
+			sudo rm -rv /etc/mysql*
+			sudo apt-get autoremove
+			sudo apt-get autoclean
+
+		чтобы MySQL было настроено безопасным образом
+			sudo mysql_secure_installation
+
+		Установка phpMyadmin
+			sudo apt-get install phpmyadmin
+			
+			dell phpmyadmin
+				sudo apt-get purge phpmyadmin
+
+	3)	Установка PHP
+
+			sudo apt-get install php7.0
+
+			// sudo apt-get install php libapache2-mod-php php-mcrypt php-mysql
+
+			(
+
+				sudo add-apt-repository ppa:ondrej/php
+				sudo apt-get update
+				(optional) sudo apt-get remove php7.0
+				sudo apt-get install php7.1 (from comments)
+
+			)
+
+		dell
+			sudo apt-get purge php7.*
+
+
+		Настройка
+			sudo subl /etc/apache2/mods-enabled/dir.conf 		//	index.php <- ставим первым
+
+		Create the log directory for PHP
+			sudo mkdir /var/log/php
+			sudo chown www-data /var/log/php
+
+		Установка модулей PHP
+			apt-cache search php- | less 						//	Для просмотра доступных опций для модулей и библиотек PHP вы можете передать результат apt-cache search в less, которая позволит вам проматывать вывод
+			apt-cache show имя_пакета(php-cli)					//	Чтобы получить больше информации по каждому модулю
+
+			sudo a2enmod php7.0 		enable php version
+
+			Важные пакеты:
+
+				sudo apt-get install curl
+				sudo apt-get install libcurl3
+				sudo apt-get install libcurl3-dev
+				sudo apt-get install php7.0-fpm php7.0-mysql
+				sudo apt-get install php7.0-cli
+				sudo apt-get install php7.0-curl
+				sudo apt-get install php7.0-mbstring
+				sudo apt-get install php7.0-xml
+				sudo apt-get install php7.0-zip
+				sudo apt-get install php7.0-gd
+				sudo apt-get install php7.0-mcrypt
+				sudo apt-get install php7.0-mhash
+				sudo apt-get install php7.0-intl
+				sudo apt install php7.0-LDAP
+				sudo apt install php7.0-APC
+				sudo apt install php7.0-SQLite3
+				sudo apt install php7.0-soap
+				sudo apt install php7.0-dom
+				sudo apt-get install imagemagick
+				sudo apt-get install subversion
+				sudo apt-get install php-memcached
+				sudo apt-get install libapache2-mod-xsendfile
+				sudo apt-get install libapache2-mod-php7.0
+
+				sudo apt-get install php-geoip php-dev libgeoip-dev
+
+				sudo apt install linuxbrew-wrapper
+
+				sudo apt install libmagickwand-dev imagemagick php-dev
+				sudo pecl install imagick
+				sudo service php7.0-fpm reload
+
+				sudo apt-get install imagemagick
+				sudo apt-get install php-imagick
+
+					sudo add-apt-repository ppa:ondrej/php
+					sudo apt-get update
+					sudo apt search php7
+				sudo apt install php7.0-mysql php7.0-curl php7.0-json php7.0-cgi  php7.0 libapache2-mod-php7.0
+				sudo apt-get install php7.0 php5.6 php5.6-mysql php-gettext php5.6-mbstring php-xdebug libapache2-mod-php5.6 libapache2-mod-php7.0
+
+
+		Добавляем local.host
+			sudo mkdir /var/www/html/test.site
+			sudo chmod -R 755 /var/www/html
+				################################################################
+					sudo vi /var/www/html/test.site/index.html
+
+					<html>...</html>
+				################################################################
+
+			добавлять виртуальный хост
+				sudo subl /etc/apache2/sites-available/open.cart.conf
+				sudo subl /etc/apache2/sites-available/trackisopen.start.conf
+				sudo subl /etc/apache2/sites-available/trackis.open.conf
+				sudo subl /etc/apache2/sites-available/laravel.basic.conf
+				sudo subl /etc/apache2/sites-available/wordpress.base.conf
+				sudo subl /etc/apache2/sites-available/www.www.yii2.basic.conf
+				sudo subl /etc/apache2/sites-available/captain.com.conf
+				sudo subl /etc/apache2/sites-available/Calculator-PHPUnit.loc.conf
+				sudo subl /etc/apache2/sites-available/cdn.groupe-atlantis.com.conf
+				sudo subl /etc/apache2/sites-available/trackisopen-master.loc.conf
+
+<VirtualHost trackisopen-master.loc:80>
+
+	#ServerName cdn.groupe-atlantis.com
+	#ServerAlias www.Calculator-PHPUnit.loc
+
+
+	DocumentRoot /var/www/html/trackisopen-master
+
+	ServerAdmin webmaster@localhost
+	ErrorLog ${APACHE_LOG_DIR}/error.log
+	CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+    #RewriteEngine on
+    #RewriteCond %{REQUEST_FILENAME} !-f
+    #RewriteCond %{REQUEST_FILENAME} !-d
+    #RewriteRule . /web/index.php
+    #RewriteRule ^(.*)$ http://mysite.ua/$1 [R=302,L]
+
+	<Directory /var/www/html/trackisopen-master>
+        AllowOverride All 													# .htaccess максимальные права на изменения директив (default)
+		AddDefaultCharset utf-8 											# Кодировка
+		DirectoryIndex index.php index.html									# Переопределение индексного файла
+		Options -Indexes													# Запрет на отображение содержимого
+
+		<Files config.php> 													# Запрет доступа к определённому файлу
+	        Deny from all
+	    </Files>
+
+	    Order Deny,Allow 													# Строка order deny,allow определяет порядoк
+	    Deny from all
+	    Allow from 127.0.0.1
+	    #Allow from 10.10.220.201
+
+        Options FollowSymLinks MultiViews
+
+	</Directory>
+</VirtualHost>
+
+----------------------------------------------------------------------------------------------------
+# Обработка ошибок
+ErrorDocument 401 /401.html 
+ErrorDocument 403 /403.html 
+ErrorDocument 404 /404.html 
+ErrorDocument 500 /500.html
+
+# Deny from all 													# Запрет доступа ко всем файлам и каталогам в текущем каталоге
+Order Allow,Deny 													# Строка order deny,allow определяет порядoк
+Deny from all
+Allow from 192.140.170.219
+Allow from 10.10.220.201
+
+Deny from 195.135.232.70  											# Запрет доступа с IP
+
+<Files *.inc> ... 													# Запрет доступа к файлам по маске
+	Deny from all
+</Files>
+
+Redirect /index.php http://example.com/index.php 					# Перенаправление
+Redirect 302 /staraya.html http://vash-sait.ua/novaya.html
+------------------------------------------------------------------------------------------------------
+
+			активировать наш хост
+				sudo a2ensite trackisopen.start.conf
+				sudo a2ensite fancybox.jq14
+				sudo a2ensite yii2.test
+				sudo a2ensite linux.dash.conf
+				sudo a2ensite open.cart.conf
+				sudo a2ensite beauty.sleep.conf
+				sudo a2ensite laravel.basic.conf
+				sudo a2ensite laravel.com.conf
+				sudo a2ensite wordpress.base.conf
+				sudo a2ensite 000-default.conf
+				sudo a2ensite captan.local.conf
+				sudo a2ensite trackisopen-master.loc.conf
+				sudo a2ensite test.site.conf
+				sudo a2ensite Calculator-PHPUnit.loc.conf
+				sudo a2ensite cdn.groupe-atlantis.com.conf
+				sudo a2ensite yii2.basic.conf
+				sudo a2ensite www.yii2.basic.conf
+				sudo a2ensite test.site
+			sudo systemctl reload apache2
+
+			disable site
+				sudo a2dissite host1.server1
+
+			завернуть трафик с этого домена на локальный сервер
+				sudo subl /etc/hosts 				//		+ 127.0.0.1 test.site
+
+
+			SSL
+				# Публичный сертификат сервера
+				SSLCertificateFile    /etc/ssl/certs/server.pem
+				# Приватный ключ сервера
+				SSLCertificateKeyFile /etc/ssl/private/server.key
+
+
+				sudo a2enmod ssl
+				sudo a2ensite default-ssl
+				sudo service apache2 restart
+
+
+				sudo certbot --apache -d laravel.basic
+				sudo certbot --reinstall --apache
+				sudo certbot certonly --webroot -w /var/www/html/laravel.com -d laravel.com
+
+					sudo openssl genrsa -out ca.key 2048
+					sudo openssl req -nodes -new -key ca.key -out ca.csr
+					sudo openssl x509 -req -days 365 -in ca.csr -signkey ca.key -out ca.crt
+					sudo mkdir /etc/apache2/ssl
+					sudo cp ca.crt ca.key ca.csr /etc/apache2/ssl/
+					~	sudo nano /etc/apache2/sites-enable/000-default.conf
+						#############################
+							<VirtualHost *:443>
+							                ServerAdmin webmaster@localhost
+							                DocumentRoot /var/www/html
+							                ErrorLog ${APACHE_LOG_DIR}/error.log
+							                CustomLog ${APACHE_LOG_DIR}/access.log combined
+							                SSLEngine on
+							                SSLCertificateFile /etc/apache2/ssl/ca.crt
+							                SSLCertificateKeyFile /etc/apache2/ssl/ca.key
+							</VirtualHost>
+						#############################
+
+
+					sudo openssl x509 -req-days365-in .csr -signkey ca.key -out ca.crt
+					sudo mkdir /etc/apache2/ssl
+					sudo cp ca.crt ca.key ca.csr /etc/apache2/ssl/
+
+	3.0)	linux securiti
+
+				sudo apt-get install apache2-utils
+				sudo htpasswd -c /etc/apache2/.htpasswd user_name
+				
+
+				Alias "/site-monitor" "/var/www/html/linux-dash/"
+				<Directory "/var/www/html/linux-dash">
+					DirectoryIndex index.html
+
+					AllowOverride All
+
+					AuthType Basic
+			        AuthName "Restricted Content"
+			        AuthUserFile /etc/apache2/.htpasswd
+			        Require valid-user
+			    </Directory>
+
+	3.1)	Тестирование работы PHP
+				В Ubuntu 16.04	"web root" B /var/www/html/
+				sudo nano /var/www/html/info.php 				//	->	<?php phpinfo(); ?>
+				http://домен_или_IP_адрес_сервера/info.php 		//	phpinfo
+				sudo rm /var/www/html/info.php 					//	delete info.php
+
+	3.2)	Установить mail
+
+				sudo apt-get install sendmail
+
+				test 
+					telnet localhost smtp
+								Trying ::1...
+								Trying 127.0.0.1...
+								Connected to localhost.
+								Escape character is '^]'.
+								220 localhost6.localdomain6 ESMTP Sendmail 
+								8.14.3/8.14.3/Debian-9.2ubuntu1; Thu, 9 Dec 2010 15:31:17 +0200;
+								(No UCE/UBE) logging access from: localhost.localdomain(OK)-
+								localhost.localdomain [127.0.0.1] 
+					HELO localhost 
+								
+
+
+
+	4.1)	Установить mc
+
+			sudo apt install mc
+
+	4.2)	ProFTPd
+
+		sudo apt-get install proftpd
+
+		sudo subl /etc/proftpd/proftpd.conf
+			раскоментировать строку DefaultRoot ~
+			добавить вниз файла строку — AuthUserFile /etc/proftpd/ftpd.passwd
+
+		/etc/shells
+			добавить строку — /bin/false
+
+		sudo addgroup ftp www-data (добавляем пользователя ftp в группу пользователей www-data)
+		sudo chown -R ftp:www-data /var/www/
+
+		sudo /etc/init.d/proftpd restart
+
+		ftpasswd --passwd --file=/etc/proftpd/ftpd.passwd --name=wordpress --shell=/bin/false --home=/var/www/html --uid=107 --gid=33
+		ftpasswd --passwd --file=/etc/proftpd/ftpd.passwd --name=addmin --shell=/bin/false --home=/var/www/html --uid=126 --gid=33
+
+			сервер должен попросить нас ввести пароль (дважды), который он зашифрует и сохранит в файле /etc/proftpd/ftpd.passwd
+
+			ftpasswd — утилита для работы с AuthUserFile
+			--passwd — ключ, который говорит, что мы хотим создать пользователя и защитить подключение к серверу паролем
+			--file — ключ, который показывать в каком файле будут храниться данные (путь к файлу, в нашем случае /etc/proftpd/ftpd.passwd)
+			--name — имя пользователя
+			--shell — шелл (оболочка, в нашем случае /bin/false — несуществующая оболчка для виртуального пользователя)
+			--home — домашний каталог — папка доступ к которой мы будем предоставлять, обычно каталог с сайтом
+			--uid — id пользователя ftp (узнать id вашего пользователя можно выполнив в консоли команду «id ftp» — результат вернет id пользователя и покажет id группы)
+			--gid — id группы, мы используем 33 — это ид группы www-data
+
+		sudo service proftpd restart
+		sudo service proftpd status
+
+		( sudo service proftpd start )
+
+		https://root.zt.ua/nastroika-ftp-servera-proftpd-v-ubuntu-14-04-lts/
+		https://habrahabr.ru/sandbox/26850/
+
+
+	4)	Установить netbeans
+
+		sudo add-apt-repository ppa:webupd8team/java
+		sudo apt-get update
+		sudo apt-get install oracle-java8-installer
+		sudo apt-get install oracle-java8-set-default
+
+		sudo apt-get install default-jdk
+		cd ~/Downloads
+		chmod +x netbeans-8.2-linux.sh
+		./netbeans-8.2-linux.sh
+
+	4)	Установить npm nodeJs bower
+
+			sudo apt-get install python-software-properties
+			curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+			
+			sudo apt-get install nodejs
+
+			sudo npm install -g bower
+
+			sudo apt-get install npm
+			sudo apt-get install nodejs
+			apt install nodejs-legacy
+			sudo apt-get install build-essential
+			
+
+			npm cache clean
+
+		    sudo npm cache clean -f
+		    sudo npm install -g n
+		    sudo n stable
+
+		    node-gyp rebuild
+			Чистка кэша сборщика
+
+
+	4)	Установить google
+
+		wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+		sudo sh -c "echo 'deb http://dl.google.com/linux/chrome/deb/ stable main' >> /etc/apt/sources.list.d/google.list"
+		sudo apt-get update
+		sudo apt-get install google-chrome-stable
+
+	4)	Установить Git
+
+			gitkraken
+
+			sudo apt-get update
+			sudo apt-get install git
+
+			git config --global user.name "Your Name"
+			git config --global user.email "youremail@domain.com"
+
+	5)	Установка Sublime-text
+			// sudo dpkg -i sublime-text_build-3047_i386.deb
+			// sudo dpkg -i google-chrome-stable_current_amd64.deb
+
+			sudo add-apt-repository ppa:webupd8team/sublime-text-3
+			sudo apt-get update && sudo apt-get install sublime-text-installer
+
+			Sublime-default
+				ls /usr/share/applications/sublime_text.desktop
+				subl /usr/share/applications/defaults.list			//	gedit 	->	repeat	->	sublime_text
+				subl touch /usr/share/applications/sublime_text.desktop
+				subl /usr/share/applications/sublime_text.desktop
+
+
+  
+
+	6)	Установка Photoshop
+
+		Wine
+			sudo add-apt-repository ppa:wine/wine-builds
+			sudo apt update
+			sudo dpkg --add-architecture i386
+			sudo apt install --install-recommends wine-staging
+			sudo apt install winehq-staging
+			winecfg
+			wget  https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks
+			chmod +x winetricks
+			sudo mv -v winetricks /usr/bin
+			winetricks
+
+		sudo apt install cabextract
+			winecfg
+
+			winetricks atmlib gdiplus msxml3 msxml6 vcrun2005 vcrun2005sp1 vcrun2008 ie6 fontsmooth-rgb gecko
+
+
+
+	6)	Установка XNeur Switcher 0.18
+			sudo add-apt-repository ppa:andrew-crew-kuznetsov/xneur-unstable
+			sudo apt-get update
+			sudo apt-get install gxneur
+		Удаление XNeur Switcher
+			sudo add-apt-repository -r ppa:andrew-crew-kuznetsov/xneur-unstable
+			sudo apt-get update
+			sudo apt-get remove gxneur
+
+	7)	Install nmap
+
+			sudo apt install nmap
+
+			// nmap 127.0.0.1/124
+
+	7)	Install composer
+			sudo apt-get update
+			sudo apt-get install composer
+
+	8)	install and configure PrestaShop
+
+			// zip -r zipfile.zip directory
+
+			unzip prestashop_1.7.1.0.zip -d /var/www/html/presta.shop
+			unzip prestashop_1.6.1.12.zip -d /var/www/html/presta.shop
+
+			sudo chmod -R 777 config cache log img mails modules themes/default-bootstrap/lang themes/default-bootstrap/pdf/lang themes/default-bootstrap/cache translations upload download admin/backups
+
+	8)	install and configure magento
+
+			sudo chmod -R 777 app/etc media media/customer media/xmlconnect media/xmlconnect/system media/xmlconnect/system/ok.gif media/xmlconnect/original media/xmlconnect/original/ok.gif media/xmlconnect/custom media/xmlconnect/custom/ok.gif media/dhl media/dhl/logo.jpg media/downloadable
+
+			mysql -u root -p
+				## Creating New User for Magento Database ##
+				CREATE USER magento@localhost IDENTIFIED BY "password";
+
+				## Create New Database ##
+				create database magento_base;
+
+				## Grant Privileges to Database ##
+				GRANT ALL ON magento_base.* TO magento@localhost;
+
+				GRANT ALL ON magento_project_captain_nason_group.* TO cptnason@localhost;
+
+				## FLUSH privileges ##
+				FLUSH PRIVILEGES;
+
+				## Exit ##
+				exit
+
+			sudo subl /etc/apache2/sites-available/default
+
+			<Directory /var/www/html/magento.local>
+			    Require all granted
+			</Directory>
+			<VirtualHost *:80>
+			    ServerName magento.local
+			    ServerAlias www.magento.local
+			    ServerAdmin webmaster@localhost
+			    DocumentRoot /var/www/html/magento.local/
+			    ErrorLog /var/www/html/magento.local/logs/error.log
+			    CustomLog /var/www/html/magento.local/logs/access.log combined
+			    <Directory /var/www/html/magento.local>
+			        Options Indexes FollowSymLinks MultiViews
+			        AllowOverride All
+			    </Directory>
+			</VirtualHost>
+
+			a2enmod rewrite
+			sudo service apache2 restart
+
+			udo apt-get install subversion
+
+	9)	install Laravel
+			sudo composer create-project laravel/laravel /var/www/html/laravel3
+			chmod -R 777 laravelnew
+
+			rm -rf presta.shop && mkdir presta.shop
+			pwd			//	dir
+			sudo poweroff 				||		sudo shutdown -h now		||
+			sudo reboot					||		sudo shutdown -r now		||	
+
+
+	10) Tor
+
+		x64
+			(t=`curl -s https://www.torproject.org/download/download-easy.html.en#linux | grep -E -o '/dist/torbrowser/[0-9]{1}.[0-9]{1}.[0-9]{1}/tor-browser-linux64-[0-9]{1}.[0-9]{1}.[0-9]{1}_' | head -1`; t="https://www.torproject.org"$t"ru.tar.xz"; wget $t) && tar -xvf tor-browser-linux64-* && sed -i 's/u`" -eq 0/u`" -eq 1/' ./tor-browser_ru/Browser/start-tor-browser && chown -R root ./tor-browser_ru/* && ./tor-browser_ru/Browser/start-tor-browser
+
+		x32
+			(t=`curl -s https://www.torproject.org/download/download-easy.html.en#linux | grep -E -o '/dist/torbrowser/[0-9]{1}.[0-9]{1}.[0-9]{1}/tor-browser-linux32-[0-9]{1}.[0-9]{1}.[0-9]{1}_' | head -1`; t="https://www.torproject.org"$t"ru.tar.xz"; wget $t) && tar -xvf tor-browser-linux32-* && sed -i 's/u`" -eq 0/u`" -eq 1/' ./tor-browser_ru/Browser/start-tor-browser && chown -R root ./tor-browser_ru/* && ./tor-browser_ru/Browser/start-tor-browser
+
+		
+			sudo /home/asus/tor-browser_ru/Browser/start-tor-browser
+		
+
+	10) 	Lightshot
+
+		sudo apt-get install wine-stable
+		sudo apt-get install wine
+		wget http://app.prntscr.com/build/setup-lightshot.exe
+		wine ./setup-lightshot.exe
+
+	10) 	filezilla
+
+		sudo add-apt-repository ppa:n-muench/programs-ppa
+		sudo apt-get update
+		sudo apt-get install filezilla
+
+	11) dd - make iso
+
+		sudo dd if=Fedora-Xfce-Live-x86_64-26-1.5.iso of=/dev/sdb bs=4M oflag=direct status=progress
+		sudo fdisk -l
+
+	11) Work with system
+
+		Glances
+		sudo apt-get install glances
+		glances
+
+		sudo apt install htop
+		htop
+
+		sudo apt install iptraf
+		sudo iptraf -u
+
+		netstat -punta
+		netstat -nlp
+		netstat -u -ap
+
+		netstat -an | grep LISTEN
+		nmap localhost
+
+		sudo tcpdump
+
+		Hollywood
+			sudo apt-get install hollywood
+			hollywood
+			Ctr+C 	|| 	exit
+
+
+	11) 
+		OPENSHOT
+
+			sudo add-apt-repository ppa:openshot.developers/ppa
+			sudo apt-get update
+			sudo apt-get install openshot-qt
+
+	11) Linux users and groups
+
+		sudo apt-get install gnome-system-tools
+
+	111) 
+		.deb
+
+			dpkg -i package-name-here.deb
+			dpkg --install package-name-here.deb
+			dpkg -i -R /path/to/dir/name/with/lots/of/dot-deb-files/
+			dpkg -i --recursive /path/to/dir/name/with/lots/of/dot-deb-files/
+		    -i or --install : Install the package.
+		    -R or --recursive : Recursively installed all *.
+
+		.tar.gz
+
+			tar zxf file.tar.gz
+			cd file
+			make install
+
+	11) Linux comand`s
+
+		sudo apt-get install unrar
+		unrar x -r /home/work/software/myfile.rar
+
+		ls [-al] [-R] [...]
+		pwd
+		cd [..]
+		echo 'Hello'
+		rm -rf *.* /home/asus/
+		cp -rp .. -v ..
+		scp -r dir1 user@remote.host:/some/remote/directory/dir2
+		touch file_name.txt
+		nano file_name.txt
+		mkdir dir_name
+		du -sh [/home]  		// размер каталога
+		cat [-d ">" -f 3] filename.txt 		||		more filename.txt 		|| 		less filename.txt
+		man -k read 			||		man comand              || 		info comand
+		whereis comand 					// whereiscomand 			
+		locate readme.txt 				// whereisfile
+		chmode -R 777 ./
+		mv filename.txt [-v] [.]filename.txt 				// rename + hidden
+		clear
+		uptime
+		uname -a
+		lscpu
+		echo $PATH
+		Ctr + Alt + F3
+		shutdown -h now
+		shutdown -r 0
+		Crt + c 							//	abord proces
+		Crt + z 							//	hide process
+		ping www.google.com
+		ps 									//	see procese`s
+		fg									//	recovery proces
+
+		ln -s ...
+
+		find /home -name "*.txt"
+
+		grep [-lirn] linux ./* || grep [-ir][-E] "function " linux filename
+			-l : Выводит только имена файлов где была найдена строка.
+			-i : Делает поиск регистронезависимым
+			-r : Производит поиск рекурсивно по всем поддиректориям.
+			-n : Выдает перед каждой строкой ее номер в файле
+			-v : Выводит строки, где нет указаной строки
+			-c : Отключает стандартный способ вывода результата
+			-w : Ведет поиск по цельным словам.
+			-s : Подавляет выдачу сообщений о не существующих или недоступных для чтения файлах.
+			
+		----------------------
+			'^#'
+			'^[0-9]'
+		
+		wc [-l -w -s] filename
+		sort [-n] filename
+		|
+		sort filename > /var/www/html/laravel.txt 									// rewrite
+		sort filename >> /var/www/html/laravel.txt 									// append
+		sort filename 2> /var/www/html/error.txt 									// write errors
+
+		unzip prestashop_1.7.1.0.zip -d /var/www/html/presta.shop
+
+		ifconfig -a
+		route
+		ping [-c 4] 192.168.0.1
+		curl google.com
+		sudo ufw allow 22 					//	open port 22
+
+
+		Add user
+
+		sudo groupadd lamers
+		sudo groupdel lamers
+
+		id Petrovich
+
+		sudo usermod -aG lamer Petrovich
+
+		Adduser Petrovich
+		sudo useradd Petrovich
+				-m + directory
+		sudo passwd Petrovich
+
+		deluser Petrovich lamer 		ubrat` is gruppi
+		userdel -r Petrovich				steret` usera
+		
+		Group`s
+			less /etc/group
+			cut -d : -f 1 /etc/group
+		
+		User`s
+			users
+			who
+			less /etc/passwd
+			cut -d : -f 1 /etc/passwd
+			awk -F':' '$2 ~ "\$" {print $1}' /etc/shadow
+			awk -F'[/:]' '{if ($3 >= 1000 && $3 != 65534) print $1}' /etc/passwd
+
+
+			w 								// show users and proces
+
+		whoami
+
+		sudo chown -R petrowich:petrowich ./123			smena vladelca
+		sudo chown -R root:root ./123			smena vladelca
+
+
+		// boot with grub
+		ls
+		set boot=(hd0, msdos4)
+		set prefix=(hd0, msdos4)/boot/grub
+		insmod normal
+		normal
+
+		// recovery grub
+		sudo fdisk -l
+				/dev/sda1 29 8369 66999082+ 83 Linux
+				/dev/sda2 * 8370 13995 45190845 7 HPFS/NTFS
+				/dev/sda3 13996 14593 4803435 5 Extended
+		sudo mount /dev/sda1 /mnt
+		sudo grub-install --root-directory=/mnt /dev/sda
+		sudo update-grub --output=/mnt/boot/grub/grub.cfg
+
+
+
+000 	0 	--- 	нет 	нет
+001 	1 	--x 	выполнение 	чтение файлов и их свойств
+010 	2 	-w- 	запись 	нет
+011 	3 	-wx 	запись и выполнение 	всё, кроме чтения списка файлов
+100 	4 	r-- 	чтение 	чтение имён файлов
+101 	5 	r-x 	чтение и выполнение 	доступ на чтение
+110 	6 	rw- 	чтение и запись 	чтение имён файлов
+111 	7 	rwx 	все права 	все права
+
+400 (-r--------)
+    Владелец имеет право чтения; никто другой не имеет права выполнять никакие действия
+644 (-rw-r--r--)
+    Все пользователи имеют право чтения; владелец может редактировать
+660 (-rw-rw----)
+    Владелец и группа могут читать и редактировать; остальные не имеют права выполнять никаких действий
+664 (-rw-rw-r--)
+    Все пользователи имеют право чтения; владелец и группа могут редактировать
+666 (-rw-rw-rw-)
+    Все пользователи могут читать и редактировать
+700 (-rwx------)
+    Владелец может читать, записывать и запускать на выполнение; никто другой не имеет права выполнять никакие действия
+744 (-rwxr--r--)
+    Каждый пользователь может читать, владелец имеет право редактировать и запускать на выполнение
+755 (-rwxr-xr-x)
+    Каждый пользователь имеет право читать и запускать на выполнение; владелец может редактировать
+777 (-rwxrwxrwx)
+    Каждый пользователь может читать, редактировать и запускать на выполнение
+1555 (-r-xr-xr-t)
+    Каждый пользователь имеет право читать и запускать на выполнение; удалить файл может только владелец этого файла
+2555 (-r-xr-sr-x)
+    Каждый пользователь имеет право читать и запускать на выполнение с правами группы(user group) владельца файла
+0440 (-r--r-----)
+    Владелец и группа имеет право чтения никто другой не имеет права выполнять никакие действия
+4555 (-r-sr-xr-x)
+    Каждый пользователь имеет право читать и запускать на выполнение с правами владельца файла 
+
+
+
+Moding
+
+	sudo add-apt-repository ppa:noobslab/macbuntu
+	sudo apt update
+	sudo apt-get install macbuntu-os-icons-lts-v7
+	sudo apt-get install macbuntu-os-ithemes-lts-v7
+	
+	Установка Docky:
+  
+		sudo add-apt-repository ppa:docky-core/ppa
+		sudo apt-get update
+		sudo apt-get install docky
+
+		Улаление Docky:
+			sudo add-apt-repository -r ppa:docky-core/ppa
+			sudo apt-get update
+			sudo apt-get remove docky
+
+	sudo apt-get install gnome-tweak-tool
+
+	add docky to autoload
+	Далее находим Gnome Tweak Tool в поиске и попробуем поменять тему и значки. Но нужно включить в расширениях User Themes ибо нам система не даст установить сторонние темы.
+	Меняем значение “Внешний вид – Темы – Gtk+”, “Значки”, “Указатель мыши” и “Тема Shell” на Macbuntu-OS.
+	Как видим у нас уже что-то получается.
+	
+	sudo apt-get install dconf-editor
+	
+	dconf-editor
+		org/gnome/desktop/wm/preferences
+
+	и меняем значение “button-layout” на
+
+	close,minimize,maximize:appmenu
+
+	DIODON
+		sudo apt-get install diodon
+
+	sysmonitor
+		sudo add-apt-repository ppa:fossfreedom/indicator-sysmonitor
+		sudo apt-get update
+		sudo apt-get install indicator-sysmonitor
+
+	Ha ha
+		telnet towel.blinkenlights.nl 		//star wars
+		
+		sudo apt-get install cmatrix
+			cmatrix
+
+		sudo apt-get install sl
+			sl
+
+		sudo apt-get install espeak
+			espeak -s 120 "$elem"
+
+		sudo apt-get install toilet
+			toilet -f mono12 "$elem"
+
+		sudo apt-get install hollywood
+			hollywood
+
+
+Recovery audio
+	sudo apt-get update;sudo apt-get dist-upgrade; sudo apt-get install linux-sound-base alsa-base alsa-utils gdm ubuntu-desktop linux-image-`uname -r` libasound2; sudo apt-get -y --reinstall install linux-sound-base alsa-base alsa-utils gdm ubuntu-desktop linux-image-`uname -r` libasound2; killall pulseaudio; rm -r ~/.pulse*; sudo usermod -aG `cat /etc/group | grep -e '^pulse:' -e '^audio:' -e '^pulse-access:' -e '^pulse-rt:' -e '^video:' | awk -F: '{print $1}' | tr '\n' ',' | sed 's:,$::g'` `whoami`
+
+
+	Wake-On-LAN
+		1)
+			ifconfig
+			sudo su
+			cd /etc/init.d/
+			nano wakeonlanconfig
+				#!/bin/bash
+				ethtool -s ens2 wol g
+				exit
+			chmod a+x wakeonlanconfig
+			update-rc.d -f wakeonlanconfig defaults
+			/etc/init.d/wakeonlanconfig
+			apt-get install ethtool
+			sudo ethtool ens2 | grep -i wake-on
+			sudo ethtool -s ens2 wol g
+		2)
+			apt-get install wakeonlan
+			wakeonlan -i [IP адрес] -p [порт] [MAC адрес]
+			

@@ -1,0 +1,127 @@
+# .htaccess
+
+#=====================================		установка кодировки
+AddDefaultCharset utf-8
+
+#=====================================		индексный файи дирректории по умолчанию
+#DirectoryIndex index.php
+#DirectoryIndex 404.jpg
+#DirectoryIndex index.html
+
+#=====================================		запрет листинга каталогов (- запрет) (бeз минуса разрешено)
+#Options -Indexes
+Options All -Indexes
+
+#=====================================		обращение к файлам без расширения
+#Option +MultiViews
+
+#====================================		 Позволяет вставлять PHP код в html js файлы
+#RemoveHandler .html .htm .js
+#AddType application/x-httpd-php .php .htm .sj .html .phtml
+
+#====================================		 Redirect простой
+
+#Redirect /index.html http://google.com
+#Redirect 302 /index.html http://google.com
+#RedirectMatch .+\.jpg$ /index.html
+
+#====================================		 Redirect пришедших с host1 или host2 и обращающихся на old\.html на new.html
+#RewriteEngine on
+#RewriteCond %{REMOTE_HOST} ^host1.* [OR]
+#RewriteCond %{REMOTE_HOST} ^host2.* [OR]
+#RewriteRule ^old\.html$ new.html
+
+#====================================		 Перенаправление домена с www на без www:
+#RewriteEngine On
+#RewriteCond %{HTTP_HOST} ^www.mysite.ua$ [NC]
+#RewriteRule ^(.*)$ http://mysite.ua/$1 [R=301,L]
+
+#====================================		 Перенаправление посетителей на разные старницы в зависимости от IP-адреса посетителя: 
+#RewriteEngine On 
+#SetEnvIf REMOTE_ADDR 183.11.101.1 REDIR="redir"
+#RewriteCond %{REDIR} redir 
+#RewriteRule ^/$ /kontakt.html
+
+#====================================		 Перенаправление на время обновления веб-ресурса: 
+#RewriteEngine on
+#RewriteCond %{REQUEST_URI} !/info.html$         //зашел не на info.html
+#RewriteCond %{REMOTE_HOST} !^14.124.354.80   //и не с 14.124.354.80
+#RewriteRule $ http://vash-sait.ua/info.html [R=302,L] 
+
+#====================================		 защита от «хотлинков» 
+#RewriteEngine On 
+#RewriteCond %{HTTP_REFERER} !^$
+#RewriteCond %{HTTP_REFERER} !^http://([ -a-z0-9] .)?my_site.ua [NC]
+#RewriteRule .(gif|jpe?g|png)$ - [F,NC,L] - появляться ошибка 403
+#(RewriteRule .(jpg|png|gif)$ http://my_site.ua/images/imageinfo.jpg [NC,R,L]) - для конкретн изображения
+
+#====================================		 Блокировка пользователей пришедших с определенного сайта
+#RewriteEngine on 
+#RewriteCond %{HTTP_REFERER} zapretnui-sait.com [NC,OR]
+#RewriteCond %{HTTP_REFERER} zapretnui-sait.com [NC,OR]
+#RewriteRule .* - [F] 
+
+#====================================		 Создание своих страниц с описанием ошибок: 
+#ErrorDocument 401 /errors/401.html
+#ErrorDocument 403 /errors/403.html
+#ErrorDocument 404 /errors/404.html
+#ErrorDocument 500 /errors/505.html
+#Напомню: 
+#    401 — Требуется авторизация (Authorization Required)
+#    403 — пользователь не прошел аутентификацию, запрет на доступ (Forbided)
+#    404 — запрашиваемый документ (файл, директория) не найден (Not Found)
+#    500 — внутренняя ошибка сервера (Internal Server Error)
+
+#====================================		 Ограничение размера загружаемого файла для PHP: 
+#php_value upload_max_filesize 20M    (где 20M  - это ращмер файла в мегабайтах)
+
+#====================================		 Изменить максимальный размер запроса для загрузки в PHP: 
+#php_value post_max_size 10M 
+
+#====================================		 Изменение времени на разбор введенных данных:
+#php_value max_input_time 60 
+
+#====================================		 Запретить доступ ко всем файлам:
+#deny from all 
+
+#====================================		 Разрешить доступ с определенного IP:
+#order allow deny
+#deny from all
+#allow from 192.112.12.198 
+
+#====================================		 Запретить доступ с определенного IP:
+#order allow deny
+#deny from all
+#deny from 192.112.12.198 
+
+#====================================		 закрыть доступ к любому из файлов
+#<Files set.php>
+#deny from all
+#</Files> 
+
+#====================================		 Ограничить доступ к определенному типу файлов:
+#<Files "\.(htm|sql|...указать еще расширения...)$">
+#order allow,deny 
+#deny from all
+#</Files> 
+
+#====================================		 Закрытие каталогов паролем
+#AuthName "Auth message"
+#AuthType Basic
+#require <valid-user | user <username1> [username2] ... [usernameN]>
+#AuthUserFile "/full/path/to/.htpasswd"
+
+
+#====================================		 Ограничить доступ к определенным файлам:
+#<Files ~ "\.(inc|conf|cfg)$">
+#    Deny from all
+#</Files>
+
+#====================================		 Запрещаем просмотр нежелательным User-Agent: 
+#SetEnvIfNoCase user-Agent ^FrontPage [NC,OR]
+#SetEnvIfNoCase user-Agent ^Java.* [NC,OR]
+#SetEnvIfNoCase user-Agent ^Microsoft.URL [NC,OR]
+#SetEnvIfNoCase user-Agent ^MSFrontPage [NC,OR]
+#Order Allow,Deny 
+#Allow from all
+#Deny from env=bad_bot

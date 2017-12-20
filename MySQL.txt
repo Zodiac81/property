@@ -1,0 +1,316 @@
+	SELECT * FROM core_config_data WHERE path = 'web/unsecure/base_url';
+	SELECT * FROM core_config_data WHERE path = 'web/secure/base_url';
+
+	SET foreign_key_checks = 0; 						// ne proveriat` keys
+	
+	mysql -u root -p
+				## Creating New User for Magento Database ##
+				CREATE USER magento@localhost IDENTIFIED BY "password";
+
+				## Create New Database ##
+				create database magento_base;
+				create database lbc;
+
+				## Grant Privileges to Database ##
+				GRANT ALL ON magento_base.* TO magento@localhost;
+
+				GRANT ALL ON magento_project_captain_nason_group.* TO cptnason@localhost;
+
+				## FLUSH privileges ##
+				FLUSH PRIVILEGES;
+
+				## Exit ##
+				exit
+
+	CREATE DATABASE IF NOT EXISTS `magento_project_captain_nason_group`;
+		DROP DATABASE IF EXISTS `magento_project_captain_nason_group`;
+	CREATE USER cptnason@localhost IDENTIFIED BY "B73FF25CC5F22A";
+	GRANT ALL ON magento_project_captain_nason_group.* TO cptnason@localhost;
+	FLUSH PRIVILEGES;
+
+	mysqldump -u [uname] -p[pass] db_name > db_backup.sql
+
+	mysqldump -u root -p lbc > 25_07_lbc.sql
+	mysql -u root -p humhub < 25_07_lbc.sql
+
+	mysqldump -u [uname] -p[pass] --all-databases > all_db_backup.sql
+		mysql -u [uname] -p < all_db_backup.sql
+	
+	mysqldump -u [uname] -p[pass] db_name table1 table2 > table_backup.sql
+	mysqldump -u [uname] -p[pass] db_name | gzip > db_backup.sql.gz
+
+
+	mysql –uUSERNAME –pPASSWORD
+
+	USE web;
+
+	DESCRIBE courses;
+
+	mysqldump –uUSERNAME –pPASSWORD DATABASE > DATABASE.sql - Экспорт базы данных в файл
+	mysql –uUSERNAME –pPASSWORD DATABASE < DATABASE.sql - Импорт базы данных из файла
+	NOT NULL - поле не может содержать неопределенного значения (NULL);
+	PRIMARY KEY - поле будет первичным ключом (идентификатором записи);
+	AUTO_INCREMENT - автозаполнение;
+	UNSIGNED - при выставлении данного параметра значение может быть отрицательным;
+	DEFAULT  'password' - задает значение по умолчанию;
+	INSERT IGNORE clients VALUES (1, 'Иванов И.И.', 'Вокзальная 3', 'Москва', '09599911100'); - использовать для избегания ошибки
+	INSERT INTO clients (id, fio) VALUES (LAST_INSERT_ID(), ‘Самин Иван Петрович'); - Для получения последнего автосгенерированного ключа
+	ORDER BY - отсортировать
+	ASC - (по умолчанию) устанавливает порядок сортирования по возрастанию; 
+	DECS - устанавливает порядок сортирования по убыванию, от больших значений к меньшим.
+	LIMIT 0,100 - 100 - количество результатов; 0 - c какого начинать
+	price AS new_price - принять поле price как new_price
+
+	SELECT DISTINCT * FROM products; - выборка уникальных значений
+
+	AND (и) конструкции OR (или)
+	
+	BETWEEN 100 AND 200 - в диапазоне от 100 до 200
+	
+	NOT BETWEEN 100 AND 200 - не в диапазоне от 100 до 200
+	
+	id_product IN (1022, 1023, 1024) - список значений
+	name LIKE ‘%мороженное%’ - name как *мороженное*
+
+	SELECT p.name FROM products p WHERE NOT (price = 100) - значение price не равно 100
+	SELECT id_catalog FROM products GROUP BY id_catalog; - группировка позволяет получить результат только с уникальными значениями по сгруппированному столбцу
+	SELECT id_catalog, name, price FROM products GROUP BY id_catalog HAVING price > 100  - HAVING аналогичен оператору WHERE за тем исключением, что применяется не для всего набора столбцов таблицы, а для набора созданного оператором GROUP BY и применяется всегда строго после него.
+	SET `last_modify` = NOW() – получает текущее время и дату 
+	SELECT COUNT(product_id) FROM products; – подсчитывает число записей в таблице.
+	SELECT MIN(price) AS min_price, MAX(price) AS max_price FROM products; – возвращают минимальное/максимальное значение столбца
+	SELECT SUM(price) AS sum_price FROM products; - получаем общую сумму элементов
+	SELECT AVG(price) AS nominal_price FROM products; – получаем среднее значение элемента из набора элементов
+	SELECT * FROM  Customers C INNER JOIN Orders O ON O.CustomerId = C.CustomerId 
+	SELECT * FROM  Customers C RIGHT OUTER JOIN Orders O ON O.CustomerId = C.CustomerId
+	SELECT * FROM  Customers C LEFT OUTER JOIN Orders O ON O.CustomerId = C.CustomerId 
+	SELECT * FROM Customers C FULL OUTER JOIN Orders O ON O.CustomerId = C.CustomerId(inner + right + left)
+	SELECT *FROM Customers C CROSS JOIN Orders O (каждый с каждым)
+	CREATE INDEX age ON user(age) - создание индекса
+	CREATE DATABASE wet DEFAULT CHARACTER SET utf8_general_ci;
+	ALTER DATABASE wet CHARACTER SET utf8_general_ci;
+	CREATE DATABASE IF NOT EXISTS my_first_db;
+	SHOW DATABASES;
+	DROP DATABASE IF EXISTS my_first_db;
+	DROP TABLE film; - Удалить таблицу из базы
+	SELECT * FROM  Customers C INNER JOIN Orders O ON O.CustomerId = C.CustomerId -для получения строк соответствия записей в главной и присоединяемой таблице.
+	SELECT * FROM  Customers C LEFT OUTER JOIN Orders O ON O.CustomerId = C.CustomerId  - из главной таблицы будут выбраны все записи, даже если в присоединяемой таблице нет совпадений
+	SELECT * FROM  Customers C RIGHT OUTER JOIN Orders O ON O.CustomerId = C.CustomerId - в присоединяемой таблице будут выбраны все записи, даже если в главной таблице нет совпадений
+	SELECT * FROM Customers C FULL OUTER JOIN Orders O ON O.CustomerId = C.CustomerId - выберет все записи обеих таблиц, заполнив NULL значением отсутствующие данные 
+	SELECT * FROM Customers C CROSS JOIN Orders O - применяется если необходимо получить все возможные сочетания из обеих таблиц
+	... WHERE pd.product_id IS NULL, ... WHERE pd.product_id IS NOT NULL - Проверка на NULL
+	(SELECT ...) UNION (SELECT ...) ORDER BY ; - Объединение запросов (UNION ALL - для нескольких таблиц)
+	(SELECT ...) EXCEPT ALL (SELECT ...); - результаты первого запроса, отсутствующего в результатах второго запроса
+	(SELECT ...) INTERSECT ALL (SELECT ...); - пересечение первого и второго запросов
+	CONCAT – функция для слияния неограниченного числа строк:CONCAT(‘доп текст ',name, …) 
+	CONCAT_WS – функция для слияния неограниченного числа строк как и предъидущая, но с игнорированием NULL: CONCAT(NULL,‘доп текст',name, …)
+	LEFT (str,len) – возвращает len крайних левых символов строки str. 
+	RIGHT(substr,str) – возвращает len крайних правых символов строки str. 
+	LTRIM(str) – возвращает строку без начальных пробелов
+	RTRIM(str) – возвращает строку без конечных пробелов
+	TRIM(str) – возвращает строку без начальных/конечных пробелов
+	QUOTE(str) – экранирует все кавычки в строке
+	REPEAT(str, count) – возвращает слитые в строку count повторений строки str 
+	REPLACE(str, from_str, to_str) – возвращает строку str в которой каждое вхождение from_str заменено на to_str 
+	LOCATE (substr,str) – возвращает позицию первого вхождения подстроки substr в строку str. Если вхождения нет, возвращает 0. 
+	LOWER (str) – возвращает строку str, в которой все буквы маленькие.
+	UPPER(str) – возвращает строку str, в которой все буквы заглавные. 
+	LENGTH (str) – возвращает длинну строки str. 
+	ADDDATE(date, INTERVAL expr type) – возвращает время date, к которому прибавлен временной интервал, определенный вторым параметром… SELECT ADDDATE(‘2016-03-21’, INTERVAL 10 DAY); 
+	ADDTIME(expr1, expr2) – возвращает результат сложения двух временных значений expr1 и expr2
+	CURDATE() -  возвращает текущую дату в формате date (YYYY-MM-DD)
+	CURTIME() – текущее время суток в виде “hh-mm-ss”
+	DATE() – извлекает из значения в формате DATETIME только дату
+	DATEDIFF(begin, end) – вычисляет разницу в днях между датами begi и end. Работает как с типом date так и с datetime 
+	DATE_FORMAT(date, format) – форматирует время date в соответствии со строкой format (есть таблица форматов…) 
+	TO_DAYS(date) - функция возвращает номер дня для даты, указанной в аргументе date, (количество дней, прошедших с года 0).
+	NOW() – текущая дата
+	SELECT (имя поля) name 
+	FROM (имя таблицы) teachers
+
+	SELECT (первое поле, второе поле) name, addr, city
+	FROM (имя таблицы) teachers
+	ORDER BY (сортировка по указанному полю) name
+	SELECT (первое поле, второе поле) title
+	FROM (имя таблицы) courses
+	WHERE (сортировка по указанному полю) length > 30
+
+	SELECT (первое поле, второе поле) title
+	FROM (имя таблицы) courses
+	WHERE (сортировка по указанному полю) length > 30
+	AND title LIKE ‘Web%’
+	CREATE TABLE clients(
+		id int NOT NULL,
+		FIO char(40) NOT NULL,
+		ADDR char(30) NOT NULL,
+		CITY char(15) NOT NULL,
+		PHONE char(11) NOT NULL,
+	PRIMARY KEY ('id')
+	);
+	CREATE TABLE ‘lessons’ (
+	  ‘id’ int(11) NOT NULL AUTO_INCREMENT,
+	  ‘teacher` int(11) DEFAULT 'teachers',
+	  `course` int(11) DEFAULT NULL,
+	  ‘room’ varchar(10) DEFAULT NULL,
+	  ‘lesson_date’ datetime DEFAULT NULL,
+	  PRIMARY KEY (‘id’)
+	) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+	CREATE TABLE teachers ( id int NOT NULL auto_increment, name varchar (50) NOT NULL default ‘’, addr varchar (255) NOT NULL default ‘’, phone varchar (25) default NULL, PRIMARY KEY (id) );
+	CREATE TABLE content ( id int NOT NULL auto_increment, name varchar (50) NOT NULL default ‘’, addr varchar (255) NOT NULL default ‘’, phone varchar (25) default NULL, PRIMARY KEY (id) );
+	INSERT INTO teachers (name, addr, phone) VALUES (‘Иванов Петр Иванович’,’Лазурная,40,кв.51’, ’41-63-71’);
+
+	UPDATE teachers SET  ‘Ivanov’ = ‘Иванов Петр Иванович’;
+	DELETE FROM teachers;
+
+	alter table   [table name]   drop column   [column name] ; - Удаление столбца
+	alter table   [table name]   add column   [new column name]   varchar (20); - Добавление колонки в базу данных
+	alter table   [table name] change [old column name][new column name]   varchar (50); - Изменение имени столбца
+	alter table [table name] add unique ([column name]); - создать столбец с уникальным именем, что бы избежать дубликатов в названиях
+	alter table [table name] drop index [colmn name]; - Удаление столбца из таблицы
+
+	INSERT INTO clients VALUES (1, 'Иванов И.И.', 'Вокзальная 3', 'Москва', '09599911100');
+	INSERT INTO clients (fio, address, c_no, phone, city) VALUES ('Петров', 'Мира 29', 2, '-', 'Екатеринбург');
+
+	UPDATE `products` SET `price` = ‘100’ WHERE `id_poduct` = ‘122’;
+	UPDATE `products` SET `price` = (`price`/26) * 26.5 ORDER BY id_poduct LIMIT 0,100 ;
+	SELECT * FROM oc_product 
+	WHERE (TO_DAYS( NOW( ) ) - TO_DAYS( `date_modified` )) > 120
+	Выбрать (удалить) товар, который уже не изменялся более 120 дней
+	SELECT *, COUNT(cu.firstname) AS qwin FROM oc_customer  cu 
+	WHERE cu.status = 1
+	GROUP BY firstname 
+	ORDER BY qwin DESC 
+	Выбираются строки с уникальным значением firstname, причем записи сортируются по qwin (количеству совпадений имен) 
+
+	UPDATE oc_product_description AS pd 
+	    INNER JOIN oc_product_to_category AS ptc 
+	        ON (pd.product_id = ptc.product_id)
+	SET pd.name = REPLACE(pd.name, 'Окно', 'МП Окно (ПВХ)')
+	WHERE ptc.category_id = 132
+	Переименование товара определенной категории, 
+	который в названии имеет определенную фразу
+	SELECT c.email FROM oc_customer c 
+	UNION ALL
+	SELECT u.email FROM oc_user u 
+	Выборка e@mail из разных таблиц
+	SQL ( structured query language — «язык структурированных запросов») MySQL – 3306 порт
+	Первичный ключ (primary key) представляет собой один из примеров уникальных индексов и применяется для уникальной идентификации записей таблицы. Никакие из двух записей таблицы не могут иметь одинаковых значений первичного ключа. Первичный ключ обычно сокращенно обозначают как PK (primary key).
+	операторы определения данных (Data Definition Language, DDL): 
+	CREATE создает объект БД (саму базу, таблицу, представление, пользователя и т. д.),
+	ALTER изменяет объект,
+	DROP удаляет объект;
+	операторы манипуляции данными (Data Manipulation Language, DML): 
+	SELECT считывает данные, удовлетворяющие заданным условиям,
+	INSERT добавляет новые данные,
+	UPDATE изменяет существующие данные,
+	DELETE удаляет данные;
+	операторы определения доступа к данным (Data Control Language, DCL): 
+	GRANT предоставляет пользователю (группе) разрешения на определенные операции с объектом,
+	REVOKE отзывает ранее выданные разрешения,
+	DENY задает запрет, имеющий приоритет над разрешением;
+	операторы управления транзакциями (Transaction Control Language, TCL): 
+	COMMIT применяет транзакцию,
+	ROLLBACK откатывает все изменения, сделанные в контексте текущей транзакции,
+	SAVEPOINT делит транзакцию на более мелкие участки.
+
+Целочисленные типы данных
+	TINYINT 	 от -127 до 128 , либо 0 до 255
+	SMALLINT  	-32 768 до 32 767 , либо от 0 до 65 535
+	MEDIUMINT  	от -8 388 608 до 8 388 607 , либо от 0 до 16 777 215
+	INT  	от -2 147 483 648 до 2 147 483 647, либо от 0 до 4 294 967 295
+	BIGINT  	От -9 223 372 036 854 775 808 до 9 223 372 036 854 775 807, либо от 0 до 18 446 744 073 709 551 615.
+
+Вещественные типы данных
+	FLOAT 	от -3,402823466E+38 до -1,175494351E-38, 0, и от 1,175494351E-38 до3,402823466E+38
+	DOUBLE 	от-1,7976931348623157E+308 до -2,2250738585072014E-308, 0, и от 2,2250738585072014E-308 до1,7976931348623157E+308
+	DECIMAL 	вещественный тип данных, хранится в виде строки. Используется редко. При отсутствии знаков -и . диапазон значений такой же как у DOUBLE. 
+
+Строчные типы данных
+	TEXT (BLOB) 	Максимальная длина 65 535 символов.
+	TINYTEXT (TINYBLOB) - длиной от 0 до 255 символов
+	MEDIUMTEXT (MEDIUMBLOB) - длиной от 0 до 16 777 215 символов
+	LONGTEXT (LONGBLOB) - длиной от 0 до 4 294 967 295 символов
+	VARCHAR 	длины от 0 до 255 символов
+	CHAR 	Диапазон составляет от 0 до 255 символов
+
+Бинарные типы данных
+	TINYBLOB 	 бинарный тип данных. Максимум 255 символов
+	BLOB 	бинарный тип. Максимум 65535 символов
+	MEDIUMBLOB 	бинарный тип данных. Максимум 16 777 215 символов
+	LONGBLOB 	бинарный тип данных. Максимум 4 294 967 295 символов.
+
+Типы данных - Дата и Время
+	DATE 	Формат следующий: YYYY-MM-DD (год, месяц, день). 2011-01-02
+	DATETIME 	Формат следующий: YYYY-MM-DD HH:MM:SS (год-месяц-день час-минута-секунда). Например: 2011-01-21 09:41:22
+	TIMESTAMP	форматы: YYYYMMDDHHMMSS,YYMMDDHHMMSS, YYYYMMDD, YYMMDD
+	TIME 	Формат: HH:MM:SS. Например: 09:21:55
+	YEAR 	хранящий дату (год). Форматы: YY, YYYY. 
+	Типы данных – Списки значений
+	ENUM 	список значений из списка допустимых строковых значений (аналог radiobutton). Максимальное количество значений 65535
+	SET 	список значений, может быть выбрано несколько значений (аналог checkbox). Максимальное количество значений, хранимых в SET - 64. 
+	
+Самые распостраненные:
+	INT 
+	VARCHAR 
+	TINYINT 
+	TEXT
+	DATETIME
+
+Управление и изменение данных в БД:
+	SELECT - даёт возможность выбрать данные из таблиц в БД
+	INSERT - позволяет добавлять новые записи в уже существующую таблицу в БД
+	UPDATE - разрешается обновить (редактировать) данные в таблице
+	DELETE - возможность удалить записи из уже существующей таблицы в БД
+	FILE - позволяется выбирать, считывать и записывать данные в файлах.
+
+Управление и изменение структуры в БД:
+	CREATE - данное право позволяет пользователю создавать не только новые таблицы, но и даже новые Базы Данных
+	ALTER - очень важная привилегия, которая позволяет переименовывать таблицы, вставлять новые и редактировать старые поля, а также удалять их.
+	INDEX - право, позволяющее по определённому условию удалять уже существующие поля
+	DROP - привилегия, позволяющая удалять либо базы данных целиком, либо таблицы. В зависимости от того, что укажете
+	CREATE TEMPORARY TABLES - данное право даёт возможность создать так называемые временные таблицы в БД. Они очень часто используются во время работы сессий. По их завершению они автоматически удаляются.
+
+Администрирование в БД:
+	GRANT - возможность создавать нового пользователя БД. Внимание! Права нового пользователя не могут быть шире прав создающего.
+	SUPER - данное право разрешает использовать команду kill (отключение другого пользователя от соединения с БД).
+	PROCESS - право, которое даёт возможность увидеть processlist (все соединения других пользователей с БД).
+	RELOAD - возможность работать с файлами журналов (открывать, закрывать), а также считывать права пользователей.
+	SHUTDOWN - право запуска команды прекращения работы сервера.
+	SHOW DATABASES - просмотр всех БД.
+	LOCK TABLES - возможность заблокировать таблицу при соединении определённого пользователя.
+	EXECUTE - возможность запуска хранимых процедур.
+	REPLICATION CLIENT - привилегия, которая позволяет отследить местонахождение главного (master) и ведомых (slaves) серверов.
+	REPLICATION SLAVE - право, позволяющее читать ведомым журнала ведущего сервера.
+
+
+
+shell> mysql --host=localhost --user=myname --password=password mydb
+shell> mysql -h localhost -u myname -ppassword mydb
+
+shell> mysql --host=localhost --user=myname --password mydb
+shell> mysql -h localhost -u myname -p mydb
+
+mysql -h 192.168.0.101 -u root -p
+
+$ mysql -u ПОЛЬЗОВАТЕЛЬ -pПАРОЛЬ -e "SQL_ЗАПРОС"
+$ mysql -u root -ppassword -e "SHOW DATABASES;"
+
+$ mysql -u ПОЛЬЗОВАТЕЛЬ -pПАРОЛЬ -D БАЗА_ДАННЫХ -e "SQL_ЗАПРОС"
+
+$ mysql -u ПОЛЬЗОВАТЕЛЬ -pПАРОЛЬ -N -e "SQL_ЗАПРОС" 		// Не выводить заголовки (названия) столбцов
+$ mysql -u ПОЛЬЗОВАТЕЛЬ -pПАРОЛЬ -B -e "SQL_ЗАПРОС"  		// Убрать декоративное обрамление
+
+
+Bash-скрипта:
+
+mysql -u ПОЛЬЗОВАТЕЛЬ -pПАРОЛЬ <<EOF
+SQL_ЗАПРОС_1
+SQL_ЗАПРОС_2
+SQL_ЗАПРОС_N
+EOF
+
+#!/bin/bash
+mysql -u root -psecret <<MY_QUERY
+USE mysql
+SHOW tables
+MY_QUERY

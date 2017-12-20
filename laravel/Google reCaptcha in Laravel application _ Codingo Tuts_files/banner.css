@@ -1,0 +1,30 @@
+/* Banner layout styles */
+.bannerContent {
+    width: 100%;
+}
+
+.bannerContent__description {
+    max-height: 60px;
+    font-size: 15px;
+    line-height: 20px;
+    margin: 6px 0 12px;
+    overflow: hidden;
+    width: 100%;
+}
+
+.bannerContent__subscribeButton {
+    display: block;
+    margin: 0 auto 6px;
+}
+
+.bannerContent__closeButton {
+    background-color: transparent;
+    color: #595959;
+    display: block;
+    margin: 0 auto;
+}
+
+.bannerContent__closeButton:hover {
+    background-color: transparent;
+    color: #595959;
+}

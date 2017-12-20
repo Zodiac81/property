@@ -1,0 +1,141 @@
+
+The Root Directory
+	bootstrap	-	содержит файлы бутстрапа
+	config		-	содержит все конфигурационные файлы
+	database	-	содержит миграции базы данных. можете использовать этот каталог для хранения базы данных SQLite
+	public		-	содержит файл, который является точкой входа, также тут находятся ваши активы , такие как изображения, JavaScript и CSS.
+	resources	-	содержит views, скомпилированы активы, такие как Less, SASS или JavaScript
+	routes		-	содержит все определения маршрута для приложения. По умолчанию: web.php, api.php, console.php
+	storage		-	содержит ваши скомпилированные шаблоны Blade, кэши файлов
+		app 	-	может быть использован для хранения любых файлов , генерируемых приложением
+		framework -	используется для хранения созданных файлов и кэшей
+		logs	-	содержит файлы логов
+	tests		-	содержит автоматизированные тесты как PHPUnit
+	vendor		-	содержит Composer зависимости
+	App			-	содержит основной код приложения, по умолчанию хранит модели (исп. Artisan для созд. классов "php artisan list make")
+		console	-	содержит Artisan команды
+		Http	-	содержит контроллеры. Почти вся логика для обработки запросов
+		events	-	классы событий. каталог не существует по умолчанию, но будет создан с помощью и Artisan команд "php artisan event:generate"
+		exceptions	-	содержит обработчик исключений
+		Jobs	-	каталог не существует по умолчанию, но будет создан с помощью и Artisan команд "php artisan make:job"
+		Listeners	-	содержит классы , которые обрабатывают свои события. каталог не существует по умолчанию, "php artisan event:generate"
+		Mail	-	классы, которые представляют электронные сообщения, отправляемые приложением. каталог не существует по умолчанию, "php artisan make:mail"
+		Notifications	-	содержит "транзакционныe" уведомлениz, отправляемыe приложением.каталог не существует по умолчанию, "php artisan make:notification"
+		Policies	-	содержит классы политик авторизации. каталог не существует по умолчанию, "php artisan make:policy"
+		Providers	-	содержит все поставщиков услуг для приложения
+
+php artisan help app:name
+
+Config
+
+	'debug' => env('APP_DEBUG', true),
+	'timezone' => 'Europe/Kiev',
+	'locale' => 'ru-RU',
+	'log' => 'daily'	-	ежедневные файлы журналов вместо одного файла
+		'log_max_files' => 30	-	хранить лог 30 дней (по умолчанию 5)
+	'log_level' => env('APP_LOG_LEVEL', 'error'),	-	уровни от наименее тяжелой до самой тяжелой: debug, info, notice, warning, error, critical, alert, emergency.
+
+	ENV
+		echo env('APP_NAME');
+
+	получение значения из config:
+		$value = config('app.timezone');
+		$value = Config::get('app.timezone');net
+	задать значение в config:
+		config(['app.timezone' => 'America/Chicago']);
+		Config::set('app.timezone','en');
+
+HTTP Исключения
+	abort(403 [,'Unauthorized action.']);
+
+Кэширование
+	php artisan config:cache
+
+
+
+Режиме обслуживания
+
+		режиме обслуживания
+				php artisan down
+				php artisan down --message=" My personal message" --retry=60
+
+		откл режим обслуживания
+				php artisan up
+
+
+php artisan storage:link	-  создать символическую ссылку на который указывает на public/storage
+
+
+		php artisan list make					-		Чтобы просмотреть доступные команды
+
+		event - по умолчания дирректории нет
+		event:generate		-	генерация событий
+		make:event				-	генерация событий
+
+Auth
+	php artisan make:auth		-	создание регистрации
+	/register		||		/auth/register				-	и регистрируемся
+
+	php artisan --version				- my version
+
+Model
+
+	php artisan make:model tasks 										-	создать модель таск существующей таблице таск
+	php artisan make:migration create_tasks_table --create=tasks 		-	создать доп таблицу таскс
+
+	php artisan make:model Post -m 										-	создать модель + миграцию
+	php artisan migrate													-   создаст таблицы по существующим миграциям
+	
+
+
+				Eloquent в документации
+
+Контроллер
+
+	<?php
+
+		namespace App\Http\Controllers;
+
+		use Illuminate\Http\Request;
+
+		class UserController extends Controller
+		{
+			public function __construct()
+		    {
+				$this->middleware('auth');
+		    }
+		    public function store(Request $request)
+		    {
+		        $name = $request->name;
+		    }
+		}
+	
+	php artisan make:controller PostController				-	создать сонтроллер с именем Post
+	php artisan make:controller Post/PostController				-	создать сонтроллер с именем Post в каталоге Post
+	php artisan make:controller PhotoController --resource	-	создать сонтроллер nbgf CRUD с именем Photo
+
+	__invoke	-	 определить контроллер , который обрабатывает только одно действие
+
+Actions Handled By Resource Controller
+
+-------------------------------------------------------------------------------
+Verb		|	URI						|	Action		|	Route Name
+-------------------------------------------------------------------------------
+GET			|	/photos					|	index		|	photos.index				- list
+-------------------------------------------------------------------------------
+GET			|	/photos/create			|	create		|	photos.create				- create
+-------------------------------------------------------------------------------
+POST		|	/photos					|	store		|	photos.store				- insert
+-------------------------------------------------------------------------------
+GET			|	/photos/{photo}			|	show		|	photos.show					- show item
+-------------------------------------------------------------------------------
+GET			|	/photos/{photo}/edit	|	edit		|	photos.edit					- insert
+-------------------------------------------------------------------------------
+PUT/PATCH	|	/photos/{photo}			|	update		|	photos.update				- update
+-------------------------------------------------------------------------------
+DELETE		|	/photos/{photo}			|	destroy		|	photos.destroy				- delete
+-------------------------------------------------------------------------------
+															route('photos.destroy');
+MIDDLEWARE 		-	фильтр
+	
+	php artisan make:middleware OldMiddleware

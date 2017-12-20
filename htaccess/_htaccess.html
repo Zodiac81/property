@@ -1,0 +1,1476 @@
+<!DOCTYPE html>
+<!-- saved from url=(0035)https://htmlweb.ru/php/htaccess.php -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1251"><script async="" type="text/javascript" src="./_htaccess_files/1035445.js"></script><script type="text/javascript" async="" src="./_htaccess_files/aci.js"></script>
+
+<link rel="icon" href="https://htmlweb.ru/favicon.gif" type="image/x-icon"><link rel="shortcut icon" href="https://htmlweb.ru/favicon.gif" type="image/x-icon">
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://htmlweb.ru/apple-touch-icon-precomposed.png">
+<meta name="application-name" content="Web-технологии">
+<script async="" type="text/javascript" src="./_htaccess_files/cnt.js"></script><script src="./_htaccess_files/cb=gapi.loaded_1" async=""></script><script src="./_htaccess_files/cb=gapi.loaded_0" async=""></script><script type="text/javascript">if(h=document.location.hash)if(h.indexOf("#/")==0)document.location=new String(h).replace("#","");</script>
+<script async="async" src="./_htaccess_files/95.js" type="text/javascript"></script>
+<link rel="STYLESHEET" type="text/css" href="./_htaccess_files/styles.css" media="screen">
+<meta http-equiv="Last-Modified" content="Sun, 26 Jun 2016 10:57:20 GMT">
+<title>.htaccess</title>
+<meta name="KeyWords" content=".htaccess, Mod_rewrite, Redirect, RewriteCond, RewriteRule, Options, RewriteEngine, ">
+<meta name="Description" content="Описание файла-конфигуратора Apache-серверов .htaccess.">
+<script type="text/javascript" src="./_htaccess_files/js.js" async=""></script>
+
+<script type="text/javascript" src="./_htaccess_files/openapi.js" async=""></script>
+<style type="text/css">/* This is not a zero-length file! */</style><style type="text/css">/* This is not a zero-length file! */</style><script src="./_htaccess_files/highlight.pack.js" type="text/javascript" async="true" charset="windows-1251"></script></head><body><div id="divTop"><div class="divTop_close" onclick="ajaxLoad(this.parentNode,&quot;/links/sm.php?x=298&quot;);"></div><img id="divTop_img" src="./_htaccess_files/pic.php" alt=""><a id="divTop_a" href="https://hostiman.ru/hosting" onclick="ajaxLoad(this.parentNode,&quot;/links/sm.php?x=298&quot;);return !window.open(this.href);" target="_blank">SSD хостинг с защитой от DDOS-атак и конструктором всего за 69 руб/мес за 10 сайтов! &gt;&gt;&gt; Бесплатный тест 30 дней!</a><div class="divTopRZ"><a href="https://htmlweb.ru/links/top_line.php">Реклама здесь</a></div></div><div id="wrap">
+
+<div id="header">
+<span class="Resize"><a href="https://htmlweb.ru/php/htaccess.php" onclick="return Resize(-1)">A</a><a href="https://htmlweb.ru/php/htaccess.php" onclick="return Resize(0)">A</a><a href="https://htmlweb.ru/php/htaccess.php" onclick="return Resize(+1)">A</a></span>
+<a href="https://htmlweb.ru/" class="header">Web-технологии</a>
+<h2 id="title2">.htaccess</h2>
+</div>
+
+<div id="menu">
+<ul>
+    <li><a href="https://htmlweb.ru/">Главная</a></li>
+    <li><a href="https://htmlweb.ru/html/">HTML</a></li>
+    <li><a href="https://htmlweb.ru/css/">CSS</a></li>
+    <li><a href="https://htmlweb.ru/java/">JavaScript</a></li>
+    <li><a href="https://htmlweb.ru/php/">PHP+MySQL</a></li>
+    <li><a href="https://htmlweb.ru/xml/">XML+XSLT</a></li>
+    <li><a href="https://htmlweb.ru/ajax/">Ajax</a></li>
+    <li><a href="https://htmlweb.ru/service/">Сервисы</a></li>
+    <li><a href="https://htmlweb.ru/download/">Скачать</a></li>
+    <li><a href="https://htmlweb.ru/other/">РАЗНОЕ</a></li>
+</ul>
+<span class="top_icon">
+<img src="./_htaccess_files/button_home.gif" width="36" height="24" alt="Сделать стартовой" title="Сделать стартовой" onclick="this.style.behavior=&#39;url(#default#homepage)&#39;;this.setHomePage(location.href);return false;">
+<a href="https://htmlweb.ru/php/htaccess.php#" onclick="return add_favorite(this)" title="Добавить в Избранное"><img src="./_htaccess_files/button_fav.gif" width="36" height="24" alt="Добавить в Избранное"></a>
+<img src="./_htaccess_files/button_mail.gif" width="35" height="24" alt="Написать письмо" title="Написать письмо" onclick="location.href=&#39;/contact.php&#39;">
+<a href="https://htmlweb.ru/sitemap/" title="Карта сайта"><img src="./_htaccess_files/button_map.gif" width="36" height="24" alt="Карта сайта"></a>
+&nbsp;&nbsp;</span>
+</div>
+<div id="content">
+<div class="right">
+
+<div class="rightall">
+    <a class="submitR l" href="https://htmlweb.ru/user/signup.php?">Регистрация</a>
+    <a class="submitR r" onclick="hide(this);show(&quot;login&quot;);return false;"> Войти </a><br class="clear">
+    <a class="submitR c" href="https://htmlweb.ru/user/api.php?vk&amp;" title="Войти/зарегистрироваться через ВКонтакт"> Войти через VK </a><br>
+    <form name="login" method="post" id="login" action="https://htmlweb.ru/php/htaccess.php" class="hide">
+    <label>Имя: <input type="text" name="name" class="rinp" required="" tabindex="1"></label><br>
+    <label>Пароль: <a href="https://htmlweb.ru/user/remember.php" class="r" tabindex="-1">Забыли?</a>
+    <input type="password" name="pass" class="rinp" required="" tabindex="2"></label><br>
+        <label class="l w65" title="безопасное соединение SSL"><input type="checkbox" value="1" tabindex="4" onclick="d=document.location;this.form.action=(this.checked?&#39;https:&#39;:&#39;http:&#39;)+&#39;//&#39;+d.hostname+d.pathname"> <span class="i_lock ml10"></span></label>
+    <input type="submit" class="submit" value="Войти" id="v_sbt" tabindex="5"><br><br>
+    </form>
+    <h2>Поиск по сайту</h2>
+<form method="get" action="https://htmlweb.ru/search/" accept-charset="utf-8">
+    <div>
+        <input type="text" name="q" onmouseover="this.focus()">
+        <input type="submit" value="Поиск" class="submit">
+    </div>
+</form>
+
+<br><br>
+
+<h2>PHP Поиск</h2>
+<form action="https://htmlweb.ru/php/function.php" method="get">
+  <div>
+    <input id="php_search" type="text" name="func" size="20" title="Введите имя PHP функции" onmouseover="this.focus()" onkeyup="searchNameq(&#39;php_rez&#39;, this)" onblur="window.setTimeout(&#39;getObj(\&#39;php_rez\&#39;).innerHTML=\&#39;\&#39;&#39;,500);">
+    <div id="php_rez"></div>
+    <input type="submit" value="Поиск" class="submit">
+    <input type="submit" value=" + " class="submitR" title="Добавить в браузер поисковую систему по операторам и функциям PHP" onclick="window.external.AddSearchProvider(&#39;http://htmlweb.ru/search.xml&#39;); return false;">
+  </div>
+</form>
+<br><br>
+</div>
+
+<div class="rightrecl">
+<div id="rekl"><div id="SRTB_175_7" style="display: none;"><div id="b_script_392469" style="position: relative;"><script type="text/javascript" async="" src="./_htaccess_files/392469.js" data-srtb-id="175" data-srtb-type="sectionId"></script><img src="./_htaccess_files/1x1.gif" style="position:absolute;visibility:hidden;width:1px;height:1px;" id="tpix_392469"><script src="./_htaccess_files/async_rtb.js" type="text/javascript" async=""></script><iframe frameborder="0" width="160px" height="600px" id="btw_ad_392469" scrolling="no" src="./_htaccess_files/adi.html" style="display: inline-block; width: 160px; height: 600px;"></iframe></div></div><div id="SRTB_175_16" style="display: none;">            <script>
+                var msg = {provider: 'sRTBMsg', act: 'showNext', sectionId: '175'};
+                var w = window;
+                w.postMessage(JSON.stringify(msg), '*');
+                while(w != w.parent){
+                    w = w.parent;
+                    w.postMessage(JSON.stringify(msg), '*');
+                }
+            </script>
+</div><div id="SRTB_175"><ins class="adsbygoogle" style="display:inline-block;width:160px;height:600px" data-ad-client="ca-pub-2430461256907383" data-ad-slot="2540484325"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div></div>
+</div>
+
+<div class="rightall">
+-&nbsp;<!--S--><!-- SAPE RTB JS -->
+<script async="async" src="./_htaccess_files/95(1).js" type="text/javascript">
+</script>
+<!-- SAPE RTB END --> <a href="https://utorrent.info/" target="_blank">скачать utorrent</a><br>
+<!--SL--><!--5e0ac--><!--SLo--><!--5e0acf--></div>
+
+</div>
+
+<div class="center" id="main">
+<div id="hypercontext"><!--index-->
+<noscript>&lt;div class="info"&gt;У Вас в браузере заблокирован JavaScript. Разрешите JavaScript для работы сайта!&lt;/div&gt;</noscript><h1>.htaccess PHP</h1>
+<p><strong>.htaccess</strong> (с точкой в начале имени) - это файл-конфигуратор Apache-серверов,
+ который дает возможность конфигурировать
+работу сервера в отдельных директориях (папках), не предоставляя доступа к главному конфигурационному файлу (apache/conf/httpd.conf).
+Например, устанавливать права доступа к файлам в директории, менять названия индексных файлов, самостоятельно
+обрабатывать ошибки Apache, перенаправляя посетителей на специальные страницы ошибок.
+<strong>.htaccess</strong> представляет собой обычный текстовый документ, расширение которого htaccess.
+Данный файл обычно находится в корне сайта, однако Вы можете создавать и дополнительные
+.htaccess-файлы для различных директорий Вашего сайта.
+</p><p><strong>Mod_rewrite</strong> - модуль, используемый веб-серверами для преобразования URL'ов.<br>
+
+</p><p>Если вы хотите вести логи всех операций, выполненных с помощью mod_rewrite, можно активировать это с помощью следующей записи в httpd.conf:</p>
+<pre>RewriteLog /usr/local/apache/logs/mod_rewrite.log
+RewriteLogLevel 1
+</pre>
+
+<h2>Директивы модуля Mod_rewrite</h2>
+
+<ul>
+<li><a href="https://htmlweb.ru/php/htaccess-mod_rewrite-rewritebase.php">RewriteBase</a></li>
+<li><a href="https://htmlweb.ru/php/htaccess-mod_rewrite-rewritecond.php">RewriteCond</a></li>
+<li><a href="https://htmlweb.ru/php/htaccess-mod_rewrite-rewriteengine.php">RewriteEngine</a></li>
+<li><a href="https://htmlweb.ru/php/htaccess-mod_rewrite-rewritelock.php">RewriteLock</a></li>
+<li><a href="https://htmlweb.ru/php/htaccess-mod_rewrite-rewritelog.php">RewriteLog</a></li>
+<li><a href="https://htmlweb.ru/php/htaccess-mod_rewrite-rewriteloglevel.php">RewriteLogLevel</a></li>
+<li><a href="https://htmlweb.ru/php/htaccess-mod_rewrite-rewritemap.php">RewriteMap</a></li>
+<li><a href="https://htmlweb.ru/php/htaccess-mod_rewrite-rewriteoptions.php">RewriteOptions</a></li>
+<li><a href="https://htmlweb.ru/php/htaccess-mod_rewrite-rewriterule.php">RewriteRule</a>
+</li></ul>
+
+<h4>Наиболее часто используемые параметры</h4>
+%{REQUEST_URI} 	Строка запроса (без доменного имени, и GET параметров), пример "/server/htaccess/"<br>
+%{HTTP_HOST} 	Доменное имя, например "max22.ru"<br>
+%{QUERY_STRING}	Строка GET параметров<br>
+
+
+<h2>Варианты реализации Редиректа с помощью файла .htaccess</h2>
+
+<ol>
+<li> Простой редирект:<br>
+<pre>Redirect 301 / http://www.domainname.ru/
+</pre>
+или
+<pre>redirect /secret http://www.site.ru/nosecret
+</pre>
+Ставится в файле <strong>.htaccess</strong> или <strong>httpd.conf</strong> для Apache.
+Первый "/" означает, что всё с верхнего уровня сайта, включая все подкаталоги,
+будет переадресовано (не забывайте поставить последний "/").
+Если Вы хотите переадресовать только страницу, сохранив PR старой страницы, можно сделать так:
+<p>
+Redirect 301 /old/old.htm http://www.you.ru/new.htm где:<br>
+    /old/old.htm - путь и имя старой страницы <br>
+    http://www.you.com/new.htm - новый путь и новое имя перемещенной страницы <br>
+
+</p></li><li> Редирект на любую страницу по ip пользователя или при запросе конкретной страницы (а также по маске имени).<br>
+Если у пользователя ip 192.152.37.125, то он будет перенаправлен на страницу user.php:
+<pre>SetEnvIf REMOTE_ADDR 192.152.37.125 REDIR="redir"
+RewriteCond %{REDIR} redir
+RewriteRule ^/$ /user.php
+</pre>
+
+</li><li> Редирект при запросе определённых файлов. Если запрашиваются файлы, расширение которых не указано в файле .htaccess (gif и jpg), то следует перенаправление:
+
+<pre>RewriteEngine On
+RewriteRule !.(gif|jpg)$ index.php
+</pre>
+
+<br></li><li> Использование mod_rewrite:<br>
+<pre>Options +FollowSymLinks
+RewriteEngine on
+RewriteCond %{HTTP_HOST} ^yourdomain\.ru
+RewriteRule ^(.*)$ http://www.yourdomain.ru/$1 [R=permanent,L]
+</pre>
+
+<br></li><li>  Редирект с регулярным выражением:<br>
+<pre>RedirectMatch 301 (.*) http://www.yourdomain.ru$1 Прописывается в файле .htaccess.
+</pre>
+
+(.*) <strong>RedirectMatch</strong> фактически соответствует регулярным образцам выражения после доменного имени.
+Таким образом, нельзя выполнить соответствие образца на ^/yourdomain.ru. Однако, можно преобразовать
+страницы с использованием .html расширения к файлам того же самого названия, но с .php расширением:
+<pre>RedirectMatch 301 (.*)\.html$ http://www.yourdomain.ru$1.php
+</pre>
+Если необходимо сделать различное перенаправление для отдельных страниц, можно использовать следующее:
+<pre>RedirectMatch Permanent ^/html/resources.html$ http://www.newdomain.com/resources.php
+RedirectMatch Permanent ^/html/other_page.html$ http://www.newdomain.com/other_page.php
+RedirectMatch Permanent ^/(.*)$ http://www.newdomain.com/
+</pre>
+"<strong>RedirectMatch Permanent</strong>" - это эквивалент "RedirectMatch 301", строка с "*(Wildcard)" должна быть последней в этом списке. <br>
+
+
+<br></li><li>Создание удобо читаемых URL<br>
+Чтобы преобразовать, например, www.site.ru/product.php?id=123 в www.site.ru/product/123 следующим образом:
+<pre>RewriteEngine on
+RewriteRule ^product/([^/\.]+)/?$ product.php?id=$1 [L]
+</pre>
+В следующем примере преобразуем www.site.ru/script.php?product=123 в www.site.ru/cat/product/123/:
+<pre>RewriteRule cat/(.*)/(.*)/$ /script.php?$1=$2
+</pre>
+
+<br></li><li> Редирект на PHP:<br>
+<pre><code class="language-html php">header(<span class="string">"HTTP/1.1 301 Moved Permanently"</span>);
+    header(<span class="string">"Location: http://www.newdomain.ru/newdir/newpage.htm"</span>);
+    <span class="keyword">exit</span>();</code></pre>
+Естественно, надо создать страницу, при обращении к которой и будет происходить Редирект,
+и разместить её на сервере. И лучше укажите HTTP/1.1 (а не HTTP/1.0 или HTTP/0.9,
+которые не поддерживают виртуальный хостинг) <br>
+
+
+<br></li><li> Редирект всех файлов в папке на один файл.<br>
+Например вы больше не нуждаетесь в разделе сайта Super discount и хотите перенаправить
+все запросы к папке /superdiscount на один файл /hot-offers.php. Для этого добавляем в .htaccess следующий код.
+
+<pre>RewriteRule ^superdiscount(.*)$ /hot-offers.php [L,R=301]
+</pre>
+
+<br></li><li>Редирект всей папки кроме одного файла<br>
+В следующем примере все файлы из папки /superdiscount будут редиректится на на файл /hot-offers.php,
+КРОМЕ файла /superdiscount/my-ebook.html котоый должен редиректится на /hot-to-make-million.html
+
+<pre>RewriteRule ^superdiscount/my-ebook.html /hot-to-make-million.html [L,R=301]
+RewriteRule ^superdiscount(.*)$ /hot-offers.php [L,R=301]
+</pre>
+
+<br></li><li>Редирект динамического URL на новый файл.<br>
+Данный вариант пригодится если вы хотите редиректить динамический URL с параметрами на новый статический файл.
+
+<pre>RewriteRule ^article.jsp?id=(.*)$ /latestnews.htm [L,R=301]
+</pre>
+
+То есть теперь, запрос к файлу вида http://www.kass.ws/article.jsp?id=8632 и/или http://www.kass.ws/article.jsp?id=1245
+будет отправлен на файл http://www.kass.ws/latestnews.htm.<br>
+
+<br></li><li>Массовый редирект новых файлов.<br>
+Тепепь перейдем к самому сложному моменту, когда вам надо редиректить массу URL-ов, например после смены вашей CMS.
+Тут сразу возникает ряд проблем. Во-первых, внесение всех изменившихся адресов в .htaccess файл займет очень много времени,
+да и само по себе занятие малоприятное. Во-вторых, слишком много записей в .htaccess файле будут тормозить Apache сервера.
+И в третьих, при внесении такого количества информации высока вероятность, что вы где то ошибетесь.
+По этому, самый лучший выход, это нанять програмиста который вам напишет динамический редирект.<br>
+
+Нижеприведенный пример написан на PHP, но так же может быть выполнен на любом языке.
+Предположим вы перешли на новую систему ссылок на вашем сайте и все файлы оканчивающиеся
+на старый id должны быть средирекчены. Сначала создаем в базе таблицу, которая содержит старый id и
+новый URL для редиректа.
+
+old_id INT
+new_url VARCHAR (255)
+
+Далее пишем код который свяжет ваши старые id с новыми URL-ами<br>
+После этого, добавляем следующую строчку в .htaccess:
+
+<pre>RewriteRule ^/product-(.*)_([0-9]+).php /redirectold.php?productid=$2
+</pre>
+
+затем создаем PHP файл redirectold.php, который будет поддерживать 301 редирект:
+
+<pre>&lt;?php
+function getRedirectUrl($productid) {
+// Connect to the database
+$dServer = "localhost";
+$dDb = "mydbname";
+$dUser = "mydb_user";
+$dPass = "password";
+
+$s = @mysql_connect($dServer, $dUser, $dPass)
+or die("Couldn't connect to database server");
+
+@mysql_select_db($dDb, $s)
+or die("Couldn't connect to database");
+
+$query = "SELECT new_url FROM redirects WHERE old_id = ". $productid;
+mysql_query($query);
+$result = mysql_query($query);
+$hasRecords = mysql_num_rows($result) == 0 ? false : true;
+if (!$hasRecords) {
+$ret = 'http://www.yoursite.com/';
+} else {
+while($row = mysql_fetch_array($result))
+{
+$ret = 'http://www.yoursite.com/'. $row["new_url"];
+}
+}
+mysql_close($s);
+return $ret;
+}
+
+$productid = $_GET["productid"];
+$url = getRedirectUrl($productid);
+
+header("HTTP/1.1 301 Moved Permanently");
+header("Location: $url");
+exit();
+?&gt;
+</pre>
+
+<p>Теперь все запросы к вашим старым URL-ам будут вызывать redirectold.php,
+который найдет новый URL и вернет 301 ответ с вашей новой ссылкой.</p>
+
+
+
+<h2>Редиректы в зависимости от времени</h2>
+
+<p>Когда нужно применять уловки типа содержания зависящего от времени масса
+вебмастеров все ещё используют CGI скрипты которые производят редиректы на специальные страницы.
+Как это может быть сделано через mod_rewrite?</p>
+Есть много переменных названных TIME_xxx для условий редиректа.
+В связке со специальными лексикографическими образцами для сравнения &lt;STRING, &gt;STRING
+и =STRING мы можем производить редиректы зависящие от времени:
+
+<pre>    RewriteEngine on
+    RewriteCond   %{TIME_HOUR}%{TIME_MIN} &gt;0700
+    RewriteCond   %{TIME_HOUR}%{TIME_MIN} &lt;1900
+    RewriteRule   ^foo\.html$             foo.day.html
+    RewriteRule   ^foo\.html$             foo.night.html
+</pre>
+<p>Это выдает содержимое foo.day.html при запросе URL foo.html с 07:00 до 19:00 а в оставшееся время содержимое foo.night.html.</p>
+
+
+
+<a name="www" id="www"></a><br></li><li>Убираем у всех запросов в начале <b>"WWW."</b><br>
+<pre>RewriteEngine on    # оглашаем, что хотим использовать mod_rewrite
+RewriteCond %{HTTP_HOST} ^www\.(.*) [NC]
+RewriteRule ^/?(.*) http://%1/$1 [L,R=permanent]
+</pre>
+<p>Проверяем доменное имя, если оно начинается с www, то сработает правило: "все, на http://%1/$1". Здесь %1 это наш домен без www (взят из условия), а $1 это адрес (взят из самого правила).</p>
+
+
+<a name="index"></a><br></li><li>Убираем у всех запросов в конце index.php. Переадресуем на страницу без index.php<br>
+<p>Поисковые системы плохо относятся к дубрям страниц. Чтобы этого избежать нужно удалить(склеить) страницы вида http://ваш_домен/ и http://ваш_домен/index.php</p>
+<pre>RewriteCond %{THE_REQUEST} ^.*/index.php
+RewriteRule ^(.*)index.php$ http://%{HTTP_HOST}/$1 [R=301,L]
+</pre>
+
+
+
+    <br></li><li>Меняем расширение <b>.html</b> на <b>.php</b><br>
+Иногда бывает так, что у Вас статичный веб-сайт, а Вам необходимо, чтобы на нем срабатывал какой-нибудь php-скрипт.
+Для этого Вам необходимо сказать серверу, чтобы он обрабатывал эту страницу как php-файл.
+<pre>AddHandler application/x-httpd-php .html
+</pre>
+Этот прием можно использовать и для других расширений файлов:
+<pre>AddHandler application/x-httpd-php .xml
+AddHandler application/x-httpd-php .asp
+</pre>
+</li></ol>
+
+<h3>Запрещение доступа в конкретную директорию</h3>
+
+<ol><li>для всех ко всем файлам в директории:
+<pre>deny from all
+</pre>
+
+</li><li>к конкретному файлу:
+<pre>&lt;Files secret.php&gt;
+deny from all
+&lt;/Files&gt;
+</pre>
+
+</li><li>по ip пользователя:
+<pre>order deny,allow
+deny from all
+allow from 192.152.37.125
+</pre>
+Доступ в данную директорию будет разрешён только пользователю с ip 192.152.37.125.
+
+<p>А если хотите наоборот, запретить отдельным ip пользователям доступ к вашему сайту, то пропишем следующие строчки:
+</p><pre><code class="language-html xml"><span class="tag">&lt;<span class="title">Limit</span> <span class="attribute">GET</span> <span class="attribute">POST</span> <span class="attribute">PUT</span>&gt;</span>
+    order allow,deny
+    allow from all
+    deny from 192.152.37.125
+    deny from 123.456.177
+<span class="tag">&lt;/<span class="title">LIMIT</span>&gt;</span></code></pre>
+
+</li><li>Директива Options -Indexes - запрет на отображение содержимого каталога при отсутствии индексного файла
+Иногда нужно сделать так, чтобы в случае отсутствия в каталоге файла, который показывается по умолчанию, не выдавался список файлов в каталоге.
+Тогда можно добавить в .htaccess такую строчку :
+<pre>Options -Indexes
+</pre>
+В этом случае вместо списка файлов в каталоге посетитель получит <a href="https://htmlweb.ru/other/http_code.php">HTTP ошибку 403 - access forbidden.</a>
+</li>
+<li>Запретить доступ к файлам с несколькими типа расширений</li>
+
+<pre><code class="language-html xml"><span class="tag">&lt;<span class="title">Files</span> ~ "\<span class="attribute">.</span>(<span class="attribute">inc</span>|<span class="attribute">conf</span>|<span class="attribute">cfg</span>)$"&gt;</span>
+    deny from all
+<span class="tag">&lt;/<span class="title">Files</span>&gt;</span></code></pre>
+<p>
+Запрещен доступ к файлам с расширением *.inc, *.conf и *.cfg. Хотя директива, по умолчанию,
+не работает с регулярными выражениями, но их можно включить поставив символ тильды(~) в опциях директивы.
+Синтаксис следующий:</p>
+[тильда] [пробел] [далее_все_без_пробелов]
+
+Чтобы блокировать этот доступ, запишем следующее:
+<pre>RewriteRule ^.htaccess$ - [F]
+</pre>
+Это правило переводится так:<br>
+
+Если кто-то пробует обращаться к файлу .htaccess, система должна
+произвести код ошибки 'HTTP response of 403' или '403 Forbidden - You
+don't have permission to access /.htaccess on this server'.
+
+<p>Конструкция ^.htaccess$ в этом регулярном выражении означает:<br>
+
+<b>^</b> - якорь начала строки<br>
+<b>$</b> - якорь конца строки<br>
+<b>.</b> - в регулярных выражениях точка '.' обозначает мета-символ и должна
+быть защищена обратным слэшем (backslash), если Вы все-таки хотите
+использовать именно фактическую точку.
+
+</p><p>Имя файла должно быть расположено точно между начальным и конечным
+якорем. Это будет гарантировать то, что только это определенное имя
+файла и никакое другое, сгенерирует код ошибки.<br>
+
+<b>[F]</b> - специальный 'запрещающий' флажок (forbidden).<br>
+<b>[NC]</b> - не учитывать регистр букв.<br>
+<b>[OR]</b> - означает 'или следующее условие'.
+
+
+</p></ol>
+
+<h3>Определение кодировки</h3>
+
+<h4>Определение кодировки, в которой сервер "отдает" файлы</h4>
+<pre>AddDefaultCharset windows-1251
+</pre>
+варианты: <b>KOI8-R</b>, <b>UTF-8</b>, <b>Windows-1251</b>
+
+<h4>Определение кодировки на загружаемые файлы</h4>
+<pre>CharsetSourceEnc windows-1251
+</pre>
+
+
+
+<a name="password"><h3>Установка пароля на директорию с помощью .htaccess</h3></a>
+
+Для установки пароля на директорию можно воспользоваться системой базовой авторизации,
+предусмотренной в веб-сервере Apache. Создаем в каталоге, к которому хотим ограничить доступ по паролю,
+файл .htaccess с такими директивами:
+
+<pre>AuthType Basic
+AuthName "Some Name"
+AuthUserFile /www/some_login/www/htdocs/some_dir/.htpasswd
+require valid-user
+</pre>
+
+Путь /www/some_login/www/htdocs/some_dir/.htpasswd обозначает полный путь к файлу паролей на диске нашего сервера.
+Если, например, вы поместите файл .htpasswd (в нем будут пароли) в домашний каталог, куда вы попадаете,
+зайдя на сервер по FTP, то путь к этому файлу будет иметь вид /www/some_login/www/htdocs/some_dir/.htpasswd,
+где some_login - Ваш логин.
+В директиве AuthUserFile указываем абсолютный путь к файлу с логинами/паролями, который мы создадим чуть позже.
+Если вы создаете файл .htaccess на своем компьютере, а не сразу на сервере используя текстовый редактор,
+обратите особое внимание на то, что .htaccess должен передаваться по FTP строго в текстовом (ASCII) режиме.
+<p>
+Создаем файл паролей. Файл с паролями должен содержать строки вида login:password.
+Пароль должен быть зашифрован с использованием алгоритма MD5. Один из способов создать такой файл -
+воспользоваться программой, входящей в поставку Apache - htpasswd
+(на нашем сервере она находится в каталоге /usr/local/apache/bin, полный путь - /usr/local/apache/bin/htpasswd).
+</p><p>
+Рассмотрим, как создать файл паролей в unix shell прямо на сервере. Зайдем в shell и будем выполнять следующие команды:
+</p><pre>htpasswd -mbc .htpasswd user1 7B1safkir
+</pre>
+ - создаем новый файл .htpasswd, в который добавляем запись для пользователя user1 с паролем,
+ указанным в командной строке.
+<pre>htpasswd .htpasswd user2
+</pre>
+ - добавляем в уже существующий файл .htpasswd пользователя user2,
+а пароль вводим вручную в ответ на соответствующий запрос программы.
+<p>
+После окончания заведения всех логинов файл нужно загрузить на сервер.
+</p>
+<a href="https://htmlweb.ru/html/password.php">О других способах установки паролей на страницу</a>
+
+
+<h3>Задаем собственные страницы ошибок</h3>
+Задать собственную страницу ошибок можно следующим образом:
+<pre>ErrorDocument 404 http://www.site.ru/404.php
+</pre>
+IE игнорирует страницы размером меньше 512 байт.
+
+<h3>Индексация директорий и поддиректорий</h3>
+Чтобы избежать индексации поисковыми системами директорий и поддиректорий,
+необходимо прописать такую строку, к примеру:
+<pre>DirectoryIndex index.php
+</pre>
+Эта директива задает файл, который будет вызван при обращении к директории без указания имени файла.
+<p>Можно указать несколько индексных страниц. При запросе каталога они будут искаться в том порядке,
+в котором перечислены в директиве DirectoryIndex. Если не будет найден файл index.html,
+то будет произведен поиск файла index.php и т.д.
+</p><pre>DirectoryIndex index.html index.php index.shtml
+</pre>
+<p>Лично я предпочитаю переадресовывать с пустых директорий либо на главную страницу сайта,
+либо на какую-либо другую подходящую страницу. Например, директорию www.site.ru/pic/
+можно переадресовать на www.site.ru.
+
+</p><h3>Защита изображений от скачивания</h3>
+Очень часто бывает, что веб-мастера нагло копируют контент с Вашего сайта вместе с рисунками,
+причем рисунки подгружаются с Вашего же сервера. Это создает лишний трафик, что, зачастую,
+приводит к ряду проблем. Как же защититься от таких веб-мастеров и не помешать
+поисковым роботам индексировать изображения? Все просто:
+<pre>RewriteEngine on
+RewriteCond %{HTTP_REFERER} .
+RewriteCond %{HTTP_REFERER} !^http://([^.]+\.)?site\. [NC]
+RewriteCond %{HTTP_REFERER} !google\. [NC]
+RewriteCond %{HTTP_REFERER} !search\?q=cache [NC]
+RewriteCond %{HTTP_REFERER} !msn\. [NC]
+RewriteCond %{HTTP_REFERER} !yahoo\. [NC]
+RewriteCond %{REQUEST_URI} !^/hotlinker\.gif$
+RewriteRule \.(gif|jpg|png)$ /hotlinker.gif [NC,L]
+</pre>
+hotlinker.gif - изображение, которое будет отображаться, вместо истинных изображений.
+Рекомендую в этом изображении отобразить Ваш логотип и ссылку на Ваш сайт.
+
+<p>Еще один варинат запрета доступа к картинкам с неразрешенных сайтов:
+</p><pre>SetEnvIfNoCase Referer "^$" local_ref=1
+SetEnvIfNoCase Referer "^http://(www\.)?htmlweb\.ru" local_ref=1
+SetEnvIfNoCase Referer "^http://(www\.)?images\.yandex\.ru" local_ref=1
+SetEnvIfNoCase Referer "^http://(www\.)?hghltd\.yandex\.com" local_ref=1
+&lt;FilesMatch ".(jpg|gif|png)"&gt;
+ Order Allow,Deny
+ Allow from env=local_ref
+&lt;/FilesMatch&gt;
+</pre>
+
+<p>Поисковые машини и разного рода сканеры создают коллосальный трафик на вашем сайте.
+Нижеприведенный блок кода позволит запретить доступ ботам на сайт.
+
+</p><pre>RewriteCond %{HTTP_USER_AGENT} (Googlebot|Slurp|spider|Twiceler|heritrix|
+	Combine|appie|boitho|e-SocietyRobot|Exabot|Nutch|OmniExplorer|
+	MJ12bot|ZyBorg/1|Ask\ Jeeves|AskJeeves|ActiveTouristBot|
+	JemmaTheTourist| agadine3|BecomeBot|Clustered-Search-Bot|
+	MSIECrawler|freefind|galaxy|genieknows|INGRID|grub-client|
+	MojeekBot|NaverBot|NetNose-Crawler|OnetSzukaj|PrassoSunner|
+	Asterias\ Crawler|T-H-U-N-D-E-R-S-T-O-N-E|GeorgeTheTouristBot|
+	VoilaBot|Vagabondo|fantomBro wser|stealthBrowser|cloakBrowser|
+	fantomCrew\ Browser|Girafabot|Indy\ Library|Intelliseek|Zealbot|
+	Windows\ 95|^Mozilla/4\.05\ \[en\]$|^Mozilla/4\.0$) [NC]
+RewriteRule ^(.*)$ - [F]
+#
+RewriteCond %{HTTP_USER_AGENT} ^Mozilla.* [NC,OR]
+RewriteCond %{HTTP_USER_AGENT} ^Opera.* [NC,OR]
+RewriteCond %{HTTP_USER_AGENT} ^Firefox.* [NC,OR]
+RewriteCond %{HTTP_USER_AGENT} ^Netscape.* [NC]
+RewriteRule ^(.*)$ - [L]
+RewriteRule ^(.*)$ - [F]
+</pre>
+
+
+<h3>Отслеживание обращений к файлу robots.txt</h3>
+Чтобы иметь больше информации о посещении поисковиков, полезно иметь подробную информацио об обращении к файлу robots.txt
+Для того, чтобы оганизовать это, в '.htaccess' должны быть следующие записи:
+<pre>  RewriteEngine on
+  Options +FollowSymlinks
+  RewriteBase /
+  RewriteRule ^robots.txt$ /robot.php?%{REQUEST_URI}
+</pre>
+Теперь при запросе файла 'robots.txt' наш RewriteRule переадресует
+посетителя (робота) к обрабатывающему запросы скрипту robot.php. Кроме
+того, переменная передается скрипту, которая будет обработана в
+соответствии с вашими нуждами. 'REQUEST_URI' определяет имя
+запрашиваемого файла. В данном примере это - 'robots.txt'. Скрипт
+прочтет содержание 'robots.txt' и отправит его web-браузеру или роботу
+поискового сервера. Таким образом, мы можем считать хиты посетителей и
+вести лог-файлы.
+
+<h3>PHPSESSID</h3>
+<p>Для отключения добавления PHPSESSID к URL вставьте в начало index.php:
+</p><pre>ini_set("session.use_trans_sid", 0);
+</pre>
+<br><p>Либо в .htaccess пропишите:
+</p><pre>php_flag session.use_trans_sid Off
+</pre>
+
+<p>Если вам все это показалось сложным, воспользуйтесь готовым <a href="http://www.seo.su/" target="_blank"> сервисом преобразования динамических URL в статические с помощью htaccess</a>
+
+
+<a name="cache"></a></p><h2>Директивы кеширования</h2>
+Кэширование для всех типов файлов по времени доступа
+
+<pre>ExpiresActive on
+ExpiresDefault "access plus 600 seconds"
+</pre>
+
+Кэширование для всех типов файлов по времени изменения
+<pre>ExpiresActive on
+ExpiresDefault "modification plus 600 seconds"
+</pre>
+Кэширование для определённых типов файлов
+<pre>ExpiresByType text/css "modification plus 600 seconds"
+ExpiresByType image/jpeg "modification plus 600 seconds"
+ExpiresByType image/gif "modification plus 600 seconds"
+ExpiresByType image/x-ico "modification plus 600 seconds"
+ExpiresByType image/png "modification plus 600 seconds"
+</pre>
+
+
+
+
+<h3>Запрет кеширования с помощью сервера Apache</h3>
+<p>Откройте файл конфигурации сервера Apache <b>httpd.conf</b> и раскомментируйте следующие строчки:</p>
+<pre>LoadModule expires_module modules/mod_expires.so
+LoadModule headers_module modules/mod_headers.so
+...
+AddModule mod_expires.c
+AddModule mod_headers.c
+</pre>
+<p>Впишите в .htaccess следующее:</p>
+<pre><code class="language-html xml"># Запрещение кеширования в этой папке
+# Необходимо включение модулей
+# mod_headers.c и mod_expires.c
+#
+# Заголовок Cache-Control
+<span class="tag">&lt;<span class="title">IfModule</span> <span class="attribute">mod_headers.c</span>&gt;</span>
+Header append Cache-Control "no-store, no-cache, must-revalidate"
+<span class="tag">&lt;/<span class="title">IfModule</span>&gt;</span>
+
+# Заголовок Expires
+<span class="tag">&lt;<span class="title">IfModule</span> <span class="attribute">mod_expires.c</span>&gt;</span>
+ExpiresActive On
+ExpiresDefault "now"
+<span class="tag">&lt;/<span class="title">IfModule</span>&gt;</span></code></pre>
+<p>Необходимые заголовки будут передаваться автоматически, и специально их писать в PHP уже не нужно - кэш уже выключен!</p>
+<a href="https://htmlweb.ru/other/http_headers.php#Cache-control">Описание http-заголовка кеширования Cache-control</a>
+
+<h3>Кеширование с помощью файла .htaccess</h3>
+<pre><code class="language-html xml"># Разрешение кеширования в этой папке
+# Необходимо включение модулей
+# mod_headers.c и mod_expires.c
+#
+<span class="tag">&lt;<span class="title">IfModule</span> <span class="attribute">mod_expires.c</span>&gt;</span>
+ExpiresActive on
+#ExpiresDefault "access plus 1 hours"
+#ExpiresDefault "access plus 10 years"
+ExpiresDefault                          "access plus 1 month"
+ExpiresByType text/cache-manifest       "access plus 0 seconds"
+ExpiresByType text/html                 "access plus 0 seconds"
+ExpiresByType text/xml                  "access plus 0 seconds"
+ExpiresByType application/xml           "access plus 0 seconds"
+ExpiresByType application/json          "access plus 0 seconds"
+ExpiresByType application/rss+xml       "access plus 1 month"
+ExpiresByType image/x-icon              "access plus 1 week"
+ExpiresByType image/gif                 "access plus 1 year"
+ExpiresByType image/png                 "access plus 1 year"
+ExpiresByType image/jpg                 "access plus 1 year"
+ExpiresByType image/jpeg                "access plus 1 year"
+ExpiresByType video/ogg                 "access plus 1 year"
+ExpiresByType audio/ogg                 "access plus 1 year"
+ExpiresByType audio/mp3                 "access plus 1 year"
+ExpiresByType video/mp4                 "access plus 1 year"
+ExpiresByType video/webm                "access plus 1 year"
+ExpiresByType text/x-component          "access plus 1 month"
+ExpiresByType font/truetype             "access plus 1 year"
+ExpiresByType font/opentype             "access plus 1 year"
+ExpiresByType application/x-font-woff   "access plus 1 year"
+ExpiresByType image/svg+xml             "access plus 1 month"
+ExpiresByType application/vnd.ms-fontobject "access plus 1 year"
+ExpiresByType text/css                  "access plus 2 months"
+ExpiresByType application/javascript    "access plus 2 months"
+ExpiresByType text/javascript           "access plus 2 months"
+<span class="tag">&lt;<span class="title">IfModule</span> <span class="attribute">mod_headers.c</span>&gt;</span>
+Header append Cache-Control "public"
+<span class="tag">&lt;/<span class="title">IfModule</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">IfModule</span>&gt;</span></code></pre>
+
+<h3>Кеширование javascript файлов с помощью файла .htaccess</h3>
+<pre><code class="language-html xml"><span class="tag">&lt;<span class="title">FilesMatch</span> <span class="attribute">.</span>*\<span class="attribute">.js</span>$&gt;</span>
+    ExpiresDefault "access plus 3 days"
+<span class="tag">&lt;/<span class="title">FilesMatch</span>&gt;</span></code></pre>
+<p>Будьте осторожны при кешировании, т.к. при изменении файла, пользователь может получить новый вариант только через 3 дня!</p>
+
+
+<h3>Как заставить html-страницы обрабатывать php-код?</h3>
+Пропишите в своем файле .htaccess следующие строки:
+<pre>RemoveHandler .php .htm .html
+AddHandler application/x-httpd-php .php .htm .html
+</pre>
+
+
+<a name="multihost" id="multihost"></a>
+<h2>Как разместить несколько сайтов на одном виртуальном хостинге?</h2>
+
+<p>Чтобы разместить два или более сайтов на одном виртуальном хостинге,
+вопреки отведенному вам тарифным планом количеству доменов необходимо в файле ".htaccess" прописать следующие строки:</p>
+
+<pre>RewriteEngine On
+RewriteRule ^newdirectory/ - [L]
+RewriteCond %{HTTP_HOST} (www.)?newdomain.ru [NC]
+RewriteRule (.*) newdirectory/$1 [L]
+</pre>
+<p>Где:<br>
+ newdirectory/ - папка, в которой будет лежать второй сайт<br>
+ newdomain.ru - домен, для которого мы делаем перенаправление</p>
+Обратите внимание, что при этом у Вас будет единый почтовый аккаунт.
+Т.е. если, у Вас существует ящик admin@domain.ru, то после подключения домена newdomain.ru у ящика admin@domain.ru
+появляется второе имя - admin@newdomain.ru. А при создании любого нового ящика (например info),
+ему автоматически присваиваются два имени - info@domain.ru и info@newdomain.ru.
+
+
+<h2>Поиск страниц больше чем в одном каталоге</h2>
+
+<p>Иногда необходимо позволить веб-серверу искать страницы больше чем в одном каталоге.</p>
+<pre>RewriteEngine on
+
+#   во-первых попытаемся найти это в указанном месте/...
+#   ...и если нашли то заканчиваем поиск:
+RewriteCond         /your/docroot/dir1/%{REQUEST_FILENAME}  -f
+RewriteRule  ^(.+)  /your/docroot/dir1/$1  [L]
+
+#   во-вторых - попытаемся найти это в pub/...
+#   ...и если нашли то заканчиваем поиск:
+RewriteCond         /your/docroot/dir2/%{REQUEST_FILENAME}  -f
+RewriteRule  ^(.+)  /your/docroot/dir2/$1  [L]
+
+#   иначе продолжаем для других директив
+RewriteRule   ^(.+)  -  [PT]
+</pre>
+
+<br><h2>Виртуальные хосты пользователей</h2>
+
+<p>Если Вы хотите предоставлять адреса www.subdomain.domain.ru для страниц пользователей,
+Вы можете использовать следующий набор правил для преобразования http://www.subdomain.domain.ru/path во внутренний путь /home/subdomain/path:</p>
+
+<pre>RewriteEngine on
+RewriteCond   %{HTTP_HOST}                 ^www\.[^.]+\.ru$
+RewriteRule   ^(.+)                        %{HTTP_HOST}$1          [C]
+RewriteRule   ^www\.([^.]+)\.ru(.*) /home/$1$2
+</pre>
+
+
+<br><h2>Повреждаются файлы при загрузке на сервер</h2>
+Если при передаче файлов через формы (при указанном enctype="multipart/form-data") бинарные данные повреждаются, пропишите в /cgi-bin/.htaccess директиву:
+<pre>CharsetRecodeMultipartForms Off.
+</pre>
+
+<br><h2>Ошибка загрузки SWF файлов.<br>Ошибки при обращении к страницам, содержащим ключевые слова,<br>типа $_REQUEST</h2>
+<p>Такое может происходить из-за установленного модуля &lt;mod_security&gt; в Apache.
+По умолчанию он блокирует в запросах строки с SQL аргументами и другими потенциально опасными командами.</p>
+<p>Возможные сообщения об ошибке:</p>
+<div class="res"><p><b>Forbidden</b></p>
+You don't have permission to access /adm/index.php on this server.
+Additionally, a 404 Not Found error was encountered while
+	trying to use an ErrorDocument to handle the request.
+</div>
+или
+<div class="res">Запрос небезопасен и был отвергнут.
+</div>
+Добавьте в .htaccess
+<pre><code class="language-html xml"><span class="tag">&lt;<span class="title">IfModule</span> <span class="attribute">mod_security.c</span>&gt;</span>
+  SecFilterEngine Off
+  SecFilterScanPOST Off
+<span class="tag">&lt;/<span class="title">IfModule</span>&gt;</span></code></pre>
+
+Для сообщения:
+<div class="res">"POST /wp-admin/async-upload.php HTTP/1.1" 406 354 "-" "Shockwave Flash"
+</div>
+можно снять защиту только на загрузку файлов на сервер:
+<pre><code class="language-html xml"><span class="tag">&lt;<span class="title">IfModule</span> <span class="attribute">mod_security.c</span>&gt;</span>
+<span class="tag">&lt;<span class="title">Files</span> <span class="attribute">async-upload.php</span>&gt;</span>
+SecFilterEngine Off
+SecFilterScanPOST Off
+<span class="tag">&lt;/<span class="title">Files</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">IfModule</span>&gt;</span></code></pre>
+<p>Оптимально снимать защиту только с той папки, в которой это необходимо, не убирая защиту со всего сайта.</p>
+
+
+
+<h2>Переменные сервера</h2>
+<p>Это переменные вида <strong>%{NAME_OF_VARIABLE}</strong>
+</p><p>где <em>NAME_OF_VARIABLE</em> может быть строкой взятой из следующего списка:
+</p><table border="0" cellpadding="5" cellspacing="0">
+<tbody><tr><th>HTTP заголовки:</th><th>соединение &amp; запрос:</th><th></th></tr>
+<tr><td>HTTP_USER_AGENT<br>HTTP_REFERER<br>HTTP_COOKIE<br>HTTP_FORWARDED<br>HTTP_HOST<br>HTTP_PROXY_CONNECTION<br>HTTP_ACCEPT<br></td><td>
+REMOTE_ADDR<br>
+REMOTE_HOST<br>
+REMOTE_USER<br>
+REMOTE_IDENT<br>
+REQUEST_METHOD<br>
+SCRIPT_FILENAME<br>
+
+PATH_INFO<br>
+QUERY_STRING<br>
+AUTH_TYPE<br></td><td></td></tr><tr><th>внутренние сервера:</th><th>системные:</th><th>специальные:</th></tr><tr><td>
+DOCUMENT_ROOT<br>
+SERVER_ADMIN<br>
+
+SERVER_NAME<br>
+SERVER_ADDR<br>
+SERVER_PORT<br>
+SERVER_PROTOCOL<br>
+SERVER_SOFTWARE<br></td><td>
+TIME_YEAR<br>
+
+TIME_MON<br>
+TIME_DAY<br>
+TIME_HOUR<br>
+TIME_MIN<br>
+TIME_SEC<br>
+TIME_WDAY<br>
+
+TIME<br></td><td>API_VERSION<br>
+THE_REQUEST<br>
+REQUEST_URI<br>
+REQUEST_FILENAME<br>
+IS_SUBREQ<br></td></tr></tbody></table>
+
+<p>Эти переменные полностью соответствуют названным похожим образом MIME-заголовкам HTTP, и переменным сервера Apache или полям <code>struct tm</code> систем Unix.
+Те, что являются для mod_rewrite специальными включают:</p>
+<p><b>IS_SUBREQ</b> - Будет содержать текст «true» если запрос выполняется в текущий момент как подзапрос,
+«false» в другом случае. Подзапросы могут быть сгенерированны модулями которым нужно иметь дело с дополнительными файлами
+или URI для того чтобы выполнить собственные задачи.
+</p><p><b>API_VERSION</b> - Это версия API модуля Apache (внутренний интерфейс между сервером и модулем) в текущей сборке сервера, что определено в include/ap_mmn.h.
+API версия модуля соответствует используемой версии Apache (для версии Apache 1.3.14, к примеру это 19990320:10), однако это в основном интересно авторам модулей.
+</p><p><b>THE_REQUEST</b> - Полная строка HTTP запроса отправленная браузером серверу (т.е., «<code>GET /index.html HTTP/1.1</code>»).
+Она не включает какие-либо дополнительные заголовки отправляемые браузером.
+</p><p><b>REQUEST_URI</b> - Ресурс, запрошенный в строке HTTP запроса.</p>
+<p><b>REQUEST_FILENAME</b> - Полный путь в файловой системе сервера к файлу или скрипту соответствующим этому запросу.</p>
+
+
+<p>Примечания:</p>
+<ol><li>Переменные SCRIPT_FILENAME и REQUEST_FILENAME содержат одинаковые значения, т.е., значение поля
+<code>filename</code> внутренней структуры <code>request_rec</code> сервера Apache.
+Первое имя это просто широко известное имя переменной CGI в то время как второе это постоянная копия
+REQUEST_URI (содержащая значение поля <code>uri</code> структуры <code>request_rec</code>).</li>
+<li>Есть специальный формат: <code>%{ENV:переменная}</code> где <em>переменная</em> может быть
+любой переменной окружения. Это ищется во внутренних структурах
+Apache и (если там нет) с помощью вызова <code>getenv()</code> из процесса Apache сервера.</li>
+<li>Есть специальный формат: <code>%{HTTP:заголовок}</code> где <em>заголовок</em> может быть
+любым именем HTTP MIME-заголовка. Это ищется в HTTP запросе. Пример: <code>%{HTTP:Proxy-Connection}</code> значение
+HTTP заголовка «<code>Proxy-Connection:</code>».</li>
+<li>Есть специальный формат <code>%{LA-U:переменная}</code> опережающих запросов которые производятся
+внутренним (основанном на URL) подзапросом для определения конечного значения
+<em>переменной</em>. Используйте это когда вы хотите использовать
+переменную для преобразований, которая реально определяется позднее, в какой-либо фазе API, и таким образом недоступна на данном этапе.
+Для примера когда вы хотите преобразовать соответственно переменной
+<code>REMOTE_USER</code> из контекста
+сервера (файл <code>httpd.conf</code>) вы должны
+использовать <code>%{LA-U:REMOTE_USER}</code> потому что эта переменная
+устанавливается в фазах авторизации которые идут
+<em>после</em> фазы трансляции URL в которой и работает mod_rewrite.
+С другой стороны, по причине реализации работы mod_rewrite в контексте каталога (файл .htaccess) через Fixup фазу
+API и из-за того, фазы авторизации идут до этой фазы, вы просто можете там использовать <code>%{REMOTE_USER}</code>.</li>
+<li>Есть специальный формат: <code>%{LA-F:переменная}</code> который создает внутренний
+(основанный на имени файла) подзапрос для определения конечного значения
+<em>переменной</em>. В основном это то же самое что и формат LA-U приведенный выше.</li></ol><p>
+
+
+
+</p><h3>Главная страница без дублирования</h3>
+
+<p>Обычно код главной страницы физически расположен в файле index.html или index.php, но сайт должен открываться по любому из запросов:
+yoursite.ru, yoursite.ru/index.html, www.yoursite.ru и www.yoursite.ru/index.html. Но для поисковых систем это четыре разных URL!
+Если не настроить .htaccess верно, поисковик добавит в свой индекс четыре одинаковых страницы. Это признак некачественного сайта.
+Избежать этой проблемы можно с помощью такого кода в .htaccess:</p>
+<pre>Options +FollowSymLinks
+RewriteEngine on
+RewriteCond %{HTTP_HOST} ^yoursite.ru
+RewriteRule (.*) http://www.yoursite.ru/$1 [R=301,L]
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\.html\ HTTP/
+RewriteRule ^index\.html$ http://www.yoursite.ru/ [R=301,L]
+</pre>
+<p>Все страницы-дубли будут склеены редиректом с кодом <a href="https://htmlweb.ru/other/http_code.php">301</a> с главной страницей – http://www.yoursite.ru/.</p>
+
+
+<h3>Дубли страниц без слэша в конце URL</h3>
+
+<p>Чтобы предотвратить ситуацию с индексированием страниц www.yoursite.ru/about и www.yoursite.ru/about/ как разных, ставим следущий код:</p>
+<p>Со страниц без слэша будет установлен редирект на «слэшевые».</p>
+<pre>RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_URI} !(.*)/$
+RewriteRule ^(.*)$ /$1/ [R=301,L]
+</pre>
+
+
+<h3>Сохранение(загрузка) файлов вместо открытия</h3>
+
+<p>Многие видели, как при попытке скачать архив с расширением .rar браузер открывает его в виде простого текста из мешанины символов.
+Это значит, что на сервере сайта не настроено принудительное сохранение типов файлов, которые не должны открываться в браузере.</p>
+<pre>AddType application/octet-stream .rar .doc .mov .avi .pdf .xls .mp4
+</pre>
+
+<h3>Сжатие отправляемых страниц</h3>
+<pre>SetOutputFilter DEFLATE
+Header unset ETag
+FileETag None
+</pre>
+
+
+
+<h3>Принудительная постановка замыкающего слеша</h3>
+<p>Следующий код всегда будет добавлять слеш в адрес URL вашего сайта, что хорошо помогает в области SEO сайта.</p>
+<pre>RewriteCond %{REQUEST_URI} /+[^\.]+$
+RewriteRule ^(.+[^/])$ %{REQUEST_URI}/ [R=301,L]
+</pre>
+
+
+
+<h3>Междоменное использование шрифтов для FireFox</h3>
+<p>При использовании встроенных шрифтов <a href="http://moiprogrammy.net/" target="_blank">Firefox</a> не позволяет брать их с внешних сайтов.
+Следующий код для файла .htaccess позволит обойти данное ограничение.</p>
+<pre><code class="language-html xml"><span class="tag">&lt;<span class="title">FilesMatch</span> "\<span class="attribute">.</span>(<span class="attribute">ttf</span>|<span class="attribute">otf</span>|<span class="attribute">eot</span>|<span class="attribute">woff</span>)$"&gt;</span>
+<span class="tag">&lt;<span class="title">IfModule</span> <span class="attribute">mod_headers.c</span>&gt;</span>
+#Замените yourdomain.com на адрес вашего блога
+Header set Access-Control-Allow-Origin "http://yourdomain.com"
+<span class="tag">&lt;/<span class="title">IfModule</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">FilesMatch</span>&gt;</span></code></pre>
+
+
+<h3>Выполнять PHP в файлах JavaScript</h3>
+<p>При разработке кода JavaScript иногда требуется использовать PHP в файлах .js,
+например, для получения данных из базы данных.</p>
+<pre>AddType application/x-httpd-php .js
+AddHandler x-httpd-php5 .js
+
+&lt;FilesMatch "\.(js|php)$"&gt;
+SetHandler application/x-httpd-php
+&lt;/FilesMatch&gt;
+</pre>
+
+<h3>Разложить файлы robots.txt, sitemap.xml и т.п. в папки доменов</h3>
+<pre># Если есть запрашиваемый файл из корня сайта, в папке домена, то перенаправляем его туда
+RewriteCond         %{DOCUMENT_ROOT}/domain/%{HTTP_HOST}/root%{REQUEST_URI} -f
+RewriteRule ^(.*)$  /domain/%{HTTP_HOST}/root/$1  [L]
+</pre>
+
+
+<h3>Блокируем User Agents через .htaccess</h3>
+<p>Если вы столкнулись с проблемой, что какие-то типы User Agent нагружают ваш сервер ненужными запросами, то от них можно избавиться добавив в .htaccess следующие строчки:</p>
+<pre>SetEnvIfNoCase User-Agent "^Black Hole" bad_bot
+SetEnvIfNoCase User-Agent "^Titan" bad_bot
+SetEnvIfNoCase User-Agent "^WebStripper" bad_bot
+SetEnvIfNoCase User-Agent "^NetMechanic" bad_bot
+SetEnvIfNoCase User-Agent "^CherryPicker" bad_bot
+SetEnvIfNoCase User-Agent "^EmailCollector" bad_bot
+SetEnvIfNoCase User-Agent "^EmailSiphon" bad_bot
+SetEnvIfNoCase User-Agent "^WebBandit" bad_bot
+SetEnvIfNoCase User-Agent "^EmailWolf" bad_bot
+SetEnvIfNoCase User-Agent "^ExtractorPro" bad_bot
+SetEnvIfNoCase User-Agent "^CopyRightCheck" bad_bot
+SetEnvIfNoCase User-Agent "^Crescent" bad_bot
+SetEnvIfNoCase User-Agent "^Wget" bad_bot
+SetEnvIfNoCase User-Agent "^SiteSnagger" bad_bot
+SetEnvIfNoCase User-Agent "^ProWebWalker" bad_bot
+SetEnvIfNoCase User-Agent "^CheeseBot" bad_bot
+SetEnvIfNoCase User-Agent "^Teleport" bad_bot
+SetEnvIfNoCase User-Agent "^TeleportPro" bad_bot
+SetEnvIfNoCase User-Agent "^MIIxpc" bad_bot
+SetEnvIfNoCase User-Agent "^Telesoft" bad_bot
+SetEnvIfNoCase User-Agent "^Website Quester" bad_bot
+SetEnvIfNoCase User-Agent "^WebZip" bad_bot
+SetEnvIfNoCase User-Agent "^moget/2.1" bad_bot
+SetEnvIfNoCase User-Agent "^WebZip/4.0" bad_bot
+SetEnvIfNoCase User-Agent "^WebSauger" bad_bot
+SetEnvIfNoCase User-Agent "^WebCopier" bad_bot
+SetEnvIfNoCase User-Agent "^NetAnts" bad_bot
+SetEnvIfNoCase User-Agent "^Mister PiX" bad_bot
+SetEnvIfNoCase User-Agent "^WebAuto" bad_bot
+SetEnvIfNoCase User-Agent "^TheNomad" bad_bot
+SetEnvIfNoCase User-Agent "^WWW-Collector-E" bad_bot
+SetEnvIfNoCase User-Agent "^RMA" bad_bot
+SetEnvIfNoCase User-Agent "^libWeb/clsHTTP" bad_bot
+SetEnvIfNoCase User-Agent "^asterias" bad_bot
+SetEnvIfNoCase User-Agent "^httplib" bad_bot
+SetEnvIfNoCase User-Agent "^turingos" bad_bot
+SetEnvIfNoCase User-Agent "^spanner" bad_bot
+SetEnvIfNoCase User-Agent "^InfoNaviRobot" bad_bot
+SetEnvIfNoCase User-Agent "^Harvest/1.5" bad_bot
+SetEnvIfNoCase User-Agent "^Bullseye/1.0" bad_bot
+SetEnvIfNoCase User-Agent "^Mozilla/4.0 (compatible; BullsEye; Windows 95)" bad_bot
+SetEnvIfNoCase User-Agent "^Crescent Internet ToolPak HTTP OLE Control v.1.0" bad_bot
+SetEnvIfNoCase User-Agent "^CherryPickerSE/1.0" bad_bot
+SetEnvIfNoCase User-Agent "^CherryPicker /1.0" bad_bot
+SetEnvIfNoCase User-Agent "^WebBandit/3.50" bad_bot
+SetEnvIfNoCase User-Agent "^NICErsPRO" bad_bot
+SetEnvIfNoCase User-Agent "^Microsoft URL Control - 5.01.4511" bad_bot
+SetEnvIfNoCase User-Agent "^DittoSpyder" bad_bot
+SetEnvIfNoCase User-Agent "^Foobot" bad_bot
+SetEnvIfNoCase User-Agent "^WebmasterWorldForumBot" bad_bot
+SetEnvIfNoCase User-Agent "^SpankBot" bad_bot
+SetEnvIfNoCase User-Agent "^BotALot" bad_bot
+SetEnvIfNoCase User-Agent "^lwp-trivial/1.34" bad_bot
+SetEnvIfNoCase User-Agent "^lwp-trivial" bad_bot
+SetEnvIfNoCase User-Agent "^Wget/1.6" bad_bot
+SetEnvIfNoCase User-Agent "^BunnySlippers" bad_bot
+SetEnvIfNoCase User-Agent "^Microsoft URL Control - 6.00.8169" bad_bot
+SetEnvIfNoCase User-Agent "^URLy Warning" bad_bot
+SetEnvIfNoCase User-Agent "^Wget/1.5.3" bad_bot
+SetEnvIfNoCase User-Agent "^LinkWalker" bad_bot
+SetEnvIfNoCase User-Agent "^cosmos" bad_bot
+SetEnvIfNoCase User-Agent "^moget" bad_bot
+SetEnvIfNoCase User-Agent "^hloader" bad_bot
+SetEnvIfNoCase User-Agent "^humanlinks" bad_bot
+SetEnvIfNoCase User-Agent "^LinkextractorPro" bad_bot
+SetEnvIfNoCase User-Agent "^Offline Explorer" bad_bot
+SetEnvIfNoCase User-Agent "^Mata Hari" bad_bot
+SetEnvIfNoCase User-Agent "^LexiBot" bad_bot
+SetEnvIfNoCase User-Agent "^Web Image Collector" bad_bot
+SetEnvIfNoCase User-Agent "^The Intraformant" bad_bot
+SetEnvIfNoCase User-Agent "^True_Robot/1.0" bad_bot
+SetEnvIfNoCase User-Agent "^True_Robot" bad_bot
+SetEnvIfNoCase User-Agent "^BlowFish/1.0" bad_bot
+SetEnvIfNoCase User-Agent "^JennyBot" bad_bot
+SetEnvIfNoCase User-Agent "^MIIxpc/4.2" bad_bot
+SetEnvIfNoCase User-Agent "^BuiltBotTough" bad_bot
+SetEnvIfNoCase User-Agent "^ProPowerBot/2.14" bad_bot
+SetEnvIfNoCase User-Agent "^BackDoorBot/1.0" bad_bot
+SetEnvIfNoCase User-Agent "^toCrawl/UrlDispatcher" bad_bot
+SetEnvIfNoCase User-Agent "^WebEnhancer" bad_bot
+SetEnvIfNoCase User-Agent "^TightTwatBot" bad_bot
+SetEnvIfNoCase User-Agent "^suzuran" bad_bot
+SetEnvIfNoCase User-Agent "^VCI WebViewer VCI WebViewer Win32" bad_bot
+SetEnvIfNoCase User-Agent "^VCI" bad_bot
+SetEnvIfNoCase User-Agent "^Szukacz/1.4" bad_bot
+SetEnvIfNoCase User-Agent "^QueryN Metasearch" bad_bot
+SetEnvIfNoCase User-Agent "^Openfind data gathere" bad_bot
+SetEnvIfNoCase User-Agent "^Openfind" bad_bot
+SetEnvIfNoCase User-Agent "^Xenu's Link Sleuth 1.1c" bad_bot
+SetEnvIfNoCase User-Agent "^Xenu's" bad_bot
+SetEnvIfNoCase User-Agent "^Zeus" bad_bot
+SetEnvIfNoCase User-Agent "^RepoMonkey Bait &amp; Tackle/v1.01" bad_bot
+SetEnvIfNoCase User-Agent "^RepoMonkey" bad_bot
+SetEnvIfNoCase User-Agent "^Zeus 32297 Webster Pro V2.9 Win32" bad_bot
+SetEnvIfNoCase User-Agent "^Webster Pro" bad_bot
+SetEnvIfNoCase User-Agent "^EroCrawler" bad_bot
+SetEnvIfNoCase User-Agent "^LinkScan/8.1a Unix" bad_bot
+SetEnvIfNoCase User-Agent "^Keyword Density/0.9" bad_bot
+SetEnvIfNoCase User-Agent "^Kenjin Spider" bad_bot
+SetEnvIfNoCase User-Agent "^Cegbfeieh" bad_bot
+
+&lt;limit get="" post="" head=""&gt;
+Order Allow,Deny
+Allow from all
+Deny from env=bad_bot
+&lt;/limit&gt;
+</pre>
+
+<h3>Переадресация по языку</h3>
+<pre>RewriteEngine on
+RewriteCond %{HTTP:Accept-Language} (ru) [NC]
+RewriteRule .* КУДА [L]
+</pre>
+
+
+<h3>Защита картинок от скачивания по ссылкам на других сайтах</h3>
+<p>Включая переходы без REFERER, т.е. когда адрес указывают в строке браузера.</p>
+<pre>RewriteEngine on
+RewriteCond %{HTTP_REFERER} !^$
+RewriteCond %{HTTP_REFERER} !^http(s)?://(www\.)?yourdomain.com [NC]
+RewriteRule \.(jpg|jpeg|png|gif)$ КУДА_ПОСЛАТЬ [NC,R,L]
+</pre>
+
+<p>Только по сссылкам на чужих сайтах:</p>
+<pre>RewriteEngine on
+RewriteCond %{HTTP_REFERER} !^http(s)?://(www\.)?yourdomain.com [NC]
+RewriteRule \.(jpg|jpeg|png|gif)$ КУДА_ПОСЛАТЬ [NC,R,L]
+</pre>
+
+<h3>Блокировать пользователей с определенным рефером</h3>
+<p>Если вы не хотите, чтобы пользователи переходя с определенных сайтов попадали на ваш, вы можете это запретить.</p>
+<pre>RewriteEngine on
+RewriteCond %{HTTP_REFERER} bannedurl1.com [NC,OR]
+RewriteCond %{HTTP_REFERER} bannedurl2.com [NC,OR]
+RewriteRule .* - [F]
+</pre>
+<p>bannedurl1.com и bannedurl2.com — примеры запрещенных сайтов.</p>
+
+
+
+<h3>Ограничение размера файла загрузки в PHP, максимального размера запроса и максимального времени выполнения скрипта</h3>
+
+<p>Объем загружаемого файла:</p>
+<pre>php_value upload_max_filesize 15M</pre>
+
+<p>Максимальный размер запроса для загрузки в PHP:</p>
+<pre>php_value post_max_size 10M</pre>
+
+<p>Время выполнения скрипта:</p>
+<pre>php_value max_execution_time 240</pre>
+
+<p>Время для скрипта на разбор введенных данных:</p>
+<pre>php_value max_input_time 180</pre>
+
+
+<h3>Указываем для IE режим вывода</h3>
+<p>Установка заголовка X-UA-Compatible:</p>
+<pre>Header set X-UA-Compatible "IE=Edge"</pre>
+
+
+<h3>Установка Vary: Accept-Encoding</h3>
+<p>Для поисковой оптимизации, и уменьшения времени загрузки страницы, Google рекомендует установить заголовок Vary: Accept-Encoding</p>
+<p>Заголовок ответа HTTP/1.1 Vary позволяет серверу указать, что закэшированный ресурс может использоваться без проверки только,
+если указанные в Vary заголовки совпадают с заголовками запроса. Значения: Accept-Encoding, Host, User-Agent, Accept-Language.</p>
+<pre><code class="language-html xml"><span class="tag">&lt;<span class="title">IfModule</span> <span class="attribute">mod_headers.c</span>&gt;</span>
+<span class="tag">&lt;<span class="title">FilesMatch</span> "\<span class="attribute">.</span>(<span class="attribute">js</span>|<span class="attribute">css</span>|<span class="attribute">xml</span>|<span class="attribute">gz</span>|<span class="attribute">html</span>)$"&gt;</span>
+   Header append Vary: Accept-Encoding
+<span class="tag">&lt;/<span class="title">FilesMatch</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">IfModule</span>&gt;</span></code></pre>
+
+<h3>Общий файл картинки для всех доменов(глобальные алиасы)</h3>
+<pre><code class="language-html javascript">Alias /javascripts /usr/share/javascript/
+<span class="xml"><span class="tag">&lt;<span class="title">Directory</span> "/<span class="attribute">usr</span>/<span class="attribute">share</span>/<span class="attribute">javascript</span>/"&gt;</span>
+Options FollowSymLinks MultiViews
+<span class="tag">&lt;/<span class="title">Directory</span>&gt;</span></span></code></pre>
+
+Положите общий файл, например, icon.png в директорию /usr/share/javascript/
+В файл /etc/javascript-common/javascript-common.conf и добавьте строку:
+<pre>Alias /apple-touch-icon-precomposed.png /usr/share/javascript/icon.png</pre>
+
+
+
+<h3>При загрузке .doc, .docx файлы открываются в браузере с непонятной кодировкой</h3>
+<p>Если у вас открываются .doc, .docx файлы в браузере с непонятной кодировкой и вы хотите чтобы при левом клике файл сохранялся, а не открывался, то вам необходимо прописать в .htaccess:</p>
+<pre>AddType application/force-download doc
+AddType application/force-download docx
+AddType application/force-download xls
+AddType application/force-download xlsx
+</pre>
+
+
+<h3>Перенаправление на безопасное соединение https</h3>
+<p>Если вы используете https и хотите, чтобы все пользователи перенаправлялись на него, то вам поможет следующий код:</p>
+<pre><code class="language-php">RewriteEngine On
+RewriteCond %{HTTPS} !on
+RewriteRule (.*) https:<span class="comment">//%{HTTP_HOST}%{REQUEST_URI}</span></code></pre>
+
+
+<h3>Доступ если установлена cookie с помощью htaccess</h3>
+<p>Если Ваш логин на сайте admin и он устанавливается в куку с именем login Вы можеле легко закрыть доступ посторонним в любую директорию.
+    Для этого создайте в этой директории(папке) файл .htaccess со следующим содержимым:</p>
+<pre><code class="language-php">RewriteEngine On
+RewriteCond %{HTTP_COOKIE} !login=admin [NC]
+RewriteRule .* http:<span class="comment">//%{HTTP_HOST}/ [L,R=301]</span></code></pre>
+<p>По этому же принципу можно закрывать сайт на профилактические работы для всех кроме админа.</p>
+
+
+<h3>Доступ к заголовкам «If-Modified-Since» и «If-None-Match» для реализации http 304 ответа</h3>
+<p>Если PHP не установлен как модуль Apache, то для доступа к заголовкам «If-Modified-Since» и «If-None-Match»
+    необходимо в корневом каталоге веб-сайта поместить файл .htaccess следующего содержания:</p>
+<pre><code class="language-php">RewriteEngine On
+RewriteRule .* — [E=HTTP_IF_MODIFIED_SINCE:%{HTTP:<span class="keyword">If</span>-Modified-Since}]
+RewriteRule .* — [E=HTTP_IF_NONE_MATCH:%{HTTP:<span class="keyword">If</span>-None-Match}]</code></pre>
+<p>После этого, необходимые заголовки будут доступны как $_SERVER['HTTP_IF_MODIFIED_SINCE'] и $_SERVER['HTTP_IF_NONE_MATCH'].</p>
+<p>Следует заметить, что заголовки «If-Modified-Since» и «If-None-Match» не отправляются браузером, если в предыдущих запросах
+    к данной странице он не получал в ответе веб-сервера заголовок «Last-Modified».
+    Кроме того, при использовании в веб-приложении сессий с установками по умолчанию, указанные заголовки также не будут присылаться браузером.
+    Для того чтобы избежать такого поведения браузера,
+    необходимо перед запуском сессии выполнять функцию session_cache_limiter, передавая в качестве аргумента параметр 'private_no_expire':</p>
+<pre><code class="language-php">session_cache_limiter(<span class="string">'private_no_expire'</span>);
+session_start();</code></pre>
+
+
+<h3>Пред и пост обработка с помощью .htaccess</h3>
+<pre><code class="language-php"><span class="comment"># Запуск перед запрашиваемым файлом</span>
+php_value auto_prepend_file <span class="string">"/dir/header.php"</span>
+
+<span class="comment"># Запуск после запрашиваемого файла</span>
+php_value auto_append_file <span class="string">"/dir/footer.php"</span></code></pre><div id="r7"></div><div id="r7"><!-- SAPE RTB DIV 468x60 -->
+<div id="SRTB_80385_7" style="display: none;"><div id="b_script_400748" style="position: relative;"><script type="text/javascript" async="" src="./_htaccess_files/400748.js" data-srtb-id="80385" data-srtb-type="sectionId"></script><img src="./_htaccess_files/1x1.gif" style="position:absolute;visibility:hidden;width:1px;height:1px;" id="tpix_400748"><script src="./_htaccess_files/async_rtb.js" type="text/javascript" async=""></script><iframe frameborder="0" width="468px" height="60px" id="btw_ad_400748" scrolling="no" src="./_htaccess_files/adi(1).html" style="display: inline-block; width: 468px; height: 60px;"></iframe></div></div><div id="SRTB_80385_16" style="display: none;">            <script>
+                var msg = {provider: 'sRTBMsg', act: 'showNext', sectionId: '80385'};
+                var w = window;
+                w.postMessage(JSON.stringify(msg), '*');
+                while(w != w.parent){
+                    w = w.parent;
+                    w.postMessage(JSON.stringify(msg), '*');
+                }
+            </script>
+</div><div id="SRTB_80385"><iframe scrolling="no" frameborder="0" marginwidth="0" marginheight="0" width="468" height="60" id="FRAME_SRTB_80385" src="./_htaccess_files/saved_resource.html"></iframe></div>
+<!-- SAPE RTB END --></div>
+
+
+<p><a href="https://htmlweb.ru/php/example/gzip_php.php">GZip сжатие с помощью .htaccess и PHP</a>.</p>
+
+<br>Читать дальше: <a href="https://htmlweb.ru/php/htaccess_subdomain.php">Переадресация поддоменов с помощью .htaccess</a><br>
+<br><p>Кроме этого дополнительную информацию по теме можно почерпнуть:</p>
+<a href="http://www.egoroff.spb.ru/" target="_blank">www.egoroff.spb.ru</a> - Примеры переадресаций<br>
+<a href="http://htaccess.net.ru/" target="_blank">htaccess.net.ru</a> - дополнительная информация по htaccess.<br>
+<br>
+<span id="vk_like" style="height: 22px; width: 350px; position: relative; clear: both; background: none;"><iframe name="fXD71aee" frameborder="0" src="./_htaccess_files/widget_like.html" width="100%" height="23" scrolling="no" id="vkwidget1" style="overflow: hidden; height: 22px; width: 350px; z-index: 150;"></iframe></span>
+<span id="vk_comments">.</span>
+<span class="soc">
+	<a href="https://htmlweb.ru/php/htaccess.php#" onclick="return addSoc(1);" title="Vkontakte" class="icon-vk-12"></a>
+	<a href="https://htmlweb.ru/php/htaccess.php#" onclick="return addSoc(2);" title="Одноклассники.ru" class="icon-ok-12"></a>
+	<a href="https://htmlweb.ru/php/htaccess.php#" onclick="return addSoc(3);" title="livejournal" class="icon-lj-12"></a>
+	<a href="https://htmlweb.ru/php/htaccess.php#" onclick="return addSoc(4);" title="Twitter" class="icon-twitter-12"></a>
+	<a href="https://htmlweb.ru/php/htaccess.php#" onclick="return addSoc(5);" title="Facebook" class="icon-facebook-12"></a>
+	<a href="https://htmlweb.ru/php/htaccess.php#" onclick="return addSoc(7);" title="Мой Мир" class="icon-moimir-12"></a>
+	<a href="https://htmlweb.ru/php/htaccess.php#" onclick="return addSoc(8);" title="Мой Круг" class="icon-moikrug-12"></a>
+	<div id="___plusone_0" style="text-indent: 0px; margin: 0px; padding: 0px; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 70px; height: 15px; background: transparent;"><iframe frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position: static; top: 0px; width: 70px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 15px;" tabindex="0" vspace="0" width="100%" id="I0_1466938512189" name="I0_1466938512189" src="./_htaccess_files/fastbutton.html" data-gapiattached="true" title="+1"></iframe></div>
+</span>
+<span id="insertComment"><input type="submit" onclick="return onComments();" class="submit" value=" Прокомментировать/Отблагодарить "></span>
+<script type="text/javascript" src="./_htaccess_files/plusone.js" async="" gapi_processed="true">{lang:'ru'}</script>
+<!--/index--></div>
+</div>
+
+<div class="left">
+<h2>Популярное: </h2>
+<ul>
+    <li><a href="https://htmlweb.ru/analiz/sitemap.php" title="Построить карту сайта - Sitemap.xml">Генератор <b>Sitemap</b></a></li>
+    <li><a href="https://htmlweb.ru/analiz/">Анализ сайта</a></li>
+    <li><a href="https://htmlweb.ru/analiz/whois_ip.php" title="Информация об IP-адресе">Чей <b>IP-адрес</b>?</a></li>
+    <li><a href="https://htmlweb.ru/analiz/whois_domain.php" title="Информация о владельце домена">Чей <b>домен</b>?</a></li>
+    <li><a href="https://htmlweb.ru/geo/telcod.php" title="Информация о местоположении телефона">Где <b>телефон</b>?</a></li>
+    <li><a href="https://htmlweb.ru/ajax/example/" title="Примеры AJAX скриптов с использоваием Java Script и PHP">Примеры <b>Ajax</b></a></li>
+    <li><a href="https://htmlweb.ru/php/example/" title="Подборка примеров на PHP">Примеры <b>PHP</b></a></li>
+    <li><a href="https://htmlweb.ru/java/example.php" title="Подборка примеров скриптов на JavaScript">Примеры <b>Javascript</b></a></li>
+    <li><a href="https://htmlweb.ru/html/example/" title="Примеры HTML, DHTML, xHTML, CSS">Примеры <b>HTML, CSS</b></a></li>
+    <li><a href="https://htmlweb.ru/gif-animator/" title="Создание анимированной gif-картинки"><b>GIF</b>-аниматор</a></li>
+    <li><a href="https://htmlweb.ru/geo/">GEO-сервисы</a></li>
+    <li><a href="https://htmlweb.ru/analiz/seo.php" title="Оптимизация и продвижение сайта">Сайт в ТОП</a></li>
+    <li><a href="https://htmlweb.ru/links.php" title="Хостинг, заработок, счетчики, рейтинги, каталоги">Полезные ссылки</a></li>
+    <li><a href="https://htmlweb.ru/analiz/robots.php" title="создать файл robots.txt">Генератор <b>Robots.txt</b></a></li>
+</ul>
+
+<br>
+<h2>Содержание:</h2>
+<ul>
+<li><span onclick="mclick(&quot;mhtml&quot;);" class="b hand" onmouseover="mOver(&quot;mhtml&quot;)" onmouseout="mOut(&quot;mhtml&quot;);">HTML</span>
+<ul id="mhtml" style="display:none;">
+    <li><a href="https://htmlweb.ru/html/bhtml.php">Что такое HTML</a>
+    </li><li><a href="https://htmlweb.ru/html/doctype.php">&lt;!DOCTYPE&gt;</a></li>
+    <li><a href="https://htmlweb.ru/html/head.php">Мета теги в &lt;head&gt;</a></li>
+    <li><a href="https://htmlweb.ru/html/base.php">Тег &lt;base&gt;</a></li>
+    <li><a href="https://htmlweb.ru/html/text.php">Текст в html</a></li>
+    <li><a href="https://htmlweb.ru/html/list.php">HTML списки</a></li>
+    <li><a href="https://htmlweb.ru/html/href.php">Ссылки</a></li>
+    <li><a href="https://htmlweb.ru/html/img.php">Картинки на сайте</a></li>
+    <li><a href="https://htmlweb.ru/html/table.php">Таблицы</a></li>
+    <li><a href="https://htmlweb.ru/html/frame.php" title="фрэймы">Фреймы</a></li>
+    <li><a href="https://htmlweb.ru/html/forms.php">Формы</a></li>
+    <li><a href="https://htmlweb.ru/html/dhtml.php" title="Динамический HTML">DHTML</a></li>
+    <!--li><a href="/html/flash.php">Флэш</a></li-->
+    <li><a href="https://htmlweb.ru/html/imagemap.php">Карты изображений</a></li>
+    <li><a href="https://htmlweb.ru/html/graph.php">Графика в HTML</a></li>
+    <li><a href="https://htmlweb.ru/html/wml.php" title="Программирование для мобильных телефонов">WML</a></li>
+    <!--li><a href="/html/filters1.php">Статические<br>фильтры</a></li>
+    <li><a href="/html/filters2.php">Динамические<br>фильтры</a></li-->
+    <li><a href="https://htmlweb.ru/html/ssi.php">SSI .shtml</a></li>
+    <!--li><a href="/html/xhtml.php">XHTML</a></li-->
+    <li><a href="https://htmlweb.ru/html/table_colors.php">Таблица <b>цветов</b> RGB</a></li>
+    <li><a href="https://htmlweb.ru/html/combine_colors_correctly.php">Правильное<br>сочетание цветов</a></li>
+    <li><a href="https://htmlweb.ru/html/web_only_colors.php">Таблица<br><b>«безопасных»<br>цветов</b></a></li>
+    <li><a href="https://htmlweb.ru/html/symbols.php">Таблица <b>символов</b></a></li>
+    <li><a href="https://htmlweb.ru/html/example/" title="Примеры HTML, CSS">Примеры HTML, CSS</a></li>
+</ul></li>
+
+<li><span onclick="mclick(&quot;mcss&quot;);" class="b hand" onmouseover="mOver(&quot;mcss&quot;)" onmouseout="mOut(&quot;mcss&quot;);">CSS</span>
+<ul id="mcss" style="display:none;">
+    <li><a href="https://htmlweb.ru/css/styles.php">Таблицы стилей CSS</a></li>
+    <li><a href="https://htmlweb.ru/css/styles1.php"><b>Свод стилей</b></a></li>
+    <li><a href="https://htmlweb.ru/css/pseudoclasses.php">Псевдоклассы CSS</a></li>
+    <li><a href="https://htmlweb.ru/css/pseudoelements.php">Псевдоэлементы CSS</a></li>
+    <li><a href="https://htmlweb.ru/css/media_screen.php">@media screen</a></li>
+</ul></li>
+
+<li><span onclick="mclick(&quot;mjs&quot;);" class="b hand" onmouseover="mOver(&quot;mjs&quot;)" onmouseout="mOut(&quot;mjs&quot;);">JavaScript</span>
+<ul id="mjs" style="display:none;">
+    <li><a href="https://htmlweb.ru/java/js.php" title="Описание JavaScript">Описание языка</a></li>
+    <li><a href="https://htmlweb.ru/java/mf.php" title="Методы и функции JavaScript">Методы и функции</a></li>
+    <li><a href="https://htmlweb.ru/java/object.php" title="Объекты JavaScript">Объекты</a></li>
+    <li><a href="https://htmlweb.ru/java/string.php">Строки</a></li>
+    <li><a href="https://htmlweb.ru/java/forms.php">Формы</a></li>
+    <li><a href="https://htmlweb.ru/java/open.php">Фреймы и окна</a></li>
+    <li><a href="https://htmlweb.ru/java/regexp.php" title="Регулярные выражения в Java Script">Регулярные<br>выражения</a></li>
+    <li><a href="https://htmlweb.ru/java/uslovnaya_kompilyaciya.php">Условная<br>компиляция</a></li>
+    <li><a href="https://htmlweb.ru/java/example.php" title="Примеры скриптов на Java Script">Примеры скриптов</a></li>
+    <li><a href="https://htmlweb.ru/java/js_debug.php" title="Тонкости отладки в Javascript, скрипты-помощники">Отладка</a></li>
+    <li><a href="https://htmlweb.ru/java/optimizaciya.php" title="Оптимизация скриптов Javascript">Оптимизация</a></li>
+    <li><a href="https://htmlweb.ru/java/games/" title="Игры OnLine без трафика, на стороне клиента на Java Script">Игры на JS</a></li>
+    <li><a href="https://htmlweb.ru/java/css.php" title="Как обратиться к свойствам CSS-стилей из JavaScript">CSS из JS</a></li>
+</ul></li>
+
+
+<li><span onclick="mclick(&quot;mphp&quot;);" class="hand" onmouseover="mOver(&quot;mphp&quot;)" onmouseout="mOut(&quot;mphp&quot;);"><b>PHP</b> + <b>MySQL</b></span>
+<ul id="mphp">
+    <li><a href="https://htmlweb.ru/php/php1.php">Введение в PHP</a></li>
+    <li><a href="https://htmlweb.ru/php/php2.php">Основы языка</a></li>
+    <li><a href="https://htmlweb.ru/php/php_array.php">Использование<br>массивов</a></li>
+    <li><a href="https://htmlweb.ru/php/function/$_server.php" title="Глобальный массив $_SERVER">$_server</a></li>
+    <li><a href="https://htmlweb.ru/php/php4.php">Создание функций</a></li>
+    <li><a href="https://htmlweb.ru/php/php5.php" title="Манипулирование строками">Строки</a></li>
+    <li><a href="https://htmlweb.ru/php/php_string.php">Функции работы<br>со строками</a></li>
+    <li><a href="https://htmlweb.ru/php/php6.php">Объектное<br>программирование</a></li>
+    <li><a href="https://htmlweb.ru/php/php_form.php" title="Работа с формами на PHP">Формы</a></li>
+    <li><a href="https://htmlweb.ru/php/php_file.php" title="Работа с файлами на PHP">Файлы</a></li>
+    <li><a href="https://htmlweb.ru/php/php_upload.php">Загрузка файлов<br> на сервер</a></li>
+    <li><a href="https://htmlweb.ru/php/mysql.php" title="Связь с базами данных MySQL">MySQL</a>
+	<ul>
+        <li><a href="https://htmlweb.ru/php/example/#mysql">Примеры MySql</a></li>
+        <li><a href="https://htmlweb.ru/php/mysql_date_time.php">Дата, время MySQL</a>
+        </li><li><a href="https://htmlweb.ru/php/mysql_faq.php">Вопросы по MySQL</a></li>
+	</ul></li>
+    <li><a href="https://htmlweb.ru/php/php_cookie.php" title="Cookie в PHP">Cookie</a></li>
+    <li><a href="https://htmlweb.ru/php/htaccess.php" title="Описание htaccess">htaccess</a></li>
+    <li><a href="https://htmlweb.ru/php/php_protect.php" title="Безопасность в PHP">Безопасность</a></li>
+    <li><a href="https://htmlweb.ru/php/php_session.php" title="Сессии в PHP">Сессии</a></li>
+    <li><a href="https://htmlweb.ru/php/mail.php" title="Отправка почты(mail) на PHP">Отправка почты</a></li>
+    <li><a href="https://htmlweb.ru/php/php_cache.php" title="Кэширование в PHP">Кэширование</a></li>
+    <li><a href="https://htmlweb.ru/php/php_date.php">Дата, время</a></li>
+    <li><a href="https://htmlweb.ru/php/php_math.php">Математические<br>функции</a></li>
+    <li><a href="https://htmlweb.ru/php/php10.php">Дополнительные<br>возможности</a></li>
+    <li><a href="https://htmlweb.ru/php/php_regexp.php" title="Регулярные выражения(regexp) в PHP">Регулярные<br>выражения</a></li>
+    <li><a href="https://htmlweb.ru/php/php_curl.php">Библиотека <b>Curl</b></a></li>
+    <li><a href="https://htmlweb.ru/php/php_imap_pop3.php">IMAP, POP3, NNTP</a></li>
+    <li><a href="https://htmlweb.ru/php/php11.php" title="Оптимизация скорости выполнения PHP программ">Оптимизация</a></li>
+    <li><a href="https://htmlweb.ru/php/example/" title="Примеры PHP скриптов">Примеры скриптов</a></li>
+</ul></li>
+
+<li><span onclick="mclick(&quot;mxml&quot;);" class="hand" onmouseover="mOver(&quot;mxml&quot;)" onmouseout="mOut(&quot;mxml&quot;);"><b>XML</b> + <b>XSLT</b></span>
+<ul id="mxml" style="display:none;">
+    <li><a href="https://htmlweb.ru/xml/xml1.php">Введение в XML</a></li>
+    <li><a href="https://htmlweb.ru/xml/xslt1.php">Язык<br>преобразований<br>XSLT</a></li>
+    <li><a href="https://htmlweb.ru/xml/xmlparser.php" title="Разбор HTML и XML файлов">Разбор XML файлов</a></li>
+</ul></li>
+
+<li><span onclick="mclick(&quot;majax&quot;);" class="b hand" onmouseover="mOver(&quot;majax&quot;)" onmouseout="mOut(&quot;majax&quot;);">AJAX</span>
+<ul id="majax" style="display:none;">
+    <li><a href="https://htmlweb.ru/ajax/ajax1.php">Знакомство с Ajax</a></li>
+    <li><a href="https://htmlweb.ru/ajax/ajax2.php">Объект<br>XMLHttpRequest</a></li>
+    <li><a href="https://htmlweb.ru/ajax/ajax3.php">Создание<br>Ajax-приложения</a></li>
+    <li><a href="https://htmlweb.ru/ajax/ajax_post.php" title="Отправка формы при помощи Ajax">Отправка формы</a></li>
+    <li><a href="https://htmlweb.ru/ajax/ajax4.php">Области применения</a></li>
+    <li><a href="https://htmlweb.ru/ajax/example/" title="Примеры AJAX скриптов с использованием JavaScript и PHP">Ajax примеры</a></li>
+    <li><a href="https://htmlweb.ru/ajax/no_ajax.php">Альтернативные<br>Ajax-у методы</a></li>
+    <li><a href="https://htmlweb.ru/ajax/ajax_error.php">Ошибки Ajax</a></li>
+    <li><a href="https://htmlweb.ru/ajax/ajax_back.php">Навигация на AJAX</a></li>
+</ul></li>
+
+<li><span onclick="mclick(&quot;mcorel&quot;);" class="b hand" onmouseover="mOver(&quot;mcorel&quot;)" onmouseout="mOut(&quot;mcorel&quot;);" title="CorelDRAW">Графика CorelDRAW</span>
+<ul id="mcorel" style="display:none;">
+    <li><a href="https://htmlweb.ru/corel/graf.php" title="Векторная и растровая графика">Типы графики</a></li>
+    <li><a href="https://htmlweb.ru/corel/" title="Пакет CorelDRAW Graphics Suite">Пакет CorelDRAW GS</a></li>
+    <li><a href="https://htmlweb.ru/corel/snowman.php" title="Подробная методичка для начинающих">Зимняя картинка</a></li>
+    <li><a href="https://htmlweb.ru/corel/glass.php" title="Пример эффекта осколка стекла">Осколок стекла</a></li>
+</ul></li>
+
+<li><span onclick="mclick(&quot;mseo&quot;);" class="b hand" onmouseover="mOver(&quot;mseo&quot;)" onmouseout="mOut(&quot;mseo&quot;);">SEO</span>
+<ul id="mseo" style="display:none;">
+    <li><a href="https://htmlweb.ru/analiz/" title="Анализ сайта, определение ТИЦ, PR, ссылок">Анализ сайта</a></li>
+    <li><a href="https://htmlweb.ru/analiz/seo.php" title="Пошаговая инструкция продвижения сайта">WEB продвижение<br>(оптимизация)</a></li>
+    <li><a href="https://htmlweb.ru/analiz/whois_domain.php">Информация<br>о <b>домене</b></a></li>
+    <li><a href="https://htmlweb.ru/analiz/whois_ip.php">Информация об<br><b>IP-адресе</b></a></li>
+    <li><a href="https://htmlweb.ru/other/ping.php" title="Оповещение поисковых систем об изменениях на сайте">Ping поисковых<br>систем</a></li>
+    <li><a href="https://htmlweb.ru/analiz/robots.php" title="Создание Robots.txt">Robots.txt</a></li>
+    <li><a href="https://htmlweb.ru/analiz/meta-robots.php" title="HTML МЕТА-тег ROBOTS">meta Robots</a></li>
+    <li><a href="https://htmlweb.ru/analiz/catalog.php" title="Основные каталоги и поисковики, структура, принципы организации">Каталоги и<br>поисковики</a></li>
+    <li><a href="https://htmlweb.ru/analiz/sape.php" title="Увеличение ссылочной популярности с помощью SAPE">Особенности SAPE</a></li>
+    <li><a href="https://htmlweb.ru/analiz/calc-pr.php" title="Методика расчета Google Page Rank">Page Rank</a></li>
+    <li><a href="https://htmlweb.ru/java/example/create_anchor.php" onclick="return InWin(this);">Сервис создания<br>ссылок</a></li>
+    <li><a href="https://htmlweb.ru/analiz/seo/kontekst_reklama.php">О Контекстной<br>рекламе</a></li>
+</ul></li>
+
+<li><span onclick="mclick(&quot;mservice&quot;);" class="b hand" onmouseover="mOver(&quot;mservice&quot;)" onmouseout="mOut(&quot;mservice&quot;);">Сервисы</span>
+<ul id="mservice" style="display:none;">
+    <li><a href="https://htmlweb.ru/service/image_to_css.php" title="Сервис генерации кода изображения для внедрение его в таблцу стилей или код страницы">Внедрение<br>изображения</a></li>
+    <li><a href="https://htmlweb.ru/service/musuk_inside.php" title="Сервис генерации кода музыкального файла для внедрение его на страницу">Внедрение<br>музыки в код</a></li>
+    <li><a href="https://htmlweb.ru/sendsms/" title="Отправить SMS с подменой отправителя">Отправить <b>SMS</b></a></li>
+    <li><a href="https://htmlweb.ru/service/">Другие сервисы</a></li>
+</ul></li>
+
+
+<li><span onclick="mclick(&quot;mother&quot;);" class="b hand" onmouseover="mOver(&quot;mother&quot;)" onmouseout="mOut(&quot;mother&quot;);">Разное</span>
+<ul id="mother" style="display:none;">
+    <li><a href="https://htmlweb.ru/cms.php" title="Системы создания и управления сайтом без знания WEB и HTML">Движки сайтов (CMS)</a></li>
+    <li><a href="https://htmlweb.ru/links.php#hosting">Регистрация<br>доменов и хостинг</a></li>
+    <li><a href="https://htmlweb.ru/links.php#money">Заработок для<br>web-мастеров</a></li>
+    <li><a href="https://htmlweb.ru/analiz/hosting.php" title="Как правильно выбрать хостинг. Какой хостинг лучше: платный или бесплатный?">Хостинг</a></li>
+    <li><a href="https://htmlweb.ru/other/dns.php">Настрока DNS</a></li>
+    <li><a href="https://htmlweb.ru/other/adsl.php" title="Описание технологии ADSL">ADSL</a></li>
+    <li><a href="https://htmlweb.ru/other/rss.php" title="Описание технологии Ленты новостей RSS">RSS</a></li>
+    <li><a href="https://htmlweb.ru/other/activex.php" title="Microsoft ActiveX и интеграция в HTML">ActiveX и HTML</a></li>
+    <li><a href="https://htmlweb.ru/html/password.php">Паролирование<br>страницы</a></li>
+    <li><a href="https://htmlweb.ru/other/http_code.php">HTTP коды</a></li>
+    <li><a href="https://htmlweb.ru/other/http_protocol.php">HTTP протокол</a></li>
+    <li><a href="https://htmlweb.ru/other/http_headers.php">HTTP заголовки</a></li>
+    <li><a href="https://htmlweb.ru/other/hidden_ref.php" title="Как спрятать ссылку?">Прячем ссылки</a></li>
+    <li><a href="https://htmlweb.ru/other/blacklist.php" title="Черный список сайтов и их владельцев">&#9760; Черный список<br>сайтов</a></li>
+    <li><a href="https://htmlweb.ru/other/zarabotok_v_internete.php" title="Заработок в интернете">&#9773; Заработок<br>в интернете</a></li>
+    <li><a href="https://htmlweb.ru/other/glossary.php" title="Справочник терминов и определений">Термины и<br>определения</a></li>
+    <li><a href="https://htmlweb.ru/domain/sale.php">Продажа доменов</a></li>
+    <li><a href="https://htmlweb.ru/other/yandex_mail.php"> &#9993; Настройки<br>Яндекс-почты</a></li>
+    <li><a href="https://htmlweb.ru/other/soc_ssilki.php" title="Добавление кнопок социальных сетей на ваш сайт">Кнопки социалок</a></li>
+    <li><a href="https://htmlweb.ru/other/sip.php">&#9742; Настроки SIP<br>в телефоне</a></li>
+    <li><a href="https://htmlweb.ru/other/search_plugin.php">Создание<br>поискового плугина</a></li>
+    <li><a href="http://0pi.ru/" target="_blank">Сервис<br>коротких ссылок</a></li>
+
+    <li><a href="https://htmlweb.ru/frends.php">Друзья</a></li>
+    <li><a href="https://htmlweb.ru/article.php">Статьи, обзоры</a></li>
+    <li><a href="https://htmlweb.ru/liex/">Статьи Liex</a></li>
+
+    <li><a href="https://htmlweb.ru/labweb.php" title="Задания к лабораторным работам">Задания к л/р</a></li>
+    <li><a href="https://htmlweb.ru/html/example.php" title="Примеры билетов на экзамене/зачете">Примеры<br>зачетных задач</a></li>
+</ul></li>
+
+<li><a href="https://htmlweb.ru/template/" title="Бесплатные шаблоны">Шаблоны сайтов</a></li>
+
+</ul>
+
+<br>
+<h2>Новое за неделю</h2>
+<ul>
+    <li><a href="https://htmlweb.ru/analiz/proxy_list.php">Бесплатные<br>прокси сервера</a>.</li>
+
+    <li><a href="https://htmlweb.ru/history.php">Вся история</a></li>
+</ul>
+
+<br><br>Сейчас на сайте: <b>1285</b>
+<div id="reklL"></div>
+</div>
+<div style="clear:both;padding: 5px 0px 5px 150px;">
+<ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-2430461256907383" data-ad-slot="1251681495"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div>
+
+<div style="clear:both;padding:0 250px"><script type="text/javascript"><!--
+document.write("<a href='http://www.liveinternet.ru/stat/htmlweb.ru/' "+
+"target=_blank rel='nofollow'><img src='//counter.yadro.ru/hit?t42.6;r"+
+escape(document.referrer)+((typeof(screen)=="undefined")?"":
+";s"+screen.width+"*"+screen.height+"*"+(screen.colorDepth?
+screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+
+";h"+escape(document.title.substring(0,80))+";"+Math.random()+
+"' border=0 width=31 height=31 \/><\/a>");//--></script><a href="http://www.liveinternet.ru/" target="_blank" rel="nofollow"><img src="./_htaccess_files/hit" border="0" width="31" height="31"></a>
+
+    <img src="./_htaccess_files/top100.cnt" alt="Rambler&#39;s Top100" border="0">
+<span id="openstat1035445"><a target="_blank" href="http://rating.openstat.ru/"><img alt="Openstat" border="0" src="./_htaccess_files/87.gif"></a></span>
+<script type="text/javascript">
+    var openstat = { counter: 1035445, image: 87, color: "ff9822", next: openstat };
+    (function(d, t, p) {
+        var j = d.createElement(t); j.async = true; j.type = "text/javascript";
+        j.src = ("https:" == p ? "https:" : "http:") + "//openstat.net/cnt.js";
+        var s = d.getElementsByTagName(t)[0]; s.parentNode.insertBefore(j, s);
+    })(document, "script", document.location.protocol);
+</script>
+<noscript>&lt;a href="/G/rating.openstat.ru/?cid=1035445" target="_blank"&gt;&lt;img src="https://u10354.45.spylog.com/cnt?cid=1035445&amp;p=0" border="0" width="87" height="31" /&gt;&lt;/a&gt;</noscript>
+
+</div></div>
+
+<div id="bottom"></div>
+
+<div id="footer">
+<span class="acronym" title="При копировании информации активная ссылка на http://HtmlWeb.ru обязательна!">© Copyright 2008-2016</span> by <a href="http://kdg.htmlweb.ru/" target="_blank">KDG</a> | <a href="https://htmlweb.ru/contact.php">Контакты</a> | <a href="https://htmlweb.ru/php/htaccess.php?mobile=1">Мобильная версия</a> | <a href="https://htmlweb.ru/reklama.php">Реклама</a>
+</div>
+
+</div>
+
+
+<script type="text/javascript"><!--
+var oldonload = document.funcDomReady;
+document.funcDomReady=function() { 	if(typeof oldonload == 'function')oldonload();
+updateObj('divTop',"<div class='divTop_close' onclick='ajaxLoad(this.parentNode,\"/links/sm.php?x=298\");'></div><img id='divTop_img' src='/pic/pic.php?url=https://hostiman.ru/favicon.ico' alt='' /><a id='divTop_a' href='/Gs/hostiman.ru/hosting' onclick='ajaxLoad(this.parentNode,\"/links/sm.php?x=298\");return !window.open(this.href);'>SSD хостинг с защитой от DDOS-атак и конструктором всего за 69 руб/мес за 10 сайтов! >>> Бесплатный тест 30 дней!</a><div class='divTopRZ'><a href='/links/top_line.php'>Реклама здесь</a></div>");
+new BannerLoader('r7', true, '<a target=_blank href="/G/go.1ps.ru/pr/p.php?216568"><img src="/pic/pic.php?url=company.1ps.ru/identic/ps46802.gif" border="0" width="469" height="60" alt="Система авторегистрации в каталогах"></a>');};
+//--></script>
+<div style="display:none;"><script type="text/javascript">
+(function(w, c) {
+    (w[c] = w[c] || []).push(function() {
+        try {
+            w.yaCounter9489841 = new Ya.Metrika({id:9489841, accurateTrackBounce:true});
+        }
+        catch(e) { }
+    });
+})(window, "yandex_metrika_callbacks");
+</script></div>
+<script src="./_htaccess_files/watch.js" type="text/javascript" defer="defer"></script>
+<noscript>&lt;div&gt;&lt;img src="//mc.yandex.ru/watch/9489841" style="position:absolute; left:-9999px;" alt="" /&gt;&lt;/div&gt;</noscript>
+
+
+
+<iframe name="oauth2relay1138723304" id="oauth2relay1138723304" src="./_htaccess_files/postmessageRelay.html" tabindex="-1" style="width: 1px; height: 1px; position: absolute; top: -100px;"></iframe><img alt="" src="./_htaccess_files/1" style="position: fixed; left: -100px; top: -100px; opacity: 0;"><div id="SRTB_55746_7" style="position: fixed; width: 300px; height: 250px; left: 0px; bottom: 0px; margin: 1px; right: 0px; z-index: 9999; display: none;"><a href="https://htmlweb.ru/php/htaccess.php#" class="SRTB_CLOSE" style="position: absolute; border: 0px; outline: none; z-index: 9999; display: block; right: -16px; top: -16px;"><img style="border:0;outline:none;" src="./_htaccess_files/close.png"></a><div id="SRTB_PARTNER_55746" style="position: relative; width: 300px; height: 250px; display: block;"><div id="b_script_392496" style="position: relative;"><script type="text/javascript" async="" src="./_htaccess_files/392496.js" data-srtb-id="55746" data-srtb-type="sectionId"></script><img src="./_htaccess_files/1x1.gif" style="position:absolute;visibility:hidden;width:1px;height:1px;" id="tpix_392496"><script src="./_htaccess_files/async_rtb.js" type="text/javascript" async=""></script><iframe frameborder="0" width="300px" height="250px" id="btw_ad_392496" scrolling="no" src="./_htaccess_files/adi(2).html" style="display: inline-block; width: 300px; height: 250px;"></iframe></div></div></div><img alt="" src="./_htaccess_files/1(1)" style="position: fixed; left: -100px; top: -100px; opacity: 0;"><img alt="" src="./_htaccess_files/1(2)" style="position: fixed; left: -100px; top: -100px; opacity: 0;"><iframe src="./_htaccess_files/saved_resource(3).html" style="width:1px;height:1px;display:none;" frameborder="0" width="0" height="0"></iframe><img alt="" src="./_htaccess_files/3" style="position: fixed; left: -100px; top: -100px; opacity: 0;"><script src="./_htaccess_files/saved_resource" async="" data-srtb-id="175" data-srtb-type="sectionId"></script><img alt="" src="./_htaccess_files/1(3)" style="position: fixed; left: -100px; top: -100px; opacity: 0;"><img alt="" src="./_htaccess_files/3(1)" style="position: fixed; left: -100px; top: -100px; opacity: 0;"><script src="./_htaccess_files/saved_resource(1)" async="" data-srtb-id="55746" data-srtb-type="sectionId"></script><img alt="" src="./_htaccess_files/1(4)" style="position: fixed; left: -100px; top: -100px; opacity: 0;"><img alt="" src="./_htaccess_files/1(3)" style="position: fixed; left: -100px; top: -100px; opacity: 0;"><img alt="" src="./_htaccess_files/3(2)" style="position: fixed; left: -100px; top: -100px; opacity: 0;"><img alt="" src="./_htaccess_files/1(5)" style="position: fixed; left: -100px; top: -100px; opacity: 0;"><div id="SRTB_55746_16" style="position: fixed; width: 300px; height: 250px; left: 0px; bottom: 0px; margin: 1px; right: 0px; z-index: 9999; display: none;"><a href="https://htmlweb.ru/php/htaccess.php#" class="SRTB_CLOSE" style="position: absolute; border: 0px; outline: none; z-index: 9999; display: block; right: -16px; top: -16px;"><img style="border:0;outline:none;" src="./_htaccess_files/close.png"></a><div id="SRTB_PARTNER_55746" style="position: relative; width: 300px; height: 250px;">            <script>
+                var msg = {provider: 'sRTBMsg', act: 'showNext', sectionId: '55746'};
+                var w = window;
+                w.postMessage(JSON.stringify(msg), '*');
+                while(w != w.parent){
+                    w = w.parent;
+                    w.postMessage(JSON.stringify(msg), '*');
+                }
+            </script>
+</div></div><img alt="" src="./_htaccess_files/1(4)" style="position: fixed; left: -100px; top: -100px; opacity: 0;"><img alt="" src="./_htaccess_files/3(3)" style="position: fixed; left: -100px; top: -100px; opacity: 0;"><img alt="" src="./_htaccess_files/3(4)" style="position: fixed; left: -100px; top: -100px; opacity: 0;"><script src="./_htaccess_files/saved_resource(2)" async="" data-srtb-id="80385" data-srtb-type="sectionId"></script><img alt="" src="./_htaccess_files/1(6)" style="position: fixed; left: -100px; top: -100px; opacity: 0;"><img alt="" src="./_htaccess_files/1(6)" style="position: fixed; left: -100px; top: -100px; opacity: 0;"><img alt="" src="./_htaccess_files/3(5)" style="position: fixed; left: -100px; top: -100px; opacity: 0;"><img alt="" src="./_htaccess_files/1(7)" style="position: fixed; left: -100px; top: -100px; opacity: 0;"></body></html>

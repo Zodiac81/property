@@ -1,0 +1,11 @@
+#!/bin/bash
+
+count=1
+
+cat dir_home | while read line
+do
+	sleep 2
+	echo "Line $count: $line"
+	count=$(( $count + 1 ))
+done
+echo "Finished"

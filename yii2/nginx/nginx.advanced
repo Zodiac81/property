@@ -1,0 +1,86 @@
+server {                                            # yii2.from.del
+
+    set $project_root /var/www/html/yii2.from.del;
+    set $fcgi_server unix:/run/php/php7.0-fpm.sock;
+    # set $fcgi_server fastcgi_pass 127.0.0.1:9000;
+ 
+    charset utf-8;
+    client_max_body_size 128M;
+ 
+    listen 80;
+ 
+    server_name yii2.from.del;
+    root $project_root/frontend/web;
+    index index.php;
+ 
+    access_log  /var/log/nginx/yii2.from.del.access.log combined;
+    error_log  /var/log/nginx/yii2.from.del.error.log warn;
+ 
+    location / {
+        try_files $uri $uri/ /index.php$is_args$args;
+    }
+ 
+    location ~ /\.(ht|svn|git) {
+        deny all;
+    }
+ 
+    location ~ \.php$ {
+        try_files $uri =404;
+        include fastcgi_params;
+        fastcgi_pass $fcgi_server;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    }
+
+    location ~ \.(js|css|png|jpg|gif|swf|ico|pdf|mov|fla|zip|rar)$ {
+        try_files $uri =404;
+    }
+    location ~ ^/assets/.*\.php$ {
+        deny all;
+    }
+    location ~* /\. {
+        deny all;
+    }
+}
+server {                                            # yii2.from.back
+
+    set $project_root /var/www/html/yii2.from.del;
+    set $fcgi_server unix:/run/php/php7.0-fpm.sock;
+    # set $fcgi_server fastcgi_pass 127.0.0.1:9000;
+ 
+    charset utf-8;
+    client_max_body_size 128M;
+ 
+    listen 80;
+ 
+    server_name yii2.from.back;
+    root $project_root/backend/web;
+    index index.php;
+ 
+    access_log  /var/log/nginx/yii2.from.del.access.log combined;
+    error_log  /var/log/nginx/yii2.from.del.error.log warn;
+ 
+    location / {
+        try_files $uri $uri/ /index.php$is_args$args;
+    }
+ 
+    location ~ /\.(ht|svn|git) {
+        deny all;
+    }
+ 
+    location ~ \.php$ {
+        try_files $uri =404;
+        include fastcgi_params;
+        fastcgi_pass $fcgi_server;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    }
+
+    location ~ \.(js|css|png|jpg|gif|swf|ico|pdf|mov|fla|zip|rar)$ {
+        try_files $uri =404;
+    }
+    location ~ ^/assets/.*\.php$ {
+        deny all;
+    }
+    location ~* /\. {
+        deny all;
+    }
+}

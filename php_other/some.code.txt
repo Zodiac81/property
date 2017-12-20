@@ -1,0 +1,28 @@
+header('Content-Type: text/html; charset=utf-8');
+echo '<pre>';
+print_r($data);
+exit;
+
+header('Content-Type: application/json');
+print_r(json_encode($data));
+exit;
+
+try {
+    if (!empty($param)) {
+	
+    } else {
+	throw new Exception('Error_text');
+    }
+} catch (Exception $e) {
+    echo '<script type="text/javascript"><!--
+		    window.onload = function() {
+			console.clear();
+			console.log(\'' . $e->getMessage() . '\');
+//			console.log(\'' . $e->getFile() . ' - ' . $e->getLine() . '\');
+		    };
+		    //--></script> ';
+//    print_r($e->getMessage());
+}
+// finally {
+//    version PHP 5.5 ...
+//}

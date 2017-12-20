@@ -1,0 +1,47 @@
+Preferences -> Settings - User и добавить
+{
+	"color_scheme": "Packages/Color Scheme - Default/Blackboard.tmTheme",
+	"auto_complete_commit_on_tab": true,
+	"auto_indent": true,
+	"auto_match_enabled": true,
+	"bold_folder_labels": true,
+	"enable_tab_scrolling": false,
+	"fallback_encoding": "Cyrillic (Windows 1251)",
+	"font_size": 10,
+	"highlight_line": true,
+	"highlight_modified_tabs": true,
+	"hot_exit": true,
+	"ignored_packages":
+	[
+		"Vintage"
+	],
+	"match_brackets": true,
+	"match_brackets_angle": true,
+	"match_brackets_braces": true,
+	"match_brackets_content": true,
+	"match_brackets_square": true,
+	"match_selection": true,
+	"remember_open_files": true,
+	"save_on_focus_lost": true,
+	"scroll_speed": 2,
+	"tab_size": 4,
+	"trim_trailing_white_space_on_save": false,
+	"update_check": false,
+	"upload_on_save": true
+}
+
+
+Hot_key
+[
+	{ "keys": ["ctrl+e"], "command": "run_macro_file", "args": {"file": "res://Packages/Default/Delete Line.sublime-macro"} },
+	{ "keys": ["alt+q"], "command": "toggle_comment", "args": { "block": false } },
+	{ "keys": ["ctrl+shift+down"], "command": "duplicate_line" },
+	{ "keys": ["ctrl+d"], "command": "duplicate_line" },
+	{ "keys": ["alt+shift+up"], "command": "swap_line_up" },
+	{ "keys": ["alt+shift+down"], "command": "swap_line_down" },
+	{ "keys": ["alt+w"], "command": "toggle_comment", "args": { "block": true } },
+]
+
+
+Ctr+Shift+P
+	install Pak~		->		javascript compli~

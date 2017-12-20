@@ -1,0 +1,271 @@
+<?php
+	if (!defined('_PS_VERSION_'))
+  	exit;
+ 
+class MyModule extends Module
+{
+	public function __construct()
+	{
+		$this->name = 'mymodule';
+		$this->tab = 'front_office_features';
+		$this->version = '1.0.0';
+		$this->author = 'Firstname Lastname';
+
+		$this->need_instance = 1;
+		$this->ps_versions_compliancy = array('min' => '1.6', 'max' => _PS_VERSION_); 
+		$this->bootstrap = true;
+
+		parent::__construct();
+
+		$this->displayName = $this->l('My module');
+		$this->description = $this->l('Description of my module.');
+
+		$this->confirmUninstall = $this->l('Are you sure you want to uninstall?');
+
+		if (!Configuration::get('MYMODULE_NAME'))      
+	  		$this->warning = $this->l('No name provided');
+	}
+
+	public function install()
+	{
+		if (Shop::isFeatureActive())
+			Shop::setContext(Shop::CONTEXT_ALL);
+
+		if (!parent::install() ||
+			!$this->registerHook('leftColumn') ||
+			!$this->registerHook('header') ||
+			!Configuration::updateValue('MYMODULE_NAME', 'my friend')
+		)
+		return false;
+
+		return true;
+	}
+
+	public function uninstall()
+	{
+		if (!parent::uninstall() ||
+			!Configuration::deleteByName('MYMODULE_NAME')
+		)
+		return false;
+
+		return true;
+	}
+
+	/* other */
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	public function getContent()
+	{
+	    $output = null;
+	 
+	    if (Tools::isSubmit('submit'.$this->name))
+	    {
+	        $my_module_name = strval(Tools::getValue('MYMODULE_NAME'));
+	        if (!$my_module_name
+	          || empty($my_module_name)
+	          || !Validate::isGenericName($my_module_name))
+	            $output .= $this->displayError($this->l('Invalid Configuration value'));
+	        else
+	        {
+	            Configuration::updateValue('MYMODULE_NAME', $my_module_name);
+	            $output .= $this->displayConfirmation($this->l('Settings updated'));
+	        }
+	    }
+	    return $output.$this->displayForm();
+	}
+
+	public function displayForm()
+	{
+	    // Get default language
+	    $default_lang = (int)Configuration::get('PS_LANG_DEFAULT');
+	     
+	    // Init Fields form array
+	    $fields_form[0]['form'] = array(
+	        'legend' => array(
+	            'title' => $this->l('Settings'),
+	        ),
+	        'input' => array(
+	            array(
+	                'type' => 'text',
+	                'label' => $this->l('Configuration value'),
+	                'name' => 'MYMODULE_NAME',
+	                'size' => 20,
+	                'required' => true
+	            )
+	        ),
+	        'submit' => array(
+	            'title' => $this->l('Save'),
+	            'class' => 'btn btn-default pull-right'
+	        )
+	    );
+	     
+	    $helper = new HelperForm();
+	     
+	    // Module, token and currentIndex
+	    $helper->module = $this;
+	    $helper->name_controller = $this->name;
+	    $helper->token = Tools::getAdminTokenLite('AdminModules');
+	    $helper->currentIndex = AdminController::$currentIndex.'&configure='.$this->name;
+	     
+	    // Language
+	    $helper->default_form_language = $default_lang;
+	    $helper->allow_employee_form_lang = $default_lang;
+	     
+	    // Title and toolbar
+	    $helper->title = $this->displayName;
+	    $helper->show_toolbar = true;        // false -> remove toolbar
+	    $helper->toolbar_scroll = true;      // yes - > Toolbar is always visible on the top of the screen.
+	    $helper->submit_action = 'submit'.$this->name;
+	    $helper->toolbar_btn = array(
+	        'save' =>
+	        array(
+	            'desc' => $this->l('Save'),
+	            'href' => AdminController::$currentIndex.'&configure='.$this->name.'&save'.$this->name.
+	            '&token='.Tools::getAdminTokenLite('AdminModules'),
+	        ),
+	        'back' => array(
+	            'href' => AdminController::$currentIndex.'&token='.Tools::getAdminTokenLite('AdminModules'),
+	            'desc' => $this->l('Back to list')
+	        )
+	    );
+	     
+	    // Load current value
+	    $helper->fields_value['MYMODULE_NAME'] = Configuration::get('MYMODULE_NAME');
+	     
+	    return $helper->generateForm($fields_form);
+	}
+/////////////////////////////////////////////////////// 		bootstrap 		///////////////////////////////////////////////////////
+
+public function __construct()
+{
+    $this->bootstrap = true;
+    $this->display = 'view';
+    $this->meta_title = $this->l('Your Merchant Expertise');
+    parent::__construct();
+}
+
+public function getContent()
+{
+    $output = '';
+    if (Tools::isSubmit('submitBlockCart'))
+    {
+        $ajax = Tools::getValue('cart_ajax');
+        if ($ajax != 0 && $ajax != 1)
+            $output .= $this->displayError($this->l('Ajax : Invalid choice.'));
+        else
+            Configuration::updateValue('PS_BLOCK_CART_AJAX', (int)($ajax));
+        $output .= $this->displayConfirmation($this->l('Settings updated'));
+    }
+    return $output.$this->renderForm();
+}
+
+public function displayForm()
+{
+    return '
+    <form action="'.Tools::safeOutput($_SERVER['REQUEST_URI']).'" method="post">
+        <fieldset>
+            <legend><img src="'.$this->_path.'logo.gif" alt="" title="" />'.$this->l('Settings').'</legend>
+ 
+            <label>'.$this->l('Ajax cart').'</label>
+            <div class="margin-form">
+                <input type="radio" name="cart_ajax" id="ajax_on" value="1" '
+                  .(Tools::getValue('cart_ajax', Configuration::get('PS_BLOCK_CART_AJAX')) ? 'checked="checked" ' : '').'/>
+                <label class="t" for="ajax_on"> <img src="../img/admin/enabled.gif" alt="'
+                  .$this->l('Enabled').'" title="'.$this->l('Enabled').'" /></label>
+                <input type="radio" name="cart_ajax" id="ajax_off" value="0" '
+                  .(!Tools::getValue('cart_ajax', Configuration::get('PS_BLOCK_CART_AJAX')) ? 'checked="checked" ' : '').'/>
+                <label class="t" for="ajax_off"> <img src="../img/admin/disabled.gif" alt="'
+                  .$this->l('Disabled').'" title="'.$this->l('Disabled').'" /></label>
+                <p class="clear">'.$this->l('Activate AJAX mode for cart (compatible with the default theme)').'</p>
+            </div>
+ 
+            <center><input type="submit" name="submitBlockCart" value="'.$this->l('Save').'" class="button" /></center>
+        </fieldset>
+    </form>';
+}
+
+public function renderForm()
+{
+    $fields_form = array(
+        'form' => array(
+            'legend' => array(
+                'title' => $this->l('Settings'),
+                'icon' => 'icon-cogs'
+            ),
+            'input' => array(
+                array(
+                    'type' => 'switch',
+                    'label' => $this->l('Ajax cart'),
+                    'name' => 'PS_BLOCK_CART_AJAX',
+                    'is_bool' => true,
+                    'desc' => $this->l('Activate AJAX mode for cart (compatible with the default theme)'),
+                    'values' => array(
+                        array(
+                            'id' => 'active_on',
+                            'value' => 1,
+                            'label' => $this->l('Enabled')
+                        ),
+                        array(
+                            'id' => 'active_off',
+                            'value' => 0,
+                            'label' => $this->l('Disabled')
+                        )
+                    ),
+                )
+            ),
+        'submit' => array(
+            'title' => $this->l('Save'),
+            'class' => 'btn btn-default pull-right')
+        ),
+    );
+     
+    $helper = new HelperForm();
+    $helper->show_toolbar = false;
+    $helper->table = $this->table;
+    $lang = new Language((int)Configuration::get('PS_LANG_DEFAULT'));
+    $helper->default_form_language = $lang->id;
+    $helper->allow_employee_form_lang =
+        Configuration::get('PS_BO_ALLOW_EMPLOYEE_FORM_LANG') ? Configuration::get('PS_BO_ALLOW_EMPLOYEE_FORM_LANG') : 0;
+    $this->fields_form = array();
+ 
+    $helper->identifier = $this->identifier;
+    $helper->submit_action = 'submitBlockCart';
+    $helper->currentIndex = $this->context->link->getAdminLink('AdminModules', false)
+       .'&configure='.$this->name.'&tab_module='.$this->tab.'&module_name='.$this->name;
+    $helper->token = Tools::getAdminTokenLite('AdminModules');
+    $helper->tpl_vars = array(
+        'fields_value' => $this->getConfigFieldsValues(),
+        'languages' => $this->context->controller->getLanguages(),
+        'id_language' => $this->context->language->id
+    );
+ 
+    return $helper->generateForm(array($fields_form));
+}      
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	public function hookDisplayLeftColumn($params)
+	{
+		$this->context->smarty->assign(
+			array(
+				'my_module_name' => Configuration::get('MYMODULE_NAME'),
+				'my_module_link' => $this->context->link->getModuleLink('mymodule', 'display')
+			)
+		);
+		return $this->display(__FILE__, 'mymodule.tpl');
+	}
+	   
+	public function hookDisplayRightColumn($params)
+	{
+		return $this->hookDisplayLeftColumn($params);
+	}
+	   
+	public function hookDisplayHeader()
+	{
+		$this->context->controller->addCSS($this->_path.'css/mymodule.css', 'all');
+	}
+
+}
+
+
+
+    

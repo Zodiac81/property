@@ -1,0 +1,225 @@
+For work with Form::text
+
+	composer require laravelcollective/html
+	composer require illuminate/html
+
+	Add to providers array
+			'Collective\Html\HtmlServiceProvider',
+	// 5.4 	Collective\Html\HtmlServiceProvider::class,
+
+	Add to aliases array
+			'Html'  => 'Collective\Html\HtmlFacade',
+	        'Form'  => 'Collective\Html\FormFacade',
+
+	// 5.4 	'Html'  => Collective\Html\HtmlFacade::class,
+        	'Form'  => Collective\Html\FormFacade::class,
+
+Views
+
+php artisan view:clear		-	удалить весь кэш шаблонов
+
+	resources/views
+
+	Вставка CSRF-токена в форму
+		<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+		<input type="hidden" name="_token" value="{{ csrf_token() }}">
+			middleware (посредник) -проверка token
+
+	{{ method_field('PUT') }}	-	Помощник может добавить скрытоеполе _method PUT
+
+Передача данных в шаблон
+
+
+	
+	Route::get('/', function(){
+	    return view('greeting', ['name' => 'James']);
+	});
+
+	<h1>Hello, {{ $name }}</h1>
+
+	// используя with()
+	$view = view('greeting')->with('name', 'Victoria');
+
+	// используя "магический" метод 
+	$view = view('greeting')->withName('Victoria');    
+	$view = view('greeting')->withTitle('Victoria');    
+
+	// при помощи второго параметра хэлпера
+	$view = view('greetings', ['name' => 'Victoria']);
+	
+Передача данных во все шаблоны
+
+	view()->share('data', [1, 2, 3]);
+	View::share('data', [1, 2, 3]);
+
+Определение наличия шаблона
+	if (view()->exists('emails.customer')){...}
+
+Получение шаблона по полному пути
+	return view()->file($pathToFile, $data);
+
+Получение шаблона в виде строки
+	echo view('emails.customer')->render();
+
+Получение пути к шаблону
+	куегкт view('emails.customer')->getPath();
+
+Генерим исключение
+	abort(404);
+
+КОМПОЗЕРЫ
+
+	подключение
+		<?php namespace App\Providers;
+		use View;
+		use Illuminate\Support\ServiceProvider;
+		class ComposerServiceProvider extends ServiceProvider {
+		    public function boot()
+		    {
+		        // Если композер реализуется при помощи класса:
+		        View::composer('profile', 'App\Http\ViewComposers\ProfileComposer');
+
+		        // Если композер реализуется в функции-замыкании:
+		        View::composer('dashboard', function(){...});
+		    }
+		        public function register(){...}
+		}
+
+	создание
+		<?php namespace App\Http\Composers;
+		use Illuminate\Contracts\View\View;
+		use Illuminate\Users\Repository as UserRepository;
+		class ProfileComposer {
+		    protected $users;
+		    public function __construct(UserRepository $users)
+		    {
+		        // Зависимости разрешаются автоматически службой контейнера...
+		        $this->users = $users;
+		    }
+		    public function compose(View $view)
+		    {
+		        $view->with('count', $this->users->count());
+		    }
+		}
+
+	Wildcards имен шаблонов композеров
+		View::composer('*', function(){...});
+
+
+
+ШАБЛОНЫ BLADE
+
+	<!-- Файл resources/views/layouts/master.blade.php -->
+
+	<html>
+	    <head>
+	        <title>App Name - @yield('title')</title>
+	    </head>
+	    <body>
+	        @section('sidebar')						-	определяет некоторую секцию контента
+	            This is the master sidebar.
+	        @show
+
+	        <div class="container">
+	            @yield('content')					-	используется для отображения в заданном месте контента секции
+	        </div>
+	    </body>
+	</html>
+
+
+	<!-- Файл resources/views/child.blade.php -->
+
+	@extends('layouts.master')
+
+	@section('title', 'Page Title')
+
+	@section('sidebar')
+	    @parent											- 	позволяет не перезаписать секцию sidebar, определённую в лейауте, а добавить контент к ней.
+
+	    <p>This is appended to the master sidebar.</p>
+	@endsection
+
+	@section('content')
+	    <p>This is my body content.</p>
+	@endsection
+
+	@include('shared.errors')							-	позволит вам добавить на страницу контент другой страницы без использования секций
+	@include('view.name', ['some_data' => $someData])
+
+	@each('view.name', $jobs, 'job')					-	цикла и включения страниц
+
+	@push('scripts')
+	    <script src="/example.js"></script>
+	@endpush											-	<head> <!-- Head Contents --> @stack('scripts') </head>
+
+	@unless (Auth::check())
+	    You are not signed in.
+	@endunless
+
+
+	Hello, {{ $name }}								- 	Для вывода переменной в шаблоне. автоматически применяет htmlentities
+
+	Hello, {!! $name !!}							-	Вывод неэкранированного контента
+
+	Hello, @{{ name }}								-	чтобы запретить Blade обрабатывать конструкции с фигурными скобками
+
+	{{ $name or 'Default' }}		||		{{ !empty($name) ? $name : 'Default' }}
+
+	{{-- This comment will not be present in the rendered HTML --}}		-	Комментарии
+
+	Create construction
+
+		.../app/Providers/AppServiceProvider.php
+
+		use Illuminate\Support\Facades\Blade;
+		class AppServiceProvider extends ServiceProvider
+		{
+		    public function boot()
+		    {
+				Blade::directive('myPrint', function($perem){
+				    return "<?php echo '<pre>'; print_r($perem); echo '</pre>'; ?>";
+				});
+		    }
+
+	ЦИКЛЫ
+
+		@if (count($records) === 1)
+		    I have one record!
+		@elseif (count($records) > 1)
+		    I have multiple records!
+		@else
+		    I don't have any records!
+		@endif
+
+
+		@for($i = 0; $i < 10; $i++)
+		    The current value is {{ $i }}
+		@endfor
+
+		@foreach ($users as $user)
+		    <p>This is user {{ $user->id }}</p>
+		@endforeach
+
+		@forelse ($users as $user)
+		    <li>{{ $user->name }}</li>
+		@empty
+		    <p>No users</p>
+		@endforelse
+
+		@while (true)
+		    <p>I'm looking forever.</p>
+		@endwhile
+
+		@foreach ($users as $key => $user)
+		    @continue($user->type == 1)
+
+		    <li>{{ $user->name }}</li>
+
+		    @break($user->number == 5)
+		@endforeach
+
+		@continue
+		@break
+
+
+
