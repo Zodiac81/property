@@ -1,6 +1,7 @@
-php artisan make:seeder UsersTableSeeder
-
 http://laravel.su/docs/5.2/seeding
+
+php artisan make:seeder UsersTableSeeder
+php artisan make:seeder ArticlesTableSeeder
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
 <?php
@@ -15,13 +16,56 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
+        DB::table('employees')->insert([
             'name' => str_random(10),
             'email' => str_random(10).'@gmail.com',
             'password' => bcrypt('secret'),
         ]);
     }
 }
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+
+<?php
+use Illuminate\Database\Seeder;
+class DatabaseSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+         $this->call(EmployeesTableSeeder::class);
+    }
+}
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+
+<?php
+
+use Illuminate\Database\Seeder;
+
+class ArticlesTableSeeder extends Seeder
+{
+    public function run()
+    {
+        // Let's truncate our existing records to start from scratch.
+        Article::truncate();
+
+        $faker = \Faker\Factory::create();
+
+        // And now, let's create a few articles in our database:
+        for ($i = 0; $i < 50; $i++) {
+            Article::create([
+                'title' => $faker->sentence,
+                'body' => $faker->paragraph,
+            ]);
+        }
+    }
+}
+
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
 
 

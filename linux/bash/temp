@@ -9,3 +9,5 @@ do
 	count=$(( $count + 1 ))
 done
 echo "Finished"
+
+# for elem in {90..1}; do clear; du -sh ./; sleep 1; done

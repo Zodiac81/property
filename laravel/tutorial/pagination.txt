@@ -1,0 +1,38 @@
+https://laravel.com/docs/5.4/pagination
+
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+
+class UserController extends Controller
+{
+    /**
+     * Show all of the users for the application.
+     *
+     * @return Response
+     */
+    public function index()
+    {
+        $users = DB::table('users')->paginate(15);
+
+        return view('user.index', ['users' => $users]);
+    }
+}
+
+$users = DB::table('users')->simplePaginate(15);        // когда вам не нужно отображать ссылку для каждого номера страницы
+
+$users = App\User::paginate(15);
+
+$users = User::where('votes', '>', 100)->paginate(15);
+
+$users = User::where('votes', '>', 100)->simplePaginate(15);
+
+
+Отображение результатов разбивки на страницы
+
+<div class="container">
+    @foreach ($users as $user)
+        {{ $user->name }}
+    @endforeach
+</div>
+
+{{ $users->links() }}

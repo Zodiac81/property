@@ -44,6 +44,11 @@ DATA
 	$request->server();								// return all of $_SERVER
 	$request->segments();							// explode uri in array
 
+	$request->all();
+	$request->input();
+	$request->route();
+	$request->query();
+
 
 METHOD
 	$request->method();								// return method

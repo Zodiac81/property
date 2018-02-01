@@ -37,6 +37,39 @@ XML PHP Extension
 		'locale' => 'ru-RU',
 		'log' => 'daily'	-	ежедневные файлы журналов вместо одного файла
 
+_________________________________________________________________________________
+
+	npm install
+
+	npm install jquery-ui --save-dev
+	npm update
+
+	Build Your webpack.mix.js Configuration
+		mix.js('resources/assets/js/app.js', 'public/js')
+		   .sass('resources/assets/sass/app.scss', 'public/css');
+	Install jquery-ui
+	npm install jquery-ui --save-dev
+
+	Load Your Desired Widget
+			// resources/assets/js/app.js
+			import $ from 'jquery';
+			window.$ = window.jQuery = $;
+			import 'jquery-ui/ui/widgets/datepicker.js';
+
+	Load CSS
+		// resources/assets/sass/app.scss
+		@import '~jquery-ui/themes/base/all.css';
+		Trigger the UI Plugin
+
+
+	Running Mix
+	// Run all Mix tasks...
+	npm run dev
+
+	// Run all Mix tasks and minify output...
+	npm run production
+_________________________________________________________________________________
+
 5)
 	laravel-debugbar		->		https://github.com/barryvdh/laravel-debugbar
 
