@@ -367,6 +367,17 @@ Redirect 302 /staraya.html http://vash-sait.ua/novaya.html
 					sudo mkdir /etc/apache2/ssl
 					sudo cp ca.crt ca.key ca.csr /etc/apache2/ssl/
 
+		#######################################################################################
+
+		https://certbot.eff.org/#ubuntuxenial-nginx
+
+		sudo apt-get update
+		sudo apt-get install software-properties-common
+		sudo add-apt-repository ppa:certbot/certbot
+		sudo apt-get update
+		sudo apt-get install python-certbot-nginx 
+
+
 	3.0.1)	Postman Native App
 
 			wget https://dl.pstmn.io/download/latest/linux64 -O postman.tar.gz
@@ -573,6 +584,10 @@ Redirect 302 /staraya.html http://vash-sait.ua/novaya.html
 	7)	Install composer
 			sudo apt-get update
 			sudo apt-get install composer
+
+			php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+			php composer-setup.php
+			php -r "unlink('composer-setup.php');"
 
 	8)	install and configure PrestaShop
 
@@ -988,3 +1003,7 @@ Recovery audio
 			apt-get install wakeonlan
 			wakeonlan -i [IP адрес] -p [порт] [MAC адрес]
 			
+
+	Add script to autoload
+
+		sudo nano /etc/rc.local

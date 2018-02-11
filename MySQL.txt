@@ -314,3 +314,6 @@ mysql -u root -psecret <<MY_QUERY
 USE mysql
 SHOW tables
 MY_QUERY
+
+
+UPDATE `yb_message` SET text = CONCAT("<a href=\"",text,"\">",text,"<\/a>") WHERE `id` > 51;

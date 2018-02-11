@@ -266,3 +266,21 @@ RFC 1867 определяет формат File Upload Post.
 http://openssl.planetmirror.com - домашняя страница проекта OpenSSL
 
 http://curl.haxx.se - домашняя страница проекта cURL
+
+#######################################################################################################
+
+curl -X POST http://rest.api/api/register \
+ -H "Accept: application/json" \
+ -H "Content-Type: application/json" \
+ -d '{"name": "John", "email": "john.doe@toptal.com", "password": "toptal123", "password_confirmation": "toptal123"}'
+
+ curl -X POST http://rest.api/api/login \
+  -H "Accept: application/json" \
+  -H "Content-type: application/json" \
+  -d "{\"email\": \"admin@test.com\", \"password\": \"toptal\" }"
+
+curl -i -X GET https://api.telegram.org/bot231500950:AAGsBaY0YaQ6ymwklHHNEy3ZfjsLQ_KQUaA/getMe
+
+curl -i -X GET https://api.telegram.org/bot231500950:AAGsBaY0YaQ6ymwklHHNEy3ZfjsLQ_KQUaA/getUpdates
+
+curl -i -X GET https://api.telegram.org/bot547219726:AAEUwVMzeb460EBvhRHvQ1o0vxaRuEr5Seg/getUpdates
