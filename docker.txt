@@ -1,0 +1,60 @@
+1)	Install
+	
+	sudo apt-get update
+	sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+	sudo apt-add-repository 'deb https://apt.dockerproject.org/repo ubuntu-xenial main'
+	sudo apt-get update
+	apt-cache policy docker-engine		//
+										// 	docker-engine:
+											  Installed: (none)
+											  Candidate: 1.11.1-0~xenial
+											  Version table:
+											     1.11.1-0~xenial 500
+											        500 https://apt.dockerproject.org/repo ubuntu-xenial/main amd64 Packages
+											     1.11.0-0~xenial 500
+											        500 https://apt.dockerproject.org/repo ubuntu-xenial/main amd64 Packages
+	sudo apt-get install -y docker-engine
+	sudo systemctl status docker
+
+	sudo usermod -aG docker $(whoami)
+
+	1.1)
+		Docker-composer
+			sudo curl -L https://github.com/docker/compose/releases/download/1.19.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+			sudo chmod +x /usr/local/bin/docker-compose
+			docker-compose --version 		//	docker-compose version 1.19.0, build 1719ceb
+
+2) Use
+
+	docker [опция] [команда] [аргументы]
+	docker
+
+	docker search ubuntu
+	docker pull ubuntu
+	docker run ubuntu
+	docker images 					// see images
+
+	docker run -it ubuntu 			// root@d9b100f2f636:/#
+		apt-get update
+		exit
+
+	docker ps 
+				[-a] 				// all conteiners
+				[-a] 				// last conteiner
+
+	docker stop < ID or repository_name > 
+
+	docker rmi [-f] < ID or repository_name > 
+
+	docker exec -ti < repository_name >  bash
+
+	docker container ls
+
+docker exec  composer install
+
+Kill all running containers
+	docker kill $(docker ps -q)
+	docker rm $(docker ps -a -q)
+	docker rmi $(docker images -q -f dangling=true)
+	docker rmi $(docker images -q)
+	

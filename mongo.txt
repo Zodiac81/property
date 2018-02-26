@@ -1,0 +1,67 @@
+1)
+	Install
+
+	sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
+	echo "deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
+	sudo apt-get update
+	sudo apt-get install -y mongodb-org
+	sudo nano /etc/systemd/system/mongodb.service >>
+													[Unit]
+													Description=High-performance, schema-free document-oriented database
+													After=network.target
+
+													[Service]
+													User=mongodb
+													ExecStart=/usr/bin/mongod --quiet --config /etc/mongod.conf
+
+													[Install]
+													WantedBy=multi-user.target
+
+	sudo systemctl start mongodb
+	sudo systemctl status mongodb
+	sudo systemctl enable mongodb
+
+	mongo | robomongo -> https://robomongo.org/download
+
+	show dbs
+
+| ~~ | ~~ | test | ~~ | ~~ |
+
+	a = { title:"Arrested Development", airdate:"November 2, 2003", network:"FOX" }
+	b = { title:"Stella", airdate:"June 28, 2005", network:"Comedy Central" }
+	c = { title:"Modern Family", airdate:"September 23, 2009", network:"ABC" }
+
+	db.shows.save(a)
+	db.shows.save(b)
+	db.shows.save(c)
+
+	db.shows.find()
+	db.shows.find().pretty()
+
+	db.shows.find({title:"Stella"}).pretty()
+	db.shows.find().sort({title: -1}).pretty() 		//-1 сортирует по убыванию 1 – по возростанию
+
+
+	Специальные операторы:
+		$lt— меньше;
+		$lte —меньше либо равно;
+		$gt — больше;
+		$gte — больше либо равно;
+		$ne — не равно;
+
+	db.shows.find({title:{$ne:"ABC"}).pretty()
+
+	db.shows.save({ title:"First", airdate:"September 23, 2011", network:"LBC" })
+
+	db.shows.update({network: 'LBC'}, {network: 'Not LBC'}) 				// 
+	db.shows.update({network: 'Not LBC'}, {$set : {network: 'LBC', title:"First", airdate:"September 23, 2011" }})
+	db.shows.update({network: 'Not LBC'}, {$set : {network: 'Low LBC' }})
+
+	Существует еще много модификаторов, например:
+		$inc — позволяет изменить поле на необходимую величину
+		$push — добавляет новые значения
+
+	db.shows.update({network: 'Low LBC'}, {$push : { news: 'some text' }})
+	db.shows.update({network: 'Low LBC'}, {$set : {news: 'some text 2' }})
+
+| ~~ | ~~ | test | ~~ | ~~ |

@@ -384,6 +384,14 @@ Redirect 302 /staraya.html http://vash-sait.ua/novaya.html
 			sudo tar -xzf postman.tar.gz -C /opt
 			rm postman.tar.gz
 			sudo ln -s /opt/Postman/Postman /usr/bin/postman
+	
+	3.0.2)	RoboMongo
+
+			Download the robomongo: https://robomongo.org/download
+			tar zxf robo3t-1.2.1-linux-x86_64-3e50a65.tar.gz 
+			cd robo3t-1.2.1-linux-x86_64-3e50a65/
+			./bin/robo3t
+			sudo ln -s ~/Загрузки/robo3t-1.2.1-linux-x86_64-3e50a65/bin/robo3t /usr/bin/robo3t
 
 	3.0)	linux securiti
 

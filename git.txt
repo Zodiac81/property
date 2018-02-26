@@ -21,7 +21,7 @@ git log -p		 	 посмотреть подробный коммит
 git log --graph		 посмотреть подробный коммит c изменениями
 
 git clone "URL-repositoria" [/your-folder]			пользуем репозиторий
-git pullor											стянуть с сервера
+git pull											стянуть с сервера
 git fetch											стянуть с сервера но не добавлять автоматически
 git checkout -- file.txt					исключить выбраный фаил из списка add вернув его в исходное состояние
 git push || git push -u origin master				залить комит на свой репозиторий
