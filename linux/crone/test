@@ -1,0 +1,12 @@
+#!/usr/bin/php
+# nmap -Pn 192.168.0.102 >> /home/asus/ipshnik
+# curl ident.me >> /home/asus/ipshnik
+<?php
+
+$file_name = __DIR__."/file_from_test";
+$link = fopen($file_name, "w+");
+# chmod($file_name, 0755);
+$file= implode('', file("http://192.168.0.102"));
+fwrite($link, $file);
+fclose($link);
+?>
