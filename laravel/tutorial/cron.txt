@@ -1,0 +1,211 @@
+* * * * * php /path-to-your-project/artisan schedule:run >> /dev/null 2>&1
+
+php artisan make:command TectConsoleCommand
+
+/var/www/html/test.laravel/app/Console/Kernel.php
+	 
+	<?php
+		namespace App\Console;
+		use Illuminate\Console\Scheduling\Schedule;
+		use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+		use App\Console\Commands\TectConsoleCommand;
+
+		class Kernel extends ConsoleKernel
+		{
+		    /**
+		     * The Artisan commands provided by your application.
+		     *
+		     * @var array
+		     */
+		    protected $commands = [
+		        TectConsoleCommand::class
+		    ];
+
+		    /**
+		     * Define the application's command schedule.
+		     *
+		     * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
+		     * @return void
+		     */
+		    protected function schedule(Schedule $schedule)
+		    {
+		        // $schedule->command('inspire')
+		        //          ->hourly();
+
+		        $schedule->call(function () {
+		            DB::table('recent_users')->delete();
+		        })->daily();
+
+		    	if (env('APP_TYPE') === 'api') {
+		            return;
+		        }
+
+		        $schedule->command('command:test')->dailyAt('00:01');
+
+		        $schedule->command(EmailsCommand::class, ['--force'])->daily();
+
+		        $schedule->exec('node /home/forge/script.js')->daily(); 				// exec может быть использована для обращения к операционной системе
+		        $schedule->exec('cd /var/www/html; mkdir test.dir')->daily();
+		    }
+
+		    /**
+		     * Register the Closure based commands for the application.
+		     *
+		     * @return void
+		     */
+		    protected function commands()
+		    {
+		        require base_path('routes/console.php');
+		    }
+		}
+
+/var/www/html/test.laravel/app/Console/Commands/TectConsoleCommand.php
+
+	<?php
+		namespace App\Console\Commands;
+		use Illuminate\Console\Command;
+		class TectConsoleCommand extends Command
+		{
+		    /**
+		     * The name and signature of the console command.
+		     *
+		     * @var string
+		     */
+		    protected $signature = 'command:test';
+
+		    /**
+		     * The console command description.
+		     *
+		     * @var string
+		     */
+		    protected $description = 'Command description';
+
+		    /**
+		     * Create a new command instance.
+		     *
+		     * @return void
+		     */
+		    public function __construct(DiscountService $discount)
+		    {
+		        parent::__construct();
+			$this->service = $discount;
+		    }
+
+		    /**
+		     * Execute the console command.
+		     *
+		     * @return mixed
+		     */
+		    public function handle()
+		    {
+		        $this->service->where('is_active', '=', 'true')->getModel()->chunk(200, function($models) {
+		            foreach ($models as $model) {
+				$to = new \Carbon\Carbon($model->date_to);
+				if($to->timestamp <= time()){
+				    $model->is_active = false;
+				    $model->save();
+				}
+		            }
+		        });
+		    }
+		}
+
+частота планировщика
+
+	МЕТОД	ОПИСАНИЕ
+	->cron('* * * * * *');		Запускать задачу по пользовательскому Cron-расписанию
+	->everyMinute();			Запускать задачу каждую минуту
+	->everyFiveMinutes();		Запускать задачу каждые пять минут
+	->everyTenMinutes();		Запускать задачу каждые десять минут
+	->everyThirtyMinutes();		Запускать задачу каждые тридцать минут
+	->hourly();					Запускать задачу каждый час
+	->hourlyAt(17);				Запускать задачу каждый час в 17 минут
+	->daily();					Запускать задачу каждый день в полночь
+	->dailyAt('13:00');			Запускать задачу каждый день в 13:00
+	->twiceDaily(1, 13);		Запускать задачу каждый день в 1:00 и 13:00
+	->weekly();					Запускать задачу каждую неделю
+	->monthly();				Запускать задачу каждый месяц
+	->monthlyOn(4, '15:00');	Запускать задачу 4 числа каждого месяца в 15:00
+	->quarterly();				Запускать задачу раз в квартал
+	->yearly();					Запускать задачу каждый год
+	->timezone('America/New_York');	Задать часовой пояс
+
+
+		// Запуск каждый понедельник в 13:00...
+		$schedule->call(function () {
+		    //
+		})->weekly()->mondays()->at('13:00');
+
+		// Запускать каждый час с 8:00 до 17:00 по будням...
+		$schedule->command('foo')
+		          ->weekdays()
+		          ->hourly()
+		          ->timezone('America/Chicago')
+		          ->between('8:00', '17:00');
+
+	МЕТОД	ОПИСАНИЕ
+	->weekdays();		Ограничить задачу рабочими днями
+	->sundays();		Ограничить задачу воскресеньем
+	->mondays();		Ограничить задачу понедельником
+	->tuesdays();		Ограничить задачу вторником
+	->wednesdays();		Ограничить задачу средой
+	->thursdays();		Ограничить задачу четвергом
+	->fridays();		Ограничить задачу пятницей
+	->saturdays();		Ограничить задачу субботой
+	->between($start, $end);	Ограничить запуск задачи между временем начала и конца промежутка
+	->when(Closure);	Ограничить задачу проверкой на истинность
+
+		$schedule->command('reminders:send')
+	                    ->hourly()
+	                    ->between('7:00', '22:00'); 						// 	between можно ограничить выполнение задачи в зависимости от времени дня
+
+	    $schedule->command('reminders:send')
+	                    ->hourly()
+	                    ->unlessBetween('23:00', '4:00');					// 	unlessBetween можно исключить выполнение задачи в указанный период времени
+
+	    $schedule->command('emails:send')->daily()->when(function () { 		// 	when может быть использован, ограничить выполнение задачи на основании результата теста на истинность
+		    return true;
+		});
+
+		$schedule->command('emails:send')->daily()->skip(function () { 		// 	skip является инверсией метода when. Если skip == true, запланированная задача не будет запущена
+		    return true;
+		});
+		when запланированная команда выполнится только при условии, что все условия when возвратят true
+
+		$schedule->command('emails:send')->evenInMaintenanceMode(); 		// evenInMaintenanceMode - задача запускается даже в режиме обслуживания
+
+	ВЫХОДНЫЕ ДАННЫЕ ЗАДАЧИ
+
+		$schedule->command('emails:send')
+	         ->daily()
+	         ->sendOutputTo($filePath); 									// 	sendOutputTo отправить вывод данных в файл для последующего анализа
+
+		$schedule->command('emails:send')									// 	appendOutputTo добавить вывод в указанный файл
+	         ->daily()
+	         ->appendOutputTo($filePath);
+
+	    $schedule->command('foo')											// 	emailOutputTo отправить по электронной почте выходные данные на адрес по вашему усмотрению
+	         ->daily()
+	         ->sendOutputTo($filePath)
+	         ->emailOutputTo('foo@example.com');     
+
+
+    ХУКИ ЗАДАЧ
+
+    			//  before и after, вы можете указать код, который будет выполняться до запуска и после завершения
+    	$schedule->command('emails:send')
+			->daily()
+			->before(function () {
+				// Задача почти началась...
+			})->after(function () {
+				// Задача завершена...
+			});
+
+				// 	pingBefore и thenPing, планировщик может автоматически пинговать заданный URL до запуска и после завершения задачи
+		$schedule->command('emails:send')
+			->daily()
+			->pingBefore($url)
+			->thenPing($url);
+
+		pingBefore($url) или thenPing($url) требует библиотеки Guzzle HTTP
+		composer require guzzlehttp/guzzle
