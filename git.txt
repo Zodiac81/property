@@ -24,6 +24,7 @@ git clone "URL-repositoria" [/your-folder]			пользуем репозитор
 git pull											стянуть с сервера
 git fetch											стянуть с сервера но не добавлять автоматически
 git checkout -- file.txt					исключить выбраный фаил из списка add вернув его в исходное состояние
+git checkout -- .							отменить все изменения
 git push || git push -u origin master				залить комит на свой репозиторий
 git remote add origin https://github.com/lexus132/my_repositorii.git 			назначить локальной дирректории удаленный репозиторий
 
