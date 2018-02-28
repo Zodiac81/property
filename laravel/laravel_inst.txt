@@ -179,6 +179,11 @@ php artisan migrate													-   зупустить migrate
 
 
 ##########################################################################################################################
+fast clear
+
+	php artisan clear-compiled; php artisan cach:clear; php artisan view:clear; php artisan optimize; php artisan route:clear; php artisan config:cache
+
+##########################################################################################################################
 
 composer update --no-scripts
 composer dump-autoload -o
