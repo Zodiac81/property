@@ -64,4 +64,29 @@
 	db.shows.update({network: 'Low LBC'}, {$push : { news: 'some text' }})
 	db.shows.update({network: 'Low LBC'}, {$set : {news: 'some text 2' }})
 
-| ~~ | ~~ | test | ~~ | ~~ |
+| ~~ | ~~ | dump | ~~ | ~~ |
+
+	mongodump --db mydb --out ./					// dump all collection in db
+
+	mongodump --host 10.0.1.7 --port 27017 --username admin --password somepassword --db mydb --out ./
+
+	mongodump --out /backup/db/						// dump all db`s
+
+	mongodump --collection mycollection --db mydb --out /backup/db/
+
+Restore MongoDB Database with mongorestore
+
+	mongorestore --db mydb --drop /backup/db/mydb
+
+MongoDB Backup Shell Script
+
+	nano /backup/mongo-backup.sh
+
+	#!/bin/sh
+	TODAY=`date +%d%b%Y`
+	BACKUP_DIR=/backup/db
+	mkdir -p ${BACKUP_DIR}/${TODAY}
+	mongodump -h <DATABASE_HOST> -d <DATABASE_NAME> -u <USERNAME> -p <PASSWRD> --out ${BACKUP_DIR}/${TODAY}/
+
+
+| ~~ | ~~ | dump | ~~ | ~~ |
