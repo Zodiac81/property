@@ -827,7 +827,7 @@ Redirect 302 /staraya.html http://vash-sait.ua/novaya.html
 		ping [-c 4] 192.168.0.1
 		curl google.com
 		sudo ufw allow 22 					//	open port 22
-
+		sudo ufw deny 21         			//	close port 21
 
 		Add user
 

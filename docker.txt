@@ -58,3 +58,12 @@ Kill all running containers
 	docker rmi $(docker images -q -f dangling=true)
 	docker rmi $(docker images -q)
 	
+
+Kill docker
+
+	sudo apt-get purge -y docker-engine
+	sudo apt-get autoremove -y --purge docker-engine
+	sudo rm -rf /var/lib/docker
+	sudo apt-get purge -y docker-engine docker docker.io docker-ce
+	sudo apt-get autoremove -y --purge docker-engine docker docker.io docker-ce
+	sudo apt-get autoclean
