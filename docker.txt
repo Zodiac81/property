@@ -67,3 +67,41 @@ Kill docker
 	sudo apt-get purge -y docker-engine docker docker.io docker-ce
 	sudo apt-get autoremove -y --purge docker-engine docker docker.io docker-ce
 	sudo apt-get autoclean
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  TEST ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+nginx
+	sudo docker pull nginx
+	sudo docker run --name docker-nginx -p 80:80 nginx 					// 	запуска этого контейнера
+				run это команда создания нового контейнера
+				--nameФлаг как мы указываем имя контейнера (если оставлено пустым один назначается для нас, как nostalgic_hopper из шага 2)
+				-p указывает порт, который мы размещаем в формате -p local-machine-port:internal-container-port. В этом случае мы сопоставляем порт 80 в контейнере с портом 80 на сервере
+				nginx это имя изображения на dockerhub (мы загрузили это раньше командой pull, но Docker сделает это автоматически, если изображение отсутствует)
+
+	docker rm docker-nginx -f			//	удалить существующий docker-nginx
+				-f принудительно
+
+	docker run --name docker-nginx -p 13280:80 -d nginx
+				-d флаг для запуска этого контейнера в фоновом режиме
+
+	docker stop docker-ngin x				// 	остановить контейнер
+
+	docker run --name docker-nginx -p 13280:80 -d -v ~/docker-nginx/html:/usr/share/nginx/html nginx
+				Мы видим, что новым дополнением к команде -v ~/docker-nginx/html:/usr/share/nginx/html является наша ссылка на объем.
+				-v указывает, что мы связываем том
+				часть слева от : местоположения нашего каталога / каталога на нашей виртуальной машине ( ~/docker-nginx/html)
+				часть справа от : местоположения, с которым мы связываемся в нашем контейнере ( /usr/share/nginx/html)
+
+	docker cp docker-nginx:/etc/nginx/conf.d/default.conf ./default.conf 			// 	взять файл конфигурации nginx из контейнера docker-nginx в текущую дирректорию
+
+	docker run --name docker-nginx -p 13280:80 -v ~/docker-nginx/html:/usr/share/nginx/html -v ~/docker-nginx/default.conf:/etc/nginx/conf.d/default.conf -d nginx
+
+	docker restart docker-nginx 			// 	перезапустить контейнер
+
+
+docker + nginx + php (docker-compose.yml)
+	touch ./docker-compose.yml
+
+	http://geekyplatypus.com/dockerise-your-php-application-with-nginx-and-php7-fpm/
