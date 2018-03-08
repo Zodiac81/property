@@ -69,6 +69,13 @@ Kill docker
 	sudo apt-get autoclean
 
 
+docker run -d -P --name static-site prakhar1989/static-site
+				-d открепит (detach) терминал
+				-P сделает все открытые порты публичными и случайными
+				--name это имя, которое мы хотим дать контейнеру
+docker port static-site
+
+
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  TEST ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -101,7 +108,23 @@ nginx
 	docker restart docker-nginx 			// 	перезапустить контейнер
 
 
+		http://geekyplatypus.com/dockerise-your-php-application-with-nginx-and-php7-fpm/
 docker + nginx + php (docker-compose.yml)
 	touch ./docker-compose.yml
+		web:
+			image: nginx:latest
+			ports:
+			- "8080:80"
 
-	http://geekyplatypus.com/dockerise-your-php-application-with-nginx-and-php7-fpm/
+	docker-compose up
+	mkdir ./code
+	nano ./docker-compose.yml
+		web:
+		  web:
+			  image: nginx:latest
+			  ports:
+			    - "8080:80"
+			  volumes:
+			    - ./code:/usr/share/nginx/html
+			    - ./default.conf:/etc/nginx/conf.d/default.conf
+	touch ./default.conf
