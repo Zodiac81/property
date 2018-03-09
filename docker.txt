@@ -27,45 +27,62 @@
 2) Use
 
 	docker [опция] [команда] [аргументы]
-	docker
 
 	docker search ubuntu 			// 	search
 	docker pull ubuntu:latest		// 	pull
+	docker images 					// 	see
 	docker run nginx 				// 	run
+
+	docker attach 					// 	подключиться к работающему контейнеру
+	docker exec -it nginx  bash
+	
+	docker cp nginx:/etc/nginx/conf.d/default.conf ./default.conf 			// 	копирывание из контейнера
+
+	docker create 					// 	создать контейнер, но не запускать его
+	docker run 						// 	создать и запустить контейнер
 		--name shot_name   			// 	name for conteiner
-		-P 							// 	open conteiner`s ports
+		-p | --publish=[]			// 	open conteiner`s ports
 		-p 8080:80					// 	8080 - in, 80 - out
 		-v ~/content/default.conf:/etc/nginx/conf.d/default.conf
 									// 	связать
+		--privileged  				// 	дает все привелегии контейнеру
 		-d 							// 	запустить в фоновом режиме (открепит (detach) терминал)
 		--rm 						// 	remove conteiner in the end
-		-it nginx bash 				// 	run and stai in terminal
-
-
-	docker exec -it nginx  bash
-
-	docker restart nginx 			// 	перезапустить контейнер
-	docker port nginx 				// 	show conteiner`s ports
-
-	docker images 					// 	see
-
-	docker run -it nginx 			// 	root@d9b100f2f636:/#
-
-	docker ps [-a] 					// 	all conteiners (and hlam)
-
-	docker stop nginx 				// 	stop conteiner
-
+		-it nginx bash 				// 	Запустить контейнер в интерактивном режиме
+		--link name:alias
+		env 						// 	выполнить команду env
+		-e | --env=[] 				// 	пробрасывает переменные окружения внутрь контейнера
+		-w  						// 	Указать рабочую директорию (--workdir)
+		-u  						// 	Пользователь:группа под которым должен быть запущен контейнер
+	
+	docker stop 					// 	остановить контейнер
+	docker start 					// 	запустить существующий остановленный контейнер
+	docker restart 					// 	перезапустить контейнер
+	docker rm 						// 	удалить контейнер
+		-f  						// 	удалять запущенные контейнеры без их остановки
 	docker rmi -f docker-nginx  	// 	remove image
-				-f принудительно
-	docker rm -f nginx  			// 	remove conteiner
-				-f принудительно
-
-
-
-
+		-f принудительно
+	docker kill 					// 	отправить сигнал SIGKILL контейнеру
+	docker wait 					// 	блокировать команду и ждать, пока контейнер не остановится
+	docker ps 						// 	показать работающие контейнеры (или вообще контейнеры)
+		-a 							// 	all conteiners (and hlam)
+	docker inspect  container_name	// 	показать всю информацию о контейнере, включая IP-адреса
+	docker logs 					// 	показать лог-вывод контейнера
+	docker events 					// 	показать события контейнера
+	docker port 					// 	показать открытые наружу порты контейнера
+	docker top 						// 	показать процессы, работающие внутри контейнера
+	docker stats 					// 	показать статистику использования ресурсов контейнером
+	docker diff 					// 	показать изменённые файлы в файловой системе контейнера
 	docker container ls
 
-docker exec  composer install
+
+	docker build .
+	docker build -t trukhinyuri/nginx ~/static_web
+		trukhinyuri – название репозитория, где будет храниться образ
+		nginx – имя образа
+		static_web - путь к папке с Dockerfile
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  remove ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Kill all running containers
 	docker kill $(docker ps -q)
@@ -83,13 +100,35 @@ Kill docker
 	sudo apt-get autoremove -y --purge docker-engine docker docker.io docker-ce
 	sudo apt-get autoclean
 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  dockerfile ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-docker run -d -P --name static-site prakhar1989/static-site
-				-d открепит (detach) терминал
-				-P сделает все открытые порты публичными и случайными
-				--name это имя, которое мы хотим дать контейнеру
-docker port static-site
+touch Dockerfile 									//	Каждая инструкция пишется заглавными буквами 
+													//	Каждая инструкция добавляет новый слой в образ и коммитит изменения
+													// 	# - комментарий
+		https://docs.docker.com/engine/reference/builder/#usage
 
+
+	# Version: 0.0.1
+	FROM ubuntu:14.04								// из какого образа строить образ
+	MAINTAINER Yuri Trukhin <trukhinyuri@infoboxcloud.com> 		// Docker автора образа и его email
+	ENV REFRESHED_AT 2014–10–16 					//  устанавливает переменные окружения в образе
+	RUN apt-get update 								// RUN исполняет команду
+	RUN apt-get install -y nginx
+	RUN echo 'Hi, I am in your container' \
+	        >/usr/share/nginx/html/index.html
+	EXPOSE 80										// приложение в контейнере должно использовать порт 80
+	WORKDIR /opt/webapp/db 							// установить директорию, откуда будут запускаться команды
+	ENTRYPOINT ["/usr/sbin/nginx"]					
+									// При запуске контейнера параметры передаются команде, указанной в ENTRYPOINT
+	USER user 						// Специфицирует пользователя, под которым должен быть запущен образ
+	RUN ["apt-get", "install", "-y", "nginx"] 		// указать формат исполнения
+	CMD ["/bin/bash", "-l"]							// указывает команду, когда контейнер запущен
+	VOLUME ["/opt/project"] 						// добавляет тома в образ
+	ADD software.lic /opt/application/software.lic 	// добавляет файлы или папки из нашего билд-окружения в образ
+	ADD http://wordpress.org/latest.zip /root/wordpress.zip
+	COPY conf.d/ /etc/apache2/ 						// COPY отличается от ADD тем, что предназначена для копирования локальных файлов из билд-контекста и не поддерживает распаковки файлов
+	ONBUILD ADD . /app/src 							// добавляет триггеры в образы
+	ONBUILD RUN cd /app/src && make
 
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  TEST ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -107,7 +146,7 @@ nginx
 	docker run --name docker-nginx -p 13280:80 -d nginx
 				-d флаг для запуска этого контейнера в фоновом режиме
 
-	docker stop docker-ngin x				// 	остановить контейнер
+	docker stop docker-nginx				// 	остановить контейнер
 
 	docker run --name docker-nginx -p 13280:80 -d -v ~/docker-nginx/html:/usr/share/nginx/html nginx
 				Мы видим, что новым дополнением к команде -v ~/docker-nginx/html:/usr/share/nginx/html является наша ссылка на объем.
