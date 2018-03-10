@@ -74,6 +74,14 @@
 	docker stats 					// 	показать статистику использования ресурсов контейнером
 	docker diff 					// 	показать изменённые файлы в файловой системе контейнера
 	docker container ls
+	docker network 
+					connect     
+					create      
+					disconnect  
+					inspect     
+					ls          
+					prune       
+					rm
 
 
 	docker build .
@@ -107,7 +115,6 @@ touch Dockerfile 									//	Каждая инструкция пишется з
 													// 	# - комментарий
 		https://docs.docker.com/engine/reference/builder/#usage
 
-
 	# Version: 0.0.1
 	FROM ubuntu:14.04								// из какого образа строить образ
 	MAINTAINER Yuri Trukhin <trukhinyuri@infoboxcloud.com> 		// Docker автора образа и его email
@@ -130,14 +137,14 @@ touch Dockerfile 									//	Каждая инструкция пишется з
 	ONBUILD ADD . /app/src 							// добавляет триггеры в образы
 	ONBUILD RUN cd /app/src && make
 
-
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Сеть в Docker ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 1. bridge
 2. host
 3. none
 
-docker run -d nginx
+docker run --name nginx -d nginx:latest
+#6e47c39f797a71429971e5c2df59305dd5bd2e47bd901e2f404de18a53aefa53
 docker inspect --format '{{ .NetworkSettings.IPAddress }}' 6e4
 #172.17.0.2
 docker run -ti busybox
@@ -145,7 +152,35 @@ docker run -ti busybox
 wget -qO- 172.17.0.2
 
 --link
-	
+	docker run -ti --link=nginx busybox
+		env | grep tcp://
+		#NAUSEOUS_ARYABHATA_PORT=tcp://172.17.0.2:80
+		#NAUSEOUS_ARYABHATA_PORT_80_TCP=tcp://172.17.0.2:80
+		#NAUSEOUS_ARYABHATA_PORT_443_TCP=tcp://172.17.0.2:443
+		cat /etc/hosts | grep nginx
+		#172.17.0.2	nginx 78633fc191d2
+
+		wget -qO- http://nginx
+		#<!DOCTYPE html>
+		#<html>
+		#<head>
+		#<title>Welcome to ...
+
+имя контейнера и создать свою сеть
+	1. Шаг первый. Создаём свою сеть:
+		docker network create mynetwork
+	2. Запускаем в этой сети nginx. В этот раз с явно указанным именем web
+		docker run -d --net=mynetwork --name=web nginx:latest
+	3. Запустим в этой же сети еще один контейнер, и проверим, видит ли он web
+		docker run -ti --net=mynetwork busybox
+			wget -qO- web
+			#<!DOCTYPE html>
+			#...
+			
+Использовать сетевой псевдоним
+	docker run -d \ 
+	       --net=mynetwork \ 
+	       --network-alias=webserver nginx
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  TEST ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
