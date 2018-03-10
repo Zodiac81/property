@@ -131,6 +131,22 @@ touch Dockerfile 									//	Каждая инструкция пишется з
 	ONBUILD RUN cd /app/src && make
 
 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Сеть в Docker ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1. bridge
+2. host
+3. none
+
+docker run -d nginx
+docker inspect --format '{{ .NetworkSettings.IPAddress }}' 6e4
+#172.17.0.2
+docker run -ti busybox
+#/ # 
+wget -qO- 172.17.0.2
+
+--link
+	
+
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  TEST ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 nginx
