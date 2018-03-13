@@ -929,6 +929,8 @@ Redirect 302 /staraya.html http://vash-sait.ua/novaya.html
 
 Moding
 
+	sudo apt-get install xdotool
+	
 	sudo add-apt-repository ppa:noobslab/macbuntu
 	sudo apt update
 	sudo apt-get install macbuntu-os-icons-lts-v7
