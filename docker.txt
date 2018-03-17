@@ -39,8 +39,10 @@
 	docker cp nginx:/etc/nginx/conf.d/default.conf ./default.conf 			// 	копирывание из контейнера
 
 	docker create 					// 	создать контейнер, но не запускать его
-	docker run 						// 	создать и запустить контейнер
+	docker up 						// 	создать и запустить контейнер по инструкции dockerfile
+	docker run 						// 	создать и запустить контейнер из образа
 		--name shot_name   			// 	name for conteiner
+		-P 							// 	open conteiner`s ports and set random-ports in out
 		-p | --publish=[]			// 	open conteiner`s ports
 		-p 8080:80					// 	8080 - in, 80 - out
 		-v ~/content/default.conf:/etc/nginx/conf.d/default.conf
@@ -50,7 +52,7 @@
 		--rm 						// 	remove conteiner in the end
 		-it nginx bash 				// 	Запустить контейнер в интерактивном режиме
 		--link name:alias
-		env 						// 	выполнить команду env
+		--env <key>=<value>			// 	выполнить команду env
 		-e | --env=[] 				// 	пробрасывает переменные окружения внутрь контейнера
 		-w  						// 	Указать рабочую директорию (--workdir)
 		-u  						// 	Пользователь:группа под которым должен быть запущен контейнер
@@ -83,9 +85,12 @@
 					prune       
 					rm
 
+efb3e7e954de    python    "bash"      6 minutes ago     Exited (0) 2 minutes ago    gifted_wozniak
+	docker commit efb3e7e954de new_image_name
+	docker history new_image_name
 
 	docker build .
-	docker build -t trukhinyuri/nginx ~/static_web
+	docker build -t my_test/1 .
 		trukhinyuri – название репозитория, где будет храниться образ
 		nginx – имя образа
 		static_web - путь к папке с Dockerfile
@@ -110,6 +115,13 @@ Kill docker
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  dockerfile ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+	FROM – задать базовый образ
+	RUN – выполнить команду в контейнере
+	ENV – задать переменную среды
+	WORKDIR – установить рабочий каталог
+	VOLUME – создать точку монтирования для тома
+	CMD – установить исполняемый файл для контейнера
+
 touch Dockerfile 									//	Каждая инструкция пишется заглавными буквами 
 													//	Каждая инструкция добавляет новый слой в образ и коммитит изменения
 													// 	# - комментарий
@@ -118,10 +130,12 @@ touch Dockerfile 									//	Каждая инструкция пишется з
 	# Version: 0.0.1
 	FROM ubuntu:14.04								// из какого образа строить образ
 	MAINTAINER Yuri Trukhin <trukhinyuri@infoboxcloud.com> 		// Docker автора образа и его email
-	ENV REFRESHED_AT 2014–10–16 					//  устанавливает переменные окружения в образе
-	RUN apt-get update 								// RUN исполняет команду
-	RUN apt-get install -y nginx
-	RUN echo 'Hi, I am in your container' \
+	ENV myName John Doe 							//  устанавливает переменные окружения в образе
+	ENV <key> <value>
+	ENV <key>=<value>
+	RUN apt-get update \								// RUN исполняет команду
+		&& apt-get install -y nginx
+		&& echo 'Hi, I am in your container' \
 	        >/usr/share/nginx/html/index.html
 	EXPOSE 80										// приложение в контейнере должно использовать порт 80
 	WORKDIR /opt/webapp/db 							// установить директорию, откуда будут запускаться команды
