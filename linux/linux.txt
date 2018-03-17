@@ -574,7 +574,7 @@ Redirect 302 /staraya.html http://vash-sait.ua/novaya.html
 
 
 
-	6)	Установка XNeur Switcher 0.18
+	6)	Установка XNeur Switcher 0.18 (puntoswitch)
 			sudo add-apt-repository ppa:andrew-crew-kuznetsov/xneur-unstable
 			sudo apt-get update
 			sudo apt-get install gxneur
