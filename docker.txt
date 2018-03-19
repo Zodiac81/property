@@ -31,6 +31,7 @@
 	docker search ubuntu 			// 	search
 	docker pull ubuntu:latest		// 	pull
 	docker images 					// 	see
+	docker image 					// 	see
 	docker run nginx 				// 	run
 
 	docker attach 					// 	подключиться к работающему контейнеру
@@ -75,7 +76,9 @@
 	docker top 						// 	показать процессы, работающие внутри контейнера
 	docker stats 					// 	показать статистику использования ресурсов контейнером
 	docker diff 					// 	показать изменённые файлы в файловой системе контейнера
+	docker container ls --all 		// show containers
 	docker container ls
+	docker container stop <Container NAME or ID>
 	docker network 
 					connect     
 					create      
@@ -150,6 +153,30 @@ touch Dockerfile 									//	Каждая инструкция пишется з
 	COPY conf.d/ /etc/apache2/ 						// COPY отличается от ADD тем, что предназначена для копирования локальных файлов из билд-контекста и не поддерживает распаковки файлов
 	ONBUILD ADD . /app/src 							// добавляет триггеры в образы
 	ONBUILD RUN cd /app/src && make
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Docker manipulate ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	docker tag image username/repository:tag
+	docker tag friendlyhello lexus132/get-started:part1
+
+	docker push username/repository:tag
+	docker push lexus132/get-started:part1
+
+	docker run -p 4000:80 username/repository:tag
+
+	docker container ls
+	docker container ls --all
+	docker container stop cfab6c89823b
+	docker stack deploy -c docker-compose.yml getstartedlab
+	docker service ls
+	docker service ps getstartedlab_web
+	docker container ls -q
+	docker service ls
+	docker service ps getstartedlab_web
+	docker stack deploy -c docker-compose.yml getstartedlab
+	docker stack rm getstartedlab 		// 
+	docker swarm leave --force 			// 
+
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Сеть в Docker ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
