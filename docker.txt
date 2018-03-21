@@ -24,6 +24,8 @@
 			sudo chmod +x /usr/local/bin/docker-compose
 			docker-compose --version 		//	docker-compose version 1.19.0, build 1719ceb
 
+docker version
+
 2) Use
 
 	docker [опция] [команда] [аргументы]
@@ -37,6 +39,7 @@
 	docker exec -it nginx  bash
 	
 	docker cp nginx:/etc/nginx/conf.d/default.conf ./default.conf 			// 	копирывание из контейнера
+	docker cp nginx:/etc/apache2/apache2.conf ./apache2.conf 			// 	копирывание из контейнера
 
 	docker create 					// 	создать контейнер, но не запускать его
 	docker up 						// 	создать и запустить контейнер по инструкции dockerfile
@@ -94,6 +97,8 @@ efb3e7e954de    python    "bash"      6 minutes ago     Exited (0) 2 minutes ago
 		trukhinyuri – название репозитория, где будет храниться образ
 		nginx – имя образа
 		static_web - путь к папке с Dockerfile
+
+docker run --rm -v $(pwd):/app composer/composer install		
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  remove ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
