@@ -83,7 +83,9 @@ install LAMP
 							enable
 
 			sudo update-rc.d apache2 disable
+			sudo update-rc.d nginx disable
 			sudo update-rc.d apache2 enable
+			sudo update-rc.d nginx enable
 
 			sudo service apache2 restart
 									reload
@@ -144,7 +146,7 @@ install LAMP
 
 	3)	Установка PHP
 
-			sudo apt-get install php7.0
+			sudo apt-get install php7.1
 
 			// sudo apt-get install php libapache2-mod-php php-mcrypt php-mysql
 
@@ -172,34 +174,38 @@ install LAMP
 			apt-cache search php- | less 						//	Для просмотра доступных опций для модулей и библиотек PHP вы можете передать результат apt-cache search в less, которая позволит вам проматывать вывод
 			apt-cache show имя_пакета(php-cli)					//	Чтобы получить больше информации по каждому модулю
 
-			sudo a2enmod php7.0 		enable php version
+			sudo a2enmod php7.1 		enable php version
 
 			Важные пакеты:
 
 				sudo apt-get install curl
 				sudo apt-get install libcurl3
 				sudo apt-get install libcurl3-dev
-				sudo apt-get install php7.0-fpm php7.0-mysql
-				sudo apt-get install php7.0-cli
-				sudo apt-get install php7.0-curl
-				sudo apt-get install php7.0-mbstring
-				sudo apt-get install php7.0-xml
-				sudo apt-get install php7.0-zip
-				sudo apt-get install php7.0-gd
-				sudo apt-get install php7.0-mcrypt
-				sudo apt-get install php7.0-mhash
-				sudo apt-get install php7.0-intl
-				sudo apt install php7.0-LDAP
-				sudo apt install php7.0-APC
-				sudo apt install php7.0-SQLite3
-				sudo apt install php7.0-soap
-				sudo apt install php7.0-dom
+				sudo apt-get install php7.1-fpm php7.1-mysql
+				sudo apt-get install php7.1-cli
+				sudo apt-get install php7.1-curl
+				sudo apt-get install php7.1-mbstring
+				sudo apt-get install php7.1-xml
+				sudo apt-get install php7.1-zip
+				sudo apt-get install php7.1-gd
+				sudo apt-get install php7.1-mcrypt
+				sudo apt-get install php7.1-mhash
+				sudo apt-get install php7.1-intl
+				sudo apt install php7.1-LDAP
+				sudo apt install php7.1-APC
+				sudo apt install php7.1-SQLite3
+				sudo apt install php7.1-soap
+				sudo apt install php7.1-dom
 				sudo apt-get install imagemagick
 				sudo apt-get install subversion
 				sudo apt-get install php-memcached
 				sudo apt-get install libapache2-mod-xsendfile
+<<<<<<< HEAD
 				sudo apt-get install libapache2-mod-php7.0
 				sudo apt-get install php-xml
+=======
+				sudo apt-get install libapache2-mod-php7.1
+>>>>>>> fd7fc4217d41fde54e2619b87ea26c2bd83e2f20
 
 				sudo apt-get install php-dev libgeoip-dev
 
@@ -207,15 +213,18 @@ install LAMP
 
 				sudo apt install libmagickwand-dev imagemagick php-dev
 				sudo pecl install imagick
-				sudo service php7.0-fpm reload
+				sudo service php7.1-fpm reload
 
 				sudo apt-get install imagemagick
 				sudo apt-get install php-imagick
 
 					sudo add-apt-repository ppa:ondrej/php
 					sudo apt-get update
+<<<<<<< HEAD
 					sudo apt search php7
 				sudo apt install php7.0-mysql php7.0-curl php7.0-json php7.0-cgi  php7.0 libapache2-mod-php7.0
+=======
+>>>>>>> fd7fc4217d41fde54e2619b87ea26c2bd83e2f20
 				sudo apt install php7.1-mysql php7.1-curl php7.1-json php7.1-cgi  php7.1 libapache2-mod-php7.1
 				sudo apt-get install php7.0 php5.6 php5.6-mysql php-gettext php5.6-mbstring php-xdebug libapache2-mod-php5.6 libapache2-mod-php7.0
 
@@ -230,8 +239,12 @@ install LAMP
 				################################################################
 
 			добавлять виртуальный хост
+<<<<<<< HEAD
 				sudo subl /etc/apache2/sites-available/open.cart.conf
 				sudo subl /etc/apache2/sites-available/agenda.prod.conf
+=======
+				sudo subl /etc/apache2/sites-available/kilodiet.local.conf
+>>>>>>> fd7fc4217d41fde54e2619b87ea26c2bd83e2f20
 				sudo subl /etc/apache2/sites-available/trackisopen.start.conf
 				sudo subl /etc/apache2/sites-available/trackis.open.conf
 				sudo subl /etc/apache2/sites-available/laravel.basic.conf
@@ -304,9 +317,13 @@ Redirect 302 /staraya.html http://vash-sait.ua/novaya.html
 ------------------------------------------------------------------------------------------------------
 
 			активировать наш хост
+<<<<<<< HEAD
 				sudo a2ensite agenda-laravel.prod.conf
 				sudo a2ensite agenda.prod.conf
 				sudo a2ensite trackisopen.start.conf
+=======
+				sudo a2ensite agenda.prod.conf
+>>>>>>> fd7fc4217d41fde54e2619b87ea26c2bd83e2f20
 				sudo a2ensite fancybox.jq14
 				sudo a2ensite yii2.test
 				sudo a2ensite linux.dash.conf
@@ -993,6 +1010,9 @@ Moding
 
 		sudo apt-get install hollywood
 			hollywood
+
+		sudo apt-get install aview imagemagick
+			asciiview file.jpg
 
 
 Recovery audio

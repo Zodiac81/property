@@ -1,6 +1,12 @@
 #!/usr/bin/python3.5
 #coding: utf8
 
+"""
+    sudo get-apt install python3
+    sudo apt-get install python3-pip
+    python3 -m pip --version
+"""
+
 print("~~~~~~~~~~~~~~ Start ~~~~~~~~~~~~~~\n")
 
 from random import randint

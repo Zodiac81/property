@@ -1,0 +1,64 @@
+
+
+#!/usr/bin/python
+#coding: utf8
+
+# добавим необходимый пакет с opencv
+import cv2
+import numpy as np
+ 
+image = cv2.imread("matrix-sunglasses-768x320.jpg") 	#	загружаем изображение
+cv2.imshow("Original image", image)						# 	отображаем его (название окна, имя переменной)
+cv2.waitKey(0)											# 	ждем нажатия клавиши
+
+# Изменяем размер изображения
+	
+	print(image.shape) 										# 	разрешение снимка
+	# (667, 1600, 3)
+
+	# Нам надо сохранить соотношение сторон
+	# чтобы изображение не исказилось при уменьшении
+	# для этого считаем коэф. уменьшения стороны
+	final_wide = 200
+	r = float(final_wide) / image.shape[1]
+	dim = (final_wide, int(image.shape[0] * r))
+	 
+	# уменьшаем изображение до подготовленных размеров
+	resized = cv2.resize(image, dim, interpolation = cv2.INTER_AREA) 	# 1.исходное изображение,
+																		# 2.кортеж с требуемым разрешением
+																		# 3.алгоритм для масштабирования
+	cv2.imshow("Resize image", resized)
+	cv2.waitKey(0)
+
+# Вырезаем нужный фрагмент изображения
+
+	# вырежем участок изображения используя срезы
+	# мы же используем NumPy
+	cropped = image[30:130, 150:300]
+	cv2.imshow("Cropped image", cropped)
+	cv2.waitKey(0)
+
+# Поворот изображения
+
+	# получим размеры изображения для поворота
+	# и вычислим центр изображения
+	(h, w) = image.shape[:2]
+	center = (w / 2, h / 2)
+	 
+	# повернем изображение на 180 градусов
+	M = cv2.getRotationMatrix2D(center, 180, 1.0)
+	rotated = cv2.warpAffine(image, M, (w, h))
+	cv2.imshow("Rotated image", rotated)
+	cv2.waitKey(0)
+
+# Отражаем изображение по осям
+
+	#отразим изображение по горизонтали
+	flip_image = cv2.flip(image,1)
+	cv2.imshow("Flip image", flip_image)
+	cv2.waitKey(0)
+
+# Сохраняем изображение
+
+	# запишем изображение на диск в формате png
+	cv2.imwrite("flip.png", flip_image)
