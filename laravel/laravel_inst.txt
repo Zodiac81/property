@@ -132,7 +132,8 @@ ________________________________________________________________________________
 Кэширование
 	php artisan config:cache
 
-
+Mongo
+	composer require jenssegers/mongodb
 
 
 Clone

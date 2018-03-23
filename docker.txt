@@ -30,6 +30,8 @@ docker version
 
 	docker [опция] [команда] [аргументы]
 
+	docker version
+
 	docker search ubuntu 			// 	search
 	docker pull ubuntu:latest		// 	pull
 	docker images 					// 	see
@@ -110,7 +112,11 @@ Kill all running containers
 	docker rm $(docker ps -a -q)
 	docker rmi $(docker images -q -f dangling=true)
 	docker rmi $(docker images -q)
+
+	docker volume ls -qf dangling=true
+	docker volume rm $(docker volume ls -qf dangling=true)
 	
+docker rm $(docker ps -a | grep -v "_data" | awk 'NR>1 {print $1}')
 
 Kill docker
 
