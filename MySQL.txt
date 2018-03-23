@@ -22,8 +22,8 @@
 				## Exit ##
 				exit
 
-	CREATE DATABASE IF NOT EXISTS `magento_project_captain_nason_group`;
-		DROP DATABASE IF EXISTS `magento_project_captain_nason_group`;
+	CREATE DATABASE IF NOT EXISTS `agenda`;
+		DROP DATABASE IF EXISTS `agenda`;
 	CREATE USER cptnason@localhost IDENTIFIED BY "B73FF25CC5F22A";
 	GRANT ALL ON magento_project_captain_nason_group.* TO cptnason@localhost;
 	FLUSH PRIVILEGES;
@@ -31,7 +31,7 @@
 	mysqldump -u [uname] -p[pass] db_name > db_backup.sql
 
 	mysqldump -u root -p lbc > 25_07_lbc.sql
-	mysql -u root -p humhub < 25_07_lbc.sql
+	mysql -u root -p c10allodiet < cible.sql
 
 	mysqldump -u [uname] -p[pass] --all-databases > all_db_backup.sql
 		mysql -u [uname] -p < all_db_backup.sql
