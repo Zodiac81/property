@@ -48,6 +48,7 @@
 		-p 8080:80					// 	8080 - in, 80 - out
 		-v ~/content/default.conf:/etc/nginx/conf.d/default.conf
 									// 	связать
+		--volumes-from <cont name or ID> 	// take v in other cont
 		--privileged  				// 	дает все привелегии контейнеру
 		-d 							// 	запустить в фоновом режиме (открепит (detach) терминал)
 		--rm 						// 	remove conteiner in the end
@@ -57,6 +58,8 @@
 		-e | --env=[] 				// 	пробрасывает переменные окружения внутрь контейнера
 		-w  						// 	Указать рабочую директорию (--workdir)
 		-u  						// 	Пользователь:группа под которым должен быть запущен контейнер
+	docker volume ls -qf danging=true 	// show vol of die container`s
+	docker volume rm $(docker volume ls -qf danging=true) 		// kill them
 	
 	docker stop 					// 	остановить контейнер
 	docker start 					// 	запустить существующий остановленный контейнер
