@@ -104,7 +104,7 @@ efb3e7e954de    python    "bash"      6 minutes ago     Exited (0) 2 minutes ago
 		nginx – имя образа
 		static_web - путь к папке с Dockerfile
 
-docker run --rm -v $(pwd):/app composer/composer install		
+docker run --rm -v $(pwd):/app composer/composer install
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  remove ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -114,6 +114,8 @@ Kill all running containers
 	docker rmi $(docker images -q -f dangling=true)
 	docker rmi $(docker images -q)
 	
+	docker volume ls -f dangling=true
+	docker volume rm $(docker volume ls -f dangling=true)
 
 Kill docker
 
