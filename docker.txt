@@ -103,7 +103,7 @@ efb3e7e954de    python    "bash"      6 minutes ago     Exited (0) 2 minutes ago
 		nginx – имя образа
 		static_web - путь к папке с Dockerfile
 
-docker run --rm -v $(pwd):/app composer/composer install		
+docker run --rm -v $(pwd):/app composer/composer update
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  remove ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
