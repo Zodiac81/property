@@ -106,13 +106,12 @@ efb3e7e954de    python    "bash"      6 minutes ago     Exited (0) 2 minutes ago
 		nginx – имя образа
 		static_web - путь к папке с Dockerfile
 
-<<<<<<< HEAD
 docker run --rm -v $(pwd):/app composer/composer update
-=======
 docker run --rm -v $(pwd):/app composer/composer install
->>>>>>> 4d15238a0c902163599032d5aa3ba20480f9705d
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  remove ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+docker rm $(docker ps -a | grep -v "_data" | awk 'NR>1 {print $1}')
 
 Kill all running containers
 	docker kill $(docker ps -q)
@@ -122,13 +121,7 @@ Kill all running containers
 
 	docker volume ls -qf dangling=true
 	docker volume rm $(docker volume ls -qf dangling=true)
-	
-<<<<<<< HEAD
-docker rm $(docker ps -a | grep -v "_data" | awk 'NR>1 {print $1}')
-=======
-	docker volume ls -f dangling=true
-	docker volume rm $(docker volume ls -f dangling=true)
->>>>>>> 4d15238a0c902163599032d5aa3ba20480f9705d
+
 
 Kill docker
 

@@ -200,13 +200,10 @@ install LAMP
 				sudo apt-get install subversion
 				sudo apt-get install php-memcached
 				sudo apt-get install libapache2-mod-xsendfile
-<<<<<<< HEAD
 				sudo apt-get install libapache2-mod-php7.0
 				sudo apt-get install php-xml
 				sudo apt-get install libapache2-mod-php7.1
-=======
 				sudo apt-get install libapache2-mod-php7.2
->>>>>>> 4d15238a0c902163599032d5aa3ba20480f9705d
 
 				sudo apt-get install php-geoip php-dev libgeoip-dev
 
@@ -221,13 +218,10 @@ install LAMP
 
 					sudo add-apt-repository ppa:ondrej/php
 					sudo apt-get update
-<<<<<<< HEAD
 					sudo apt search php7
 				sudo apt install php7.0-mysql php7.0-curl php7.0-json php7.0-cgi  php7.0 libapache2-mod-php7.0
 				sudo apt install php7.1-mysql php7.1-curl php7.1-json php7.1-cgi  php7.1 libapache2-mod-php7.1
-=======
 				sudo apt install php7.2-mysql php7.2-curl php7.2-json php7.2-cgi  php7.2 libapache2-mod-php7.2
->>>>>>> 4d15238a0c902163599032d5aa3ba20480f9705d
 				sudo apt-get install php7.0 php5.6 php5.6-mysql php-gettext php5.6-mbstring php-xdebug libapache2-mod-php5.6 libapache2-mod-php7.0
 
 
@@ -241,11 +235,8 @@ install LAMP
 				################################################################
 
 			добавлять виртуальный хост
-<<<<<<< HEAD
 				sudo subl /etc/apache2/sites-available/open.cart.conf
 				sudo subl /etc/apache2/sites-available/agenda.prod.conf
-=======
->>>>>>> 4d15238a0c902163599032d5aa3ba20480f9705d
 				sudo subl /etc/apache2/sites-available/kilodiet.local.conf
 				sudo subl /etc/apache2/sites-available/trackisopen.start.conf
 				sudo subl /etc/apache2/sites-available/trackis.open.conf
@@ -319,14 +310,11 @@ Redirect 302 /staraya.html http://vash-sait.ua/novaya.html
 ------------------------------------------------------------------------------------------------------
 
 			активировать наш хост
-<<<<<<< HEAD
 				sudo a2ensite agenda-laravel.prod.conf
 				sudo a2ensite agenda.prod.conf
 				sudo a2ensite trackisopen.start.conf
 				sudo a2ensite agenda.prod.conf
-=======
 				sudo a2ensite agenda.prod.conf
->>>>>>> 4d15238a0c902163599032d5aa3ba20480f9705d
 				sudo a2ensite fancybox.jq14
 				sudo a2ensite yii2.test
 				sudo a2ensite linux.dash.conf
