@@ -18,7 +18,7 @@ PHP
         sudo apt-get install php7.1 php7.1-cli php7.1-common php7.1-json php7.1-opcache php7.1-mysql php7.1-mbstring php7.1-mcrypt php7.1-zip php7.1-fpm php7.1-xml
   7.2
         sudo apt-get install php7.2 php7.2-cli php7.2-common php7.2-json php7.2-opcache php7.2-mysql php7.2-mbstring php7.2-mcrypt php7.2-zip php7.2-fpm php7.2-xml
-=======
+
         sudo apt-get install php7.2 
         sudo apt-get install php7.2-cli
         sudo apt-get install php-cli
@@ -32,7 +32,6 @@ PHP
         sudo apt-get install php7.2-fpm
         sudo apt-get install php-mongodb
         sudo apt-get install php-xml
->>>>>>> f90409b97430483a3f2d3ab19c0b2495136a2a6e
 
         php --ini |grep Loaded
         Loaded Configuration File: /etc/php/7.1/cli/php.ini
