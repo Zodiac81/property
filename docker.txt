@@ -30,6 +30,8 @@ docker version
 
 	docker [опция] [команда] [аргументы]
 
+	docker version
+
 	docker search ubuntu 			// 	search
 	docker pull ubuntu:latest		// 	pull
 	docker images 					// 	see
@@ -104,18 +106,22 @@ efb3e7e954de    python    "bash"      6 minutes ago     Exited (0) 2 minutes ago
 		nginx – имя образа
 		static_web - путь к папке с Dockerfile
 
+docker run --rm -v $(pwd):/app composer/composer update
 docker run --rm -v $(pwd):/app composer/composer install
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  remove ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+docker rm $(docker ps -a | grep -v "_data" | awk 'NR>1 {print $1}')
 
 Kill all running containers
 	docker kill $(docker ps -q)
 	docker rm $(docker ps -a -q)
 	docker rmi $(docker images -q -f dangling=true)
 	docker rmi $(docker images -q)
-	
-	docker volume ls -f dangling=true
-	docker volume rm $(docker volume ls -f dangling=true)
+
+	docker volume ls -qf dangling=true
+	docker volume rm $(docker volume ls -qf dangling=true)
+
 
 Kill docker
 
