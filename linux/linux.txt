@@ -82,10 +82,14 @@ install LAMP
 							disable
 							enable
 
-			sudo update-rc.d apache2 disable
-			sudo update-rc.d nginx disable
 			sudo update-rc.d apache2 enable
+			sudo update-rc.d apache2 disable
+
 			sudo update-rc.d nginx enable
+			sudo update-rc.d nginx disable
+
+			sudo update-rc.d mongodb enable
+			sudo update-rc.d mongodb disable
 
 			sudo service apache2 restart
 									reload
@@ -813,6 +817,12 @@ Redirect 302 /staraya.html http://vash-sait.ua/novaya.html
 		----------------------
 			'^#'
 			'^[0-9]'
+
+		ssh -X user@hostname
+		sudo nautilus
+
+		nc -l 12345
+		nc 127.0.0.1 1234
 		
 		wc [-l -w -s] filename
 		sort [-n] filename
