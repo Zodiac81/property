@@ -86,6 +86,7 @@ install LAMP
 			sudo update-rc.d nginx disable
 			sudo update-rc.d apache2 enable
 			sudo update-rc.d nginx enable
+			sudo update-rc.d mongo enable
 
 			sudo service apache2 restart
 									reload
@@ -151,12 +152,10 @@ install LAMP
 			// sudo apt-get install php libapache2-mod-php php-mcrypt php-mysql
 
 			(
-
 				sudo add-apt-repository ppa:ondrej/php
 				sudo apt-get update
 				(optional) sudo apt-get remove php7.0
 				sudo apt-get install php7.1 (from comments)
-
 			)
 
 		dell
@@ -185,7 +184,7 @@ install LAMP
 				sudo apt-get install php7.2-cli
 				sudo apt-get install php7.2-curl
 				sudo apt-get install php7.2-mbstring
-				sudo apt-get install php7.2-xml
+				sudo apt-get install php7.1-xml
 				sudo apt-get install php7.2-zip
 				sudo apt-get install php7.2-gd
 				sudo apt-get install php7.2-mcrypt
