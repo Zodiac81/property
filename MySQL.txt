@@ -32,6 +32,7 @@
 
 	mysqldump -u root -p lbc > 25_07_lbc.sql
 	mysql -u root -p c10allodiet < cible.sql
+	mysql -u root -p test < ./cl_ponzo1_apprendreplus2.sql
 
 	mysqldump -u [uname] -p[pass] --all-databases > all_db_backup.sql
 		mysql -u [uname] -p < all_db_backup.sql
