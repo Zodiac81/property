@@ -109,6 +109,55 @@ efb3e7e954de    python    "bash"      6 minutes ago     Exited (0) 2 minutes ago
 docker run --rm -v $(pwd):/app composer/composer update
 docker run --rm -v $(pwd):/app composer/composer install
 
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  dockerfile ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	FROM – задать базовый образ
+	RUN – выполнить команду в контейнере
+	ENV – задать переменную среды
+	WORKDIR – установить рабочий каталог
+	VOLUME – создать точку монтирования для тома
+	CMD – установить исполняемый файл для контейнера
+
+touch Dockerfile 									//	Каждая инструкция пишется заглавными буквами 
+													//	Каждая инструкция добавляет новый слой в образ и коммитит изменения
+													// 	# - комментарий
+		https://docs.docker.com/engine/reference/builder/#usage
+
+	# Version: 0.0.1
+	FROM ubuntu:14.04								// из какого образа строить образ
+	LABLE maintainer="Yuri Trukhin"					// Docker автора образа и его email
+	USER user 										// Специфицирует пользователя, под которым должен быть запущен образ
+	WORKDIR /opt/webapp/db 							// установить директорию, откуда будут запускаться команды
+	
+	ENV myName John Doe 							//  устанавливает переменные окружения в образе
+	ENV <key> <value>
+	ENV <key>=<value>
+	
+	RUN ["apt-get", "install", "-y", "nginx"] 		// указать формат исполнения
+	RUN apt-get update && apt-get install -y --force-yes apache2
+	RUN apt-get update \							// RUN исполняет команду
+		&& apt-get install -y nginx
+		&& echo 'Hi, I am in your container' \
+	        >/usr/share/nginx/html/index.html
+	
+	EXPOSE 80										// приложение в контейнере должно использовать порт 80
+	EXPOSE 80 22
+	
+	CMD ["/bin/bash", "-l"]							// указывает команду, когда контейнер запущен
+	
+	VOLUME ["/opt/project"] 						// добавляет тома в образ
+	VOLUME ./project /opt/project
+	
+	ADD software.lic /opt/application/software.lic 	// добавляет файлы или папки из нашего билд-окружения в образ
+	ADD http://wordpress.org/latest.zip /root/wordpress.zip
+	COPY ./conf.d /etc/apache2/ 					// COPY отличается от ADD тем, что предназначена для копирования локальных файлов из билд-контекста и не поддерживает распаковки файлов
+	
+	ONBUILD ADD . /app/src 							// добавляет триггеры в образы
+	ONBUILD RUN cd /app/src && make
+	
+	ENTRYPOINT ["/usr/sbin/nginx"]					// При запуске контейнера параметры передаются в ENTRYPOINT (точка входа)
+
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  remove ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 docker rm $(docker ps -a | grep -v "_data" | awk 'NR>1 {print $1}')
@@ -131,44 +180,6 @@ Kill docker
 	sudo apt-get purge -y docker-engine docker docker.io docker-ce
 	sudo apt-get autoremove -y --purge docker-engine docker docker.io docker-ce
 	sudo apt-get autoclean
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  dockerfile ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-	FROM – задать базовый образ
-	RUN – выполнить команду в контейнере
-	ENV – задать переменную среды
-	WORKDIR – установить рабочий каталог
-	VOLUME – создать точку монтирования для тома
-	CMD – установить исполняемый файл для контейнера
-
-touch Dockerfile 									//	Каждая инструкция пишется заглавными буквами 
-													//	Каждая инструкция добавляет новый слой в образ и коммитит изменения
-													// 	# - комментарий
-		https://docs.docker.com/engine/reference/builder/#usage
-
-	# Version: 0.0.1
-	FROM ubuntu:14.04								// из какого образа строить образ
-	MAINTAINER Yuri Trukhin <trukhinyuri@infoboxcloud.com> 		// Docker автора образа и его email
-	ENV myName John Doe 							//  устанавливает переменные окружения в образе
-	ENV <key> <value>
-	ENV <key>=<value>
-	RUN apt-get update \								// RUN исполняет команду
-		&& apt-get install -y nginx
-		&& echo 'Hi, I am in your container' \
-	        >/usr/share/nginx/html/index.html
-	EXPOSE 80										// приложение в контейнере должно использовать порт 80
-	WORKDIR /opt/webapp/db 							// установить директорию, откуда будут запускаться команды
-	ENTRYPOINT ["/usr/sbin/nginx"]					
-									// При запуске контейнера параметры передаются команде, указанной в ENTRYPOINT
-	USER user 						// Специфицирует пользователя, под которым должен быть запущен образ
-	RUN ["apt-get", "install", "-y", "nginx"] 		// указать формат исполнения
-	CMD ["/bin/bash", "-l"]							// указывает команду, когда контейнер запущен
-	VOLUME ["/opt/project"] 						// добавляет тома в образ
-	ADD software.lic /opt/application/software.lic 	// добавляет файлы или папки из нашего билд-окружения в образ
-	ADD http://wordpress.org/latest.zip /root/wordpress.zip
-	COPY conf.d/ /etc/apache2/ 						// COPY отличается от ADD тем, что предназначена для копирования локальных файлов из билд-контекста и не поддерживает распаковки файлов
-	ONBUILD ADD . /app/src 							// добавляет триггеры в образы
-	ONBUILD RUN cd /app/src && make
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  Docker manipulate ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

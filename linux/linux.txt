@@ -745,6 +745,10 @@ Redirect 302 /staraya.html http://vash-sait.ua/novaya.html
 		netstat -nlp
 		netstat -u -ap
 
+		kill node-proces`s
+			netstat -nptl all
+			kill -9 23797
+
 		netstat -an | grep LISTEN
 		nmap localhost
 
