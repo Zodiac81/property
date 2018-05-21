@@ -12,7 +12,7 @@ Linux:
 
 		Нам нужно отредактировать файл /etc/privoxy/config. Откройте его любым текстовым редактором.
 
-			leafpad /etc/privoxy/config
+			subl /etc/privoxy/config
 
 		и добавьте в самый конец эти строки:
 
@@ -22,8 +22,8 @@ Linux:
 
 		Запустим необходимые службы
 
-			service tor start
-			service privoxy start
+			sudo service tor start
+			sudo service privoxy start
 
 		Отправляем весь трафик из нашей системы на прокси. Открываем: Настройки ...Параметры системы...Сетевые прокси-службы и вводим следующие данные:
 
