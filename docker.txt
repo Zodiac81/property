@@ -315,3 +315,5 @@ docker + nginx + php (docker-compose.yml)
           memory: 50M
       restart_policy:
         condition: on-failure
+
+      command: ifconfig
